@@ -48,6 +48,9 @@ The installer:
 | update-ai-opportunity-monitor | Weekly orchestration and publication | Included for Codex and Claude Code |
 | Foresight Radar | Three-year baseline and source maps | Optional; source URL must be registered before repository release |
 | Smart Research | Evidence packs and contradiction checks | Optional; installable from its public GitHub repository |
+| Palantir Ontology design | Object/action/relationship modeling | Optional; local skill is recognized, canonical GitHub URL still needs to be registered |
+| Palantir Foundry OSDK workflow | Real Foundry Ontology objects/actions integration | Optional integration; installable from a pinned public GitHub path |
+| MiroFish guide | Scenario simulation planning, seed quality, and report audit | Optional; installable from a pinned public GitHub repository |
 | AIhot | Seven-day discovery | Built-in public REST connector; separate skill is not required |
 | Browser verification | Official-source confirmation | Codex or Claude Code runtime capability with embedded fallback |
 
@@ -57,10 +60,11 @@ Before publishing the repository:
 
 1. Decide whether Foresight Radar will be published as its own repository or distributed inside this repository.
 2. Confirm its redistribution license.
-3. Replace `unpublished-source-not-recorded` in `config/skill-dependencies.json` with the canonical source.
-4. Confirm every external GitHub dependency remains pinned to a reviewed commit SHA rather than a moving branch. Smart Research is already pinned.
-5. Run `npm run skills:check -- --target=both`, `npm run doctor`, and `npm test` on a clean machine.
-6. Clone the repository under a second OS account and confirm Codex and Claude Code can both produce a valid profile batch.
+3. Register the canonical public source for the local `palantir-ontology` design skill if it should be installed automatically on other machines.
+4. Replace `unpublished-source-not-recorded` in `config/skill-dependencies.json` with the canonical source.
+5. Confirm every external GitHub dependency remains pinned to a reviewed commit SHA rather than a moving branch. Smart Research, MiroFish guide, and the Palantir OSDK workflow are pinned.
+6. Run `npm run skills:check -- --target=both`, `npm run doctor`, and `npm test` on a clean machine.
+7. Clone the repository under a second OS account and confirm Codex and Claude Code can both produce a valid profile batch.
 
 ## Team operation
 

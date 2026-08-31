@@ -53,6 +53,56 @@
       "fallback": "docs/BASELINE-RESEARCH.md"
     },
     {
+      "id": "palantir-ontology",
+      "capabilities": ["ontology-modeling", "object-action-map", "operational-interface-design"],
+      "requirement": "optional-enhancement",
+      "delivery": "external-skill",
+      "aliases": ["palantir-ontology"],
+      "installable": false,
+      "source": null,
+      "source_status": "local-skill-source-not-recorded",
+      "release_action": "公開済みGitHub URLとライセンスを登録すると自動インストール可能。現状はアプリ内ontologyロジックとdocs/ONTOLOGY-AND-INSIGHTS.mdをfallbackにする",
+      "fallback": "docs/ONTOLOGY-AND-INSIGHTS.md"
+    },
+    {
+      "id": "palantir-core-workflow-b",
+      "capabilities": ["foundry-ontology-osdk"],
+      "requirement": "optional-integration",
+      "delivery": "external-skill",
+      "aliases": ["palantir-core-workflow-b"],
+      "installable": true,
+      "source": {
+        "type": "github",
+        "url": "https://github.com/jeremylongshore/tons-of-skills-marketplace.git",
+        "web_url": "https://github.com/jeremylongshore/tons-of-skills-marketplace/tree/main/plugins/saas-packs/palantir-pack/skills/palantir-core-workflow-b",
+        "ref": "1010ff1889b2b3bc12aa68e8e7ff85e81094a47a",
+        "path": "plugins/saas-packs/palantir-pack/skills/palantir-core-workflow-b",
+        "license": "MIT",
+        "pin_status": "pinned-commit",
+        "pinned_at": "2026-08-31"
+      },
+      "fallback": "Foundry実接続をしない通常運用では不要。企業AI活動の関係整理はローカルontologyで代替する"
+    },
+    {
+      "id": "mirofish-guide",
+      "capabilities": ["scenario-simulation", "relationship-stress-test"],
+      "requirement": "optional-enhancement",
+      "delivery": "external-skill",
+      "aliases": ["mirofish-guide"],
+      "installable": true,
+      "source": {
+        "type": "github",
+        "url": "https://github.com/MOZARTINOS/mirofish-guide.git",
+        "web_url": "https://github.com/MOZARTINOS/mirofish-guide",
+        "ref": "420bd020c73436b6ca84e1de55f16226e8e38352",
+        "path": ".",
+        "license": "MIT",
+        "pin_status": "pinned-commit",
+        "pinned_at": "2026-08-31"
+      },
+      "fallback": "docs/ONTOLOGY-AND-INSIGHTS.md"
+    },
+    {
       "id": "aihot",
       "capabilities": ["weekly-discovery"],
       "requirement": "connector",

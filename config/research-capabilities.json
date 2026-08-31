@@ -39,6 +39,20 @@
       "required": true
     },
     {
+      "id": "ontology-modeling",
+      "purpose": "企業、AI活動、提携、オファリング、導入段階をオブジェクトと関係として整理する",
+      "preferred_skills": ["palantir-ontology", "palantir-core-workflow-b"],
+      "fallback": "config/ontology.jsonとlib/intelligence.cjsのローカル関係生成を使用する。Foundry実接続は必須ではない",
+      "required": false
+    },
+    {
+      "id": "scenario-simulation",
+      "purpose": "重要な変化から競合反応、採用シナリオ、論点の分岐を合成的にストレステストする",
+      "preferred_skills": ["mirofish-guide"],
+      "fallback": "docs/ONTOLOGY-AND-INSIGHTS.mdのシナリオ観点を使い、合成結果は一次事実と分離して扱う",
+      "required": false
+    },
+    {
       "id": "dashboard-publication",
       "purpose": "確認済みデータを企業台帳、変更台帳、ヒートマップ、会議モードへ反映する",
       "preferred_skills": ["update-ai-opportunity-monitor"],
