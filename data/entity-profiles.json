@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T13:45:00.000Z",
+  "updated_at": "2026-08-31T14:10:00.000Z",
   "baseline_window": {
     "start": "2021-09-01",
     "end": "2026-08-31"
@@ -301,7 +301,18 @@
           }
         }
       ],
-      "last_reviewed": "2026-08-31T11:40:00.000Z"
+      "last_reviewed": "2026-08-31T11:40:00.000Z",
+      "research_scope": [
+        {
+          "scope": "Japan",
+          "focus": "デロイト トーマツの生成AI社内活用、AI導入支援、オントロジー構築サービス、国内提供サービスを確認"
+        },
+        {
+          "scope": "Global",
+          "focus": "Deloitte GlobalのAI Institute、Trustworthy AI、NVIDIA等とのアライアンス、業界別AI資産、社内AI活用を確認"
+        }
+      ],
+      "scope_policy": "Big4は日本法人とグローバルネットワークを分けて調査し、同一企業プロフィール内で統合表示する"
     },
     {
       "entity_id": "ntt-data",
@@ -533,7 +544,18 @@
           }
         }
       ],
-      "last_reviewed": "2026-08-31T09:20:00.000Z"
+      "last_reviewed": "2026-08-31T09:20:00.000Z",
+      "research_scope": [
+        {
+          "scope": "Japan",
+          "focus": "PwC Japanの生成AI/AI導入支援、リスク管理、社内導入支援、業界別サービスを確認"
+        },
+        {
+          "scope": "Global",
+          "focus": "PwC GlobalのAIサービス、Responsible AI、業界別AIソリューション、アライアンス、グローバルAI投資を確認"
+        }
+      ],
+      "scope_policy": "Big4は日本法人とグローバルネットワークを分けて調査し、同一企業プロフィール内で統合表示する"
     },
     {
       "entity_id": "mckinsey",
@@ -1729,7 +1751,18 @@
           }
         }
       ],
-      "last_reviewed": "2026-08-31T11:40:00.000Z"
+      "last_reviewed": "2026-08-31T11:40:00.000Z",
+      "research_scope": [
+        {
+          "scope": "Japan",
+          "focus": "EY JapanのAIコンサルティング、税務・法務向け生成AI、AI人材育成、国内提供サービスを確認"
+        },
+        {
+          "scope": "Global",
+          "focus": "EY GlobalのEY.ai、EYQ、AI Lab、AI governance、アライアンス、監査/税務/法務/コンサル横断資産を確認"
+        }
+      ],
+      "scope_policy": "Big4は日本法人とグローバルネットワークを分けて調査し、同一企業プロフィール内で統合表示する"
     },
     {
       "entity_id": "kpmg-consulting",
@@ -1808,7 +1841,18 @@
           }
         }
       ],
-      "last_reviewed": "2026-08-31T11:40:00.000Z"
+      "last_reviewed": "2026-08-31T11:40:00.000Z",
+      "research_scope": [
+        {
+          "scope": "Japan",
+          "focus": "KPMG Japanの生成AI利活用支援、Trusted AI、AIリスク/規制対応、国内業界別支援を確認"
+        },
+        {
+          "scope": "Global",
+          "focus": "KPMG GlobalのTrusted AI、AI transformation、Microsoft等とのアライアンス、監査/税務/アドバイザリー横断資産を確認"
+        }
+      ],
+      "scope_policy": "Big4は日本法人とグローバルネットワークを分けて調査し、同一企業プロフィール内で統合表示する"
     },
     {
       "entity_id": "bain",

@@ -43,11 +43,14 @@
 - 社内AI活用、人材育成、AIセンター、CoE、研究所に関する公式発表
 - 提携先、買収、出資、パートナーエコシステムの公式発表
 
+Big4は日本法人だけでなくグローバルネットワークも調査対象にする。PwC、EY、KPMG、Deloitteは別会社として二重登録せず、同一プロフィール内に`research_scope`として`Japan`と`Global`を分けて記録する。日本側では国内提供サービス、国内導入支援、国内プレスリリースを確認し、グローバル側ではAIプラットフォーム、社内AI活用、アライアンス、業界別AI資産、ガバナンス/Responsible AIの公式情報を確認する。
+
 ## 企業ごとの成果物
 
 各プロフィールには以下を入れる。
 
 - `current_position`: 現在のAI戦略と実行位置を2〜4文で記載
+- `research_scope`: Big4など複数地域を見る企業では、Japan / Globalなどの調査範囲と確認観点を記載
 - `maturity_stage`: 最も進んだ確認済み段階
 - `development_methods`: 自社開発、外部製品、コンサル・SIer、スタートアップ、大学の別
 - `dimensions`: `config/entity-intelligence.json`の該当マトリクスを使用

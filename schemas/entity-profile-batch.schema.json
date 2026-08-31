@@ -20,6 +20,17 @@
           "entity_id": { "type": "string" },
           "status": { "enum": ["partial", "complete"] },
           "current_position": { "type": "string" },
+          "research_scope": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["scope", "focus"],
+              "properties": {
+                "scope": { "type": "string" },
+                "focus": { "type": "string" }
+              }
+            }
+          },
           "maturity_stage": { "type": "string" },
           "development_methods": { "type": "array", "items": { "type": "string" } },
           "dimensions": { "type": "object" },

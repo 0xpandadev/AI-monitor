@@ -1,4 +1,4 @@
-const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',digestCategory:'all',companyFilter:'all'};
+const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
@@ -58,13 +58,9 @@ function matchesConsultingFilter(entity,filterId){
   const filter=consultingFilters().find(item=>item.id===filterId)||consultingFilters()[0];
   return filter.test(entity);
 }
-function segmentFilters(list){
-  const segments=[...new Set(list.map(entity=>entity.segment).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja'));
-  return [{id:'all',label:'すべて',test:()=>true},...segments.map(segment=>({id:`segment:${segment}`,label:segment,test:entity=>entity.segment===segment}))];
-}
-function matchesSegmentFilter(entity,filterId,list){
-  const filter=segmentFilters(list).find(item=>item.id===filterId)||segmentFilters(list)[0];
-  return filter.test(entity);
+function valueFilters(list,field){
+  const values=[...new Set(list.map(entity=>entity[field]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja'));
+  return [{id:'all',label:'すべて'},...values.map(value=>({id:value,label:value}))];
 }
 
 async function api(path,options={}){
@@ -95,6 +91,8 @@ function bind(){
     const graphFilter=event.target.closest('[data-graph-filter]');if(graphFilter){state.graphFilter=graphFilter.dataset.graphFilter;render();return;}
     const digestFilter=event.target.closest('[data-digest-filter]');if(digestFilter){state.digestCategory=digestFilter.dataset.digestFilter;render();return;}
     const companyFilter=event.target.closest('[data-company-filter]');if(companyFilter){state.companyFilter=companyFilter.dataset.companyFilter;render();return;}
+    const aiTypeFilter=event.target.closest('[data-ai-type-filter]');if(aiTypeFilter){state.aiTypeFilter=aiTypeFilter.dataset.aiTypeFilter;render();return;}
+    const aiRegionFilter=event.target.closest('[data-ai-region-filter]');if(aiRegionFilter){state.aiRegionFilter=aiRegionFilter.dataset.aiRegionFilter;render();return;}
     const jump=event.target.closest('[data-jump]');if(jump)setView(jump.dataset.jump);
     const method=event.target.closest('[data-method]');if(method)openMethod();
   });
@@ -107,7 +105,7 @@ function bind(){
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeDrawer();closeMeetingMode();}if(!$('#meeting-mode').hidden&&event.key==='ArrowRight')moveMeeting(1);if(!$('#meeting-mode').hidden&&event.key==='ArrowLeft')moveMeeting(-1);});
 }
 function navigate(event){const button=event.target.closest('[data-view]');if(button)setView(button.dataset.view);}
-function setView(view){state.view=view;state.query='';state.digestCategory='all';state.companyFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
+function setView(view){state.view=view;state.query='';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
@@ -190,11 +188,11 @@ function renderLedgerTable(signals){
 function renderCategory(ids,description){
   const baseList=entities(ids);let list=baseList,signals=signalsFor(ids);
   if(ids.length===1&&ids[0]==='consulting'&&state.companyFilter!=='all'){list=list.filter(entity=>matchesConsultingFilter(entity,state.companyFilter));const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
-  if(ids.length===1&&ids[0]==='ai-companies'&&state.companyFilter!=='all'){list=list.filter(entity=>matchesSegmentFilter(entity,state.companyFilter,baseList));const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
-  if(state.query){list=list.filter(entity=>`${entity.name} ${entity.segment||''} ${entity.profile?.current_position||''}`.toLowerCase().includes(state.query));signals=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''}`.toLowerCase().includes(state.query));}
+  if(ids.length===1&&ids[0]==='ai-companies'){if(state.aiTypeFilter!=='all')list=list.filter(entity=>entity.segment===state.aiTypeFilter);if(state.aiRegionFilter!=='all')list=list.filter(entity=>entity.region_tag===state.aiRegionFilter);const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
+  if(state.query){list=list.filter(entity=>`${entity.name} ${entity.segment||''} ${entity.region_tag||''} ${entity.profile?.current_position||''}`.toLowerCase().includes(state.query));signals=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''}`.toLowerCase().includes(state.query));}
   const matrixId=ids.length>1?'global-saas':ids[0];const matrix=matrixFor(matrixId);const started=list.filter(entity=>entity.profile).length;const historyTotal=list.reduce((sum,entity)=>sum+evidenceCount(entity),0);
   const enterpriseIndustry=ids.includes('enterprises')?renderIndustryMatrix(list,matrix):'';
-  const companyFilterStrip=ids.length===1&&ids[0]==='consulting'?renderConsultingFilterStrip(baseList):(ids.length===1&&ids[0]==='ai-companies'?renderSegmentFilterStrip(baseList):'');
+  const companyFilterStrip=ids.length===1&&ids[0]==='consulting'?renderConsultingFilterStrip(baseList):(ids.length===1&&ids[0]==='ai-companies'?renderAiFilterStrip(baseList):'');
   return `<section class="category-intro"><div><span>3-5 YEAR COMPANY BASELINE</span><h2>${esc(viewMeta[state.view][1])}</h2><p>${esc(description)}</p></div><dl><div><dt>監視企業</dt><dd>${list.length}</dd></div><div><dt>基礎情報あり</dt><dd>${started}</dd></div><div><dt>確認履歴</dt><dd>${historyTotal}</dd></div></dl></section>
   <section class="method-strip"><div><b>セルの意味</b>${state.data.intelligence.evidence_states.map(item=>`<span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span>`).join('')}<em>数字ではなく、公式根拠で確認できた状態です</em></div><button data-method>判定方法・注意点</button></section>
   ${companyFilterStrip}
@@ -208,9 +206,9 @@ function renderConsultingFilterStrip(list){
   return `<section class="company-filter-strip"><header><span>コンサル分類</span><h2>戦コン・Big4・DX系で切り替える</h2><p>分類は監視リストのセグメントと主要カテゴリを使っています。</p></header><div>${filters.map(filter=>{const count=list.filter(entity=>filter.test(entity)).length;return `<button class="${state.companyFilter===filter.id?'active':''}" data-company-filter="${esc(filter.id)}"><span>${esc(filter.label)}</span><b>${count}</b></button>`;}).join('')}</div></section>`;
 }
 
-function renderSegmentFilterStrip(list){
-  const filters=segmentFilters(list);
-  return `<section class="company-filter-strip"><header><span>AI企業分類</span><h2>モデル・中国勢・算力で切り替える</h2><p>分類は監視リストのセグメントです。企業の強さではなく、観測領域を切り替えます。</p></header><div>${filters.map(filter=>{const count=list.filter(entity=>filter.test(entity)).length;return `<button class="${state.companyFilter===filter.id?'active':''}" data-company-filter="${esc(filter.id)}"><span>${esc(filter.label)}</span><b>${count}</b></button>`;}).join('')}</div></section>`;
+function renderAiFilterStrip(list){
+  const typeFilters=valueFilters(list,'segment'),regionFilters=valueFilters(list,'region_tag');
+  return `<section class="company-filter-strip ai-filter-strip"><header><span>AI企業分類</span><h2>種類と地域で切り替える</h2><p>企業タイプと地域は別軸です。市場評価ではなく、観測範囲を絞るためのタグです。</p></header><div class="filter-row"><strong>種類</strong>${typeFilters.map(filter=>{const count=list.filter(entity=>filter.id==='all'||entity.segment===filter.id).length;return `<button class="${state.aiTypeFilter===filter.id?'active':''}" data-ai-type-filter="${esc(filter.id)}"><span>${esc(filter.label)}</span><b>${count}</b></button>`;}).join('')}</div><div class="filter-row"><strong>地域</strong>${regionFilters.map(filter=>{const count=list.filter(entity=>filter.id==='all'||entity.region_tag===filter.id).length;return `<button class="${state.aiRegionFilter===filter.id?'active':''}" data-ai-region-filter="${esc(filter.id)}"><span>${esc(filter.label)}</span><b>${count}</b></button>`;}).join('')}</div></section>`;
 }
 
 function renderEntityMatrix(list,matrix){
@@ -258,10 +256,15 @@ function renderEvidenceRadar(entity,matrix){
 function openEntity(id){
   const entity=state.data.entities.find(item=>item.id===id);if(!entity)return;const profile=entity.profile,related=state.data.signals.filter(signal=>signal.entity_id===id);const matrix=matrixFor(entity.group_id);const history=[...(profile?.history||[]).map(item=>({...item,kind:'history'})),...related.map(signal=>({date:signal.published_at,title:signal.title,summary:signal.summary,source:signal.source,signal_id:signal.id,kind:'signal'}))].sort((a,b)=>String(b.date).localeCompare(String(a.date)));
   const sources=[...new Map(history.filter(item=>item.source?.url).map(item=>[item.source.url,item.source])).values()];
-  showDrawer(`<section class="profile-head"><span class="drawer-kicker">${esc(entity.group_label)} / ${esc(entity.segment||'未分類')}</span><h2>${esc(entity.name)}</h2><p>${esc(profile?.current_position||'ベースラインはまだ調査されていません。企業名だけを現在地として扱わず、一次情報を確認するまで未確認で表示します。')}</p><div class="profile-status"><span>${profile?.status==='complete'?'基準調査完了':profile?'部分確認':'調査待ち'}</span><b>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</b><small>${esc(watchLabel(entity))}</small></div></section>
+  showDrawer(`<section class="profile-head"><span class="drawer-kicker">${esc(entity.group_label)} / ${esc(entity.segment||'未分類')}${entity.region_tag?` / ${esc(entity.region_tag)}`:''}</span><h2>${esc(entity.name)}</h2><p>${esc(profile?.current_position||'ベースラインはまだ調査されていません。企業名だけを現在地として扱わず、一次情報を確認するまで未確認で表示します。')}</p><div class="profile-status"><span>${profile?.status==='complete'?'基準調査完了':profile?'部分確認':'調査待ち'}</span><b>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</b><small>${esc(watchLabel(entity))}</small></div></section>
   <section class="profile-matrix"><h3>AI現在地</h3><div>${matrix.dimensions.map(dimension=>{const value=profileState(entity,dimension.id);return `<span class="matrix-key ${value}">${stateGlyph[value]} ${esc(dimension.label)} · ${esc(stateDefinition(value).label)}</span>`;}).join('')}</div></section>
   <section class="profile-radar"><div><span>EVIDENCE PROFILE</span><h3>AI活動の形</h3><p>定性的な確認状態を可視化したもので、企業評価や総合点ではありません。</p></div>${renderEvidenceRadar(entity,matrix)}<aside><b>${sources.length}</b><span>公式根拠</span><b>${related.length+(profile?.history?.length||0)}</b><span>確認済み履歴</span><small>${profile?.status==='complete'?'基準窓の確認完了':profile?'部分確認のため比較には使用しない':'調査待ちのため比較には使用しない'}</small></aside></section>
-  <section class="profile-columns"><article><span>企業情報</span><h3>現在のAI戦略</h3><dl><dt>導入段階</dt><dd>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</dd><dt>開発方法</dt><dd>${profile?.development_methods?.length?profile.development_methods.map(method=>esc(methodLabel(method))).join(' / '):'未確認'}</dd></dl><h4>社内活用</h4>${listOrUnknown(profile?.internal_use)}<h4>外部向けオファリング</h4>${listOrUnknown(profile?.offerings)}<h4>AI関連の提携</h4>${listOrUnknown(profile?.partnerships)}</article><article><span>12か月・3〜5年の更新履歴</span><h3>${history.length}件の確認済み履歴</h3>${history.length?`<div class="profile-timeline">${history.map(item=>`<button ${item.signal_id?`data-signal="${esc(item.signal_id)}"`:''}><time>${esc(item.date)}</time><b>${esc(item.title)}</b><p>${esc(item.summary)}</p></button>`).join('')}</div>`:'<p class="unknown-copy">一次情報のバックフィル待ちです。</p>'}</article><article><span>公式根拠</span><h3>${sources.length}件</h3>${sources.length?sources.map(source=>`<a class="profile-source" href="${safeUrl(source.url)}" target="_blank" rel="noreferrer"><b>${esc(source.publisher)}</b><small>${esc(source.title||source.url)}</small></a>`).join(''):'<p class="unknown-copy">根拠資料はまだ登録されていません。</p>'}<p class="evidence-note">ヒートマップはこの根拠に基づく定性的な現在地です。ニュース件数や検索件数によるランキングではありません。</p></article></section>`,'profile');
+  <section class="profile-columns"><article><span>企業情報</span><h3>現在のAI戦略</h3><dl><dt>導入段階</dt><dd>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</dd><dt>開発方法</dt><dd>${profile?.development_methods?.length?profile.development_methods.map(method=>esc(methodLabel(method))).join(' / '):'未確認'}</dd></dl>${profileScopeBlock(profile)}<h4>社内活用</h4>${listOrUnknown(profile?.internal_use)}<h4>外部向けオファリング</h4>${listOrUnknown(profile?.offerings)}<h4>AI関連の提携</h4>${listOrUnknown(profile?.partnerships)}</article><article><span>12か月・3〜5年の更新履歴</span><h3>${history.length}件の確認済み履歴</h3>${history.length?`<div class="profile-timeline">${history.map(item=>`<button ${item.signal_id?`data-signal="${esc(item.signal_id)}"`:''}><time>${esc(item.date)}</time><b>${esc(item.title)}</b><p>${esc(item.summary)}</p></button>`).join('')}</div>`:'<p class="unknown-copy">一次情報のバックフィル待ちです。</p>'}</article><article><span>公式根拠</span><h3>${sources.length}件</h3>${sources.length?sources.map(source=>`<a class="profile-source" href="${safeUrl(source.url)}" target="_blank" rel="noreferrer"><b>${esc(source.publisher)}</b><small>${esc(source.title||source.url)}</small></a>`).join(''):'<p class="unknown-copy">根拠資料はまだ登録されていません。</p>'}<p class="evidence-note">ヒートマップはこの根拠に基づく定性的な現在地です。ニュース件数や検索件数によるランキングではありません。</p></article></section>`,'profile');
+}
+function profileScopeBlock(profile){
+  const scope=profile?.research_scope;
+  if(!Array.isArray(scope)||!scope.length)return '';
+  return `<h4>調査範囲</h4><ul>${scope.map(item=>`<li><b>${esc(item.scope)}</b> ${esc(item.focus)}</li>`).join('')}</ul>`;
 }
 function listOrUnknown(items){return items?.length?`<ul>${items.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>`:'<p class="unknown-copy">未確認</p>';}
 function openSignal(id){

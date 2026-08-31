@@ -28,7 +28,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - Update history: exact update, previous difference, and source on one row.
 - Digest news board: category-filtered list for weekly or imported signals, with evidence-linked cards.
 - Consulting filter strip: Big4, MBB, strategy, general, DX/IT, think tank, FAS, and HR segmentation.
-- AI company filter strip: model/platform, China/Asia model companies, data/ontology, inference cloud, model distribution, semiconductor/HBM, and AI-server supply chain segmentation.
+- AI company filter strip: ordinary company-type tags such as Big Tech, model developers, enterprise AI, AI cloud/inference, model distribution, semiconductor/hardware, and AI servers; region tags are a separate filter axis.
 - Company matrix: qualitative cells only: unknown, observed, active, scaled.
 - Industry matrix: aggregation of researched companies with an explicit coverage warning; never an industry adoption rate.
 - Meeting mode: one message per screen with conclusion, evidence, competitor effect, implication, and next watch items.
@@ -63,3 +63,5 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - 2026-08-31: Renamed the scaled matrix state from commercial language to full-scale rollout wording. Reason: avoid implying revenue, market rank, or sales success from a qualitative evidence cell.
 - 2026-08-31: Replaced the monthly trend line with a theme momentum board. Reason: sparse monthly counts were easy to misread as a market trend; the useful question is which official-update themes are accelerating, continuing, or newly resurfacing.
 - 2026-08-31: Expanded the major AI company surface into an AI supply-chain map with segment filters and a semiconductor/supply-chain axis. Reason: model companies, Chinese model challengers, data/ontology platforms, inference clouds, HBM, fabs, and AI servers affect different strategic questions and should not be collapsed into one flat list.
+- 2026-08-31: Added explicit Japan / Global research scope support for Big4 consulting profiles. Reason: Big4 AI capability is often split between local market offerings and global network assets, so the board should show both without double-counting companies.
+- 2026-08-31: Split AI company filters into company type and region. Reason: geography and business role answer different questions, so they should be combinable instead of mixed into one label.

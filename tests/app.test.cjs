@@ -15,7 +15,13 @@ test('watchlist contains the intended monitoring universe',()=>{
   const weeklyResearch=require('../config/weekly-research.json');
   assert.equal(entities.length,208);
   assert.equal(groups.find(group=>group.id==='ai-companies').members.length,37);
+  assert.ok(groups.find(group=>group.id==='ai-companies').members.some(member=>member.segment==='ビッグテック'&&member.region_tag==='中国'));
+  assert.ok(groups.find(group=>group.id==='ai-companies').members.some(member=>member.segment==='半導体・ハード'&&member.region_tag==='台湾'));
   assert.equal(groups.find(group=>group.id==='consulting').members.length,67);
+  for(const id of ['pwc-consulting','ey-strategy-consulting','kpmg-consulting','deloitte-tohmatsu']){
+    const member=groups.find(group=>group.id==='consulting').members.find(item=>item.id===id);
+    assert.deepEqual(member.research_scope,['Japan','Global']);
+  }
   assert.equal(groups.find(group=>group.id==='enterprises').members.length,42);
   const challengers=groups.find(group=>group.id==='startups');
   assert.equal(challengers.label,'日本AIスタートアップ・新興企業');
@@ -64,6 +70,7 @@ test('board is explicit when empty and every populated signal is sourced',()=>{
   assert.equal(data.metrics.profiles_started,data.profile_coverage.profiles_started);
   assert.ok(data.metrics.profiles_started>=69);
   assert.equal(data.entities.filter(entity=>entity.group_id==='ai-companies'&&entity.profile).length,37);
+  assert.ok(data.entities.find(entity=>entity.id==='pwc-consulting').profile.research_scope.some(item=>item.scope==='Global'));
   assert.equal(data.metrics.profiles_complete,0);
   assert.deepEqual(data.intelligence.evidence_states.map(item=>item.id),['unknown','observed','active','scaled']);
   assert.ok(data.intelligence.matrices.consulting.dimensions.some(item=>item.id==='internal-use'));
