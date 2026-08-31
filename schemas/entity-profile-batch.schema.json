@@ -34,6 +34,11 @@
           "maturity_stage": { "type": "string" },
           "development_methods": { "type": "array", "items": { "type": "string" } },
           "dimensions": { "type": "object" },
+          "internal_use": { "type": "array", "items": { "type": ["string", "object"] } },
+          "offerings": { "type": "array", "items": { "type": ["string", "object"] } },
+          "reusable_assets": { "type": "array", "items": { "type": ["string", "object"] } },
+          "partnerships": { "type": "array", "items": { "type": ["string", "object"] } },
+          "talent_org": { "type": "array", "items": { "type": ["string", "object"] } },
           "history": {
             "type": "array",
             "items": {

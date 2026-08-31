@@ -33,7 +33,8 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - Industry matrix: aggregation of researched companies with an explicit coverage warning; never an industry adoption rate.
 - Meeting mode: one message per screen with conclusion, evidence, competitor effect, implication, and next watch items.
 - Coverage warning: always visible while the 3-5 year baseline is incomplete.
-- Relationship map: company-to-topic, company-to-offering, and company-to-partner links derived from the canonical profile and weekly-signal stores. Every edge exposes evidence coverage.
+- Relationship surface: weekly changes, offering catalog, and partnership catalog are readable lists first. A capped company-to-topic/offering/partner graph is an optional detail explorer; every edge exposes whether its evidence is item-level, profile-level, or unverified.
+- Consulting comparison: six plain-language columns — 顧客向け提供, 実装・定着能力, 自社AI活用, 共通資産・製品化, 外部連携・エコシステム, AI人材・組織. Industry, client function, and delivery stage remain tags/details rather than radar axes.
 - Insight board: deterministic multi-company patterns with conclusion, source count, limitation, implication, and next-watch action.
 - Evidence radar: an ordinal evidence profile, never a total score or company ranking. Hide it until at least four dimensions have confirmed states.
 
@@ -41,7 +42,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 
 | Surface | Analytical question | Form | Sufficiency and fallback | Palette |
 | --- | --- | --- | --- | --- |
-| Relationship map | Which companies connect to the same change theme, offering type, or partner? | Two-column node-link SVG | Show only evidence-backed edges; empty state when none exist | Navy companies, cobalt topics, orange partnerships, neutral edges |
+| Relationship surface | What changed, what is offered, and which alliances matter? | Theme summary + company catalogs; capped node-link explorer on demand | Lists are the default. The explorer excludes unverified edges and caps non-weekly relations at 30 | Navy structure, cobalt evidence, orange attention, dashed profile-only links |
 | Theme momentum | Which AI themes are moving now versus the previous period? | Thematic momentum board | Compare recent 90 days with the previous 90 days; label as acceleration/continuation/new activity and never present raw monthly counts as a market trend | Cobalt bars, orange acceleration badges, neutral context |
 | Evidence radar | What dimensions of one company have confirmed activity? | Ordinal radar, maximum 8 axes | Require at least 4 known axes; otherwise show coverage message | Cobalt fill and stroke plus neutral guides |
 | Insight board | Which patterns cross multiple companies and sources? | Evidence cards | Require at least 2 companies and 2 confirmed primary-source signals | Navy structure, orange discussion, cobalt high-confidence state |
@@ -65,3 +66,5 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - 2026-08-31: Expanded the major AI company surface into an AI supply-chain map with segment filters and a semiconductor/supply-chain axis. Reason: model companies, Chinese model challengers, data/ontology platforms, inference clouds, HBM, fabs, and AI servers affect different strategic questions and should not be collapsed into one flat list.
 - 2026-08-31: Added explicit Japan / Global research scope support for Big4 consulting profiles. Reason: Big4 AI capability is often split between local market offerings and global network assets, so the board should show both without double-counting companies.
 - 2026-08-31: Split AI company filters into company type and region. Reason: geography and business role answer different questions, so they should be combinable instead of mixed into one label.
+- 2026-08-31: Replaced the all-in-one relationship graph with a weekly theme summary, company-level offering/partnership catalogs, and a capped detail explorer. Reason: 37 company-theme links, 261 profile-listed offerings, and 126 profile-listed partnerships are different units and become unreadable when rendered as one network.
+- 2026-08-31: Replaced the consulting eight-axis matrix with six plain-language dimensions for client offering, delivery capability, internal adoption, reusable assets, external ecosystem, and AI talent/organization. Reason: strategy, development, deployment, operations, and products were overlapping labels rather than decision-ready comparison axes.

@@ -74,7 +74,7 @@ async function init(){
   try{
     const [health,data]=await Promise.all([api('/api/health'),api('/api/dashboard')]);state.data=data;
     $('#health-dot').classList.add('online');$('#health-label').textContent=`稼働中 · ${health.version}`;
-    $('#updated-at').textContent=formatDate(data.updated_at);$('#nav-important').textContent=data.metrics.important;$('#nav-ledger').textContent=data.signals.length;$('#nav-graph').textContent=data.knowledge_graph?.summary?.edges||0;$('#nav-insights').textContent=data.insights?.length||0;
+    $('#updated-at').textContent=formatDate(data.updated_at);$('#nav-important').textContent=data.metrics.important;$('#nav-ledger').textContent=data.signals.length;$('#nav-graph').textContent=data.trends?.momentum_themes?.length||0;$('#nav-insights').textContent=data.insights?.length||0;
     $$('[data-count-group]').forEach(element=>{const id=element.dataset.countGroup;element.textContent=id==='saas'?(group('global-saas')?.count||0)+(group('japan-saas')?.count||0):group(id)?.count||0;});
     bind();render();
   }catch(error){$('#health-label').textContent='サーバー未接続';$('#content').innerHTML=`<section class="empty-panel"><h2>画面を読み込めません</h2><p>${esc(error.message)}</p><p><code>npm start</code>を実行して再読み込みしてください。</p></section>`;}
@@ -109,7 +109,7 @@ function setView(view){state.view=view;state.query='';state.digestCategory='all'
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
-  const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界の基盤モデル、Geminiを含む大手プラットフォーム、中国・アジア勢、データ/オントロジー、AIクラウド、推論基盤、半導体・HBM、AIサーバーを一つの供給網として比較します。'),consulting:()=>renderCategory(['consulting'],'各社の社内AI活用、外部オファリング、開発・導入・運用、製品資産、提携を3〜5年の基準情報として比較します。'),enterprises:()=>renderCategory(['enterprises'],'日本企業の全社AI、独自開発、製造・R&D、顧客向けAI、SCM、統制、組織を業界別・企業別に確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
+  const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界の基盤モデル、Geminiを含む大手プラットフォーム、中国・アジア勢、データ/オントロジー、AIクラウド、推論基盤、半導体・HBM、AIサーバーを一つの供給網として比較します。'),consulting:()=>renderCategory(['consulting'],'コンサル各社を、顧客向け提供、実装・定着、自社AI活用、共通資産、外部連携、AI人材・組織の6軸で比較します。業界・業務領域と個別オファリングは詳細で確認します。'),enterprises:()=>renderCategory(['enterprises'],'日本企業の全社AI、独自開発、製造・R&D、顧客向けAI、SCM、統制、組織を業界別・企業別に確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
   $('#content').innerHTML=(views[state.view]||renderDigest)();
 }
 
@@ -121,7 +121,7 @@ function renderDigest(){
   <section class="coverage-warning"><b>3〜5年ベースラインは作成中</b><p>${esc(d.profile_coverage.note||'基礎情報の確認を進めています。')}</p><button data-jump="settings">調査範囲と方法を見る</button></section>
   <section class="landscape-strip"><header><div><span>企業インテリジェンス</span><h2>名前ではなく、各社のAI現在地を見る</h2></div><p>件数は監視・調査カバレッジです。市場の強さや優劣を示すスコアではありません。</p></header><div class="landscape-track">${d.groups.filter(item=>item.id!=='additional').map(item=>{const target=item.id==='global-saas'||item.id==='japan-saas'?'saas':item.id;const note=outlook.get(item.id);const profiled=entities(item.id).filter(entity=>entity.profile).length;return `<button data-jump="${target}" class="landscape-cell ${item.signal_count?'changed':''}"><span>${esc(item.label)}</span><b>${profiled}<small> / ${item.count}社</small></b><small>${note?esc(note.summary):'基礎情報を調査中'}</small></button>`;}).join('')}</div></section>
   ${renderDigestNews(d.signals)}
-  <section class="intelligence-shortcuts"><button data-jump="relationships"><span>RELATIONSHIP MAP</span><b>${d.knowledge_graph.summary.companies}社 · ${d.knowledge_graph.summary.edges}関係</b><small>企業、変化テーマ、オファリング、提携を接続</small></button><button data-jump="insights"><span>INSIGHT BOARD</span><b>${d.insights.length}件の観測パターン</b><small>結論、根拠、反証、次回観測を一体表示</small></button></section>
+  <section class="intelligence-shortcuts"><button data-jump="relationships"><span>RELATIONSHIP / TREND</span><b>${d.trends?.momentum_themes?.length||0}テーマ · ${d.metrics.this_period}更新</b><small>変化・提供・提携を一覧で確認し、必要なときだけ関係図を開く</small></button><button data-jump="insights"><span>INSIGHT BOARD</span><b>${d.insights.length}件の観測パターン</b><small>結論、根拠、反証、次回観測を一体表示</small></button></section>
   <section class="ledger-board"><header><div><span>更新履歴</span><h2>根拠付きで何が変わったか</h2></div><button data-jump="ledger">${d.signals.length}件をすべて見る →</button></header>${renderLedgerTable(d.signals.slice(0,8))}</section>`;
 }
 
@@ -135,29 +135,66 @@ function renderDigestNews(signals){
   return `<section class="digest-news-board"><div class="digest-news-list"><header><div><span>カテゴリ別ニュース</span><h2>今週・今回取り込みの確認済み情報</h2></div><b>${shown.length} / ${feed.length}件</b></header>${shown.length?shown.map(signal=>`<article class="digest-news-card ${esc(signal.importance)}"><button data-signal="${esc(signal.id)}"><time>${esc(signal.published_at)}</time><strong>${esc(signal.entity?.name||signal.entity_id)}</strong><h3>${esc(signal.title)}</h3><p>${esc(signal.summary)}</p><footer><span>${esc(signal.category)}</span><small>${esc(signal.source?.publisher||'source')}</small></footer></button></article>`).join(''):'<div class="empty-inline"><b>該当するニュースはありません</b><p>カテゴリまたは検索条件を変えてください。</p></div>'}</div><aside class="digest-category-rail"><header><span>タグで絞る</span><h3>カテゴリ</h3><p>件数は登録済み根拠の数です。市場評価ではありません。</p></header><button class="${active==='all'?'active':''}" data-digest-filter="all"><span>すべて</span><b>${total}</b></button>${counts.map(item=>`<button class="${active===item.category?'active':''}" data-digest-filter="${esc(item.category)}"><span>${esc(item.category)}</span><b>${item.count}</b></button>`).join('')}</aside></section>`;
 }
 
+function relationEvidenceCounts(graph,type){
+  return graph.summary.relation_evidence_counts?.[type]||{item:0,profile:0,unverified:0};
+}
+
+function relationStatus(entity,raw){
+  const ids=raw&&typeof raw==='object'&&Array.isArray(raw.evidence_signal_ids)?raw.evidence_signal_ids.filter(Boolean):[];
+  if(ids.length)return {label:'個別根拠あり',className:'item',ids};
+  if(entity.profile?.history?.some(item=>item.source?.url))return {label:'プロフィール根拠のみ',className:'profile',ids:[]};
+  return {label:'根拠待ち',className:'unverified',ids:[]};
+}
+
+function relationName(raw){return raw&&typeof raw==='object'?String(raw.name||raw.label||'').trim():String(raw||'').trim();}
+
+function relationCatalogRows(type){
+  const field=type==='offers'?'offerings':'partnerships';
+  return state.data.entities.filter(entity=>entity.profile?.[field]?.length).map(entity=>{
+    const items=entity.profile[field].map(raw=>({name:relationName(raw),status:relationStatus(entity,raw)})).filter(item=>item.name);
+    return {entity,items};
+  }).filter(row=>row.items.length).sort((a,b)=>b.items.length-a.items.length||a.entity.name.localeCompare(b.entity.name,'ja'));
+}
+
+function renderRelationCatalog(type){
+  const isOffering=type==='offers',label=isOffering?'AIオファリング':'提携';
+  const rows=relationCatalogRows(type),total=rows.reduce((sum,row)=>sum+row.items.length,0);
+  const itemEvidence=rows.reduce((sum,row)=>sum+row.items.filter(item=>item.status.className==='item').length,0);
+  const profileOnly=rows.reduce((sum,row)=>sum+row.items.filter(item=>item.status.className==='profile').length,0);
+  const unverified=rows.reduce((sum,row)=>sum+row.items.filter(item=>item.status.className==='unverified').length,0);
+  return `<section class="relationship-catalog"><header><div><span>${isOffering?'OFFERING CATALOG':'PARTNERSHIP CATALOG'}</span><h2>${label}を企業別に確認する</h2><p>${isOffering?'提供項目を線でつながず、会社ごとの代表項目と根拠状態を一覧で見ます。':'提携先を線でつながず、関係の登録状態と根拠を一覧で見ます。'}</p></div><dl><div><dt>登録項目</dt><dd>${total}</dd></div><div><dt>個別根拠あり</dt><dd>${itemEvidence}</dd></div><div><dt>プロフィール根拠のみ</dt><dd>${profileOnly}</dd></div><div><dt>根拠待ち</dt><dd>${unverified}</dd></div></dl></header>${rows.length?`<div class="relationship-table-wrap"><table class="relationship-table"><thead><tr><th>企業</th><th>${label}</th><th>根拠状態</th><th>確認</th></tr></thead><tbody>${rows.map(row=>{const visible=row.items.slice(0,3),remaining=row.items.length-visible.length;return `<tr><th><button data-entity="${esc(row.entity.id)}"><b>${esc(row.entity.name)}</b><small>${esc(row.entity.segment||row.entity.group_label||'')}</small></button></th><td><div class="relation-items">${visible.map(item=>`<span>${esc(item.name)}</span>`).join('')}${remaining?`<em>+${remaining}件</em>`:''}</div></td><td><div class="relation-statuses"><span class="relation-status item">${row.items.filter(item=>item.status.className==='item').length} 個別</span><span class="relation-status profile">${row.items.filter(item=>item.status.className==='profile').length} プロフィール</span><span class="relation-status unverified">${row.items.filter(item=>item.status.className==='unverified').length} 待ち</span></div></td><td><button class="table-action" data-entity="${esc(row.entity.id)}">詳細 →</button></td></tr>`;}).join('')}</tbody></table></div>`:'<div class="empty-inline"><b>登録された項目はありません</b><p>プロフィール調査後に表示されます。</p></div>'}<footer>「個別根拠あり」は項目自身に根拠IDが紐付いたものです。プロフィール根拠のみは、会社のAI活動は確認できても、その項目自体の直接確認ではありません。</footer></section>`;
+}
+
+function renderThemeSummary(trends){
+  const themes=(trends.momentum_themes||[]).slice().sort((a,b)=>b.recent_90_days-a.recent_90_days||b.companies-a.companies);
+  return `<section class="theme-summary"><header><div><span>WEEKLY CHANGES</span><h2>今週の変化をテーマ別に見る</h2><p>37は「企業×テーマ」の接続数です。テーマ自体は${themes.length}種類で、更新件数とは別に表示します。</p></div><b>${state.data.metrics.this_period}件の確認済み更新</b></header>${themes.length?`<div class="theme-summary-grid">${themes.map(item=>`<article><div><h3>${esc(item.category)}</h3><span class="momentum-tag ${esc(item.momentum)}">${esc(item.momentum)}</span></div><dl><div><dt>関与企業</dt><dd>${item.companies}社</dd></div><div><dt>直近90日</dt><dd>${item.recent_90_days}件</dd></div><div><dt>根拠</dt><dd>${item.sources}情報源</dd></div></dl><p>${esc(shortLabel(item.latest_title,72))}</p></article>`).join('')}</div>`:'<div class="empty-inline"><b>テーマ別に表示できる更新がありません</b></div>'}</section>`;
+}
+
 function renderRelationships(){
-  const graph=state.data.knowledge_graph,trends=state.data.trends,relationMeta={
-    'changed-in':{label:'変化テーマ',note:'週次の公式更新を分類別に接続'},
-    offers:{label:'AIオファリング',note:'企業プロフィールの外部提供サービスを接続'},
-    'partners-with':{label:'提携',note:'プロフィールで確認した提携先を接続'}
-  };
-  const meta=relationMeta[state.graphFilter]||relationMeta['changed-in'];
-  return `<section class="category-intro ontology-intro"><div><span>LOCAL ONTOLOGY</span><h2>企業名を、活動と関係へ接続する</h2><p>${esc(state.data.ontology.principle)}</p></div><dl><div><dt>接続企業</dt><dd>${graph.summary.companies}</dd></div><div><dt>関係</dt><dd>${graph.summary.edges}</dd></div><div><dt>全監視</dt><dd>${graph.summary.watched_companies}</dd></div></dl></section>
-  <section class="graph-panel"><header><div><span>関係マップ</span><h2>${esc(meta.label)}</h2><p>${esc(meta.note)}。企業ノードをクリックすると公式根拠を含む詳細を開きます。</p></div><div class="graph-filters">${Object.entries(relationMeta).map(([id,item])=>`<button class="${state.graphFilter===id?'active':''}" data-graph-filter="${id}">${esc(item.label)} <b>${graph.summary.relation_counts[id]||0}</b></button>`).join('')}</div></header>${renderNetworkGraph(graph,state.graphFilter)}<footer>${esc(graph.caveat)}</footer></section>
+  const graph=state.data.knowledge_graph,trends=state.data.trends;
+  const offerCounts=relationEvidenceCounts(graph,'offers'),partnerCounts=relationEvidenceCounts(graph,'partners-with');
+  return `<section class="category-intro ontology-intro"><div><span>RELATIONSHIP / TREND</span><h2>変化・提供・提携を一覧で確認する</h2><p>全体を線でつなぐのではなく、まず会議で読める一覧に整理します。関係図は必要な範囲だけ詳細探索で開きます。</p></div><dl><div><dt>テーマ</dt><dd>${trends.momentum_themes?.length||0}</dd></div><div><dt>今週の更新</dt><dd>${state.data.metrics.this_period}</dd></div><div><dt>登録提供項目</dt><dd>${graph.summary.relation_counts.offers||0}</dd></div><div><dt>登録提携項目</dt><dd>${graph.summary.relation_counts['partners-with']||0}</dd></div></dl></section>
+  ${renderThemeSummary(trends)}
+  ${renderRelationCatalog('offers')}
+  ${renderRelationCatalog('partners-with')}
+  <details class="graph-panel relationship-explorer"><summary><span>DETAILED EXPLORER</span><b>関係図を開く</b><small>全体のランキングではなく、選択した関係を最大30件まで確認します</small></summary><div class="graph-panel-inner"><header><div><span>関係マップ</span><h2>選択した関係だけを見る</h2><p>個別根拠またはプロフィール根拠がある関係のみ表示します。</p></div><div class="graph-filters">${[['changed-in','企業×変化テーマ'],['offers','企業×提供'],['partners-with','企業×提携']].map(([id,label])=>`<button class="${state.graphFilter===id?'active':''}" data-graph-filter="${id}">${label} <b>${graph.summary.relation_counts[id]||0}</b></button>`).join('')}</div></header>${renderNetworkGraph(graph,state.graphFilter)}<footer>${esc(graph.caveat)} 提供の個別根拠 ${offerCounts.item}件、提携の個別根拠 ${partnerCounts.item}件。</footer></div></details>
   ${renderTrendPanel(trends)}`;
 }
 
 function renderNetworkGraph(graph,relationType){
   const nodeMap=new Map(graph.nodes.map(node=>[node.id,node]));const edges=graph.edges.filter(edge=>edge.relation_type===relationType);
   if(!edges.length)return '<div class="empty-inline"><b>確認済みの関係はまだありません</b><p>基準情報の取込後に自動表示されます。</p></div>';
-  const companies=[...new Map(edges.map(edge=>{const node=nodeMap.get(edge.from);return [node.id,node];})).values()].sort((a,b)=>a.label.localeCompare(b.label,'ja'));
-  const targets=[...new Map(edges.map(edge=>{const node=nodeMap.get(edge.to);return [node.id,node];})).values()].sort((a,b)=>(b.evidence_count||0)-(a.evidence_count||0)||a.label.localeCompare(b.label,'ja'));
+  const eligible=relationType==='changed-in'?edges:edges.filter(edge=>edge.evidence_scope!=='unverified');
+  const limited=eligible.slice().sort((a,b)=>(b.evidence_count||0)-(a.evidence_count||0)||String(a.id).localeCompare(String(b.id))).slice(0,30);
+  if(!limited.length)return '<div class="empty-inline"><b>個別またはプロフィール根拠がある関係はまだありません</b><p>根拠待ちの候補は一覧で確認できます。</p></div>';
+  const companies=[...new Map(limited.map(edge=>{const node=nodeMap.get(edge.from);return [node.id,node];})).values()].sort((a,b)=>a.label.localeCompare(b.label,'ja'));
+  const targets=[...new Map(limited.map(edge=>{const node=nodeMap.get(edge.to);return [node.id,node];})).values()].sort((a,b)=>(b.evidence_count||0)-(a.evidence_count||0)||a.label.localeCompare(b.label,'ja'));
   const width=1120,row=62,pad=46,height=Math.max(520,Math.max(companies.length,targets.length)*row+pad*2);const leftX=55,rightX=720,nodeWidth=330;
   const position=(items,index)=>pad+(height-pad*2)*(items.length===1?.5:index/(items.length-1));
   const companyY=new Map(companies.map((node,index)=>[node.id,position(companies,index)]));const targetY=new Map(targets.map((node,index)=>[node.id,position(targets,index)]));
-  const edgeSvg=edges.map(edge=>{const y1=companyY.get(edge.from),y2=targetY.get(edge.to);const weight=Math.min(4,1+edge.evidence_count*.55);return `<path class="graph-edge ${esc(edge.relation_type)}" d="M ${leftX+nodeWidth} ${y1} C 555 ${y1}, 565 ${y2}, ${rightX} ${y2}" style="stroke-width:${weight}" aria-label="${esc(edge.label)}・根拠${edge.evidence_count}件"><title>${esc(`${edge.label} / 根拠${edge.evidence_count}件 / ${edge.evidence_scope==='item'?'個別紐付け':'プロフィール単位'}`)}</title></path>`;}).join('');
-  const companySvg=companies.map(node=>{const y=companyY.get(node.id);return `<g class="graph-node company" data-entity="${esc(node.entity_id)}" transform="translate(${leftX} ${y-22})" tabindex="0" role="button"><rect width="${nodeWidth}" height="44"></rect><text x="13" y="18">${esc(shortLabel(node.label,34))}</text><text class="sub" x="13" y="34">${esc(shortLabel(node.group_label,35))} · 根拠 ${node.evidence_count}</text></g>`;}).join('');
-  const targetSvg=targets.map(node=>{const y=targetY.get(node.id);return `<g class="graph-node target ${esc(node.object_type)}" transform="translate(${rightX} ${y-22})"><rect width="${nodeWidth}" height="44"></rect><text x="13" y="18">${esc(shortLabel(node.label,36))}</text><text class="sub" x="13" y="34">${esc(node.object_type)} · 根拠 ${node.evidence_count||0}</text><title>${esc(node.label)}</title></g>`;}).join('');
+  const edgeSvg=limited.map(edge=>{const y1=companyY.get(edge.from),y2=targetY.get(edge.to);const weight=Math.min(4,1+edge.evidence_count*.55);const evidenceLabel=edge.evidence_scope==='item'?'個別根拠':edge.evidence_scope==='profile'?'プロフィール根拠':'根拠待ち';return `<path class="graph-edge ${esc(edge.relation_type)} ${esc(edge.evidence_scope)}" d="M ${leftX+nodeWidth} ${y1} C 555 ${y1}, 565 ${y2}, ${rightX} ${y2}" style="stroke-width:${weight}" aria-label="${esc(edge.label)}・${evidenceLabel}"><title>${esc(`${edge.label} / ${evidenceLabel}${edge.evidence_count?` ${edge.evidence_count}件`:''}`)}</title></path>`;}).join('');
+  const companySvg=companies.map(node=>{const y=companyY.get(node.id);return `<g class="graph-node company" data-entity="${esc(node.entity_id)}" transform="translate(${leftX} ${y-22})" tabindex="0" role="button"><rect width="${nodeWidth}" height="44"></rect><text x="13" y="18">${esc(shortLabel(node.label,34))}</text><text class="sub" x="13" y="34">${esc(shortLabel(node.group_label,35))} · ${node.evidence_count?'個別根拠 '+node.evidence_count+'件':'プロフィール根拠'}</text></g>`;}).join('');
+  const targetSvg=targets.map(node=>{const y=targetY.get(node.id);return `<g class="graph-node target ${esc(node.object_type)}" transform="translate(${rightX} ${y-22})"><rect width="${nodeWidth}" height="44"></rect><text x="13" y="18">${esc(shortLabel(node.label,36))}</text><text class="sub" x="13" y="34">${esc(node.object_type)} · ${node.evidence_count?'個別根拠 '+node.evidence_count+'件':'プロフィール根拠'}</text><title>${esc(node.label)}</title></g>`;}).join('');
   return `<div class="graph-canvas"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="企業と${esc(relationType)}の関係マップ">${edgeSvg}${companySvg}${targetSvg}</svg></div>`;
 }
 
@@ -259,7 +296,7 @@ function openEntity(id){
   showDrawer(`<section class="profile-head"><span class="drawer-kicker">${esc(entity.group_label)} / ${esc(entity.segment||'未分類')}${entity.region_tag?` / ${esc(entity.region_tag)}`:''}</span><h2>${esc(entity.name)}</h2><p>${esc(profile?.current_position||'ベースラインはまだ調査されていません。企業名だけを現在地として扱わず、一次情報を確認するまで未確認で表示します。')}</p><div class="profile-status"><span>${profile?.status==='complete'?'基準調査完了':profile?'部分確認':'調査待ち'}</span><b>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</b><small>${esc(watchLabel(entity))}</small></div></section>
   <section class="profile-matrix"><h3>AI現在地</h3><div>${matrix.dimensions.map(dimension=>{const value=profileState(entity,dimension.id);return `<span class="matrix-key ${value}">${stateGlyph[value]} ${esc(dimension.label)} · ${esc(stateDefinition(value).label)}</span>`;}).join('')}</div></section>
   <section class="profile-radar"><div><span>EVIDENCE PROFILE</span><h3>AI活動の形</h3><p>定性的な確認状態を可視化したもので、企業評価や総合点ではありません。</p></div>${renderEvidenceRadar(entity,matrix)}<aside><b>${sources.length}</b><span>公式根拠</span><b>${related.length+(profile?.history?.length||0)}</b><span>確認済み履歴</span><small>${profile?.status==='complete'?'基準窓の確認完了':profile?'部分確認のため比較には使用しない':'調査待ちのため比較には使用しない'}</small></aside></section>
-  <section class="profile-columns"><article><span>企業情報</span><h3>現在のAI戦略</h3><dl><dt>導入段階</dt><dd>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</dd><dt>開発方法</dt><dd>${profile?.development_methods?.length?profile.development_methods.map(method=>esc(methodLabel(method))).join(' / '):'未確認'}</dd></dl>${profileScopeBlock(profile)}<h4>社内活用</h4>${listOrUnknown(profile?.internal_use)}<h4>外部向けオファリング</h4>${listOrUnknown(profile?.offerings)}<h4>AI関連の提携</h4>${listOrUnknown(profile?.partnerships)}</article><article><span>12か月・3〜5年の更新履歴</span><h3>${history.length}件の確認済み履歴</h3>${history.length?`<div class="profile-timeline">${history.map(item=>`<button ${item.signal_id?`data-signal="${esc(item.signal_id)}"`:''}><time>${esc(item.date)}</time><b>${esc(item.title)}</b><p>${esc(item.summary)}</p></button>`).join('')}</div>`:'<p class="unknown-copy">一次情報のバックフィル待ちです。</p>'}</article><article><span>公式根拠</span><h3>${sources.length}件</h3>${sources.length?sources.map(source=>`<a class="profile-source" href="${safeUrl(source.url)}" target="_blank" rel="noreferrer"><b>${esc(source.publisher)}</b><small>${esc(source.title||source.url)}</small></a>`).join(''):'<p class="unknown-copy">根拠資料はまだ登録されていません。</p>'}<p class="evidence-note">ヒートマップはこの根拠に基づく定性的な現在地です。ニュース件数や検索件数によるランキングではありません。</p></article></section>`,'profile');
+  <section class="profile-columns"><article><span>企業情報</span><h3>AIの現在地</h3><dl><dt>導入段階</dt><dd>${esc(maturityLabel(profile?.maturity_stage||'unknown'))}</dd><dt>開発方法</dt><dd>${profile?.development_methods?.length?profile.development_methods.map(method=>esc(methodLabel(method))).join(' / '):'未確認'}</dd></dl>${profileScopeBlock(profile)}<h4>自社AI活用</h4>${listOrUnknown(profile?.internal_use)}<h4>外部向けオファリング</h4>${listOrUnknown(profile?.offerings)}<h4>外部連携</h4>${listOrUnknown(profile?.partnerships)}${profile?.reusable_assets?.length?`<h4>共通資産・製品化</h4>${listOrUnknown(profile.reusable_assets)}`:''}${profile?.talent_org?.length?`<h4>AI人材・組織</h4>${listOrUnknown(profile.talent_org)}`:''}</article><article><span>12か月・3〜5年の更新履歴</span><h3>${history.length}件の確認済み履歴</h3>${history.length?`<div class="profile-timeline">${history.map(item=>`<button ${item.signal_id?`data-signal="${esc(item.signal_id)}"`:''}><time>${esc(item.date)}</time><b>${esc(item.title)}</b><p>${esc(item.summary)}</p></button>`).join('')}</div>`:'<p class="unknown-copy">一次情報のバックフィル待ちです。</p>'}</article><article><span>公式根拠</span><h3>${sources.length}件</h3>${sources.length?sources.map(source=>`<a class="profile-source" href="${safeUrl(source.url)}" target="_blank" rel="noreferrer"><b>${esc(source.publisher)}</b><small>${esc(source.title||source.url)}</small></a>`).join(''):'<p class="unknown-copy">根拠資料はまだ登録されていません。</p>'}<p class="evidence-note">ヒートマップはこの根拠に基づく定性的な現在地です。ニュース件数や検索件数によるランキングではありません。</p></article></section>`,'profile');
 }
 function profileScopeBlock(profile){
   const scope=profile?.research_scope;

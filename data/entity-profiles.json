@@ -217,14 +217,12 @@
         "consulting-si"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "observed",
-        "deployment": "observed",
-        "operations": "unknown",
-        "products": "observed",
-        "partnerships": "unknown"
+        "client-offerings": "scaled",
+        "delivery-capability": "observed",
+        "internal-adoption": "unknown",
+        "reusable-assets": "observed",
+        "external-ecosystem": "unknown",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [
@@ -245,14 +243,12 @@
         "consulting-si"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "scaled",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "observed"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "scaled",
+        "reusable-assets": "active",
+        "external-ecosystem": "observed",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [
         "社内用生成AIチャットボット",
@@ -445,14 +441,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "observed",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "observed",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "active"
       },
       "internal_use": [
         "Advanced AI Center KyotoでAI同士と人の共創体験を提示"
@@ -508,14 +502,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "observed",
-        "products": "observed",
-        "partnerships": "observed"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "unknown",
+        "reusable-assets": "observed",
+        "external-ecosystem": "observed",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [
@@ -568,14 +560,12 @@
         "in-house"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "active",
-        "offering": "scaled",
-        "build": "scaled",
-        "deployment": "scaled",
-        "operations": "active",
-        "products": "scaled",
-        "partnerships": "scaled"
+        "client-offerings": "scaled",
+        "delivery-capability": "scaled",
+        "internal-adoption": "active",
+        "reusable-assets": "scaled",
+        "external-ecosystem": "scaled",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [
         "QuantumBlack LabsでAIツール・資産を開発"
@@ -637,14 +627,12 @@
         "academic-collaboration"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "observed",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "observed",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "observed",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [
         "BCG XのAI専門人材・プロダクトライブラリー"
@@ -706,14 +694,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "observed",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "scaled",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "scaled",
+        "internal-adoption": "observed",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "active"
       },
       "internal_use": [
         "AI活用知見をAIソーシングや業務効率化支援に展開"
@@ -776,14 +762,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "active",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "observed",
-        "partnerships": "observed"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "active",
+        "reusable-assets": "observed",
+        "external-ecosystem": "observed",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [
         "Azure OpenAI＋Slackチャットボット",
@@ -1681,14 +1665,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "active",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "active",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "active"
       },
       "internal_use": [
         "EY.ai EYQ",
@@ -1774,14 +1756,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "observed"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "unknown",
+        "reusable-assets": "active",
+        "external-ecosystem": "observed",
+        "ai-talent-org": "observed"
       },
       "internal_use": [],
       "offerings": [
@@ -1865,14 +1845,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "scaled"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "unknown",
+        "reusable-assets": "active",
+        "external-ecosystem": "scaled",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [
@@ -1928,14 +1906,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "observed",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "unknown",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [
@@ -1977,14 +1953,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "active",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "unknown",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [
@@ -2030,14 +2004,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "scaled",
-        "deployment": "scaled",
-        "operations": "scaled",
-        "products": "active",
-        "partnerships": "active"
+        "client-offerings": "scaled",
+        "delivery-capability": "scaled",
+        "internal-adoption": "unknown",
+        "reusable-assets": "active",
+        "external-ecosystem": "active",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [
@@ -2082,14 +2054,12 @@
         "external-product"
       ],
       "dimensions": {
-        "strategy": "scaled",
-        "internal-use": "unknown",
-        "offering": "scaled",
-        "build": "active",
-        "deployment": "active",
-        "operations": "active",
-        "products": "active",
-        "partnerships": "observed"
+        "client-offerings": "scaled",
+        "delivery-capability": "active",
+        "internal-adoption": "unknown",
+        "reusable-assets": "active",
+        "external-ecosystem": "observed",
+        "ai-talent-org": "unknown"
       },
       "internal_use": [],
       "offerings": [

@@ -44,7 +44,7 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/カテゴリ別ニュース/);
   assert.match(files,/コンサル分類/);
   assert.match(files,/会議モード/);
-  assert.match(files,/社内活用/);
+  assert.match(files,/自社AI活用/);
   assert.match(files,/関係・トレンド/);
   assert.match(files,/示唆ボード/);
 });
@@ -73,7 +73,7 @@ test('board is explicit when empty and every populated signal is sourced',()=>{
   assert.ok(data.entities.find(entity=>entity.id==='pwc-consulting').profile.research_scope.some(item=>item.scope==='Global'));
   assert.equal(data.metrics.profiles_complete,0);
   assert.deepEqual(data.intelligence.evidence_states.map(item=>item.id),['unknown','observed','active','scaled']);
-  assert.ok(data.intelligence.matrices.consulting.dimensions.some(item=>item.id==='internal-use'));
+  assert.deepEqual(data.intelligence.matrices.consulting.dimensions.map(item=>item.id),['client-offerings','delivery-capability','internal-adoption','reusable-assets','external-ecosystem','ai-talent-org']);
   assert.ok(data.intelligence.matrices.enterprises.dimensions.some(item=>item.id==='manufacturing-rd'));
   if(data.signals.length===0){
     assert.equal(data.brief.headline,'初回の定点観測前です');
@@ -95,9 +95,13 @@ test('ontology surface derives relationships, honest trends, and sourced insight
   assert.equal(data.knowledge_graph.summary.watched_companies,data.metrics.watched);
   assert.ok(data.knowledge_graph.summary.relation_counts['changed-in']>0);
   for(const edge of data.knowledge_graph.edges){
-    assert.ok(edge.evidence_count>0,`${edge.id} has no evidence`);
-    for(const id of edge.evidence_ids)assert.ok(signalIds.has(id)||String(id).startsWith('profile:'),`${edge.id} references unknown evidence ${id}`);
+    assert.ok(['item','profile','unverified'].includes(edge.evidence_scope),`${edge.id} has invalid evidence scope`);
+    assert.equal(edge.evidence_count,edge.evidence_ids.length);
+    for(const id of edge.evidence_ids)assert.ok(signalIds.has(id),`${edge.id} references unknown direct evidence ${id}`);
+    for(const id of (edge.profile_evidence_ids||[]))assert.ok(signalIds.has(id)||String(id).startsWith('profile:'),`${edge.id} references unknown profile evidence ${id}`);
   }
+  assert.ok(data.knowledge_graph.summary.relation_evidence_counts.offers.profile>0);
+  assert.ok(data.knowledge_graph.summary.relation_evidence_counts['partners-with'].profile>0);
   assert.equal(data.trends.sufficient_for_line,false);
   assert.ok(Array.isArray(data.trends.momentum_themes));
   assert.ok(data.trends.momentum_themes.length>0);
@@ -112,7 +116,7 @@ test('ontology surface derives relationships, honest trends, and sourced insight
 });
 
 test('profile batch contract supports parallel evidence-backed backfill',()=>{
-  const batch={schema_version:'1.0',batch_id:'consulting-01',updated_at:'2026-08-31T08:00:00.000Z',baseline_window:{start:'2021-09-01',end:'2026-08-31'},profiles:[{entity_id:'mckinsey',status:'partial',current_position:'一次情報に基づく現在位置',maturity_stage:'commercial',development_methods:['in-house'],dimensions:{strategy:'observed'},internal_use:[],offerings:[],partnerships:[],history:[{date:'2026-08-31',title:'公式更新',summary:'確認した内容',category:'AIオファリング',source:{title:'公式更新',url:'https://www.mckinsey.com/',publisher:'McKinsey',tier:'primary'}}]}]};
+  const batch={schema_version:'1.0',batch_id:'consulting-01',updated_at:'2026-08-31T08:00:00.000Z',baseline_window:{start:'2021-09-01',end:'2026-08-31'},profiles:[{entity_id:'mckinsey',status:'partial',current_position:'一次情報に基づく現在位置',maturity_stage:'commercial',development_methods:['in-house'],dimensions:{'client-offerings':'observed'},internal_use:[],offerings:[],partnerships:[],history:[{date:'2026-08-31',title:'公式更新',summary:'確認した内容',category:'AIオファリング',source:{title:'公式更新',url:'https://www.mckinsey.com/',publisher:'McKinsey',tier:'primary'}}]}]};
   assert.deepEqual(validateProfileBatch(batch),[]);
   assert.ok(validateProfileBatch({...batch,profiles:[{...batch.profiles[0],entity_id:'not-watched'}]}).some(error=>error.includes('監視対象')));
 });

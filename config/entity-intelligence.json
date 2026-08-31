@@ -45,14 +45,12 @@
     "consulting": {
       "label": "コンサルティングAI能力マップ",
       "dimensions": [
-        { "id": "strategy", "label": "戦略" },
-        { "id": "internal-use", "label": "社内活用" },
-        { "id": "offering", "label": "オファリング" },
-        { "id": "build", "label": "開発" },
-        { "id": "deployment", "label": "導入" },
-        { "id": "operations", "label": "運用" },
-        { "id": "products", "label": "製品・資産" },
-        { "id": "partnerships", "label": "提携" }
+        { "id": "client-offerings", "label": "顧客向け提供" },
+        { "id": "delivery-capability", "label": "実装・定着能力" },
+        { "id": "internal-adoption", "label": "自社AI活用" },
+        { "id": "reusable-assets", "label": "共通資産・製品化" },
+        { "id": "external-ecosystem", "label": "外部連携・エコシステム" },
+        { "id": "ai-talent-org", "label": "AI人材・組織" }
       ]
     },
     "enterprises": {
