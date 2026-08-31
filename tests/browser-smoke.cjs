@@ -1,0 +1,74 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const os=require('node:os');
+const path=require('node:path');
+const {spawn}=require('node:child_process');
+
+const chrome='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const url=process.env.AIOM_BROWSER_URL||'http://127.0.0.1:4327';
+const debugPort=9337;
+const profile=path.join(os.tmpdir(),`aiom-chrome-${process.pid}`);
+
+function delay(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+async function target(){
+  for(let attempt=0;attempt<50;attempt++){
+    try{const list=await fetch(`http://127.0.0.1:${debugPort}/json/list`).then(response=>response.json());const page=list.find(item=>item.type==='page');if(page)return page;}catch{}
+    await delay(100);
+  }
+  throw new Error('Chrome DevTools target did not start');
+}
+function connect(wsUrl){
+  return new Promise((resolve,reject)=>{
+    const socket=new WebSocket(wsUrl);let nextId=0;const pending=new Map();
+    socket.onopen=()=>resolve({
+      send(method,params={}){return new Promise((ok,fail)=>{const id=++nextId;pending.set(id,{ok,fail});socket.send(JSON.stringify({id,method,params}));});},
+      close(){socket.close();}
+    });
+    socket.onerror=reject;
+    socket.onmessage=event=>{const message=JSON.parse(event.data);if(!message.id)return;const request=pending.get(message.id);if(!request)return;pending.delete(message.id);if(message.error)request.fail(new Error(message.error.message));else request.ok(message.result);};
+  });
+}
+async function evaluate(cdp,expression){
+  const result=await cdp.send('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});
+  if(result.exceptionDetails)throw new Error(result.exceptionDetails.exception?.description||result.exceptionDetails.text);
+  return result.result.value;
+}
+async function screenshot(cdp,file){
+  const result=await cdp.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,fromSurface:true});
+  fs.writeFileSync(path.join(__dirname,'..',file),Buffer.from(result.data,'base64'));
+}
+
+(async()=>{
+  if(!fs.existsSync(chrome))throw new Error(`Chrome not found: ${chrome}`);
+  const child=spawn(chrome,[`--remote-debugging-port=${debugPort}`,`--user-data-dir=${profile}`,'--headless=new','--disable-gpu','--no-sandbox','--hide-scrollbars','--window-size=1440,1000',url],{stdio:'ignore',windowsHide:true});
+  let cdp;
+  try{
+    const page=await target();cdp=await connect(page.webSocketDebuggerUrl);await cdp.send('Page.enable');await cdp.send('Runtime.enable');
+    await evaluate(cdp,`new Promise((resolve,reject)=>{const started=Date.now();const timer=setInterval(()=>{const metric=document.querySelector('.metric-line');if(metric){clearInterval(timer);resolve(true);}else if(Date.now()-started>10000){clearInterval(timer);reject(new Error('dashboard timeout'));}},100);})`);
+    const summary=await evaluate(cdp,`(async()=>{
+      const click=selector=>{const node=document.querySelector(selector);if(!node)throw new Error('missing '+selector);node.click();};
+      const text=selector=>document.querySelector(selector)?.innerText||'';
+      const result={title:document.title,metrics:text('.metric-line')};
+      click('[data-view="startups"]');await new Promise(r=>setTimeout(r,60));result.startupRows=document.querySelectorAll('.entity-matrix tbody tr').length;result.startupTitle=text('.matrix-panel h2');
+      click('[data-view="consulting"]');await new Promise(r=>setTimeout(r,60));result.consultingRows=document.querySelectorAll('.entity-matrix tbody tr').length;click('[data-entity="mckinsey"]');await new Promise(r=>setTimeout(r,60));result.drawer=text('#drawer-content');
+      return result;
+    })()`);
+    assert.equal(summary.title,'AI Opportunity Monitor');assert.match(summary.metrics,/監視企業\s*181/);assert.equal(summary.startupRows,40);assert.match(summary.startupTitle,/スタートアップ・新興企業/);assert.equal(summary.consultingRows,67);assert.match(summary.drawer,/現在のAI戦略/);assert.match(summary.drawer,/公式根拠/);
+    await screenshot(cdp,'browser-ai-opportunity-monitor.png');
+    const features=await evaluate(cdp,`(async()=>{
+      document.querySelector('#drawer-close').click();document.querySelector('[data-view="enterprises"]').click();await new Promise(r=>setTimeout(r,60));
+      const industry=[...document.querySelectorAll('h2')].some(h=>h.textContent.includes('調査済み企業から見える現在地'));
+      document.querySelector('[data-view="ledger"]').click();await new Promise(r=>setTimeout(r,60));const ledgerRows=document.querySelectorAll('.change-ledger tbody tr').length;
+      document.querySelector('#meeting-mode-button').click();await new Promise(r=>setTimeout(r,60));const meeting=!document.querySelector('#meeting-mode').hidden&&document.querySelector('#meeting-content').innerText.includes('THIS WEEK');document.querySelector('#meeting-close').click();
+      return {industry,ledgerRows,meeting};
+    })()`);
+    assert.equal(features.industry,true);assert.equal(features.ledgerRows>0,true);assert.equal(features.meeting,true);
+    await cdp.send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});await cdp.send('Page.navigate',{url});await delay(500);
+    await evaluate(cdp,`new Promise(resolve=>{const timer=setInterval(()=>{if(document.querySelector('.metric-line')){clearInterval(timer);resolve(true);}},100)})`);
+    const noOverflow=await evaluate(cdp,'document.documentElement.scrollWidth<=window.innerWidth');assert.equal(noOverflow,true);await screenshot(cdp,'browser-ai-opportunity-monitor-mobile.png');
+    console.log(JSON.stringify({ok:true,...summary,features,screenshot:'browser-ai-opportunity-monitor.png'},null,2));
+  }finally{
+    if(cdp)cdp.close();child.kill();
+    try{fs.rmSync(profile,{recursive:true,force:true});}catch{}
+  }
+})().catch(error=>{console.error(error);process.exitCode=1;});

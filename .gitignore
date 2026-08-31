@@ -1,0 +1,6 @@
+node_modules/
+.env
+data/local-watchlist.json
+data/drafts/
+data/archive/*.local.json
+browser-*.png

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Opportunity Monitor weekly update",
+  "type": "object",
+  "required": ["schema_version", "updated_at", "period", "brief", "signals", "source_health", "limitations"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "period": {
+      "type": "object",
+      "required": ["start", "end", "label"],
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" },
+        "label": { "type": "string" }
+      }
+    },
+    "brief": {
+      "type": "object",
+      "required": ["headline", "summary", "discussion_points", "category_outlook"],
+      "properties": {
+        "headline": { "type": "string" },
+        "summary": { "type": "string" },
+        "discussion_points": { "type": "array", "items": { "type": "string" } },
+        "category_outlook": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "signals": { "type": "array", "items": { "type": "object" } },
+    "source_health": { "type": "array", "items": { "type": "object" } },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  }
+}

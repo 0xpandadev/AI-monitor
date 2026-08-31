@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI市場、コンサルティング、国内企業、スタートアップ・新興企業、SaaSの定点観測ボード。">
+  <title>AI Opportunity Monitor</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-frame">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true"><span>AI</span><i></i><span>OM</span></div>
+        <div><strong>AI Opportunity<br>Monitor</strong><small>OPEN RESEARCH WORKBENCH</small></div>
+      </div>
+      <nav id="primary-nav" class="primary-nav" aria-label="監視カテゴリー">
+        <button class="nav-item active" data-view="digest"><span>今週のダイジェスト</span><b id="nav-important">0</b></button>
+        <button class="nav-item" data-view="ledger"><span>変更台帳</span><b id="nav-ledger">0</b></button>
+        <button class="nav-item" data-view="ai-companies"><span>主要AI企業</span><b data-count-group="ai-companies">0</b></button>
+        <button class="nav-item" data-view="consulting"><span>コンサルマップ</span><b data-count-group="consulting">0</b></button>
+        <button class="nav-item" data-view="enterprises"><span>日本企業</span><b data-count-group="enterprises">0</b></button>
+        <button class="nav-item" data-view="startups"><span>スタートアップ・新興企業</span><b data-count-group="startups">0</b></button>
+        <button class="nav-item" data-view="saas"><span>SaaS</span><b data-count-group="saas">0</b></button>
+      </nav>
+      <div class="sidebar-secondary">
+        <button class="nav-item" data-view="archive"><span>月次アーカイブ</span></button>
+        <button class="nav-item" data-view="settings"><span>監視設定・情報源</span></button>
+      </div>
+      <div class="sidebar-status">
+        <span id="health-dot" class="health-dot"></span>
+        <div><b id="health-label">接続確認中</b><small>AI APIの直接利用なし</small></div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="workspace-header">
+        <div>
+          <span id="view-kicker" class="view-kicker">WEEKLY AI LANDSCAPE</span>
+          <h1 id="view-title">今週のダイジェスト</h1>
+        </div>
+        <div class="header-tools">
+          <button id="meeting-mode-button" class="meeting-button" type="button"><span>会議モード</span><b>全画面で見る</b></button>
+          <label class="search-box" for="global-search">
+            <span>企業を検索</span>
+            <input id="global-search" type="search" placeholder="企業名・テーマ">
+          </label>
+          <div class="update-state"><span>最終更新</span><b id="updated-at">未更新</b></div>
+        </div>
+      </header>
+      <div id="content" class="content" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <aside id="detail-drawer" class="detail-drawer" aria-label="詳細" aria-hidden="true">
+    <button id="drawer-close" class="drawer-close" aria-label="詳細を閉じる">×</button>
+    <div id="drawer-content"></div>
+  </aside>
+  <section id="meeting-mode" class="meeting-mode" aria-label="会議モード" hidden>
+    <button id="meeting-close" class="meeting-close" type="button" aria-label="会議モードを閉じる">×</button>
+    <div id="meeting-content" class="meeting-content"></div>
+    <nav class="meeting-nav" aria-label="スライド操作">
+      <button id="meeting-prev" type="button">← 前へ</button>
+      <span id="meeting-index">1 / 5</span>
+      <button id="meeting-next" type="button">次へ →</button>
+    </nav>
+  </section>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

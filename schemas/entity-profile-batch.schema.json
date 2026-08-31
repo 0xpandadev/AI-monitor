@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Opportunity Monitor entity profile batch",
+  "type": "object",
+  "required": ["schema_version", "updated_at", "baseline_window", "profiles"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "baseline_window": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": { "start": { "type": "string" }, "end": { "type": "string" } }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entity_id", "status", "current_position", "maturity_stage", "development_methods", "dimensions", "history"],
+        "properties": {
+          "entity_id": { "type": "string" },
+          "status": { "enum": ["partial", "complete"] },
+          "current_position": { "type": "string" },
+          "maturity_stage": { "type": "string" },
+          "development_methods": { "type": "array", "items": { "type": "string" } },
+          "dimensions": { "type": "object" },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["date", "title", "category", "summary", "source"],
+              "properties": {
+                "date": { "type": "string" },
+                "title": { "type": "string" },
+                "category": { "type": "string" },
+                "stage": { "type": "string" },
+                "method": { "type": "string" },
+                "summary": { "type": "string" },
+                "source": {
+                  "type": "object",
+                  "required": ["title", "url", "publisher", "tier"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

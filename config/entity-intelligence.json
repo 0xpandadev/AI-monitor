@@ -1,0 +1,108 @@
+{
+  "baseline_window": {
+    "years": 3,
+    "start": "2023-09-01",
+    "end": "2026-08-31",
+    "purpose": "週次ニュースの前提となる各社のAI現在地と変更履歴を保持する"
+  },
+  "evidence_states": [
+    { "id": "unknown", "label": "未確認", "definition": "一次情報による確認がまだない" },
+    { "id": "observed", "label": "確認あり", "definition": "対象期間内の一次情報を1件以上確認した" },
+    { "id": "active", "label": "継続展開", "definition": "複数の取り組み、継続提供、組織的活動の一次情報を確認した" },
+    { "id": "scaled", "label": "全社・商用", "definition": "全社導入、一般提供、外部販売、事業化の一次情報を確認した" }
+  ],
+  "maturity_stages": [
+    { "id": "unknown", "label": "未確認" },
+    { "id": "considering", "label": "検討" },
+    { "id": "poc", "label": "PoC" },
+    { "id": "department", "label": "部門導入" },
+    { "id": "enterprise", "label": "全社導入" },
+    { "id": "proprietary", "label": "独自開発" },
+    { "id": "commercial", "label": "外部販売・事業化" }
+  ],
+  "development_methods": [
+    { "id": "in-house", "label": "自社開発" },
+    { "id": "external-product", "label": "外部製品導入" },
+    { "id": "consulting-si", "label": "コンサル・SIerとの共同開発" },
+    { "id": "startup-partnership", "label": "AIスタートアップとの連携" },
+    { "id": "academic-collaboration", "label": "大学・研究機関との共同研究" },
+    { "id": "not-confirmed", "label": "未確認" }
+  ],
+  "matrices": {
+    "ai-companies": {
+      "label": "AI企業の競争領域",
+      "dimensions": [
+        { "id": "models", "label": "モデル" },
+        { "id": "products", "label": "製品" },
+        { "id": "agents", "label": "エージェント" },
+        { "id": "infrastructure", "label": "基盤" },
+        { "id": "partnerships", "label": "提携" },
+        { "id": "governance", "label": "安全・統制" },
+        { "id": "research", "label": "研究" }
+      ]
+    },
+    "consulting": {
+      "label": "コンサルティングAI能力マップ",
+      "dimensions": [
+        { "id": "strategy", "label": "戦略" },
+        { "id": "internal-use", "label": "社内活用" },
+        { "id": "offering", "label": "オファリング" },
+        { "id": "build", "label": "開発" },
+        { "id": "deployment", "label": "導入" },
+        { "id": "operations", "label": "運用" },
+        { "id": "products", "label": "製品・資産" },
+        { "id": "partnerships", "label": "提携" }
+      ]
+    },
+    "enterprises": {
+      "label": "日本企業AI利活用マップ",
+      "dimensions": [
+        { "id": "enterprise-ai", "label": "全社AI" },
+        { "id": "employee-genai", "label": "全社員向け" },
+        { "id": "proprietary-ai", "label": "独自開発" },
+        { "id": "customer-ai", "label": "顧客向け" },
+        { "id": "manufacturing-rd", "label": "製造・R&D" },
+        { "id": "sales-service", "label": "営業・顧客接点" },
+        { "id": "scm-quality", "label": "SCM・品質" },
+        { "id": "governance", "label": "統制・セキュリティ" },
+        { "id": "organization", "label": "組織・人材" },
+        { "id": "partnerships", "label": "提携・出資" },
+        { "id": "research", "label": "特許・研究" }
+      ]
+    },
+    "startups": {
+      "label": "スタートアップ・新興企業の事業進展",
+      "dimensions": [
+        { "id": "core-tech", "label": "独自技術" },
+        { "id": "products", "label": "製品" },
+        { "id": "customers", "label": "導入顧客" },
+        { "id": "partnerships", "label": "提携" },
+        { "id": "funding", "label": "資金調達" },
+        { "id": "research", "label": "研究・特許" }
+      ]
+    },
+    "global-saas": {
+      "label": "グローバルSaaSのAI再定義",
+      "dimensions": [
+        { "id": "copilot", "label": "支援AI" },
+        { "id": "agents", "label": "エージェント" },
+        { "id": "platform", "label": "開発基盤" },
+        { "id": "governance", "label": "統制" },
+        { "id": "pricing", "label": "価格・包装" },
+        { "id": "ecosystem", "label": "連携網" }
+      ]
+    },
+    "japan-saas": {
+      "label": "日本SaaSのAI再定義",
+      "dimensions": [
+        { "id": "copilot", "label": "支援AI" },
+        { "id": "agents", "label": "エージェント" },
+        { "id": "platform", "label": "開発基盤" },
+        { "id": "governance", "label": "統制" },
+        { "id": "pricing", "label": "価格・包装" },
+        { "id": "ecosystem", "label": "連携網" }
+      ]
+    }
+  },
+  "change_ledger_columns": ["番号", "重要度", "企業", "変更内容", "分類", "前回との差分", "根拠"]
+}

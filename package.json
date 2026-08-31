@@ -1,0 +1,21 @@
+{
+  "name": "ai-opportunity-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI market and company monitoring board for strategy and market research.",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "doctor": "node scripts/doctor.cjs",
+    "capabilities": "node scripts/capability-doctor.cjs",
+    "skills:check": "node scripts/bootstrap-skills.cjs --json",
+    "skills:install": "node scripts/bootstrap-skills.cjs --install --json",
+    "research:batches": "node scripts/create-research-batches.cjs",
+    "update:template": "node scripts/create-update-template.cjs",
+    "update:import": "node scripts/import-update.cjs",
+    "profiles:import": "node scripts/import-profile-batch.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "updated_at": "2026-08-31T06:10:00.000Z",
+  "baseline_window": { "start": "2023-09-01", "end": "2026-08-31" },
+  "coverage": {
+    "status": "in_progress",
+    "profiles_started": 11,
+    "profiles_complete": 0,
+    "total_entities": 181,
+    "note": "初回週次調査で確認した企業から台帳化を開始。3年分の公式情報バックフィルは未完了"
+  },
+  "profiles": [
+    {
+      "entity_id": "openai",
+      "status": "partial",
+      "current_position": "基盤モデルを外部開発環境へ展開する一方、高自律エージェントの安全性とパートナー依存が経営課題になっている。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "models": "scaled", "products": "active", "agents": "active", "infrastructure": "observed", "partnerships": "active", "governance": "active", "research": "active" },
+      "internal_use": [],
+      "offerings": ["GPT-5.6ファミリー", "Kiroでのモデル提供"],
+      "partnerships": ["Amazon Web Services / Kiro", "Cursor（契約終了方針を発表）"],
+      "activity_signal_ids": ["2026-08-26-openai-hugging-face-incident", "2026-08-28-openai-cursor-contract", "2026-08-24-openai-gpt56-kiro"]
+    },
+    {
+      "entity_id": "anthropic",
+      "status": "partial",
+      "current_position": "ブラウザ実行と継続記憶を一般提供し、仕事の実行面を広げながら、自動アラインメント研究も進めている。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "models": "active", "products": "scaled", "agents": "scaled", "infrastructure": "observed", "partnerships": "unknown", "governance": "active", "research": "active" },
+      "internal_use": [],
+      "offerings": ["Claude in Chrome", "Claude Memory", "Claude Cowork"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-26-anthropic-claude-chrome-ga", "2026-08-25-anthropic-unified-memory", "2026-08-28-anthropic-automated-alignment-research"]
+    },
+    {
+      "entity_id": "google-deepmind",
+      "status": "partial",
+      "current_position": "音声と動画の専門モデルをGemini APIと企業向けエージェント基盤へ組み込み、マルチモーダル業務の入口を広げている。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "models": "scaled", "products": "active", "agents": "observed", "infrastructure": "observed", "partnerships": "unknown", "governance": "unknown", "research": "active" },
+      "internal_use": [],
+      "offerings": ["Gemini 3.5 Transcribe", "Gemini Omni 1.1 Flash"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-26-google-gemini-transcribe", "2026-08-27-google-gemini-omni-11"]
+    },
+    {
+      "entity_id": "meta",
+      "status": "partial",
+      "current_position": "大規模AI処理のボトルネックをネットワーク層から解くため、AI向けEthernet転送規格を外部公開している。",
+      "maturity_stage": "proprietary",
+      "development_methods": ["in-house"],
+      "dimensions": { "models": "unknown", "products": "unknown", "agents": "unknown", "infrastructure": "active", "partnerships": "observed", "governance": "unknown", "research": "active" },
+      "internal_use": ["大規模AIクラスタ向けネットワーク技術"],
+      "offerings": ["MetaRoCE仕様・参照実装"],
+      "partnerships": ["Open Compute Project"],
+      "activity_signal_ids": ["2026-08-24-meta-roce"]
+    },
+    {
+      "entity_id": "nvidia",
+      "status": "partial",
+      "current_position": "AIエージェントの長文脈・多数ツール呼び出しを前提に、電力当たり処理量とトークンコストを製品価値として訴求している。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "models": "observed", "products": "scaled", "agents": "active", "infrastructure": "scaled", "partnerships": "unknown", "governance": "unknown", "research": "active" },
+      "internal_use": [],
+      "offerings": ["Vera Rubin NVL72"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-24-nvidia-vera-rubin-agent-efficiency"]
+    },
+    {
+      "entity_id": "fortience",
+      "status": "partial",
+      "current_position": "AI化する業務の棚卸しと優先順位付けを入口商品にし、AIネイティブなToBe業務構想へ接続している。",
+      "maturity_stage": "commercial",
+      "development_methods": ["consulting-si"],
+      "dimensions": { "strategy": "active", "internal-use": "unknown", "offering": "scaled", "build": "observed", "deployment": "observed", "operations": "unknown", "products": "observed", "partnerships": "unknown" },
+      "internal_use": [],
+      "offerings": ["AIエージェント3ステップ"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-25-fortience-ai-agent-three-steps"]
+    },
+    {
+      "entity_id": "deloitte-tohmatsu",
+      "status": "partial",
+      "current_position": "企業固有の判断基準をオントロジーとして実装し、AIによる業務自律実行までを支援領域にしている。",
+      "maturity_stage": "commercial",
+      "development_methods": ["consulting-si"],
+      "dimensions": { "strategy": "active", "internal-use": "observed", "offering": "scaled", "build": "active", "deployment": "active", "operations": "observed", "products": "active", "partnerships": "observed" },
+      "internal_use": ["社内データを使ったオントロジーPoC（公式発表で有効性を確認）"],
+      "offerings": ["企業固有知識のオントロジー構築サービス"],
+      "partnerships": ["複数データプラットフォーム企業とのアライアンス（社名は今回未特定）"],
+      "activity_signal_ids": ["2026-08-25-deloitte-ontology-service"]
+    },
+    {
+      "entity_id": "ntt-data",
+      "status": "partial",
+      "current_position": "エージェント構築・共有・実行から、専用VDI、権限、操作履歴までを統合し、全社業務プロセスの実行基盤として外部提供している。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house", "consulting-si"],
+      "dimensions": { "enterprise-ai": "active", "employee-genai": "unknown", "proprietary-ai": "scaled", "customer-ai": "scaled", "manufacturing-rd": "unknown", "sales-service": "active", "scm-quality": "unknown", "governance": "active", "organization": "observed", "partnerships": "unknown", "research": "observed" },
+      "internal_use": ["LITRON審査エージェントの固定資産管理業務検証"],
+      "offerings": ["LITRON Builder", "LITRON Library", "LITRON Buddy", "AIエージェント向けVDI"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-25-ntt-data-litron-expansion", "2026-08-25-ntt-data-agent-vdi"]
+    },
+    {
+      "entity_id": "nec",
+      "status": "partial",
+      "current_position": "独自AIを中核に、需要予測・調達・生産計画などSCMの複数業務を横断実行する高価格帯エージェントを事業化している。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "enterprise-ai": "unknown", "employee-genai": "unknown", "proprietary-ai": "active", "customer-ai": "scaled", "manufacturing-rd": "observed", "sales-service": "unknown", "scm-quality": "scaled", "governance": "observed", "organization": "unknown", "partnerships": "unknown", "research": "observed" },
+      "internal_use": [],
+      "offerings": ["NEC SCM AIエージェント", "AI Platform Service", "cotomi"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-28-nec-scm-ai-agent"]
+    },
+    {
+      "entity_id": "freee",
+      "status": "partial",
+      "current_position": "会計画面へのAI追加ではなく、資料回収から決算申告までをまたぐ業務エージェントと顧客側の開発基盤へ拡張している。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "copilot": "active", "agents": "scaled", "platform": "scaled", "governance": "observed", "pricing": "observed", "ecosystem": "active" },
+      "internal_use": [],
+      "offerings": ["freee顧問先管理 | AIエージェント", "freee Agent Hub"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-28-freee-agent-hub"]
+    },
+    {
+      "entity_id": "notion",
+      "status": "partial",
+      "current_position": "文書・業務空間のエージェント化を進めつつ、直接実行だけでなく人が承認する編集モードを製品に組み込んでいる。",
+      "maturity_stage": "commercial",
+      "development_methods": ["in-house"],
+      "dimensions": { "copilot": "active", "agents": "scaled", "platform": "active", "governance": "active", "pricing": "unknown", "ecosystem": "unknown" },
+      "internal_use": [],
+      "offerings": ["Notion Agent", "Suggest edits"],
+      "partnerships": [],
+      "activity_signal_ids": ["2026-08-28-notion-agent-suggest-edits"]
+    }
+  ]
+}

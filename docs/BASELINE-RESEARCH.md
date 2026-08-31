@@ -1,0 +1,72 @@
+# 3年ベースライン調査手順
+
+## 目的
+
+週次ニュースを単発カードで終わらせず、各社のAI現在地、成熟段階、開発方式、過去3年の変更履歴へ積み上げる。初期対象はコンサルティング、日本AIスタートアップ・新興企業、日本大手事業会社。主要AI企業とSaaSも同じ契約で管理する。
+
+## 調査能力の解決順
+
+1. `config/research-capabilities.json`を読む。
+2. `npm run capabilities`で利用可能なスキルを確認する。
+3. `historical-baseline`はForesight Radarが利用可能ならsource-mapとdiffの方法を使う。
+4. `deep-verification`はSmart Researchが利用可能なら証拠台帳と矛盾確認に使う。
+5. 外部スキルがない場合は、この文書の手順をそのまま実行する。欠けたスキルを理由に調査対象を減らさない。
+6. AIhotは直近7日間の候補発見専用であり、3年ベースラインの取得には使わない。
+
+## 直接回答とみなす情報
+
+- 企業公式ニュース、IR、製品・サービスページ、導入事例、公式技術ブログ、論文、特許、政府資料に日付と具体的なAI活動がある。
+- コンサル会社では、社内AI活用、外部オファリング、開発・導入・運用、製品・資産、提携、組織・人材を区別できる。
+- 事業会社では、全社AI、全社員向け生成AI、独自開発、顧客向けAI、製造・R&D、営業・顧客接点、SCM・品質、ガバナンス、組織、提携、研究を区別できる。
+- スタートアップ・新興企業では、独自技術、製品、顧客導入、提携、資金調達、研究・特許を区別できる。
+- 導入段階を、検討、PoC、部門導入、全社導入、独自開発、外部販売・事業化のいずれかで根拠付きで判断できる。
+
+採用、求人、イベント登壇、一般論の記事だけでは、導入や提供を確認したことにしない。関連情報は`Supporting Context`として履歴に残せるが、ヒートマップの状態を上げない。
+
+## 情報源の順番
+
+1. 企業公式ニュース／ニュースルーム
+2. IR・統合報告書・決算説明資料
+3. 製品・サービスページとリリースノート
+4. 公式導入事例・技術ブログ・GitHub・論文・特許
+5. 政府・規制当局・大学・共同研究先の公式発表
+6. PR TIMESや専門メディアは候補発見に使い、重要事実は上記へ戻る
+
+## 企業ごとの成果物
+
+各プロフィールには以下を入れる。
+
+- `current_position`: 現在のAI戦略と実行位置を2〜4文で記載
+- `maturity_stage`: 最も進んだ確認済み段階
+- `development_methods`: 自社開発、外部製品、コンサル・SIer、スタートアップ、大学の別
+- `dimensions`: `config/entity-intelligence.json`の該当マトリクスを使用
+- `internal_use`: 社内利用。確認できない場合は空配列
+- `offerings`: 外部向けサービス・製品。確認できない場合は空配列
+- `partnerships`: 相手先と目的。相手先不明の場合はその旨を明記
+- `history`: 3年間の変更履歴。各項目に日付、分類、要約、一次情報URLを保持
+- `status`: 3年窓を調べ切った場合のみ`complete`。一部確認は`partial`
+
+ヒートマップはニュース件数で色付けしない。状態は`unknown`、`observed`、`active`、`scaled`の定性的ルーブリックで、根拠をクリックできる場合だけ更新する。
+
+## 並行調査
+
+```powershell
+npm run research:batches -- consulting 12
+npm run research:batches -- startups 10
+npm run research:batches -- enterprises 10
+```
+
+各担当者は自分の`batch_id`だけを調査し、`schemas/entity-profile-batch.schema.json`に従う別ファイルを作る。同じ共有JSONを複数人で同時編集しない。完成したファイルを1つずつ次で統合する。
+
+```powershell
+npm run profiles:import -- data/drafts/profiles-consulting-01.json
+```
+
+## 完了条件
+
+- バッチ内の全企業にプロフィールがある。
+- 2023-09-01〜2026-08-31を対象にした。
+- `complete`の企業は、公式ニュース、IR、製品、導入事例の主要な入口を確認済み。
+- 重要事実に一次情報URLがある。
+- 未確認、矛盾、同名企業、取得失敗を明記した。
+- `npm test`、`npm run doctor`、`npm run capabilities`が成功する。

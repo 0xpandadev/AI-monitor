@@ -1,0 +1,14 @@
+{
+  "topics": [
+    { "id": "models", "label": "基盤モデル", "description": "モデル公開、性能、価格、提供条件" },
+    { "id": "agents", "label": "AIエージェント", "description": "業務実行、自律化、マルチエージェント" },
+    { "id": "consulting-offers", "label": "AIオファリング", "description": "コンサル各社の新サービスと支援体制" },
+    { "id": "enterprise-adoption", "label": "企業導入", "description": "日本企業の導入事例と全社展開" },
+    { "id": "internal-development", "label": "内製開発", "description": "独自モデル、業務基盤、社内ツール" },
+    { "id": "saas-repositioning", "label": "SaaS再定義", "description": "AI機能、価格体系、製品ポジション" },
+    { "id": "startup", "label": "スタートアップ・新興企業", "description": "新製品、資金調達、顧客獲得、提携、上場後の事業拡大" },
+    { "id": "alliances", "label": "提携・M&A", "description": "技術獲得、資本提携、共同事業" },
+    { "id": "governance", "label": "ガバナンス", "description": "規制、リスク管理、セキュリティ" },
+    { "id": "talent", "label": "組織・人材", "description": "採用、育成、組織再編、働き方" }
+  ]
+}

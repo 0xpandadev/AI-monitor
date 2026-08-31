@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "policy": {
+    "install_requires_explicit_flag": true,
+    "skip_existing": true,
+    "never_overwrite": true,
+    "required_capabilities_have_embedded_fallbacks": true,
+    "note": "clone直後から中核機能は動く。外部スキルは明示操作時だけ追加し、既存環境を上書きしない"
+  },
+  "dependencies": [
+    {
+      "id": "update-ai-opportunity-monitor",
+      "capabilities": ["dashboard-publication", "weekly-orchestration"],
+      "requirement": "required",
+      "delivery": "repository",
+      "aliases": ["update-ai-opportunity-monitor"],
+      "project_paths": [
+        ".agents/skills/update-ai-opportunity-monitor/SKILL.md",
+        ".claude/skills/update-ai-opportunity-monitor/SKILL.md"
+      ],
+      "installable": false,
+      "fallback": null
+    },
+    {
+      "id": "foresight-radar",
+      "capabilities": ["historical-baseline"],
+      "requirement": "optional-enhancement",
+      "delivery": "external-skill",
+      "aliases": ["foresight-radar"],
+      "installable": false,
+      "source": null,
+      "source_status": "unpublished-source-not-recorded",
+      "release_action": "公開前に正規GitHub URLとライセンスを登録するか、許諾済みコピーをリポジトリへ同梱する",
+      "fallback": "docs/BASELINE-RESEARCH.md"
+    },
+    {
+      "id": "smart-research",
+      "capabilities": ["deep-verification"],
+      "requirement": "optional-enhancement",
+      "delivery": "external-skill",
+      "aliases": ["smart-research"],
+      "installable": true,
+      "source": {
+        "type": "github",
+        "url": "https://github.com/0xpandadev/smart-research.git",
+        "web_url": "https://github.com/0xpandadev/smart-research",
+        "ref": "99bf105cf0e01aca42c617a0f9ad8ea1d003bc96",
+        "path": ".",
+        "license": "Apache-2.0",
+        "pin_status": "pinned-commit",
+        "pinned_at": "2026-08-31"
+      },
+      "fallback": "docs/BASELINE-RESEARCH.md"
+    },
+    {
+      "id": "aihot",
+      "capabilities": ["weekly-discovery"],
+      "requirement": "connector",
+      "delivery": "embedded-public-rest-connector",
+      "aliases": ["aihot", "ai-radar"],
+      "installable": false,
+      "source": {
+        "type": "service",
+        "url": "https://aihot.virxact.com",
+        "authentication": "none",
+        "mcp": false
+      },
+      "fallback": "config/research-capabilities.json"
+    },
+    {
+      "id": "primary-web-verification",
+      "capabilities": ["primary-verification"],
+      "requirement": "platform-capability",
+      "delivery": "codex-or-claude-runtime",
+      "aliases": ["browse", "firecrawl"],
+      "installable": false,
+      "source": null,
+      "fallback": "標準Web検索と企業公式サイトの直接確認"
+    }
+  ]
+}

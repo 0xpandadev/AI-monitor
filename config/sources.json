@@ -1,0 +1,15 @@
+{
+  "policy": {
+    "confirmed": "企業公式ニュース、IR、製品ページ、導入事例、リリースノート、公式GitHub、政府機関",
+    "discovery": "AIhot、PR TIMES、専門メディア、公式SNS。重要事項は公式情報へ戻って確認する",
+    "social": "発見用途に限定し、単独では確認済みにしない"
+  },
+  "sources": [
+    { "id": "official-sites", "name": "企業公式サイト", "role": "確認", "state": "利用可能", "url": null, "note": "各社のニュース、IR、製品、導入事例" },
+    { "id": "consulting-map", "name": "コンサルファーム業界地図2026年版", "role": "監視対象の初期登録", "state": "利用可能", "url": "https://consul.global/post40874/", "note": "67社の初期母集団。AI動向は各社公式情報で確認" },
+    { "id": "aihot", "name": "AIhot", "role": "週次市場スキャン", "state": "公開情報を利用可能", "url": "https://aihot.virxact.com/", "note": "技術、製品、活用、研究、実装、業界論点の発見に利用。要約は候補情報として扱い、重要事項は原典へ戻って確認" },
+    { "id": "pr-times", "name": "PR TIMES", "role": "発見", "state": "検索利用", "url": "https://prtimes.jp/", "note": "日本企業とスタートアップ・新興企業の発表候補" },
+    { "id": "tdnet", "name": "TDnet", "role": "確認", "state": "検索利用", "url": "https://www.release.tdnet.info/", "note": "上場企業の適時開示" },
+    { "id": "government", "name": "経済産業省・デジタル庁・IPA", "role": "確認", "state": "検索利用", "url": "https://www.meti.go.jp/", "note": "国内AI政策、ガバナンス、導入支援" }
+  ]
+}

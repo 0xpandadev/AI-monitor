@@ -1,0 +1,8 @@
+interface:
+  display_name: "AI Opportunity Monitor Update"
+  short_description: "Refresh the weekly AI market monitoring board"
+  brand_color: "#C95D24"
+  default_prompt: "Use $update-ai-opportunity-monitor to refresh this week's source-verified AI market changes."
+
+policy:
+  allow_implicit_invocation: true
