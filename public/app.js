@@ -1,10 +1,10 @@
-const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
+const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',relationshipTab:'changes',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
   digest:['WEEKLY AI LANDSCAPE','今週のダイジェスト'],
   ledger:['EVIDENCE UPDATE HISTORY','更新履歴'],
-  relationships:['ONTOLOGY / TREND','関係・トレンド'],
+  relationships:['WEEKLY AI MOVEMENTS','今週の変化'],
   insights:['EVIDENCE TO DECISION','示唆ボード'],
   'ai-companies':['MODEL / PLATFORM WATCH','主要AI企業'],
   consulting:['CONSULTING AI MAP','コンサルマップ'],
@@ -89,6 +89,7 @@ function bind(){
     const signal=event.target.closest('[data-signal]');if(signal){openSignal(signal.dataset.signal);return;}
     const insight=event.target.closest('[data-insight]');if(insight){openInsight(insight.dataset.insight);return;}
     const graphFilter=event.target.closest('[data-graph-filter]');if(graphFilter){state.graphFilter=graphFilter.dataset.graphFilter;render();return;}
+    const relationshipTab=event.target.closest('[data-relationship-tab]');if(relationshipTab){state.relationshipTab=relationshipTab.dataset.relationshipTab;render();return;}
     const digestFilter=event.target.closest('[data-digest-filter]');if(digestFilter){state.digestCategory=digestFilter.dataset.digestFilter;render();return;}
     const companyFilter=event.target.closest('[data-company-filter]');if(companyFilter){state.companyFilter=companyFilter.dataset.companyFilter;render();return;}
     const aiTypeFilter=event.target.closest('[data-ai-type-filter]');if(aiTypeFilter){state.aiTypeFilter=aiTypeFilter.dataset.aiTypeFilter;render();return;}
@@ -105,7 +106,7 @@ function bind(){
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeDrawer();closeMeetingMode();}if(!$('#meeting-mode').hidden&&event.key==='ArrowRight')moveMeeting(1);if(!$('#meeting-mode').hidden&&event.key==='ArrowLeft')moveMeeting(-1);});
 }
 function navigate(event){const button=event.target.closest('[data-view]');if(button)setView(button.dataset.view);}
-function setView(view){state.view=view;state.query='';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
+function setView(view){state.view=view;state.query='';state.relationshipTab='changes';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
@@ -121,7 +122,7 @@ function renderDigest(){
   <section class="coverage-warning"><b>3〜5年ベースラインは作成中</b><p>${esc(d.profile_coverage.note||'基礎情報の確認を進めています。')}</p><button data-jump="settings">調査範囲と方法を見る</button></section>
   <section class="landscape-strip"><header><div><span>企業インテリジェンス</span><h2>名前ではなく、各社のAI現在地を見る</h2></div><p>件数は監視・調査カバレッジです。市場の強さや優劣を示すスコアではありません。</p></header><div class="landscape-track">${d.groups.filter(item=>item.id!=='additional').map(item=>{const target=item.id==='global-saas'||item.id==='japan-saas'?'saas':item.id;const note=outlook.get(item.id);const profiled=entities(item.id).filter(entity=>entity.profile).length;return `<button data-jump="${target}" class="landscape-cell ${item.signal_count?'changed':''}"><span>${esc(item.label)}</span><b>${profiled}<small> / ${item.count}社</small></b><small>${note?esc(note.summary):'基礎情報を調査中'}</small></button>`;}).join('')}</div></section>
   ${renderDigestNews(d.signals)}
-  <section class="intelligence-shortcuts"><button data-jump="relationships"><span>RELATIONSHIP / TREND</span><b>${d.trends?.momentum_themes?.length||0}テーマ · ${d.metrics.this_period}更新</b><small>変化・提供・提携を一覧で確認し、必要なときだけ関係図を開く</small></button><button data-jump="insights"><span>INSIGHT BOARD</span><b>${d.insights.length}件の観測パターン</b><small>結論、根拠、反証、次回観測を一体表示</small></button></section>
+  <section class="intelligence-shortcuts"><button data-jump="relationships"><span>WEEKLY AI MOVEMENTS</span><b>${d.trends?.momentum_themes?.length||0}テーマ · ${d.metrics.this_period}更新</b><small>今週の変化を確認し、提供・提携は必要なときだけ切り替える</small></button><button data-jump="insights"><span>INSIGHT BOARD</span><b>${d.insights.length}件の観測パターン</b><small>結論、根拠、反証、次回観測を一体表示</small></button></section>
   <section class="ledger-board"><header><div><span>更新履歴</span><h2>根拠付きで何が変わったか</h2></div><button data-jump="ledger">${d.signals.length}件をすべて見る →</button></header>${renderLedgerTable(d.signals.slice(0,8))}</section>`;
 }
 
@@ -157,7 +158,7 @@ function relationCatalogRows(type){
 }
 
 function renderRelationCatalog(type){
-  const isOffering=type==='offers',label=isOffering?'AIオファリング':'提携';
+  const isOffering=type==='offers',label=isOffering?'顧客向け提供':'外部提携';
   const rows=relationCatalogRows(type),total=rows.reduce((sum,row)=>sum+row.items.length,0);
   const itemEvidence=rows.reduce((sum,row)=>sum+row.items.filter(item=>item.status.className==='item').length,0);
   const profileOnly=rows.reduce((sum,row)=>sum+row.items.filter(item=>item.status.className==='profile').length,0);
@@ -167,18 +168,21 @@ function renderRelationCatalog(type){
 
 function renderThemeSummary(trends){
   const themes=(trends.momentum_themes||[]).slice().sort((a,b)=>b.recent_90_days-a.recent_90_days||b.companies-a.companies);
-  return `<section class="theme-summary"><header><div><span>WEEKLY CHANGES</span><h2>今週の変化をテーマ別に見る</h2><p>37は「企業×テーマ」の接続数です。テーマ自体は${themes.length}種類で、更新件数とは別に表示します。</p></div><b>${state.data.metrics.this_period}件の確認済み更新</b></header>${themes.length?`<div class="theme-summary-grid">${themes.map(item=>`<article><div><h3>${esc(item.category)}</h3><span class="momentum-tag ${esc(item.momentum)}">${esc(item.momentum)}</span></div><dl><div><dt>関与企業</dt><dd>${item.companies}社</dd></div><div><dt>直近90日</dt><dd>${item.recent_90_days}件</dd></div><div><dt>根拠</dt><dd>${item.sources}情報源</dd></div></dl><p>${esc(shortLabel(item.latest_title,72))}</p></article>`).join('')}</div>`:'<div class="empty-inline"><b>テーマ別に表示できる更新がありません</b></div>'}</section>`;
+  const currentSignals=signalFeed(state.data.signals).filter(signal=>signal.verification==='confirmed');
+  const companies=new Set(currentSignals.map(signal=>signal.entity_id).filter(Boolean)).size;
+  return `<section class="theme-summary"><header><div><span>WEEKLY CHANGES</span><h2>今週、AI市場で何が変わったか</h2><p>公式更新をテーマごとに整理しています。まず変化を見て、提供内容と提携先は上の切替で確認します。</p></div><dl><div><dt>更新</dt><dd>${currentSignals.length}</dd></div><div><dt>テーマ</dt><dd>${themes.length}</dd></div><div><dt>企業</dt><dd>${companies}</dd></div></dl></header>${themes.length?`<div class="theme-summary-grid">${themes.map(item=>`<article><div><h3>${esc(item.category)}</h3><span class="momentum-tag ${esc(item.momentum)}">${esc(item.momentum)}</span></div><dl><div><dt>関与企業</dt><dd>${item.companies}社</dd></div><div><dt>直近90日</dt><dd>${item.recent_90_days}件</dd></div><div><dt>根拠</dt><dd>${item.sources}情報源</dd></div></dl><p>${esc(shortLabel(item.latest_title,72))}</p></article>`).join('')}</div>`:'<div class="empty-inline"><b>テーマ別に表示できる更新がありません</b></div>'}</section>`;
 }
 
 function renderRelationships(){
   const graph=state.data.knowledge_graph,trends=state.data.trends;
   const offerCounts=relationEvidenceCounts(graph,'offers'),partnerCounts=relationEvidenceCounts(graph,'partners-with');
-  return `<section class="category-intro ontology-intro"><div><span>RELATIONSHIP / TREND</span><h2>変化・提供・提携を一覧で確認する</h2><p>全体を線でつなぐのではなく、まず会議で読める一覧に整理します。関係図は必要な範囲だけ詳細探索で開きます。</p></div><dl><div><dt>テーマ</dt><dd>${trends.momentum_themes?.length||0}</dd></div><div><dt>今週の更新</dt><dd>${state.data.metrics.this_period}</dd></div><div><dt>登録提供項目</dt><dd>${graph.summary.relation_counts.offers||0}</dd></div><div><dt>登録提携項目</dt><dd>${graph.summary.relation_counts['partners-with']||0}</dd></div></dl></section>
-  ${renderThemeSummary(trends)}
-  ${renderRelationCatalog('offers')}
-  ${renderRelationCatalog('partners-with')}
+  const tabs=[['changes','今週の変化'],['offers','顧客向け提供'],['partners','外部提携']];
+  const pane=state.relationshipTab==='offers'?renderRelationCatalog('offers'):state.relationshipTab==='partners'?renderRelationCatalog('partners-with'):renderThemeSummary(trends);
+  return `<section class="category-intro ontology-intro"><div><span>WEEKLY AI MOVEMENTS</span><h2>今週のAI変化を見る</h2><p>今週の公式更新を起点に、企業の動き・顧客向け提供・外部提携を切り替えて確認します。</p></div><dl><div><dt>今週の更新</dt><dd>${state.data.metrics.this_period}</dd></div><div><dt>動いたテーマ</dt><dd>${trends.momentum_themes?.length||0}</dd></div><div><dt>関与企業</dt><dd>${new Set(signalFeed(state.data.signals).map(signal=>signal.entity_id).filter(Boolean)).size}</dd></div></dl></section>
+  <nav class="relationship-tabs" aria-label="AI変化の見方">${tabs.map(([id,label])=>`<button class="relationship-tab ${state.relationshipTab===id?'active':''}" data-relationship-tab="${id}">${label}</button>`).join('')}</nav>
+  ${pane}
   <details class="graph-panel relationship-explorer"><summary><span>DETAILED EXPLORER</span><b>関係図を開く</b><small>全体のランキングではなく、選択した関係を最大30件まで確認します</small></summary><div class="graph-panel-inner"><header><div><span>関係マップ</span><h2>選択した関係だけを見る</h2><p>個別根拠またはプロフィール根拠がある関係のみ表示します。</p></div><div class="graph-filters">${[['changed-in','企業×変化テーマ'],['offers','企業×提供'],['partners-with','企業×提携']].map(([id,label])=>`<button class="${state.graphFilter===id?'active':''}" data-graph-filter="${id}">${label} <b>${graph.summary.relation_counts[id]||0}</b></button>`).join('')}</div></header>${renderNetworkGraph(graph,state.graphFilter)}<footer>${esc(graph.caveat)} 提供の個別根拠 ${offerCounts.item}件、提携の個別根拠 ${partnerCounts.item}件。</footer></div></details>
-  ${renderTrendPanel(trends)}`;
+  `;
 }
 
 function renderNetworkGraph(graph,relationType){
