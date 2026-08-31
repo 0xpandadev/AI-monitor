@@ -13,7 +13,8 @@ async function waitFor(url){for(let index=0;index<50;index++){try{const response
 test('watchlist contains the intended monitoring universe',()=>{
   const {entities,groups}=registry();
   const weeklyResearch=require('../config/weekly-research.json');
-  assert.equal(entities.length,181);
+  assert.equal(entities.length,208);
+  assert.equal(groups.find(group=>group.id==='ai-companies').members.length,37);
   assert.equal(groups.find(group=>group.id==='consulting').members.length,67);
   assert.equal(groups.find(group=>group.id==='enterprises').members.length,42);
   const challengers=groups.find(group=>group.id==='startups');
@@ -23,7 +24,7 @@ test('watchlist contains the intended monitoring universe',()=>{
   assert.equal(weeklyResearch.lanes.find(lane=>lane.id==='company-watch').frequency,'weekly_all');
   assert.equal(groups.filter(group=>['global-saas','japan-saas'].includes(group.id)).reduce((sum,group)=>sum+group.members.length,0),22);
   assert.equal(new Set(entities.map(entity=>entity.id)).size,entities.length);
-  for(const id of ['pwc-consulting','mckinsey','bcg','kearney','hikari-ai','flux'])assert.ok(entities.some(entity=>entity.id===id),`${id} missing`);
+  for(const id of ['pwc-consulting','mckinsey','bcg','kearney','hikari-ai','flux','palantir','deepseek','moonshot-ai','minimax','coreweave','amd','tsmc'])assert.ok(entities.some(entity=>entity.id===id),`${id} missing`);
 });
 
 test('public product surface contains only the monitoring product',()=>{
@@ -59,9 +60,10 @@ test('portable skill manifest keeps the core local and external installs explici
 test('board is explicit when empty and every populated signal is sourced',()=>{
   const data=dashboard();
   assert.equal(data.product.name,'AI Opportunity Monitor');
-  assert.equal(data.metrics.watched,181);
+  assert.equal(data.metrics.watched,208);
   assert.equal(data.metrics.profiles_started,data.profile_coverage.profiles_started);
-  assert.ok(data.metrics.profiles_started>=37);
+  assert.ok(data.metrics.profiles_started>=69);
+  assert.equal(data.entities.filter(entity=>entity.group_id==='ai-companies'&&entity.profile).length,37);
   assert.equal(data.metrics.profiles_complete,0);
   assert.deepEqual(data.intelligence.evidence_states.map(item=>item.id),['unknown','observed','active','scaled']);
   assert.ok(data.intelligence.matrices.consulting.dimensions.some(item=>item.id==='internal-use'));
@@ -89,7 +91,10 @@ test('ontology surface derives relationships, honest trends, and sourced insight
     assert.ok(edge.evidence_count>0,`${edge.id} has no evidence`);
     for(const id of edge.evidence_ids)assert.ok(signalIds.has(id)||String(id).startsWith('profile:'),`${edge.id} references unknown evidence ${id}`);
   }
-  assert.equal(data.trends.sufficient_for_line,data.trends.temporal_points>=data.trends.minimum_temporal_points);
+  assert.equal(data.trends.sufficient_for_line,false);
+  assert.ok(Array.isArray(data.trends.momentum_themes));
+  assert.ok(data.trends.momentum_themes.length>0);
+  assert.ok(data.trends.momentum_themes.every(item=>item.category&&item.momentum));
   for(const insight of data.insights){
     assert.ok(insight.entity_ids.length>=2);
     assert.ok(insight.evidence_count>=2);
@@ -116,6 +121,6 @@ test('local server exposes the standalone dashboard and no AI API requirement',{
   const port=await freePort();const child=spawn(process.execPath,['server.cjs'],{cwd:ROOT,env:{...process.env,AIOM_PORT:String(port)},stdio:'ignore'});t.after(()=>child.kill());
   await waitFor(`http://127.0.0.1:${port}/api/health`);
   let response=await fetch(`http://127.0.0.1:${port}/api/health`);let body=await response.json();assert.equal(body.product,'AI Opportunity Monitor');assert.equal(body.ai_api_required,false);
-  response=await fetch(`http://127.0.0.1:${port}/api/dashboard`);body=await response.json();assert.equal(body.metrics.watched,181);assert.equal(body.groups.find(group=>group.id==='consulting').count,67);assert.equal(body.groups.find(group=>group.id==='startups').count,40);assert.equal(body.profile_coverage.profiles_started,body.metrics.profiles_started);assert.ok(body.profile_coverage.profiles_started>=37);assert.ok(body.capabilities.capabilities.some(item=>item.id==='historical-baseline'));
+  response=await fetch(`http://127.0.0.1:${port}/api/dashboard`);body=await response.json();assert.equal(body.metrics.watched,208);assert.equal(body.groups.find(group=>group.id==='consulting').count,67);assert.equal(body.groups.find(group=>group.id==='startups').count,40);assert.equal(body.groups.find(group=>group.id==='ai-companies').count,37);assert.equal(body.entities.filter(entity=>entity.group_id==='ai-companies'&&entity.profile).length,37);assert.equal(body.profile_coverage.profiles_started,body.metrics.profiles_started);assert.ok(body.profile_coverage.profiles_started>=69);assert.ok(body.capabilities.capabilities.some(item=>item.id==='historical-baseline'));
   response=await fetch(`http://127.0.0.1:${port}/`);assert.equal(response.status,200);assert.match(await response.text(),/<title>AI Opportunity Monitor<\/title>/);
 });

@@ -30,12 +30,13 @@
   ],
   "matrices": {
     "ai-companies": {
-      "label": "AI企業の競争領域",
+      "label": "AI企業・算力サプライチェーンの競争領域",
       "dimensions": [
         { "id": "models", "label": "モデル" },
-        { "id": "products", "label": "製品" },
+        { "id": "products", "label": "製品・API" },
         { "id": "agents", "label": "エージェント" },
-        { "id": "infrastructure", "label": "基盤" },
+        { "id": "infrastructure", "label": "クラウド・算力" },
+        { "id": "supply-chain", "label": "半導体・供給網" },
         { "id": "partnerships", "label": "提携" },
         { "id": "governance", "label": "安全・統制" },
         { "id": "research", "label": "研究" }

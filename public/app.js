@@ -58,6 +58,14 @@ function matchesConsultingFilter(entity,filterId){
   const filter=consultingFilters().find(item=>item.id===filterId)||consultingFilters()[0];
   return filter.test(entity);
 }
+function segmentFilters(list){
+  const segments=[...new Set(list.map(entity=>entity.segment).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja'));
+  return [{id:'all',label:'すべて',test:()=>true},...segments.map(segment=>({id:`segment:${segment}`,label:segment,test:entity=>entity.segment===segment}))];
+}
+function matchesSegmentFilter(entity,filterId,list){
+  const filter=segmentFilters(list).find(item=>item.id===filterId)||segmentFilters(list)[0];
+  return filter.test(entity);
+}
 
 async function api(path,options={}){
   const response=await fetch(path,{headers:{'Content-Type':'application/json',...(options.headers||{})},...options});
@@ -103,7 +111,7 @@ function setView(view){state.view=view;state.query='';state.digestCategory='all'
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
-  const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界のモデル・プラットフォーム企業を、モデル、製品、エージェント、基盤、提携、安全性、研究で比較します。'),consulting:()=>renderCategory(['consulting'],'各社の社内AI活用、外部オファリング、開発・導入・運用、製品資産、提携を3〜5年の基準情報として比較します。'),enterprises:()=>renderCategory(['enterprises'],'日本企業の全社AI、独自開発、製造・R&D、顧客向けAI、SCM、統制、組織を業界別・企業別に確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
+  const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界の基盤モデル、Geminiを含む大手プラットフォーム、中国・アジア勢、データ/オントロジー、AIクラウド、推論基盤、半導体・HBM、AIサーバーを一つの供給網として比較します。'),consulting:()=>renderCategory(['consulting'],'各社の社内AI活用、外部オファリング、開発・導入・運用、製品資産、提携を3〜5年の基準情報として比較します。'),enterprises:()=>renderCategory(['enterprises'],'日本企業の全社AI、独自開発、製造・R&D、顧客向けAI、SCM、統制、組織を業界別・企業別に確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
   $('#content').innerHTML=(views[state.view]||renderDigest)();
 }
 
@@ -156,14 +164,9 @@ function renderNetworkGraph(graph,relationType){
 }
 
 function renderTrendPanel(trends){
-  const max=Math.max(1,...trends.categories.map(item=>item.confirmed_changes));
-  return `<section class="trend-panel"><header><div><span>確認済み変更の分布</span><h2>${trends.sufficient_for_line?'月次トレンド':'時系列は蓄積中'}</h2><p>${esc(trends.note)}</p></div><div class="trend-readiness"><b>${trends.temporal_points} / ${trends.minimum_temporal_points}</b><span>確認済み月</span></div></header>${trends.sufficient_for_line?renderMonthlyLine(trends.monthly):`<div class="category-bars">${trends.categories.map(item=>`<div><span>${esc(item.category)}</span><i><b style="width:${Math.max(6,item.confirmed_changes/max*100)}%"></b></i><strong>${item.confirmed_changes}件</strong><small>${item.companies}社 · ${item.sources}情報源</small></div>`).join('')}</div>`}<footer>件数は登録済み一次情報のカバレッジであり、市場規模や企業評価ではありません。</footer></section>`;
-}
-
-function renderMonthlyLine(points){
-  const width=1040,height=270,padX=52,padY=34,max=Math.max(1,...points.map(item=>item.confirmed_changes));
-  const coords=points.map((item,index)=>({item,x:padX+(width-padX*2)*(points.length===1?.5:index/(points.length-1)),y:height-padY-(height-padY*2)*(item.confirmed_changes/max)}));
-  return `<div class="monthly-line"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="月次の確認済み変更件数"><line x1="${padX}" y1="${height-padY}" x2="${width-padX}" y2="${height-padY}"></line><polyline points="${coords.map(point=>`${point.x},${point.y}`).join(' ')}"></polyline>${coords.map(point=>`<g><circle cx="${point.x}" cy="${point.y}" r="5"></circle><text x="${point.x}" y="${point.y-12}">${point.item.confirmed_changes}</text><text class="axis" x="${point.x}" y="${height-10}">${esc(point.item.month)}</text></g>`).join('')}</svg></div>`;
+  const themes=trends.momentum_themes||[];
+  const max=Math.max(1,...themes.map(item=>item.recent_90_days||0));
+  return `<section class="trend-panel"><header><div><span>テーマ別モメンタム</span><h2>どのAIテーマが動いているか</h2><p>${esc(trends.note)}</p></div><div class="trend-readiness"><b>${esc(trends.reference_date||'--')}</b><span>基準日</span></div></header>${themes.length?`<div class="momentum-board">${themes.map(item=>`<article class="${esc(item.momentum)}"><div><span>${esc(item.category)}</span><b>${esc(item.momentum)}</b></div><i><b style="width:${Math.max(6,(item.recent_90_days||0)/max*100)}%"></b></i><dl><div><dt>直近90日</dt><dd>${item.recent_90_days}件</dd></div><div><dt>前90日</dt><dd>${item.previous_90_days}件</dd></div><div><dt>1年内</dt><dd>${item.recent_365_days}件</dd></div><div><dt>関与企業</dt><dd>${item.companies}社</dd></div></dl><p><small>最新:</small> ${esc(item.latest_at||'--')} · ${esc(shortLabel(item.latest_title,54))}</p></article>`).join('')}</div>`:'<div class="empty-inline"><b>モメンタムを計算できる確認済み情報がありません</b><p>週次更新またはベースライン取り込み後に表示します。</p></div>'}<footer>「加速」「継続」「新規・再浮上」は登録済み公式更新の直近90日と前90日の比較です。市場規模、導入率、企業評価ではありません。</footer></section>`;
 }
 
 function renderInsights(){
@@ -187,13 +190,14 @@ function renderLedgerTable(signals){
 function renderCategory(ids,description){
   const baseList=entities(ids);let list=baseList,signals=signalsFor(ids);
   if(ids.length===1&&ids[0]==='consulting'&&state.companyFilter!=='all'){list=list.filter(entity=>matchesConsultingFilter(entity,state.companyFilter));const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
+  if(ids.length===1&&ids[0]==='ai-companies'&&state.companyFilter!=='all'){list=list.filter(entity=>matchesSegmentFilter(entity,state.companyFilter,baseList));const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
   if(state.query){list=list.filter(entity=>`${entity.name} ${entity.segment||''} ${entity.profile?.current_position||''}`.toLowerCase().includes(state.query));signals=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''}`.toLowerCase().includes(state.query));}
   const matrixId=ids.length>1?'global-saas':ids[0];const matrix=matrixFor(matrixId);const started=list.filter(entity=>entity.profile).length;const historyTotal=list.reduce((sum,entity)=>sum+evidenceCount(entity),0);
   const enterpriseIndustry=ids.includes('enterprises')?renderIndustryMatrix(list,matrix):'';
-  const consultingFilterStrip=ids.length===1&&ids[0]==='consulting'?renderConsultingFilterStrip(baseList):'';
+  const companyFilterStrip=ids.length===1&&ids[0]==='consulting'?renderConsultingFilterStrip(baseList):(ids.length===1&&ids[0]==='ai-companies'?renderSegmentFilterStrip(baseList):'');
   return `<section class="category-intro"><div><span>3-5 YEAR COMPANY BASELINE</span><h2>${esc(viewMeta[state.view][1])}</h2><p>${esc(description)}</p></div><dl><div><dt>監視企業</dt><dd>${list.length}</dd></div><div><dt>基礎情報あり</dt><dd>${started}</dd></div><div><dt>確認履歴</dt><dd>${historyTotal}</dd></div></dl></section>
   <section class="method-strip"><div><b>セルの意味</b>${state.data.intelligence.evidence_states.map(item=>`<span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span>`).join('')}<em>数字ではなく、公式根拠で確認できた状態です</em></div><button data-method>判定方法・注意点</button></section>
-  ${consultingFilterStrip}
+  ${companyFilterStrip}
   ${enterpriseIndustry}
   <section class="matrix-panel"><header><div><span>企業比較</span><h2>${esc(matrix.label)}</h2></div><p>企業名をクリックすると、現在位置・履歴・公式根拠を表示します。</p></header>${renderEntityMatrix(list,matrix)}</section>
   <section class="ledger-board"><header><div><span>この領域の更新履歴</span><h2>確認済みの更新</h2></div><b>${signals.length}件</b></header>${renderLedgerTable(signals)}</section>`;
@@ -202,6 +206,11 @@ function renderCategory(ids,description){
 function renderConsultingFilterStrip(list){
   const filters=consultingFilters();
   return `<section class="company-filter-strip"><header><span>コンサル分類</span><h2>戦コン・Big4・DX系で切り替える</h2><p>分類は監視リストのセグメントと主要カテゴリを使っています。</p></header><div>${filters.map(filter=>{const count=list.filter(entity=>filter.test(entity)).length;return `<button class="${state.companyFilter===filter.id?'active':''}" data-company-filter="${esc(filter.id)}"><span>${esc(filter.label)}</span><b>${count}</b></button>`;}).join('')}</div></section>`;
+}
+
+function renderSegmentFilterStrip(list){
+  const filters=segmentFilters(list);
+  return `<section class="company-filter-strip"><header><span>AI企業分類</span><h2>モデル・中国勢・算力で切り替える</h2><p>分類は監視リストのセグメントです。企業の強さではなく、観測領域を切り替えます。</p></header><div>${filters.map(filter=>{const count=list.filter(entity=>filter.test(entity)).length;return `<button class="${state.companyFilter===filter.id?'active':''}" data-company-filter="${esc(filter.id)}"><span>${esc(filter.label)}</span><b>${count}</b></button>`;}).join('')}</div></section>`;
 }
 
 function renderEntityMatrix(list,matrix){

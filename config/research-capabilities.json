@@ -12,7 +12,7 @@
     },
     {
       "id": "weekly-discovery",
-      "purpose": "AI市場全体と181社の週次候補を発見する",
+      "purpose": "AI市場全体と登録済み監視企業の週次候補を発見する",
       "preferred_skills": ["aihot"],
       "connector": {
         "type": "public-rest-api-or-mcp",

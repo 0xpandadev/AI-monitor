@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-08-31T11:40:00.000Z",
+  "updated_at": "2026-08-31T13:45:00.000Z",
   "baseline_window": {
     "start": "2021-09-01",
     "end": "2026-08-31"
   },
   "coverage": {
     "status": "in_progress",
-    "profiles_started": 37,
+    "profiles_started": 69,
     "profiles_complete": 0,
-    "total_entities": 181,
+    "total_entities": 208,
     "note": "completeは指定した基準窓の一次情報確認が完了したプロフィールのみ"
   },
   "profiles": [
@@ -77,30 +77,56 @@
     {
       "entity_id": "google-deepmind",
       "status": "partial",
-      "current_position": "音声と動画の専門モデルをGemini APIと企業向けエージェント基盤へ組み込み、マルチモーダル業務の入口を広げている。",
+      "current_position": "Geminiを中核に、Google AI Studio、Gemini API、Vertex AI、Gemini Enterprise、Gemma、画像・動画・音声・ロボティクス系モデルを横断展開している。モデル企業であると同時に、企業向けAIプラットフォームとAIアプリの供給者でもある。",
       "maturity_stage": "commercial",
       "development_methods": [
         "in-house"
       ],
       "dimensions": {
         "models": "scaled",
-        "products": "active",
-        "agents": "observed",
-        "infrastructure": "observed",
-        "partnerships": "unknown",
-        "governance": "unknown",
-        "research": "active"
+        "products": "scaled",
+        "agents": "active",
+        "infrastructure": "scaled",
+        "supply-chain": "observed",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "scaled"
       },
-      "internal_use": [],
-      "offerings": [
-        "Gemini 3.5 Transcribe",
-        "Gemini Omni 1.1 Flash"
+      "internal_use": [
+        "Google製品群へのGemini組み込み"
       ],
-      "partnerships": [],
+      "offerings": [
+        "Gemini",
+        "Gemini API",
+        "Vertex AI",
+        "Gemini Enterprise",
+        "Gemma",
+        "Veo",
+        "Imagen",
+        "Gemini Robotics"
+      ],
+      "partnerships": [
+        "Google Cloud ecosystem"
+      ],
       "activity_signal_ids": [
         "2026-08-26-google-gemini-transcribe",
         "2026-08-27-google-gemini-omni-11"
-      ]
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Google DeepMind models portfolio reviewed",
+          "category": "AIモデル・製品",
+          "summary": "Google DeepMindの公式モデルページで、Gemini、Veo、Imagen、Gemma、Gemini Roboticsなど複数モデル群の展開を確認した。",
+          "source": {
+            "title": "Models — Google DeepMind",
+            "url": "https://deepmind.google/models/",
+            "publisher": "Google DeepMind",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
     },
     {
       "entity_id": "meta",
@@ -135,7 +161,7 @@
     {
       "entity_id": "nvidia",
       "status": "partial",
-      "current_position": "AIエージェントの長文脈・多数ツール呼び出しを前提に、電力当たり処理量とトークンコストを製品価値として訴求している。",
+      "current_position": "GPU、ネットワーク、AI Enterprise、NIM、DGX/クラウド連携を通じて、生成AIとエージェント時代の算力供給網の中心にいる。モデル単体ではなく、企業AIの実行基盤そのものを提供するプレイヤーとして監視する。",
       "maturity_stage": "commercial",
       "development_methods": [
         "in-house"
@@ -145,18 +171,42 @@
         "products": "scaled",
         "agents": "active",
         "infrastructure": "scaled",
-        "partnerships": "unknown",
-        "governance": "unknown",
+        "supply-chain": "scaled",
+        "partnerships": "scaled",
+        "governance": "observed",
         "research": "active"
       },
       "internal_use": [],
       "offerings": [
-        "Vera Rubin NVL72"
+        "GPU accelerated computing",
+        "NVIDIA AI Enterprise",
+        "NIM",
+        "DGX Cloud partnerships"
       ],
-      "partnerships": [],
+      "partnerships": [
+        "Oracle Cloud Infrastructure",
+        "Dell Technologies",
+        "Supermicro",
+        "major cloud providers"
+      ],
       "activity_signal_ids": [
         "2026-08-24-nvidia-vera-rubin-agent-efficiency"
-      ]
+      ],
+      "history": [
+        {
+          "date": "2026-03-17",
+          "title": "Oracle expands AI collaboration with NVIDIA",
+          "category": "AI算力・提携",
+          "summary": "OracleとNVIDIAの連携拡張により、OCI上の大規模AIスーパーコンピューティング、ベクトル処理、AIアプリケーション基盤の強化が確認できる。",
+          "source": {
+            "title": "Oracle Expands AI Collaboration with NVIDIA",
+            "url": "https://blogs.oracle.com/cloud-infrastructure/oracle-nvidia-gtc-2026-key-announcements",
+            "publisher": "Oracle",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
     },
     {
       "entity_id": "fortience",
@@ -2030,6 +2080,1506 @@
         }
       ],
       "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "cohere",
+      "status": "partial",
+      "current_position": "Command系モデル、RAG、ツール利用、エージェント、翻訳・視覚系モデルを、企業利用とプライベート展開を重視して提供している。Northにより、単なるAPIではなく業務ワークスペース/エージェント基盤へ広げている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "observed",
+        "supply-chain": "unknown",
+        "partnerships": "active",
+        "governance": "active",
+        "research": "observed"
+      },
+      "internal_use": [],
+      "offerings": [
+        "Command A",
+        "Command R",
+        "North",
+        "enterprise RAG and agent workflows"
+      ],
+      "partnerships": [
+        "Amazon Bedrock",
+        "Microsoft Azure",
+        "Oracle OCI Generative AI Service"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Cohere models and North reviewed",
+          "category": "AIモデル・製品",
+          "summary": "Cohere公式ドキュメントでCommand系モデルと、Northでの業務自動化・エージェントワークフローを確認した。",
+          "source": {
+            "title": "An Overview of Cohere's Models",
+            "url": "https://docs.cohere.com/docs/models",
+            "publisher": "Cohere",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "palantir",
+      "status": "partial",
+      "current_position": "AIPを通じてLLMを企業データ、Ontology、業務アプリ、権限、監査、運用に接続する。モデル企業ではなく、AIを業務実行と意思決定に落とすデータ/オントロジー基盤として監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "scaled",
+        "agents": "scaled",
+        "infrastructure": "active",
+        "supply-chain": "unknown",
+        "partnerships": "active",
+        "governance": "scaled",
+        "research": "observed"
+      },
+      "internal_use": [
+        "Foundry/AIP/Ontology上のAIワークフロー運用"
+      ],
+      "offerings": [
+        "Palantir AIP",
+        "Foundry Ontology",
+        "AIP Logic",
+        "AIP Evals",
+        "AIP-powered workflows and agents"
+      ],
+      "partnerships": [
+        "commercial LLM providers",
+        "enterprise data platforms"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "AIP overview reviewed",
+          "category": "データ・オントロジー",
+          "summary": "AIPがAIを企業データと業務、Ontology、セキュリティ、監査、ワークフローに接続する位置づけを確認した。",
+          "source": {
+            "title": "Overview • AIP • Palantir",
+            "url": "https://www.palantir.com/docs/foundry/aip",
+            "publisher": "Palantir",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "deepseek",
+      "status": "partial",
+      "current_position": "DeepSeek-R1以降、推論モデル、低価格API、オープンウェイト/技術レポートを軸に、中国発の基盤モデル競争を代表する存在になっている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "unknown",
+        "supply-chain": "unknown",
+        "partnerships": "observed",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [],
+      "offerings": [
+        "DeepSeek-R1",
+        "DeepSeek API",
+        "DeepThink"
+      ],
+      "partnerships": [
+        "open-source ecosystem",
+        "cloud/model platforms"
+      ],
+      "history": [
+        {
+          "date": "2025-01-20",
+          "title": "DeepSeek-R1 release",
+          "category": "AIモデル・研究",
+          "summary": "DeepSeekはDeepSeek-R1と蒸留モデルを公開し、API提供と技術レポートを案内した。",
+          "source": {
+            "title": "DeepSeek-R1 Release",
+            "url": "https://api-docs.deepseek.com/news/news250120/",
+            "publisher": "DeepSeek",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "moonshot-ai",
+      "status": "partial",
+      "current_position": "Kimiシリーズで長文脈、推論、コーディング、マルチモーダルを前面に出す中国発モデル企業。Kimi.com、Kimi Work、Kimi Code、APIで製品面も展開している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "observed",
+        "supply-chain": "unknown",
+        "partnerships": "observed",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [],
+      "offerings": [
+        "Kimi",
+        "Kimi Work",
+        "Kimi Code",
+        "Kimi API",
+        "Kimi K3"
+      ],
+      "partnerships": [
+        "inference partners",
+        "open-source maintainers"
+      ],
+      "history": [
+        {
+          "date": "2026-07-16",
+          "title": "Kimi K3 announced",
+          "category": "AIモデル・製品",
+          "summary": "Kimi K3をKimi.com、Kimi Work、Kimi Code、Kimi APIで提供し、モデル重み公開計画も示した。",
+          "source": {
+            "title": "Kimi K3 Tech Blog: Open Frontier Intelligence",
+            "url": "https://www.kimi.com/en/blog/kimi-k3",
+            "publisher": "Moonshot AI / Kimi",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "minimax",
+      "status": "partial",
+      "current_position": "テキスト、コーディング、音声、動画、音楽、キャラクター対話などをまたぐマルチモーダルAI企業。モデルAPIとクリエイティブ/エージェント用途の両方を監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "observed",
+        "supply-chain": "unknown",
+        "partnerships": "observed",
+        "governance": "unknown",
+        "research": "observed"
+      },
+      "internal_use": [],
+      "offerings": [
+        "MiniMax-M2 series",
+        "MiniMax M1/M2 text APIs",
+        "Hailuo video",
+        "Speech",
+        "Music"
+      ],
+      "partnerships": [
+        "developer ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "MiniMax model portfolio reviewed",
+          "category": "AIモデル・製品",
+          "summary": "公式APIドキュメントでMiniMaxのテキスト、音声、動画、音楽モデルの提供状況を確認した。",
+          "source": {
+            "title": "Models - MiniMax API Docs",
+            "url": "https://platform.minimax.io/docs/guides/models-intro",
+            "publisher": "MiniMax",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "alibaba-cloud-qwen",
+      "status": "partial",
+      "current_position": "QwenシリーズとModel Studioにより、基盤モデル、API、ファインチューニング、アプリ開発をAlibaba Cloud上で束ねる中国の主要AIプラットフォーム。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "scaled",
+        "agents": "active",
+        "infrastructure": "scaled",
+        "supply-chain": "observed",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "Alibaba Cloud上のモデルサービス"
+      ],
+      "offerings": [
+        "Qwen",
+        "Model Studio",
+        "model APIs",
+        "fine-tuning and application development"
+      ],
+      "partnerships": [
+        "Alibaba Cloud ecosystem",
+        "open-source Qwen ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Alibaba Cloud Model Studio reviewed",
+          "category": "AIプラットフォーム",
+          "summary": "Model StudioがQwenを含むモデル、開発、API提供を扱うプラットフォームであることを確認した。",
+          "source": {
+            "title": "What is Model Studio",
+            "url": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/what-is-model-studio",
+            "publisher": "Alibaba Cloud",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "baidu-ernie",
+      "status": "partial",
+      "current_position": "ERNIEと千帆/Wenxin Workshopを通じて、中国語中心の大規模モデル、深度思考モデル、API/企業導入基盤を提供している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "observed",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "Baidu AI Cloud / Qianfan platform"
+      ],
+      "offerings": [
+        "ERNIE",
+        "ERNIE-X1",
+        "Wenxin Workshop",
+        "Qianfan ModelBuilder"
+      ],
+      "partnerships": [
+        "Baidu AI Cloud ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2025-06-29",
+          "title": "ERNIE-X1-32K-Preview notice",
+          "category": "AIモデル・製品",
+          "summary": "Baidu公式文書でERNIE-X1の深度思考モデル、API名、機能範囲を確認した。",
+          "source": {
+            "title": "ERNIE-X1-32K-Preview上线公告",
+            "url": "https://ai.baidu.com/ai-doc/WENXINWORKSHOP/hm90w209a",
+            "publisher": "Baidu AI Cloud",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "tencent-hunyuan",
+      "status": "partial",
+      "current_position": "Hunyuan/Hy3をTencent CloudとTencent製品群へ接続し、モデル単体よりも既存アプリ・クラウドへの深い組み込みを競争軸にしている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "observed",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "Tencent products and services"
+      ],
+      "offerings": [
+        "Tencent Hunyuan",
+        "Hy3",
+        "Tencent Cloud TokenHub API"
+      ],
+      "partnerships": [
+        "Tencent product ecosystem",
+        "third-party developer platforms"
+      ],
+      "history": [
+        {
+          "date": "2026-07-06",
+          "title": "Tencent Hunyuan Hy3 official release",
+          "category": "AIモデル・エージェント",
+          "summary": "TencentはHy3を正式リリースし、WorkBuddy/CodeBuddy、Yuanbaoなどへの採用とTencent Cloud API提供を説明した。",
+          "source": {
+            "title": "Tencent Hunyuan Officially Releases Hy3",
+            "url": "https://www.tencent.com/en-us/articles/2202386.html",
+            "publisher": "Tencent",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "bytedance-doubao",
+      "status": "partial",
+      "current_position": "Volcengine上でDoubao-Seed系モデルを、テキスト、コード/Agent、動画、画像、音声、埋め込みまで幅広く企業向けに提供している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "scaled",
+        "agents": "active",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "ByteDance / Volcengine AI cloud"
+      ],
+      "offerings": [
+        "Doubao-Seed",
+        "Doubao-Seed-Evolving",
+        "Seedance",
+        "Seedream",
+        "Doubao voice and embedding models"
+      ],
+      "partnerships": [
+        "Volcengine enterprise customers"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Doubao product page reviewed",
+          "category": "AIモデル・製品",
+          "summary": "Volcengine公式ページでDoubao-Seedのマルチモーダルモデル、Agent/Coding用途、企業AI転換向け提供を確認した。",
+          "source": {
+            "title": "Doubao product page",
+            "url": "https://www.volcengine.com/product/doubao",
+            "publisher": "Volcengine / ByteDance",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "zhipu-ai",
+      "status": "partial",
+      "current_position": "GLM-4系モデルをBigModelプラットフォームで提供し、長文脈、Function Call、MCP、構造化出力など企業・エージェント用途を意識した機能を持つ。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "observed",
+        "supply-chain": "unknown",
+        "partnerships": "observed",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [],
+      "offerings": [
+        "GLM-4",
+        "BigModel API",
+        "Function Call",
+        "MCP support"
+      ],
+      "partnerships": [
+        "BigModel developer ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "GLM-4 model documentation reviewed",
+          "category": "AIモデル・製品",
+          "summary": "Zhipu AI公式文書でGLM-4系モデル、長文脈、Function Call、MCP、構造化出力の対応を確認した。",
+          "source": {
+            "title": "GLM-4 - 智谱AI开放文档",
+            "url": "https://docs.bigmodel.cn/cn/guide/models/text/glm-4",
+            "publisher": "Zhipu AI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "huawei-cloud-pangu",
+      "status": "partial",
+      "current_position": "Pangu大模型とHuawei Cloud/Ascend系の提供により、モデル、業種適用、クラウド算力をまとめて提供する中国の重要プレイヤー。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "observed",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "Huawei Cloud ModelArts / Ascend ecosystem"
+      ],
+      "offerings": [
+        "Pangu NLP",
+        "Pangu CV",
+        "Pangu Scientific Computing",
+        "Pangu Multimodal",
+        "Pangu Prediction"
+      ],
+      "partnerships": [
+        "Huawei Cloud / Ascend ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Pangu Large Models reviewed",
+          "category": "AIモデル・算力",
+          "summary": "Huawei Cloud公式ページでPanguのNLP、CV、科学計算、マルチモーダル、予測モデルを確認した。",
+          "source": {
+            "title": "Pangu Large Models",
+            "url": "https://www.huaweicloud.com/intl/en-us/product/pangu.html",
+            "publisher": "Huawei Cloud",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "coreweave",
+      "status": "partial",
+      "current_position": "AI専用クラウドとして、GPU基盤、Kubernetes、推論基盤、性能/コスト予測可能性を売りにし、モデル企業の裏側にある推論・学習インフラ需要を代表する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "scaled",
+        "agents": "observed",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "GPU cloud operations"
+      ],
+      "offerings": [
+        "CoreWeave Cloud",
+        "CoreWeave Inference",
+        "GPU clusters"
+      ],
+      "partnerships": [
+        "NVIDIA ecosystem",
+        "AI model and application companies"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "CoreWeave Inference reviewed",
+          "category": "AI算力・推論基盤",
+          "summary": "CoreWeave公式ページで、AIアプリ/エージェント向けにスケールする推論基盤の提供を確認した。",
+          "source": {
+            "title": "AI Inference | CoreWeave Solutions",
+            "url": "https://www.coreweave.com/solutions/ai-inference",
+            "publisher": "CoreWeave",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "lambda",
+      "status": "partial",
+      "current_position": "AI専用クラウドとして、オンデマンドGPU、1-Click Clusters、長期スーパーコンピュータ級クラスターを提供する算力供給プレイヤー。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "GPU cloud operations"
+      ],
+      "offerings": [
+        "On-Demand Cloud",
+        "1-Click Clusters",
+        "Superclusters",
+        "Private Cloud"
+      ],
+      "partnerships": [
+        "NVIDIA GPU ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Lambda AI cloud reviewed",
+          "category": "AI算力・クラウド",
+          "summary": "Lambda公式ページで、トレーニング、ファインチューニング、モデル/エージェント配備向けGPUクラウドを確認した。",
+          "source": {
+            "title": "AI Cloud Platform | Lambda",
+            "url": "https://lambda.ai/welcome/ai-cloud",
+            "publisher": "Lambda",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "groq",
+      "status": "partial",
+      "current_position": "LPUを軸に、低遅延・高スループットの推論専用クラウドを提供する。モデルそのものより、エージェント/リアルタイムAIの実行コストと速度を観測する対象。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "observed",
+        "governance": "active",
+        "research": "observed"
+      },
+      "internal_use": [
+        "GroqCloud inference operations"
+      ],
+      "offerings": [
+        "GroqCloud",
+        "GroqMetal",
+        "GroqCore",
+        "GroqAssured"
+      ],
+      "partnerships": [
+        "model developers and enterprise customers"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Groq platform reviewed",
+          "category": "AI算力・推論基盤",
+          "summary": "Groq公式ページで、専用インフラ、推論スタック、エンタープライズ統制を分けた提供を確認した。",
+          "source": {
+            "title": "Groq Platform",
+            "url": "https://groq.com/platform",
+            "publisher": "Groq",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "cerebras",
+      "status": "partial",
+      "current_position": "Cerebras Inferenceにより、専用AIチップ/システム企業から、開発者向け推論APIの提供者にも広がっている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "active",
+        "supply-chain": "active",
+        "partnerships": "observed",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "Cerebras Inference / AI systems"
+      ],
+      "offerings": [
+        "Cerebras Inference API",
+        "Cerebras AI systems"
+      ],
+      "partnerships": [
+        "developer ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Cerebras Inference quickstart reviewed",
+          "category": "AI算力・推論基盤",
+          "summary": "Cerebras公式ドキュメントで、開発者向け推論APIとSDK提供を確認した。",
+          "source": {
+            "title": "Quickstart - Cerebras Inference",
+            "url": "https://inference-docs.cerebras.ai/quickstart",
+            "publisher": "Cerebras",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "hugging-face",
+      "status": "partial",
+      "current_position": "モデル、データセット、Spacesに加え、Inference Providersで複数推論事業者を束ねる流通/実行レイヤーになっている。オープンモデルの採用経路を観測する上で重要。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "scaled",
+        "agents": "observed",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "scaled",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "Hugging Face Hub and inference routing"
+      ],
+      "offerings": [
+        "Hugging Face Hub",
+        "Inference Providers",
+        "Inference Endpoints",
+        "Spaces"
+      ],
+      "partnerships": [
+        "Cerebras",
+        "Cohere",
+        "Fireworks",
+        "Groq",
+        "Replicate",
+        "Together and other providers"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Inference Providers reviewed",
+          "category": "モデル流通・推論基盤",
+          "summary": "Hugging Face公式文書で、複数推論プロバイダー経由でモデルを利用できる仕組みを確認した。",
+          "source": {
+            "title": "Inference Providers · Hugging Face",
+            "url": "https://huggingface.co/docs/inference-providers/en/index",
+            "publisher": "Hugging Face",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "together-ai",
+      "status": "partial",
+      "current_position": "オープンモデルのサーバーレス推論と専用エンドポイントを提供し、Kimi、DeepSeek、Qwen、GLMなどのモデル流通・実行先として重要。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "model hosting and inference platform"
+      ],
+      "offerings": [
+        "Together Inference API",
+        "serverless inference",
+        "dedicated endpoints"
+      ],
+      "partnerships": [
+        "open model ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Together recommended models reviewed",
+          "category": "モデル流通・推論基盤",
+          "summary": "Together公式文書で、Kimi、DeepSeek、Qwen、GLMなどのモデルを推論APIで扱う構成を確認した。",
+          "source": {
+            "title": "Recommended models - Together AI docs",
+            "url": "https://docs.together.ai/docs/inference/recommended-models",
+            "publisher": "Together AI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "replicate",
+      "status": "partial",
+      "current_position": "公開モデル、公式モデル、デプロイメント、予測APIを提供し、画像・動画・音声・LLMなどのモデル利用をアプリ開発者に開く流通基盤。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "active",
+        "agents": "unknown",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "unknown"
+      },
+      "internal_use": [
+        "model deployment and prediction API"
+      ],
+      "offerings": [
+        "Replicate model API",
+        "official models",
+        "deployments"
+      ],
+      "partnerships": [
+        "model authors and open-source ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Replicate deployments reviewed",
+          "category": "モデル流通・推論基盤",
+          "summary": "Replicate公式文書で、モデルの本番デプロイ、GPU選択、オートスケール、専用APIエンドポイントを確認した。",
+          "source": {
+            "title": "Deployments - Replicate",
+            "url": "https://replicate.com/docs/topics/deployments",
+            "publisher": "Replicate",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "oracle-cloud-infrastructure",
+      "status": "partial",
+      "current_position": "OCI SuperclusterとNVIDIA/AMD GPU対応により、AI学習・推論・エージェント向けの大規模クラウド算力を提供する。主に基盤供給側として監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "scaled",
+        "agents": "observed",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "scaled",
+        "governance": "active",
+        "research": "observed"
+      },
+      "internal_use": [
+        "OCI Supercluster and AI infrastructure"
+      ],
+      "offerings": [
+        "OCI AI Infrastructure",
+        "OCI Supercluster",
+        "GPU bare metal instances",
+        "NVIDIA/AMD GPU clusters"
+      ],
+      "partnerships": [
+        "NVIDIA",
+        "AMD",
+        "AI infrastructure partners"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "OCI AI Infrastructure reviewed",
+          "category": "AI算力・クラウド",
+          "summary": "Oracle公式ページで、OCI Supercluster、NVIDIA Blackwell/Hopper、AMD MI300Xなどを含む大規模AI基盤を確認した。",
+          "source": {
+            "title": "AI Infrastructure | Oracle",
+            "url": "https://www.oracle.com/ai-infrastructure/",
+            "publisher": "Oracle",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "amd",
+      "status": "partial",
+      "current_position": "Instinct MI300/MI325系アクセラレータとROCmを通じて、NVIDIA以外の主要AI/HPC算力供給者として監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "scaled",
+        "agents": "unknown",
+        "infrastructure": "scaled",
+        "supply-chain": "scaled",
+        "partnerships": "active",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [
+        "AMD Instinct and ROCm ecosystem"
+      ],
+      "offerings": [
+        "AMD Instinct MI300 Series",
+        "MI325X",
+        "ROCm"
+      ],
+      "partnerships": [
+        "cloud providers",
+        "server OEMs",
+        "HPC/AI ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "AMD Instinct MI300 series reviewed",
+          "category": "AI算力・半導体",
+          "summary": "AMD公式ページで、Instinct MI300シリーズのAI/HPC向けアクセラレータと高帯域メモリ構成を確認した。",
+          "source": {
+            "title": "AMD Instinct MI300 Series Accelerators",
+            "url": "https://www.amd.com/en/products/accelerators/instinct/mi300.html",
+            "publisher": "AMD",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "broadcom",
+      "status": "partial",
+      "current_position": "AIクラスタ向けEthernet、スイッチ、光/SerDes、カスタムAI XPUなどを供給し、GPU以外のAIデータセンター制約を解くインフラ企業。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "scaled",
+        "agents": "unknown",
+        "infrastructure": "scaled",
+        "supply-chain": "scaled",
+        "partnerships": "active",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [
+        "AI networking and custom silicon"
+      ],
+      "offerings": [
+        "AI networking",
+        "Tomahawk switches",
+        "custom accelerators",
+        "co-packaged optics"
+      ],
+      "partnerships": [
+        "cloud and data-center operators"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Broadcom AI infrastructure reviewed",
+          "category": "AI算力・半導体",
+          "summary": "Broadcom公式ページで、AIクラスタ向けネットワーク、接続、カスタムアクセラレータを確認した。",
+          "source": {
+            "title": "AI Infrastructure: Open, Scalable and Power-Efficient Technologies for AI Clusters",
+            "url": "https://www.broadcom.com/solutions/ai-solutions/ai-infrastructure",
+            "publisher": "Broadcom",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "tsmc",
+      "status": "partial",
+      "current_position": "先端ロジック、3DFabric、シリコンフォトニクス、HPC/AI向け統合プラットフォームを提供するAI半導体供給網の基盤企業。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "scaled",
+        "agents": "unknown",
+        "infrastructure": "active",
+        "supply-chain": "scaled",
+        "partnerships": "scaled",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "dedicated foundry and HPC platform"
+      ],
+      "offerings": [
+        "Integrated HPC Platform for AI",
+        "advanced process technologies",
+        "TSMC 3DFabric",
+        "silicon photonics"
+      ],
+      "partnerships": [
+        "fabless semiconductor customers",
+        "IP ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "TSMC HPC platform for AI reviewed",
+          "category": "AI算力・半導体",
+          "summary": "TSMC公式ページで、AI向けHPCプラットフォーム、先端ロジック、3DFabric、接続技術、IPエコシステムを確認した。",
+          "source": {
+            "title": "High-Performance Computing Platform",
+            "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/platform_HPC",
+            "publisher": "TSMC",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "asml",
+      "status": "partial",
+      "current_position": "EUV/High NA EUVにより、先端AIチップ製造のプロセス制約に関わる装置企業。直接AIサービスではないが、AI半導体供給網の重要ノード。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "scaled",
+        "agents": "unknown",
+        "infrastructure": "observed",
+        "supply-chain": "scaled",
+        "partnerships": "scaled",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "lithography systems for leading-edge chips"
+      ],
+      "offerings": [
+        "EUV lithography systems",
+        "High NA EXE platform"
+      ],
+      "partnerships": [
+        "leading-edge chip manufacturers"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "ASML EUV systems reviewed",
+          "category": "AI算力・半導体",
+          "summary": "ASML公式ページで、High NA EXE platformが2025〜2026年の量産対応を目指す先端リソグラフィ技術であることを確認した。",
+          "source": {
+            "title": "EUV lithography systems – Products",
+            "url": "https://www.asml.com/en/products/euv-lithography-systems",
+            "publisher": "ASML",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "sk-hynix",
+      "status": "partial",
+      "current_position": "HBMと先端パッケージングでAIアクセラレータのメモリ制約に関わる。AIサービスではなく、AI算力供給網のメモリ側キープレイヤーとして監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "active",
+        "agents": "unknown",
+        "infrastructure": "observed",
+        "supply-chain": "scaled",
+        "partnerships": "active",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [
+        "HBM and memory packaging"
+      ],
+      "offerings": [
+        "HBM",
+        "iHBM thermal solution",
+        "MR-MUF packaging"
+      ],
+      "partnerships": [
+        "AI accelerator and semiconductor ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-05-26",
+          "title": "iHBM thermal solution announced",
+          "category": "AI算力・半導体",
+          "summary": "SK hynixはHBMパッケージに冷却要素を組み込むiHBMを発表し、AI性能向上のための熱制約対応を示した。",
+          "source": {
+            "title": "SK hynix unveils iHBM thermal solution to boost AI performance",
+            "url": "https://news.skhynix.com/en/ihbm-solution/",
+            "publisher": "SK hynix",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "micron",
+      "status": "partial",
+      "current_position": "HBM3E/HBM4を通じて、AI/HPC向け高帯域メモリを供給する。モデル進化ではなく、推論・学習のメモリ帯域制約を観測する対象。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "active",
+        "agents": "unknown",
+        "infrastructure": "observed",
+        "supply-chain": "scaled",
+        "partnerships": "active",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [
+        "HBM memory portfolio"
+      ],
+      "offerings": [
+        "HBM3E",
+        "HBM4",
+        "high-bandwidth memory for AI/HPC"
+      ],
+      "partnerships": [
+        "hyperscale cloud and AI infrastructure customers"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Micron HBM portfolio reviewed",
+          "category": "AI算力・半導体",
+          "summary": "Micron公式ページで、HBM4/HBM3EがAI/HPCワークロード向けメモリ帯域・容量・電力効率を支えることを確認した。",
+          "source": {
+            "title": "High-bandwidth memory (HBM)",
+            "url": "https://www.micron.com/products/memory/hbm",
+            "publisher": "Micron",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "supermicro",
+      "status": "partial",
+      "current_position": "NVIDIA HGX/B200/GB200/GB300などを組み合わせたAIサーバー、ラック、AI Factoryを提供し、企業がAI基盤をオンプレ/専用環境で組む際の供給側になる。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "scaled",
+        "agents": "unknown",
+        "infrastructure": "scaled",
+        "supply-chain": "scaled",
+        "partnerships": "scaled",
+        "governance": "observed",
+        "research": "observed"
+      },
+      "internal_use": [
+        "AI server and rack integration"
+      ],
+      "offerings": [
+        "AI/deep learning servers",
+        "AI Factory with NVIDIA",
+        "liquid-cooled GPU racks"
+      ],
+      "partnerships": [
+        "NVIDIA",
+        "storage and data platform partners"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Supermicro AI server solutions reviewed",
+          "category": "AI算力・サーバー",
+          "summary": "Supermicro公式ページで、NVIDIA GPUを用いたAIサーバー、ラック、AI Factory向け統合基盤を確認した。",
+          "source": {
+            "title": "AI Server Solutions for Enterprise Infrastructure",
+            "url": "https://www.supermicro.com/en/solutions/ai-deep-learning",
+            "publisher": "Supermicro",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "dell-technologies",
+      "status": "partial",
+      "current_position": "Dell AI Factory with NVIDIAを中心に、企業向けAIインフラ、データ基盤、サービス、運用導入を束ね、PoCから本番化までの実装基盤を提供している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product",
+        "consulting-si"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "scaled",
+        "agents": "observed",
+        "infrastructure": "scaled",
+        "supply-chain": "scaled",
+        "partnerships": "scaled",
+        "governance": "active",
+        "research": "observed"
+      },
+      "internal_use": [
+        "enterprise AI infrastructure and services"
+      ],
+      "offerings": [
+        "Dell AI Factory with NVIDIA",
+        "Dell AI Data Platform",
+        "PowerScale/ObjectScale AI storage",
+        "AI services"
+      ],
+      "partnerships": [
+        "NVIDIA"
+      ],
+      "history": [
+        {
+          "date": "2026-05-18",
+          "title": "Dell Technologies AI Factory advancements",
+          "category": "AI算力・サーバー",
+          "summary": "DellはDell AI Factory with NVIDIAの拡張を発表し、agentic AI、データオーケストレーション、次世代インフラ、オープンエコシステムを説明した。",
+          "source": {
+            "title": "Dell Technologies Closes the Gap Between AI Ambition and AI Outcomes",
+            "url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~05~dell-technologies-closes-the-gap-between-ai-ambition-and-ai-outcomes.htm",
+            "publisher": "Dell Technologies",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "cloudflare-workers-ai",
+      "status": "partial",
+      "current_position": "Workers AIにより、エッジ/サーバーレス実行環境でモデル利用を可能にする。フルスタックAI企業ではなく、アプリ開発者がAI推論を組み込む配布・実行レイヤーとして監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "active",
+        "supply-chain": "observed",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "unknown"
+      },
+      "internal_use": [
+        "Cloudflare Workers runtime and AI binding"
+      ],
+      "offerings": [
+        "Workers AI",
+        "Workers AI Models",
+        "AI bindings"
+      ],
+      "partnerships": [
+        "model providers and open-source model ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Workers AI model catalog reviewed",
+          "category": "モデル流通・推論基盤",
+          "summary": "Cloudflare公式文書で、Workers AIのモデルカタログとサーバーレスAI実行の仕組みを確認した。",
+          "source": {
+            "title": "Workers AI Models",
+            "url": "https://developers.cloudflare.com/workers-ai/models/index.md",
+            "publisher": "Cloudflare",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:20:00.000Z"
+    },
+    {
+      "entity_id": "microsoft",
+      "status": "partial",
+      "current_position": "Microsoft Foundry、Copilot、Azure AI、モデルカタログ、エージェント管理、観測・評価・統制を一体化し、企業AIの開発/運用プラットフォームとして展開している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "scaled",
+        "agents": "scaled",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "scaled",
+        "governance": "scaled",
+        "research": "active"
+      },
+      "internal_use": [
+        "Microsoft 365 Copilot",
+        "Azure AI platform operations"
+      ],
+      "offerings": [
+        "Microsoft Foundry",
+        "Foundry Agent Service",
+        "Foundry Models",
+        "Microsoft 365 Copilot",
+        "Azure AI services"
+      ],
+      "partnerships": [
+        "OpenAI",
+        "Meta",
+        "Mistral AI",
+        "NVIDIA",
+        "enterprise software ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-07-20",
+          "title": "Microsoft Foundry unified platform reviewed",
+          "category": "AIプラットフォーム",
+          "summary": "Microsoft公式文書で、Foundryがエージェント、モデル、ツール、観測、評価、RBAC、ネットワーク、ポリシーを単一管理面で扱うことを確認した。",
+          "source": {
+            "title": "What is Microsoft Foundry?",
+            "url": "https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry",
+            "publisher": "Microsoft Learn",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:45:00.000Z"
+    },
+    {
+      "entity_id": "amazon-aws",
+      "status": "partial",
+      "current_position": "Amazon Bedrock、Amazon Q、Trainium/Inferentia、SageMaker、Agents for Bedrockを通じて、モデル選択、業務アプリ、開発基盤、AI専用チップまでを持つクラウドAI基盤。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "scaled",
+        "agents": "scaled",
+        "infrastructure": "scaled",
+        "supply-chain": "active",
+        "partnerships": "scaled",
+        "governance": "scaled",
+        "research": "active"
+      },
+      "internal_use": [
+        "AWS AI/ML services",
+        "Amazon Q developer and business workflows"
+      ],
+      "offerings": [
+        "Amazon Bedrock",
+        "Agents for Amazon Bedrock",
+        "Amazon Q",
+        "Trainium",
+        "Inferentia",
+        "SageMaker"
+      ],
+      "partnerships": [
+        "Anthropic",
+        "Meta",
+        "Mistral AI",
+        "Cohere",
+        "Stability AI",
+        "AI21 Labs"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Amazon Bedrock supported models reviewed",
+          "category": "AIプラットフォーム",
+          "summary": "AWS公式文書で、Bedrockが複数の基盤モデルを扱う管理型サービスであることを確認した。",
+          "source": {
+            "title": "Supported foundation models in Amazon Bedrock",
+            "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html",
+            "publisher": "AWS Documentation",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:45:00.000Z"
+    },
+    {
+      "entity_id": "xai",
+      "status": "partial",
+      "current_position": "Grokモデル、画像/動画/音声API、検索連携を通じて、リアルタイム性とメディア生成を含むAIプロダクト/API企業として展開している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "observed",
+        "supply-chain": "observed",
+        "partnerships": "observed",
+        "governance": "unknown",
+        "research": "observed"
+      },
+      "internal_use": [
+        "Grok consumer and API services"
+      ],
+      "offerings": [
+        "Grok models",
+        "xAI API",
+        "Imagine API",
+        "Voice API",
+        "server-side search tools"
+      ],
+      "partnerships": [
+        "X ecosystem"
+      ],
+      "history": [
+        {
+          "date": "2026-05-29",
+          "title": "xAI model documentation reviewed",
+          "category": "AIモデル・製品",
+          "summary": "xAI公式文書で、Grokモデル、コーディングモデル、音声、画像・動画生成、検索ツール連携を確認した。",
+          "source": {
+            "title": "Models | xAI Docs",
+            "url": "https://docs.x.ai/developers/models",
+            "publisher": "xAI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:45:00.000Z"
+    },
+    {
+      "entity_id": "mistral-ai",
+      "status": "partial",
+      "current_position": "オープンウェイトと商用モデル、La Plateforme、Agents API、OCR、音声、コーディングモデルを展開し、欧州発の基盤モデル/企業AIプラットフォームとして監視する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "observed",
+        "supply-chain": "unknown",
+        "partnerships": "active",
+        "governance": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "Mistral platform and model operations"
+      ],
+      "offerings": [
+        "Mistral Medium",
+        "Mistral Small",
+        "Devstral",
+        "Codestral",
+        "Voxtral",
+        "OCR",
+        "La Plateforme"
+      ],
+      "partnerships": [
+        "Microsoft",
+        "cloud/model distribution partners"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Mistral model portfolio reviewed",
+          "category": "AIモデル・製品",
+          "summary": "Mistral公式ページで、汎用、コーディング、音声、OCRなどのモデル群と企業向けカスタマイズ導線を確認した。",
+          "source": {
+            "title": "Models - from cloud to edge",
+            "url": "https://mistral.ai/models/",
+            "publisher": "Mistral AI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T13:45:00.000Z"
     }
   ]
 }

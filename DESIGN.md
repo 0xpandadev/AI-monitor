@@ -28,6 +28,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - Update history: exact update, previous difference, and source on one row.
 - Digest news board: category-filtered list for weekly or imported signals, with evidence-linked cards.
 - Consulting filter strip: Big4, MBB, strategy, general, DX/IT, think tank, FAS, and HR segmentation.
+- AI company filter strip: model/platform, China/Asia model companies, data/ontology, inference cloud, model distribution, semiconductor/HBM, and AI-server supply chain segmentation.
 - Company matrix: qualitative cells only: unknown, observed, active, scaled.
 - Industry matrix: aggregation of researched companies with an explicit coverage warning; never an industry adoption rate.
 - Meeting mode: one message per screen with conclusion, evidence, competitor effect, implication, and next watch items.
@@ -41,7 +42,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 | Surface | Analytical question | Form | Sufficiency and fallback | Palette |
 | --- | --- | --- | --- | --- |
 | Relationship map | Which companies connect to the same change theme, offering type, or partner? | Two-column node-link SVG | Show only evidence-backed edges; empty state when none exist | Navy companies, cobalt topics, orange partnerships, neutral edges |
-| Trend panel | Is a repeated movement visible over time? | Monthly line | Require at least 8 observed months; otherwise show categorical bars and exact coverage | Single cobalt root plus neutrals |
+| Theme momentum | Which AI themes are moving now versus the previous period? | Thematic momentum board | Compare recent 90 days with the previous 90 days; label as acceleration/continuation/new activity and never present raw monthly counts as a market trend | Cobalt bars, orange acceleration badges, neutral context |
 | Evidence radar | What dimensions of one company have confirmed activity? | Ordinal radar, maximum 8 axes | Require at least 4 known axes; otherwise show coverage message | Cobalt fill and stroke plus neutral guides |
 | Insight board | Which patterns cross multiple companies and sources? | Evidence cards | Require at least 2 companies and 2 confirmed primary-source signals | Navy structure, orange discussion, cobalt high-confidence state |
 
@@ -60,3 +61,5 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - 2026-08-31: Changed matrix state marks from abstract shapes to Japanese state glyphs and added per-company evidence-history counts. Reason: make it clear that cells represent evidence status, not a numeric score or market ranking.
 - 2026-08-31: Restored the category-filtered digest news board, renamed the change ledger to update history, and added consulting segment filters. Reason: the dashboard must support both weekly news reading and long-term company-baseline comparison.
 - 2026-08-31: Renamed the scaled matrix state from commercial language to full-scale rollout wording. Reason: avoid implying revenue, market rank, or sales success from a qualitative evidence cell.
+- 2026-08-31: Replaced the monthly trend line with a theme momentum board. Reason: sparse monthly counts were easy to misread as a market trend; the useful question is which official-update themes are accelerating, continuing, or newly resurfacing.
+- 2026-08-31: Expanded the major AI company surface into an AI supply-chain map with segment filters and a semiconductor/supply-chain axis. Reason: model companies, Chinese model challengers, data/ontology platforms, inference clouds, HBM, fabs, and AI servers affect different strategic questions and should not be collapsed into one flat list.
