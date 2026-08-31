@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-08-31T09:20:00.000Z",
+  "updated_at": "2026-08-31T11:40:00.000Z",
   "baseline_window": {
-    "start": "2023-09-01",
+    "start": "2021-09-01",
     "end": "2026-08-31"
   },
   "coverage": {
     "status": "in_progress",
-    "profiles_started": 30,
+    "profiles_started": 37,
     "profiles_complete": 0,
     "total_entities": 181,
-    "note": "completeは指定した3年窓の一次情報確認が完了したプロフィールのみ"
+    "note": "completeは指定した基準窓の一次情報確認が完了したプロフィールのみ"
   },
   "profiles": [
     {
@@ -188,33 +188,70 @@
     {
       "entity_id": "deloitte-tohmatsu",
       "status": "partial",
-      "current_position": "企業固有の判断基準をオントロジーとして実装し、AIによる業務自律実行までを支援領域にしている。",
+      "current_position": "社内の生成AI活用をコンサル業務の高度化として進めつつ、企業固有の業務知見をオントロジー化してAIの自律実行基盤へつなぐ外部サービスを展開している。社内活用、業務知識の構造化、データ基盤、AIエージェント適用を一体で見るべきプレイヤー。",
       "maturity_stage": "commercial",
       "development_methods": [
+        "in-house",
         "consulting-si"
       ],
       "dimensions": {
         "strategy": "active",
-        "internal-use": "observed",
+        "internal-use": "scaled",
         "offering": "scaled",
         "build": "active",
         "deployment": "active",
-        "operations": "observed",
+        "operations": "active",
         "products": "active",
         "partnerships": "observed"
       },
       "internal_use": [
-        "社内データを使ったオントロジーPoC（公式発表で有効性を確認）"
+        "社内用生成AIチャットボット",
+        "資料作成支援ツール",
+        "多言語オンラインミーティングのリアルタイム通訳・議事録生成ツール",
+        "デロイト トーマツ グループ2万人への生成AI活用拡大"
       ],
       "offerings": [
-        "企業固有知識のオントロジー構築サービス"
+        "企業固有知識のオントロジー構築サービス",
+        "生成AI導入・活用支援",
+        "AIによる業務自律実行に向けたデータ基盤・運用設計"
       ],
       "partnerships": [
-        "複数データプラットフォーム企業とのアライアンス（社名は今回未特定）"
+        "複数データプラットフォーム企業とのアライアンス（公式発表上、社名は今回未特定）"
       ],
       "activity_signal_ids": [
         "2026-08-25-deloitte-ontology-service"
-      ]
+      ],
+      "history": [
+        {
+          "date": "2024-03-13",
+          "title": "生成AIによるコンサル業務高度化を発表",
+          "category": "社内AI活用",
+          "stage": "全社導入",
+          "method": "自社開発",
+          "summary": "資料作成支援ツール、社内生成AIチャットボット、リアルタイム通訳・議事録生成ツールなどを自社開発・導入し、グループ2万人への活用拡大を示した。",
+          "source": {
+            "title": "デロイト トーマツ、生成AIを活用しコンサル業務を高度化",
+            "url": "https://www.deloitte.com/jp/ja/about/press-room/nr20240313.html",
+            "publisher": "Deloitte Tohmatsu",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-25",
+          "title": "オントロジー構築サービスを提供",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "企業固有の業務知見や判断基準をオントロジー層として実装し、AIが自律的に業務を実行できるようデータ基盤と運用の仕組み作りを支援する。",
+          "source": {
+            "title": "AIの業務自律実行のために企業固有の業務知見をデジタル化するオントロジー構築サービスを提供",
+            "url": "https://www.deloitte.com/jp/ja/about/press-room/nr20260825.html",
+            "publisher": "Deloitte Tohmatsu",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
     },
     {
       "entity_id": "ntt-data",
@@ -1560,6 +1597,439 @@
         }
       ],
       "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "ey-strategy-consulting",
+      "status": "partial",
+      "current_position": "EY.aiを統合型AIプラットフォームとして掲げ、AIコンサルティング、リスク、税務・法務、M&A、監査、データ、システムインテグレーションまで横断している。社内向けにはEY.ai EYQやAI研修を含む展開があり、外部向けにはAI導入と信頼・倫理を一体で支援する位置づけ。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "active",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [
+        "EY.ai EYQ",
+        "EYメンバー向けAI研修・人材育成プログラム",
+        "EY FabricへのAI組み込み"
+      ],
+      "offerings": [
+        "EY.ai",
+        "AI（人工知能）コンサルティングサービス",
+        "AI&Data / インテリジェントオートメーション",
+        "税務・法務領域の生成AI活用支援"
+      ],
+      "partnerships": [
+        "Dell Technologies",
+        "Thomson Reuters",
+        "EY AIエコシステム"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2023-09-26",
+          "title": "税務・法務向け生成AIサービスを発表",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "税務・法務とテクノロジーの専門家チームで、生成AIを活用した業務高度化支援を提示した。",
+          "source": {
+            "title": "EY、税務・法務向け生成AIサービスを発表",
+            "url": "https://www.ey.com/ja_jp/newsroom/2023/09/ey-japan-news-release-2023-09-26",
+            "publisher": "EY Japan",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2023-12-13",
+          "title": "EY.aiを日本向けに発表",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "自社開発",
+          "summary": "14億ドル規模の投資プログラムを背景に、EY.ai、EY.ai EYQ、AI研修、EY FabricへのAI組み込みを説明した。",
+          "source": {
+            "title": "EY、新たな人工知能（AI）の統合型プラットフォーム「EY.ai」を開始",
+            "url": "https://www.ey.com/ja_jp/newsroom/2023/12/ey-japan-news-release-2023-12-13",
+            "publisher": "EY Japan",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "AIコンサルティングサービスを確認",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "戦略、設計、アーキテクチャ、データ、システムインテグレーション、プログラム運営、リスクまで含むAI導入支援を確認した。",
+          "source": {
+            "title": "AI（人工知能）コンサルティングサービス",
+            "url": "https://www.ey.com/ja_jp/services/consulting/artificial-intelligence-consulting-services",
+            "publisher": "EY Japan",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "kpmg-consulting",
+      "status": "partial",
+      "current_position": "生成AI利活用支援とKPMG Trusted AIを軸に、AI導入、PoC、事業参入、ガバナンス、規制対応、リスクモニタリングを横断する。AI活用を攻めと守りの両面で扱い、金融など業界固有要件も含めて支援する位置づけ。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "observed"
+      },
+      "internal_use": [],
+      "offerings": [
+        "生成AI利活用支援サービス",
+        "KPMG Trusted AI",
+        "AI Risk Assessment",
+        "AI Regulation & Compliance",
+        "AI Risk Transformation",
+        "AI Risk Monitoring"
+      ],
+      "partnerships": [
+        "KPMGジャパン内メンバーファーム横断チーム",
+        "AI関連団体・関係機関・サービス提供企業との段階的連携方針"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2023-06-15",
+          "title": "生成AI利活用支援サービスを開始",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "生成AI基盤導入、戦略策定とPoC、業務・組織・システム変革、金融業務向け対話型AIの開発・導入助言を提示した。",
+          "source": {
+            "title": "KPMGジャパン、生成AI利活用支援サービスの提供を開始",
+            "url": "https://kpmg.com/jp/ja/media/press-releases/2023/06/generative-ai.html",
+            "publisher": "KPMG Japan",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2024-06-19",
+          "title": "KPMG Trusted AIを本格展開",
+          "category": "AIガバナンス",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "AIリスク評価、規制対応、ガバナンス体制・開発環境整備、リスクモニタリングを柱とするAIガバナンス支援を発表した。",
+          "source": {
+            "title": "KPMGジャパン、AIの積極的な利活用に欠かせないAIガバナンス構築を支援",
+            "url": "https://kpmg.com/jp/ja/media/press-releases/2024/06/kpmg-trusted-ai.html",
+            "publisher": "KPMG Japan",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "Trusted AIサービスページを確認",
+          "category": "AIガバナンス",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "AIエージェント普及時代の統制、リスクコンサルティング、コンプライアンス、AIガバナンスを継続テーマとして提示している。",
+          "source": {
+            "title": "AIガバナンス－KPMG Trusted AI－",
+            "url": "https://kpmg.com/jp/ja/services/advisory/kpmg-trusted/trusted-ai.html",
+            "publisher": "KPMG Japan",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "bain",
+      "status": "partial",
+      "current_position": "OpenAIとのサービスアライアンスを中核に、生成AIのユースケース選定から実装・スケールまでを支援する。OpenAI Center of Excellence、業界別ユースケース、AI Retail Merchant Assistantなど、戦略だけでなく実装資産を伴うAI変革支援として観測する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "startup-partnership",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "scaled"
+      },
+      "internal_use": [],
+      "offerings": [
+        "Bain & OpenAI Alliance",
+        "OpenAI Center of Excellence",
+        "AI Retail Merchant Assistant",
+        "AI Sales Representative Copilot",
+        "Regulatory Drafting Automation Solution"
+      ],
+      "partnerships": [
+        "OpenAI"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2023-02-21",
+          "title": "OpenAIとのサービスアライアンスを発表",
+          "category": "提携・M&A",
+          "stage": "外部提供・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "OpenAI技術とBainの戦略・デジタル実装力を組み合わせ、企業のAI価値実現を支援するアライアンスとして発表された。",
+          "source": {
+            "title": "Bain & OpenAI Alliance",
+            "url": "https://www.bain.com/about/partnerships-alliance-ecosystem/openai-alliance/",
+            "publisher": "Bain & Company",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2024-10-17",
+          "title": "OpenAIとの提携拡大を確認",
+          "category": "提携・M&A",
+          "stage": "外部提供・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "専任OpenAI Center of Excellenceを含む協業拡大を示し、顧客のAI投資価値最大化とソリューション実装を前面に出した。",
+          "source": {
+            "title": "Bain & OpenAI Alliance",
+            "url": "https://www.bain.com/about/partnerships-alliance-ecosystem/openai-alliance/",
+            "publisher": "Bain & Company",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "kearney",
+      "status": "partial",
+      "current_position": "Digital & Analyticsの中でData and AIを明示し、LLM Leaderboard、Gen AI Alliances、データ/アナリティクス変革、業界別AIソリューションを支援領域としている。戦略系コンサルのAI対応として、AIを戦略・オペレーション変革の実装能力へ接続する位置づけ。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "observed",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [],
+      "offerings": [
+        "Data and AI",
+        "LLM Leaderboard",
+        "Gen AI Alliances",
+        "Data and analytics transformation",
+        "業界別AI-powered solutions"
+      ],
+      "partnerships": [
+        "Gen AI alliance ecosystem"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Data and AI提供領域を確認",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "LLM Leaderboard、Gen AI Alliances、データ/アナリティクス変革を含むData and AIサービス群を確認した。",
+          "source": {
+            "title": "Data and AI",
+            "url": "https://www.kearney.com/service/digital-analytics/data-and-ai",
+            "publisher": "Kearney",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "capgemini",
+      "status": "partial",
+      "current_position": "Data & AIを基盤に、生成AI戦略、企業向けカスタム生成AI、ソフトウェアエンジニアリング、顧客体験、Microsoft 365 Copilot、倫理的AI、Generative AI Labを提示している。業務改革・デジタル戦略とAI実装をつなぐグローバルSI/コンサルとして観測する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [],
+      "offerings": [
+        "Custom Generative AI for Enterprise",
+        "Generative AI for software engineering",
+        "Generative AI for customer experience",
+        "Generative AI strategy",
+        "Microsoft 365 Copilot支援",
+        "Ethical AI",
+        "Generative AI Lab"
+      ],
+      "partnerships": [
+        "Microsoft 365 Copilot関連支援",
+        "Capgemini Generative AI Lab"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "Generative AIサービス群を確認",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "企業向けカスタム生成AI、ソフトウェア開発、顧客体験、生成AI戦略、Microsoft 365 Copilot、倫理的AI、Generative AI Labを確認した。",
+          "source": {
+            "title": "Generative AI",
+            "url": "https://www.capgemini.com/jp-jp/services/data-and-ai/generative-ai/",
+            "publisher": "Capgemini",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "ibm-japan",
+      "status": "partial",
+      "current_position": "IBM ConsultingはAI戦略・ガバナンス、データサービス、エージェント型AIを中核ケイパビリティとして提示し、サプライチェーン、マーケティング、カスタマーサービス、サイバー、IT運用、財務までユースケースを広げている。自社技術とオープンエコシステムを組み合わせてAIの設計・構築・拡張を支援する位置づけ。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "scaled",
+        "deployment": "scaled",
+        "operations": "scaled",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [],
+      "offerings": [
+        "AIコンサルティング・サービス",
+        "AI戦略とガバナンス",
+        "データ・サービス",
+        "エージェント型AI",
+        "AI for IT operations",
+        "AI for cybersecurity"
+      ],
+      "partnerships": [
+        "IBMのオープン・エコシステム",
+        "Microsoft生成AIソリューション導入支援事例"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "AIコンサルティング・サービスを確認",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "AI戦略・ガバナンス、データサービス、エージェント型AI、サプライチェーン、マーケティング、カスタマーサービス、サイバー、IT運用、財務のユースケースを確認した。",
+          "source": {
+            "title": "AIコンサルティング・サービス",
+            "url": "https://www.ibm.com/jp-ja/consulting/artificial-intelligence",
+            "publisher": "IBM",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
+    },
+    {
+      "entity_id": "nri",
+      "status": "partial",
+      "current_position": "AIやデータ活用のコンサルティングから基盤構築、実行支援までをワンストップで支援し、生成AI企業変革、金融AIプラットフォーム、産業向けAI活用、AIセキュリティ、生成AI環境マネージドサービス、NRI Solution AIを提示している。日本大手企業向けのAI活用支援と自社ソリューションの両面で観測する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "observed"
+      },
+      "internal_use": [],
+      "offerings": [
+        "AI活用支援",
+        "生成AIを活用した企業変革コンサルティング",
+        "NRI金融AIプラットフォーム YUIAI",
+        "産業業界向けAI活用支援",
+        "AIセキュリティ支援",
+        "Generative AI らくパ",
+        "NRI Solution AI",
+        "TRAINA"
+      ],
+      "partnerships": [
+        "NRIセキュアテクノロジーズ",
+        "金融機関・産業トップ企業向け支援事例"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "AI活用サービス・ソリューションを確認",
+          "category": "AIオファリング",
+          "stage": "外部提供・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "生成AI企業変革、YUIAI、産業向けAI活用、AIセキュリティ、生成AI環境マネージドサービス、NRI Solution AI、TRAINAを確認した。",
+          "source": {
+            "title": "AI活用",
+            "url": "https://www.nri.com/jp/service/theme/ai/index.html",
+            "publisher": "NRI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T11:40:00.000Z"
     }
   ]
 }

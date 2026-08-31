@@ -301,7 +301,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "McKinsey and Wonderful team up to deliver enterprise AI transformation from strategy to scale",
@@ -321,7 +321,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "BCG X、「AIサイエンス研究所」を設立",
@@ -341,7 +341,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "生成AIを活用した社内問合せ対応業務効率化支援サービスの提供を開始",
@@ -361,7 +361,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "「生成AI活用プロフェッショナルサービス powered by Lumada」を提供開始",
@@ -381,7 +381,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "Hitachi and Microsoft Enter Milestone Agreement to Accelerate Business and Social Innovation with Generative AI",
@@ -401,7 +401,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "新たな全社AI戦略を発表。富士通AIの強みとは。",
@@ -421,7 +421,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "Toyota Research Institute Unveils Breakthrough in Teaching Robots New Behaviors",
@@ -441,7 +441,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "Sony Presents New AI Research at NeurIPS 2024",
@@ -461,7 +461,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "Mitsubishi Electric Develops Behavioral-analysis AI that Analyzes Manual Tasks Without Requiring Training Data",
@@ -481,7 +481,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "Announcing Our Series A",
@@ -501,7 +501,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery",
@@ -521,7 +521,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "PLaMo-13Bを公開しました",
@@ -541,7 +541,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "グローバルモデルに匹敵する700億パラメータの日本語LLMを開発しました",
@@ -561,7 +561,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "KDDIグループとの資本業務提携を発表しました",
@@ -581,7 +581,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "ストックマーク 1,000億パラメータ規模の独自LLMを公開",
@@ -601,7 +601,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "ストックマーク シリーズDラウンドでポラリスより45億円の資金調達を実施",
@@ -621,7 +621,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "新サービス「PKSHA AI Agents」をローンチ",
@@ -641,7 +641,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "PKSHAグループとシノケングループが「セールスAIエージェント」を提供開始",
@@ -661,7 +661,7 @@
       "importance": "high",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "LayerX、AIエージェント事業を開始。AIを活用して、業務の「完全自動運転」を目指す",
@@ -681,7 +681,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "LayerX、AgenticSecをグループに迎え、AI時代のセキュリティ領域に進出",
@@ -701,7 +701,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "CADDi Wins Best Business Intelligence and Engineering Management Software at 2024 SaaS Awards",
@@ -721,7 +721,7 @@
       "importance": "medium",
       "verification": "confirmed",
       "change": {
-        "delta": "直近3年ベースラインへ追加"
+        "delta": "直近3〜5年ベースラインへ追加"
       },
       "source": {
         "title": "LegalOn Launches Generative AI for Contracts, LegalOn Assistant",

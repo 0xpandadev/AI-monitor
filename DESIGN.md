@@ -25,11 +25,13 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 
 ## Components
 
-- Change ledger: exact change, previous difference, and source on one row.
+- Update history: exact update, previous difference, and source on one row.
+- Digest news board: category-filtered list for weekly or imported signals, with evidence-linked cards.
+- Consulting filter strip: Big4, MBB, strategy, general, DX/IT, think tank, FAS, and HR segmentation.
 - Company matrix: qualitative cells only: unknown, observed, active, scaled.
 - Industry matrix: aggregation of researched companies with an explicit coverage warning; never an industry adoption rate.
 - Meeting mode: one message per screen with conclusion, evidence, competitor effect, implication, and next watch items.
-- Coverage warning: always visible while the three-year baseline is incomplete.
+- Coverage warning: always visible while the 3-5 year baseline is incomplete.
 - Relationship map: company-to-topic, company-to-offering, and company-to-partner links derived from the canonical profile and weekly-signal stores. Every edge exposes evidence coverage.
 - Insight board: deterministic multi-company patterns with conclusion, source count, limitation, implication, and next-watch action.
 - Evidence radar: an ordinal evidence profile, never a total score or company ranking. Hide it until at least four dimensions have confirmed states.
@@ -56,3 +58,5 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - 2026-08-31: Kept incomplete baseline coverage visible. Reason: prevent unresearched companies from being mistaken for inactive companies.
 - 2026-08-31: Added a locally derived ontology surface, relationship map, honest trend fallback, evidence radar, and deterministic insight board. Reason: connect company facts into decision-ready patterns without adding Palantir, MiroFish, or direct LLM API dependencies.
 - 2026-08-31: Changed matrix state marks from abstract shapes to Japanese state glyphs and added per-company evidence-history counts. Reason: make it clear that cells represent evidence status, not a numeric score or market ranking.
+- 2026-08-31: Restored the category-filtered digest news board, renamed the change ledger to update history, and added consulting segment filters. Reason: the dashboard must support both weekly news reading and long-term company-baseline comparison.
+- 2026-08-31: Renamed the scaled matrix state from commercial language to full-scale rollout wording. Reason: avoid implying revenue, market rank, or sales success from a qualitative evidence cell.

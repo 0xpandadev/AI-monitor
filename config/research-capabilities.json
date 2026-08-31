@@ -5,7 +5,7 @@
   "capabilities": [
     {
       "id": "historical-baseline",
-      "purpose": "直近3年の企業別AI現在地、変更履歴、情報源マップを作る",
+      "purpose": "直近3〜5年の企業別AI現在地、更新履歴、情報源マップを作る",
       "preferred_skills": ["foresight-radar"],
       "fallback": "同梱のbaseline手順に従い、企業公式ニュース、IR、製品、導入事例を年別に検索して一次情報を保存する",
       "required": true
@@ -54,7 +54,7 @@
     },
     {
       "id": "dashboard-publication",
-      "purpose": "確認済みデータを企業台帳、変更台帳、ヒートマップ、会議モードへ反映する",
+      "purpose": "確認済みデータを企業プロフィール、更新履歴、ヒートマップ、会議モードへ反映する",
       "preferred_skills": ["update-ai-opportunity-monitor"],
       "fallback": "リポジトリ同梱の更新スキルとnpm update:importを使用する",
       "required": true

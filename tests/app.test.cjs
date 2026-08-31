@@ -33,7 +33,9 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/AI Opportunity Monitor/);
   assert.match(files,/コンサルマップ/);
   assert.match(files,/日本企業AI利活用/);
-  assert.match(files,/変更履歴台帳/);
+  assert.match(files,/更新履歴/);
+  assert.match(files,/カテゴリ別ニュース/);
+  assert.match(files,/コンサル分類/);
   assert.match(files,/会議モード/);
   assert.match(files,/社内活用/);
   assert.match(files,/関係・トレンド/);
@@ -59,7 +61,7 @@ test('board is explicit when empty and every populated signal is sourced',()=>{
   assert.equal(data.product.name,'AI Opportunity Monitor');
   assert.equal(data.metrics.watched,181);
   assert.equal(data.metrics.profiles_started,data.profile_coverage.profiles_started);
-  assert.ok(data.metrics.profiles_started>=30);
+  assert.ok(data.metrics.profiles_started>=37);
   assert.equal(data.metrics.profiles_complete,0);
   assert.deepEqual(data.intelligence.evidence_states.map(item=>item.id),['unknown','observed','active','scaled']);
   assert.ok(data.intelligence.matrices.consulting.dimensions.some(item=>item.id==='internal-use'));
@@ -98,7 +100,7 @@ test('ontology surface derives relationships, honest trends, and sourced insight
 });
 
 test('profile batch contract supports parallel evidence-backed backfill',()=>{
-  const batch={schema_version:'1.0',batch_id:'consulting-01',updated_at:'2026-08-31T08:00:00.000Z',baseline_window:{start:'2023-09-01',end:'2026-08-31'},profiles:[{entity_id:'mckinsey',status:'partial',current_position:'一次情報に基づく現在位置',maturity_stage:'commercial',development_methods:['in-house'],dimensions:{strategy:'observed'},internal_use:[],offerings:[],partnerships:[],history:[{date:'2026-08-31',title:'公式更新',summary:'確認した内容',category:'AIオファリング',source:{title:'公式更新',url:'https://www.mckinsey.com/',publisher:'McKinsey',tier:'primary'}}]}]};
+  const batch={schema_version:'1.0',batch_id:'consulting-01',updated_at:'2026-08-31T08:00:00.000Z',baseline_window:{start:'2021-09-01',end:'2026-08-31'},profiles:[{entity_id:'mckinsey',status:'partial',current_position:'一次情報に基づく現在位置',maturity_stage:'commercial',development_methods:['in-house'],dimensions:{strategy:'observed'},internal_use:[],offerings:[],partnerships:[],history:[{date:'2026-08-31',title:'公式更新',summary:'確認した内容',category:'AIオファリング',source:{title:'公式更新',url:'https://www.mckinsey.com/',publisher:'McKinsey',tier:'primary'}}]}]};
   assert.deepEqual(validateProfileBatch(batch),[]);
   assert.ok(validateProfileBatch({...batch,profiles:[{...batch.profiles[0],entity_id:'not-watched'}]}).some(error=>error.includes('監視対象')));
 });
@@ -114,6 +116,6 @@ test('local server exposes the standalone dashboard and no AI API requirement',{
   const port=await freePort();const child=spawn(process.execPath,['server.cjs'],{cwd:ROOT,env:{...process.env,AIOM_PORT:String(port)},stdio:'ignore'});t.after(()=>child.kill());
   await waitFor(`http://127.0.0.1:${port}/api/health`);
   let response=await fetch(`http://127.0.0.1:${port}/api/health`);let body=await response.json();assert.equal(body.product,'AI Opportunity Monitor');assert.equal(body.ai_api_required,false);
-  response=await fetch(`http://127.0.0.1:${port}/api/dashboard`);body=await response.json();assert.equal(body.metrics.watched,181);assert.equal(body.groups.find(group=>group.id==='consulting').count,67);assert.equal(body.groups.find(group=>group.id==='startups').count,40);assert.equal(body.profile_coverage.profiles_started,body.metrics.profiles_started);assert.ok(body.profile_coverage.profiles_started>=30);assert.ok(body.capabilities.capabilities.some(item=>item.id==='historical-baseline'));
+  response=await fetch(`http://127.0.0.1:${port}/api/dashboard`);body=await response.json();assert.equal(body.metrics.watched,181);assert.equal(body.groups.find(group=>group.id==='consulting').count,67);assert.equal(body.groups.find(group=>group.id==='startups').count,40);assert.equal(body.profile_coverage.profiles_started,body.metrics.profiles_started);assert.ok(body.profile_coverage.profiles_started>=37);assert.ok(body.capabilities.capabilities.some(item=>item.id==='historical-baseline'));
   response=await fetch(`http://127.0.0.1:${port}/`);assert.equal(response.status,200);assert.match(await response.text(),/<title>AI Opportunity Monitor<\/title>/);
 });

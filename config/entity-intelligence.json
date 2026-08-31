@@ -1,15 +1,15 @@
 {
   "baseline_window": {
-    "years": 3,
-    "start": "2023-09-01",
+    "years": 5,
+    "start": "2021-09-01",
     "end": "2026-08-31",
-    "purpose": "週次ニュースの前提となる各社のAI現在地と変更履歴を保持する"
+    "purpose": "週次ニュースの前提となる各社のAI現在地と更新履歴を保持する"
   },
   "evidence_states": [
     { "id": "unknown", "label": "未確認", "definition": "一次情報による確認がまだない" },
     { "id": "observed", "label": "確認あり", "definition": "対象期間内の一次情報を1件以上確認した" },
     { "id": "active", "label": "継続展開", "definition": "複数の取り組み、継続提供、組織的活動の一次情報を確認した" },
-    { "id": "scaled", "label": "全社・商用", "definition": "全社導入、一般提供、外部販売、事業化の一次情報を確認した" }
+    { "id": "scaled", "label": "本格展開", "definition": "PoCや単発発表を超え、全社導入、一般提供、外部提供、事業化のいずれかを一次情報で確認した" }
   ],
   "maturity_stages": [
     { "id": "unknown", "label": "未確認" },
@@ -18,7 +18,7 @@
     { "id": "department", "label": "部門導入" },
     { "id": "enterprise", "label": "全社導入" },
     { "id": "proprietary", "label": "独自開発" },
-    { "id": "commercial", "label": "外部販売・事業化" }
+    { "id": "commercial", "label": "外部提供・事業化" }
   ],
   "development_methods": [
     { "id": "in-house", "label": "自社開発" },
@@ -104,5 +104,5 @@
       ]
     }
   },
-  "change_ledger_columns": ["番号", "重要度", "企業", "変更内容", "分類", "前回との差分", "根拠"]
+  "change_ledger_columns": ["番号", "重要度", "企業", "更新内容", "分類", "前回との差分", "根拠"]
 }
