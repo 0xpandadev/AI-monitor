@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "name": "AI Opportunity Monitor knowledge model",
+  "principle": "一次情報で確認した企業・活動・関係・変化を、意思決定に使える形で接続する。Palantir製品や非公開仕様には依存しない。",
+  "object_types": [
+    { "id": "company", "label": "企業", "description": "監視対象企業または関係先" },
+    { "id": "offering", "label": "AIオファリング", "description": "外部提供するAI製品・サービス・方法論" },
+    { "id": "partner", "label": "提携先", "description": "提携・共同開発・提供関係の相手" },
+    { "id": "topic", "label": "変化テーマ", "description": "週次変更を束ねる分類" }
+  ],
+  "relation_types": [
+    { "id": "changed-in", "label": "変化を確認", "source": "weekly-signal" },
+    { "id": "offers", "label": "提供", "source": "company-profile" },
+    { "id": "partners-with", "label": "提携", "source": "company-profile" }
+  ],
+  "actions": [
+    { "id": "open-evidence", "label": "公式根拠を確認" },
+    { "id": "review-relationship", "label": "関係をレビュー" },
+    { "id": "promote-insight", "label": "会議論点へ昇格" },
+    { "id": "add-next-watch", "label": "次回観測へ追加" }
+  ],
+  "insight_policy": {
+    "minimum_entities": 2,
+    "minimum_confirmed_signals": 2,
+    "high_confidence_signals": 3,
+    "require_primary_source": true,
+    "never_infer_absence_from_unknown": true
+  }
+}

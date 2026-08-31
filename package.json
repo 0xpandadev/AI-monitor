@@ -1,6 +1,6 @@
 {
   "name": "ai-opportunity-monitor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "AI market and company monitoring board for strategy and market research.",
   "scripts": {

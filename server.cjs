@@ -24,7 +24,7 @@ function staticFile(response,url){
 const server=http.createServer(async(request,response)=>{
   const url=new URL(request.url,`http://${request.headers.host||`${HOST}:${PORT}`}`);
   try{
-    if(request.method==='GET'&&url.pathname==='/api/health')return send(response,200,{ok:true,product:'AI Opportunity Monitor',version:'0.1.0',ai_api_required:false});
+    if(request.method==='GET'&&url.pathname==='/api/health')return send(response,200,{ok:true,product:'AI Opportunity Monitor',version:'0.2.0',ai_api_required:false});
     if(request.method==='GET'&&url.pathname==='/api/dashboard')return send(response,200,dashboard());
     if(request.method==='POST'&&url.pathname==='/api/watchlist'){
       const result=addEntity(await jsonBody(request));return result.ok?send(response,201,result):send(response,422,{error:'invalid_entity',details:result.errors});

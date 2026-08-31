@@ -30,6 +30,18 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - Industry matrix: aggregation of researched companies with an explicit coverage warning; never an industry adoption rate.
 - Meeting mode: one message per screen with conclusion, evidence, competitor effect, implication, and next watch items.
 - Coverage warning: always visible while the three-year baseline is incomplete.
+- Relationship map: company-to-topic, company-to-offering, and company-to-partner links derived from the canonical profile and weekly-signal stores. Every edge exposes evidence coverage.
+- Insight board: deterministic multi-company patterns with conclusion, source count, limitation, implication, and next-watch action.
+- Evidence radar: an ordinal evidence profile, never a total score or company ranking. Hide it until at least four dimensions have confirmed states.
+
+## Visualization contracts
+
+| Surface | Analytical question | Form | Sufficiency and fallback | Palette |
+| --- | --- | --- | --- | --- |
+| Relationship map | Which companies connect to the same change theme, offering type, or partner? | Two-column node-link SVG | Show only evidence-backed edges; empty state when none exist | Navy companies, cobalt topics, orange partnerships, neutral edges |
+| Trend panel | Is a repeated movement visible over time? | Monthly line | Require at least 8 observed months; otherwise show categorical bars and exact coverage | Single cobalt root plus neutrals |
+| Evidence radar | What dimensions of one company have confirmed activity? | Ordinal radar, maximum 8 axes | Require at least 4 known axes; otherwise show coverage message | Cobalt fill and stroke plus neutral guides |
+| Insight board | Which patterns cross multiple companies and sources? | Evidence cards | Require at least 2 companies and 2 confirmed primary-source signals | Navy structure, orange discussion, cobalt high-confidence state |
 
 ## Motion and accessibility
 
@@ -42,3 +54,4 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - 2026-08-31: Replaced name-only company presentation with strict evidence matrices and a three-column profile drawer. Reason: the company list is a navigation aid, not the intelligence product.
 - 2026-08-31: Added cobalt as a secondary semantic color only for confirmed activity states. Reason: distinguish evidence from orange discussion accents.
 - 2026-08-31: Kept incomplete baseline coverage visible. Reason: prevent unresearched companies from being mistaken for inactive companies.
+- 2026-08-31: Added a locally derived ontology surface, relationship map, honest trend fallback, evidence radar, and deterministic insight board. Reason: connect company facts into decision-ready patterns without adding Palantir, MiroFish, or direct LLM API dependencies.

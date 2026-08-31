@@ -36,6 +36,8 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/変更台帳/);
   assert.match(files,/会議モード/);
   assert.match(files,/社内活用/);
+  assert.match(files,/関係・トレンド/);
+  assert.match(files,/示唆ボード/);
 });
 
 test('portable skill manifest keeps the core local and external installs explicit',()=>{
@@ -70,6 +72,27 @@ test('board is explicit when empty and every populated signal is sourced',()=>{
     assert.ok(signal.source?.url,`${signal.id} has no source URL`);
     assert.ok(signal.source?.publisher,`${signal.id} has no source publisher`);
     assert.ok(['confirmed','candidate','updated','retracted'].includes(signal.verification),`${signal.id} has invalid verification`);
+  }
+});
+
+test('ontology surface derives relationships, honest trends, and sourced insights',()=>{
+  const data=dashboard();const signalIds=new Set(data.signals.map(signal=>signal.id));
+  assert.equal(data.ontology.schema_version,'1.0');
+  assert.ok(data.knowledge_graph.summary.nodes>0);
+  assert.ok(data.knowledge_graph.summary.edges>0);
+  assert.equal(data.knowledge_graph.summary.watched_companies,data.metrics.watched);
+  assert.ok(data.knowledge_graph.summary.relation_counts['changed-in']>0);
+  for(const edge of data.knowledge_graph.edges){
+    assert.ok(edge.evidence_count>0,`${edge.id} has no evidence`);
+    for(const id of edge.evidence_ids)assert.ok(signalIds.has(id),`${edge.id} references unknown evidence ${id}`);
+  }
+  assert.equal(data.trends.sufficient_for_line,data.trends.temporal_points>=data.trends.minimum_temporal_points);
+  for(const insight of data.insights){
+    assert.ok(insight.entity_ids.length>=2);
+    assert.ok(insight.evidence_count>=2);
+    assert.ok(insight.counterevidence);
+    assert.ok(insight.next_watch);
+    for(const id of insight.evidence_signal_ids)assert.ok(signalIds.has(id));
   }
 });
 
