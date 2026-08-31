@@ -3,7 +3,7 @@ const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
   digest:['WEEKLY AI LANDSCAPE','今週のダイジェスト'],
-  ledger:['CHANGE LEDGER','変更台帳'],
+  ledger:['CHANGE HISTORY LEDGER','変更履歴台帳'],
   relationships:['ONTOLOGY / TREND','関係・トレンド'],
   insights:['EVIDENCE TO DECISION','示唆ボード'],
   'ai-companies':['MODEL / PLATFORM WATCH','主要AI企業'],
@@ -14,7 +14,7 @@ const viewMeta={
   archive:['MONTHLY MEMORY','月次アーカイブ'],
   settings:['COVERAGE / SOURCES','監視設定・情報源']
 };
-const stateGlyph={unknown:'—',observed:'●',active:'▲',scaled:'■'};
+const stateGlyph={unknown:'未',observed:'確',active:'継',scaled:'商'};
 
 function esc(value=''){return String(value).replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));}
 function safeUrl(value=''){try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:'#';}catch{return '#';}}
@@ -29,6 +29,7 @@ function methodLabel(id){return state.data.intelligence.development_methods.find
 function profileState(entity,dimension){return entity.profile?.dimensions?.[dimension]||'unknown';}
 function matrixFor(id){return state.data.intelligence.matrices[id]||{label:'企業AI現在地',dimensions:[]};}
 function watchLabel(entity){if(entity.profile?.status==='complete')return '3年基準完了';if(entity.profile)return '基礎情報は部分確認';return '3年基準を調査待ち';}
+function evidenceCount(entity){return (entity.profile?.history?.length||0)+(entity.signal_count||0);}
 function shortLabel(value,max=28){const text=String(value||'');return text.length>max?`${text.slice(0,max-1)}…`:text;}
 
 async function api(path,options={}){
@@ -85,7 +86,7 @@ function renderDigest(){
   <section class="coverage-warning"><b>3年ベースラインは作成中</b><p>${esc(d.profile_coverage.note||'基礎情報の確認を進めています。')}</p><button data-jump="settings">調査範囲と方法を見る</button></section>
   <section class="landscape-strip"><header><div><span>企業インテリジェンス</span><h2>名前ではなく、各社のAI現在地を見る</h2></div><p>件数は監視・調査カバレッジです。市場の強さや優劣を示すスコアではありません。</p></header><div class="landscape-track">${d.groups.filter(item=>item.id!=='additional').map(item=>{const target=item.id==='global-saas'||item.id==='japan-saas'?'saas':item.id;const note=outlook.get(item.id);const profiled=entities(item.id).filter(entity=>entity.profile).length;return `<button data-jump="${target}" class="landscape-cell ${item.signal_count?'changed':''}"><span>${esc(item.label)}</span><b>${profiled}<small> / ${item.count}社</small></b><small>${note?esc(note.summary):'基礎情報を調査中'}</small></button>`;}).join('')}</div></section>
   <section class="intelligence-shortcuts"><button data-jump="relationships"><span>RELATIONSHIP MAP</span><b>${d.knowledge_graph.summary.companies}社 · ${d.knowledge_graph.summary.edges}関係</b><small>企業、変化テーマ、オファリング、提携を接続</small></button><button data-jump="insights"><span>INSIGHT BOARD</span><b>${d.insights.length}件の観測パターン</b><small>結論、根拠、反証、次回観測を一体表示</small></button></section>
-  <section class="ledger-board"><header><div><span>変更台帳</span><h2>今週、何が変わったか</h2></div><button data-jump="ledger">${d.signals.length}件をすべて見る →</button></header>${renderLedgerTable(d.signals.slice(0,8))}</section>`;
+  <section class="ledger-board"><header><div><span>変更履歴台帳</span><h2>根拠付きで何が変わったか</h2></div><button data-jump="ledger">${d.signals.length}件をすべて見る →</button></header>${renderLedgerTable(d.signals.slice(0,8))}</section>`;
 }
 
 function renderRelationships(){
@@ -135,7 +136,7 @@ function renderInsights(){
 function renderLedgerPage(signals){
   let filtered=signals;
   if(state.query)filtered=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''} ${signal.category}`.toLowerCase().includes(state.query));
-  return `<section class="category-intro"><div><span>Evidence-backed changes</span><h2>ニュースではなく、変更履歴として残す</h2><p>変更内容、前回との差分、公式根拠を1行で追える台帳です。初回基準のため、現在はすべて「基準へ追加」と表示します。</p></div><dl><div><dt>確認済み変更</dt><dd>${filtered.length}</dd></div><div><dt>一次情報</dt><dd>${filtered.filter(item=>item.source?.tier==='primary').length}</dd></div></dl></section><section class="ledger-board standalone"><header><div><span>変更台帳</span><h2>${esc(state.data.brief.period?.label||'全期間')}</h2></div><button data-method>定義を見る</button></header>${renderLedgerTable(filtered)}</section>`;
+  return `<section class="category-intro"><div><span>Evidence-backed changes</span><h2>ニュースではなく、変更履歴として残す</h2><p>変更内容、前回との差分、公式根拠を1行で追える台帳です。初回基準のため、現在はすべて「基準へ追加」と表示します。</p></div><dl><div><dt>確認済み変更</dt><dd>${filtered.length}</dd></div><div><dt>一次情報</dt><dd>${filtered.filter(item=>item.source?.tier==='primary').length}</dd></div></dl></section><section class="ledger-board standalone"><header><div><span>変更履歴台帳</span><h2>${esc(state.data.brief.period?.label||'全期間')}</h2></div><button data-method>定義を見る</button></header>${renderLedgerTable(filtered)}</section>`;
 }
 
 function renderLedgerTable(signals){
@@ -146,18 +147,18 @@ function renderLedgerTable(signals){
 function renderCategory(ids,description){
   let list=entities(ids),signals=signalsFor(ids);
   if(state.query){list=list.filter(entity=>`${entity.name} ${entity.segment||''} ${entity.profile?.current_position||''}`.toLowerCase().includes(state.query));signals=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''}`.toLowerCase().includes(state.query));}
-  const matrixId=ids.length>1?'global-saas':ids[0];const matrix=matrixFor(matrixId);const started=list.filter(entity=>entity.profile).length;
+  const matrixId=ids.length>1?'global-saas':ids[0];const matrix=matrixFor(matrixId);const started=list.filter(entity=>entity.profile).length;const historyTotal=list.reduce((sum,entity)=>sum+evidenceCount(entity),0);
   const enterpriseIndustry=ids.includes('enterprises')?renderIndustryMatrix(list,matrix):'';
-  return `<section class="category-intro"><div><span>3 YEAR COMPANY BASELINE</span><h2>${esc(viewMeta[state.view][1])}</h2><p>${esc(description)}</p></div><dl><div><dt>監視企業</dt><dd>${list.length}</dd></div><div><dt>基礎情報あり</dt><dd>${started}</dd></div><div><dt>変更履歴</dt><dd>${signals.length}</dd></div></dl></section>
-  <section class="method-strip"><div><b>セルの意味</b>${state.data.intelligence.evidence_states.map(item=>`<span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span>`).join('')}</div><button data-method>判定方法・注意点</button></section>
+  return `<section class="category-intro"><div><span>3 YEAR COMPANY BASELINE</span><h2>${esc(viewMeta[state.view][1])}</h2><p>${esc(description)}</p></div><dl><div><dt>監視企業</dt><dd>${list.length}</dd></div><div><dt>基礎情報あり</dt><dd>${started}</dd></div><div><dt>確認履歴</dt><dd>${historyTotal}</dd></div></dl></section>
+  <section class="method-strip"><div><b>セルの意味</b>${state.data.intelligence.evidence_states.map(item=>`<span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span>`).join('')}<em>数字ではなく、公式根拠で確認できた状態です</em></div><button data-method>判定方法・注意点</button></section>
   ${enterpriseIndustry}
   <section class="matrix-panel"><header><div><span>企業比較</span><h2>${esc(matrix.label)}</h2></div><p>企業名をクリックすると、現在位置・3年履歴・公式根拠を表示します。</p></header>${renderEntityMatrix(list,matrix)}</section>
-  <section class="ledger-board"><header><div><span>この領域の変更台帳</span><h2>確認済みの更新</h2></div><b>${signals.length}件</b></header>${renderLedgerTable(signals)}</section>`;
+  <section class="ledger-board"><header><div><span>この領域の変更履歴台帳</span><h2>確認済みの更新</h2></div><b>${signals.length}件</b></header>${renderLedgerTable(signals)}</section>`;
 }
 
 function renderEntityMatrix(list,matrix){
   if(!list.length)return '<div class="empty-inline"><b>該当する企業がありません</b><p>検索条件を変更してください。</p></div>';
-  return `<div class="table-scroll matrix-scroll"><table class="entity-matrix"><thead><tr><th>企業 / 現在地</th>${matrix.dimensions.map(item=>`<th>${esc(item.label)}</th>`).join('')}</tr></thead><tbody>${list.map(entity=>`<tr><th><button data-entity="${esc(entity.id)}"><b>${esc(entity.name)}</b><span>${esc(entity.profile?.current_position||watchLabel(entity))}</span></button></th>${matrix.dimensions.map(dimension=>{const value=profileState(entity,dimension.id),definition=stateDefinition(value);return `<td><button class="matrix-cell ${value}" data-entity="${esc(entity.id)}" title="${esc(`${dimension.label}: ${definition.label}。${definition.definition}`)}"><b>${stateGlyph[value]}</b><span>${esc(definition.label)}</span></button></td>`;}).join('')}</tr>`).join('')}</tbody></table></div>`;
+  return `<div class="table-scroll matrix-scroll"><table class="entity-matrix"><thead><tr><th>企業 / 現在地</th>${matrix.dimensions.map(item=>`<th>${esc(item.label)}</th>`).join('')}</tr></thead><tbody>${list.map(entity=>`<tr><th><button data-entity="${esc(entity.id)}"><b>${esc(entity.name)}</b><span>${esc(entity.profile?.current_position||watchLabel(entity))}</span><small>${esc(watchLabel(entity))} · 確認履歴 ${evidenceCount(entity)}件</small></button></th>${matrix.dimensions.map(dimension=>{const value=profileState(entity,dimension.id),definition=stateDefinition(value);return `<td><button class="matrix-cell ${value}" data-entity="${esc(entity.id)}" title="${esc(`${dimension.label}: ${definition.label}。${definition.definition}`)}"><b>${stateGlyph[value]}</b><span>${esc(definition.label)}</span></button></td>`;}).join('')}</tr>`).join('')}</tbody></table></div>`;
 }
 
 function renderIndustryMatrix(list,matrix){
@@ -216,7 +217,7 @@ function openInsight(id){
   showDrawer(`<span class="drawer-kicker">INSIGHT / ${esc(insight.type)}</span><h2>${esc(insight.title)}</h2><div class="drawer-signal-meta"><span class="confidence ${esc(insight.confidence)}">${insight.confidence==='high'?'高確度':'中確度'}</span><b>${insight.evidence_count}件の一次情報</b></div><section class="drawer-section emphasis"><h3>観測した結論</h3><p>${esc(insight.conclusion)}</p></section><section class="drawer-section"><h3>判定理由</h3><p>${esc(insight.rationale)}</p></section><section class="drawer-section"><h3>公式根拠</h3>${evidence.map(signal=>`<button data-signal="${esc(signal.id)}"><span>${esc(signal.entity?.name||signal.entity_id)}</span><b>${esc(signal.title)}</b></button>`).join('')}</section><section class="drawer-section"><h3>反証・制約</h3><p>${esc(insight.counterevidence)}</p></section><section class="drawer-section emphasis"><h3>自社への示唆</h3><p>${esc(insight.implication)}</p></section><section class="drawer-section"><h3>次回観測</h3><p>${esc(insight.next_watch)}</p></section>`);
 }
 function openMethod(){
-  showDrawer(`<span class="drawer-kicker">METHOD / DEFINITIONS</span><h2>ヒートマップの判定方法</h2><section class="drawer-section"><p>各セルは市場シェアや優劣ではなく、一次情報で確認できた活動の状態です。ニュース件数、検索結果数、言及数は色付けに使いません。</p>${state.data.intelligence.evidence_states.map(item=>`<div class="method-row"><span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span><p>${esc(item.definition)}</p></div>`).join('')}</section><section class="drawer-section"><h3>導入段階</h3><p>${state.data.intelligence.maturity_stages.map(item=>esc(item.label)).join(' → ')}</p></section><section class="drawer-section emphasis"><h3>誤読しないために</h3><p>未確認は「取り組みがない」という意味ではありません。現時点で登録済みの一次情報がないという意味です。3年ベースラインの完了企業だけが、期間内の主要公式発信を一巡済みです。</p></section>`);
+  showDrawer(`<span class="drawer-kicker">METHOD / DEFINITIONS</span><h2>ヒートマップと記号の判定方法</h2><section class="drawer-section"><p>各セルは市場シェアや優劣ではなく、一次情報で確認できた活動の状態です。ニュース件数、検索結果数、言及数は色付けに使いません。</p>${state.data.intelligence.evidence_states.map(item=>`<div class="method-row"><span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span><p>${esc(item.definition)}</p></div>`).join('')}</section><section class="drawer-section"><h3>導入段階</h3><p>${state.data.intelligence.maturity_stages.map(item=>esc(item.label)).join(' → ')}</p></section><section class="drawer-section emphasis"><h3>誤読しないために</h3><p>未確認は「取り組みがない」という意味ではありません。現時点で登録済みの一次情報がないという意味です。行頭の確認履歴件数は登録済み根拠の数で、強さや市場評価ではありません。</p></section>`);
 }
 function showDrawer(html,mode='signal'){$('#drawer-content').innerHTML=html;$('#detail-drawer').classList.toggle('profile',mode==='profile');$('#drawer-backdrop').hidden=false;$('#detail-drawer').classList.add('open');$('#detail-drawer').setAttribute('aria-hidden','false');$('#drawer-close').focus();}
 function closeDrawer(){$('#detail-drawer').classList.remove('open','profile');$('#detail-drawer').setAttribute('aria-hidden','true');$('#drawer-backdrop').hidden=true;}

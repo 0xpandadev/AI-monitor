@@ -15,11 +15,11 @@
       "purpose": "AI市場全体と181社の週次候補を発見する",
       "preferred_skills": ["aihot"],
       "connector": {
-        "type": "public-rest-api",
+        "type": "public-rest-api-or-mcp",
         "base_url": "https://aihot.virxact.com",
         "authentication": "none",
-        "mcp": false,
-        "note": "ブラウザUser-Agentが必要。直近7日間の発見用で、要約は一次情報ではない"
+        "mcp": true,
+        "note": "REST API v1、RSS、MCPが案内されている。直近7日間の発見用で、要約は一次情報ではない"
       },
       "fallback": "企業名、期間、AI関連語を使ったWeb検索と公式ニュースページ確認",
       "required": true

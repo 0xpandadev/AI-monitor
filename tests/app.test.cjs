@@ -33,7 +33,7 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/AI Opportunity Monitor/);
   assert.match(files,/コンサルマップ/);
   assert.match(files,/日本企業AI利活用/);
-  assert.match(files,/変更台帳/);
+  assert.match(files,/変更履歴台帳/);
   assert.match(files,/会議モード/);
   assert.match(files,/社内活用/);
   assert.match(files,/関係・トレンド/);
@@ -58,7 +58,8 @@ test('board is explicit when empty and every populated signal is sourced',()=>{
   const data=dashboard();
   assert.equal(data.product.name,'AI Opportunity Monitor');
   assert.equal(data.metrics.watched,181);
-  assert.equal(data.metrics.profiles_started,11);
+  assert.equal(data.metrics.profiles_started,data.profile_coverage.profiles_started);
+  assert.ok(data.metrics.profiles_started>=30);
   assert.equal(data.metrics.profiles_complete,0);
   assert.deepEqual(data.intelligence.evidence_states.map(item=>item.id),['unknown','observed','active','scaled']);
   assert.ok(data.intelligence.matrices.consulting.dimensions.some(item=>item.id==='internal-use'));
@@ -84,7 +85,7 @@ test('ontology surface derives relationships, honest trends, and sourced insight
   assert.ok(data.knowledge_graph.summary.relation_counts['changed-in']>0);
   for(const edge of data.knowledge_graph.edges){
     assert.ok(edge.evidence_count>0,`${edge.id} has no evidence`);
-    for(const id of edge.evidence_ids)assert.ok(signalIds.has(id),`${edge.id} references unknown evidence ${id}`);
+    for(const id of edge.evidence_ids)assert.ok(signalIds.has(id)||String(id).startsWith('profile:'),`${edge.id} references unknown evidence ${id}`);
   }
   assert.equal(data.trends.sufficient_for_line,data.trends.temporal_points>=data.trends.minimum_temporal_points);
   for(const insight of data.insights){
@@ -113,6 +114,6 @@ test('local server exposes the standalone dashboard and no AI API requirement',{
   const port=await freePort();const child=spawn(process.execPath,['server.cjs'],{cwd:ROOT,env:{...process.env,AIOM_PORT:String(port)},stdio:'ignore'});t.after(()=>child.kill());
   await waitFor(`http://127.0.0.1:${port}/api/health`);
   let response=await fetch(`http://127.0.0.1:${port}/api/health`);let body=await response.json();assert.equal(body.product,'AI Opportunity Monitor');assert.equal(body.ai_api_required,false);
-  response=await fetch(`http://127.0.0.1:${port}/api/dashboard`);body=await response.json();assert.equal(body.metrics.watched,181);assert.equal(body.groups.find(group=>group.id==='consulting').count,67);assert.equal(body.groups.find(group=>group.id==='startups').count,40);assert.equal(body.profile_coverage.profiles_started,11);assert.ok(body.capabilities.capabilities.some(item=>item.id==='historical-baseline'));
+  response=await fetch(`http://127.0.0.1:${port}/api/dashboard`);body=await response.json();assert.equal(body.metrics.watched,181);assert.equal(body.groups.find(group=>group.id==='consulting').count,67);assert.equal(body.groups.find(group=>group.id==='startups').count,40);assert.equal(body.profile_coverage.profiles_started,body.metrics.profiles_started);assert.ok(body.profile_coverage.profiles_started>=30);assert.ok(body.capabilities.capabilities.some(item=>item.id==='historical-baseline'));
   response=await fetch(`http://127.0.0.1:${port}/`);assert.equal(response.status,200);assert.match(await response.text(),/<title>AI Opportunity Monitor<\/title>/);
 });

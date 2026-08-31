@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T05:20:00.000Z",
+  "updated_at": "2026-08-31T09:20:00.000Z",
   "signals": [
     {
       "id": "2026-08-26-openai-hugging-face-incident",
@@ -287,6 +287,446 @@
         "title": "Ask your agent to suggest edits",
         "url": "https://www.notion.com/releases/2026-08-28",
         "publisher": "Notion",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-04-07-mckinsey-wonderful-agentic-ai",
+      "entity_id": "mckinsey",
+      "title": "McKinseyがWonderful AIと企業向けエージェントAI展開で協業",
+      "summary": "McKinseyはWonderful AIとの戦略的協業を発表し、QuantumBlackのAI変革能力とWonderfulのエージェント基盤を組み合わせ、PoCから本番展開への移行を支援すると説明しました。",
+      "why_it_matters": "戦略コンサルのAI支援が、構想策定から実行基盤・FDE型実装へ近づいています。競合比較では、戦略、データ、運用、人材だけでなく、エージェント実装力を見ます。",
+      "category": "AIエージェント",
+      "published_at": "2026-04-07",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "McKinsey and Wonderful team up to deliver enterprise AI transformation from strategy to scale",
+        "url": "https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/mckinsey-and-wonderful-team-up-to-deliver-enterprise-ai-transformation-from-strategy-to-scale",
+        "publisher": "McKinsey & Company",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2025-04-24-bcg-ai-science-institute",
+      "entity_id": "bcg",
+      "title": "BCG XがAIサイエンス研究所を設立",
+      "summary": "BCG XはAI Science Instituteを設立し、学術機関や業界のR&Dチームと連携して科学的発見と事業適用を支援すると発表しました。",
+      "why_it_matters": "AIコンサルの競争軸が業務効率化だけでなく、研究開発、生産技術、素材・ライフサイエンス領域の専門性に広がっています。",
+      "category": "AIオファリング",
+      "published_at": "2025-04-24",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "BCG X、「AIサイエンス研究所」を設立",
+        "url": "https://www.bcg.com/ja-jp/press/24april2025-bcg-x-launches-ai-science-institute",
+        "publisher": "BCG",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-07-09-abeam-pksha-genai-helpdesk",
+      "entity_id": "abeam",
+      "title": "アビームがPKSHA Workplaceと生成AI社内問合せ支援を提供",
+      "summary": "アビームコンサルティングは、PKSHA Workplaceと提携し、PKSHA AI ヘルプデスクを用いた社内問合せ対応業務効率化支援サービスを2024年7月から提供開始しました。",
+      "why_it_matters": "コンサル会社がAIプロダクト企業と組み、ナレッジ整理、FAQ、社内問い合わせ、周辺業務自動化までをサービス化する動きです。",
+      "category": "AIオファリング",
+      "published_at": "2024-07-09",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "生成AIを活用した社内問合せ対応業務効率化支援サービスの提供を開始",
+        "url": "https://www.abeam.com/jp/ja/news/2024/0709/",
+        "publisher": "ABeam Consulting",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-07-22-hitachi-lumada-genai-service",
+      "entity_id": "hitachi",
+      "title": "日立が生成AI活用プロフェッショナルサービス powered by Lumadaを提供開始",
+      "summary": "日立は、生成AI共通基盤、業務ガイドライン、約1,000件のユースケース検証、数百人規模の専門家体制を背景に、生成AI導入から活用、人材育成までを支援するサービスを開始しました。",
+      "why_it_matters": "日本大手企業が自社の全社AI実践を外部向けサービスへ転換する例です。社内導入実績と顧客向け事業化を同じプロフィールで追う必要があります。",
+      "category": "AIオファリング",
+      "published_at": "2024-07-22",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "「生成AI活用プロフェッショナルサービス powered by Lumada」を提供開始",
+        "url": "https://www.hitachi.com/ja-jp/press/articles/2024/07/0722/",
+        "publisher": "Hitachi",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-06-03-hitachi-microsoft-genai-alliance",
+      "entity_id": "hitachi",
+      "title": "日立とMicrosoftが生成AIで3年規模の戦略協業",
+      "summary": "日立とMicrosoftは、LumadaへのAzure OpenAI ServiceやCopilot群の組み込み、27万人従業員の生産性向上、5万人超のGenAI人材育成を含む協業を発表しました。",
+      "why_it_matters": "事業会社のAI利活用は単独施策ではなく、クラウド、業務アプリ、開発環境、人材育成を含む複合的な提携として進んでいます。",
+      "category": "提携・M&A",
+      "published_at": "2024-06-03",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "Hitachi and Microsoft Enter Milestone Agreement to Accelerate Business and Social Innovation with Generative AI",
+        "url": "https://www.hitachi.com/en-us/press/hitachi-and-microsoft-enter-milestone-agreement-to-accelerate-business/",
+        "publisher": "Hitachi",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-03-12-fujitsu-kozuchi-commercialization",
+      "entity_id": "fujitsu",
+      "title": "富士通がKozuchi商用化を含むAI戦略を発表",
+      "summary": "富士通はFujitsu Kozuchiの商用化、Uvance主要オファリングへのAI組み込み、独自生成AIやAIトラスト技術を含む全社AI戦略を説明しました。",
+      "why_it_matters": "国内大手IT企業は、AI技術、クラウド基盤、コンサルティング、業種別オファリングを一体で外部提供する方向です。",
+      "category": "内製開発",
+      "published_at": "2024-03-12",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "新たな全社AI戦略を発表。富士通AIの強みとは。",
+        "url": "https://www.fujitsu.com/jp/microsite/fujitsutransformationnews/2024-03-12/01/",
+        "publisher": "Fujitsu",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2023-09-19-toyota-large-behavior-models",
+      "entity_id": "toyota",
+      "title": "Toyota Research Instituteがロボット向けLarge Behavior Modelに向けた生成AI手法を発表",
+      "summary": "Toyota Research InstituteはDiffusion Policyを用いてロボットに新しい器用な動作を短時間で教える生成AI手法を発表し、Large Behavior Modelsへの一歩と位置付けました。",
+      "why_it_matters": "事業会社のAIはホワイトカラー用途だけでなく、ロボティクス、製造、モビリティのフィジカルAIへ広がります。",
+      "category": "内製開発",
+      "published_at": "2023-09-19",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "Toyota Research Institute Unveils Breakthrough in Teaching Robots New Behaviors",
+        "url": "https://pressroom.toyota.com/toyota-research-institute-unveils-breakthrough-in-teaching-robots-new-behaviors/",
+        "publisher": "Toyota Research Institute",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-12-23-sony-neurips-ai-research",
+      "entity_id": "sony",
+      "title": "SonyがNeurIPS 2024で生成AI・公平性・3D認識などの研究を発表",
+      "summary": "SonyはNeurIPS 2024で、生成AI、フェアネス、ニューラル等変性、画像生成、連合学習など幅広いAI研究を発表しました。",
+      "why_it_matters": "AI活用企業としてのソニーは、製品適用だけでなく、研究組織と創作・ゲーム・センシング領域の技術蓄積を観測対象にする必要があります。",
+      "category": "研究",
+      "published_at": "2024-12-23",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "Sony Presents New AI Research at NeurIPS 2024",
+        "url": "https://www.sony.com/en/SonyInfo/technology/stories/entries/NeurIPS2024_report/index.html",
+        "publisher": "Sony Group",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-01-25-mitsubishi-electric-behavior-ai",
+      "entity_id": "mitsubishi-electric",
+      "title": "三菱電機が製造現場の手作業分析AIを開発",
+      "summary": "三菱電機は、事前の教師データ準備なしに製造現場の反復作業を動画から分析する行動分析AIを開発し、作業分析時間を最大99%削減できると発表しました。",
+      "why_it_matters": "製造業のAI活用では、生成AIだけでなく、現場動画、作業分析、改善提案に関わる専用AIが重要です。",
+      "category": "内製開発",
+      "published_at": "2024-01-25",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "Mitsubishi Electric Develops Behavioral-analysis AI that Analyzes Manual Tasks Without Requiring Training Data",
+        "url": "https://www.mitsubishielectric.com/en/pr/2024/0125/",
+        "publisher": "Mitsubishi Electric",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-09-04-sakana-series-a-nvidia",
+      "entity_id": "sakana-ai",
+      "title": "Sakana AIが約2億ドルのSeries AとNVIDIA協業を発表",
+      "summary": "Sakana AIは約2億ドルのSeries Aを発表し、NVIDIAとの研究・インフラ・日本AIコミュニティ形成に関する協業、日本の金融・産業大手からの出資を明らかにしました。",
+      "why_it_matters": "日本発AIスタートアップが、資金、計算基盤、国内大手企業ネットワークを同時に獲得する動きです。単なるモデル企業ではなく、国産AIエコシステムのハブとして追う必要があります。",
+      "category": "提携・M&A",
+      "published_at": "2024-09-04",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "Announcing Our Series A",
+        "url": "https://sakana.ai/series-a/",
+        "publisher": "Sakana AI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-08-13-sakana-ai-scientist",
+      "entity_id": "sakana-ai",
+      "title": "Sakana AIが研究開発プロセス自動化を目指すAI Scientistを発表",
+      "summary": "Sakana AIは、アイデア生成、実験、論文執筆など研究プロセスの自動化を目指すAI Scientistを発表しました。",
+      "why_it_matters": "AIの観測軸には、業務効率化だけでなく、研究開発そのものをAI化する動きも含めるべきです。",
+      "category": "研究",
+      "published_at": "2024-08-13",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery",
+        "url": "https://sakana.ai/ai-scientist/",
+        "publisher": "Sakana AI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2023-09-28-pfn-plamo-13b",
+      "entity_id": "preferred-networks",
+      "title": "Preferred Networksが日英対応LLM PLaMo-13Bを公開",
+      "summary": "Preferred Networksは、約130億パラメータの日英対応LLM PLaMo-13Bを公開し、MN-2とABCIの大規模言語モデル構築支援プログラムを活用したと説明しました。",
+      "why_it_matters": "国産LLMでは、モデル性能だけでなく、計算基盤、公開ライセンス、商用提供経路が競争軸になります。",
+      "category": "基盤モデル",
+      "published_at": "2023-09-28",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "PLaMo-13Bを公開しました",
+        "url": "https://www.preferred.jp/ja/blog/tech/llm-plamo",
+        "publisher": "Preferred Networks",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-03-12-elyza-70b-japanese-llm",
+      "entity_id": "elyza",
+      "title": "ELYZAが700億パラメータの日本語LLMを開発",
+      "summary": "ELYZAは、700億パラメータの日本語LLMを開発し、ELYZA LLM for JPシリーズとしてAPIサービスや共同開発を順次提供すると発表しました。",
+      "why_it_matters": "日本語LLM企業は、基盤モデル開発から企業組み込み・共同開発へ接続しています。導入支援会社にとって連携候補にも競合にもなります。",
+      "category": "基盤モデル",
+      "published_at": "2024-03-12",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "グローバルモデルに匹敵する700億パラメータの日本語LLMを開発しました",
+        "url": "https://elyza.ai/news/2024/03/12/%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AB%E5%8C%B9%E6%95%B5%E3%81%99%E3%82%8B700%E5%84%84%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%AE%E6%97%A5%E6%9C%AC%E8%AA%9Ellm%E3%82%92",
+        "publisher": "ELYZA",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-03-18-elyza-kddi-alliance",
+      "entity_id": "elyza",
+      "title": "ELYZAがKDDIグループとの資本業務提携を発表",
+      "summary": "ELYZAは、KDDIグループとの資本業務提携を発表し、生成AIの社会実装に向けた取り組みを進めるとしました。",
+      "why_it_matters": "国内LLMスタートアップは単独販売だけでなく、大手通信会社の顧客基盤・導入力と結びつくことで市場投入を加速しています。",
+      "category": "提携・M&A",
+      "published_at": "2024-03-18",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "KDDIグループとの資本業務提携を発表しました",
+        "url": "https://elyza.ai/news/2024/03/18/kddi%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%A8%E3%81%AE%E8%B3%87%E6%9C%AC%E6%A5%AD%E5%8B%99%E6%8F%90%E6%90%BA%E3%82%92%E7%99%BA%E8%A1%A8%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F",
+        "publisher": "ELYZA",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-05-16-stockmark-llm-100b",
+      "entity_id": "stockmark",
+      "title": "ストックマークが1,000億パラメータ規模の独自LLMを公開",
+      "summary": "ストックマークは、GENIAC採択を受けて開発したStockmark-LLM-100bを公開し、ビジネス領域の日本語データやハルシネーション抑止を特徴として説明しました。",
+      "why_it_matters": "国内AI新興企業の競争軸は、モデル公開だけでなく、ビジネス知識、RAG基盤、企業ごとの独自LLM開発支援にあります。",
+      "category": "基盤モデル",
+      "published_at": "2024-05-16",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "ストックマーク 1,000億パラメータ規模の独自LLMを公開",
+        "url": "https://stockmark.co.jp/r-and-d/topics/20240516/",
+        "publisher": "Stockmark",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-10-21-stockmark-series-d",
+      "entity_id": "stockmark",
+      "title": "ストックマークがSeries Dで45億円を調達",
+      "summary": "ストックマークは、ポラリス・キャピタル・グループを投資家とする第三者割当増資でSeries D総額45億円を調達し、累計調達額が88億円超になったと発表しました。",
+      "why_it_matters": "エンタープライズ向け生成AIプラットフォーム企業が成長資金を得ており、導入支援市場の競合・提携候補として重要です。",
+      "category": "提携・M&A",
+      "published_at": "2024-10-21",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "ストックマーク シリーズDラウンドでポラリスより45億円の資金調達を実施",
+        "url": "https://stockmark.co.jp/news/20241021/",
+        "publisher": "Stockmark",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2025-04-07-pksha-ai-agents",
+      "entity_id": "pksha-technology",
+      "title": "PKSHAがPKSHA AI Agentsをローンチ",
+      "summary": "PKSHA Technologyは、社内・顧客接点で働くAIエージェントをソリューション型とプロダクト型の両方で提供するPKSHA AI Agentsを発表しました。",
+      "why_it_matters": "国内AI SaaS企業は、チャットボットから社内・顧客接点で働くAIエージェントへ提供範囲を広げています。",
+      "category": "AIエージェント",
+      "published_at": "2025-04-07",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "新サービス「PKSHA AI Agents」をローンチ",
+        "url": "https://www.pkshatech.com/news/20250407/",
+        "publisher": "PKSHA Technology",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-01-09-pksha-sales-ai-agent",
+      "entity_id": "pksha-technology",
+      "title": "PKSHAが不動産投資営業向けセールスAIエージェントを提供",
+      "summary": "PKSHAグループとシノケングループは、24時間365日、会社説明や商品説明を行う対話型AIアバターのセールスAIエージェント提供を発表しました。",
+      "why_it_matters": "AIエージェントがバックオフィス支援だけでなく、営業接点そのものへ入っているため、顧客接点変革の事例として追う価値があります。",
+      "category": "AIエージェント",
+      "published_at": "2026-01-09",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "PKSHAグループとシノケングループが「セールスAIエージェント」を提供開始",
+        "url": "https://www.pkshatech.com/news/20260109/",
+        "publisher": "PKSHA Technology",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2025-04-07-layerx-ai-agent-business",
+      "entity_id": "layerx",
+      "title": "LayerXがAIエージェント事業を開始",
+      "summary": "LayerXはAIエージェント事業への参入を発表し、請求書受領代行などをAIエージェントが行うAI-BPOサービスを予定し、業務の完全自動運転を目指すと説明しました。",
+      "why_it_matters": "日本SaaSは、入力補助やAI検索から、特定業務プロセスをエージェントで代行する方向へ進んでいます。",
+      "category": "SaaS再定義",
+      "published_at": "2025-04-07",
+      "importance": "high",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "LayerX、AIエージェント事業を開始。AIを活用して、業務の「完全自動運転」を目指す",
+        "url": "https://layerx.co.jp/news/20250407/",
+        "publisher": "LayerX",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-04-23-layerx-agenticsec",
+      "entity_id": "layerx",
+      "title": "LayerXがAgenticSecをグループ化しAIセキュリティ領域へ進出",
+      "summary": "LayerXはAgenticSecのグループ参画を発表し、AIエージェントによるペネトレーションテスト自動化技術を基盤に、AI時代のソフトウェアセキュリティ領域を強化するとしました。",
+      "why_it_matters": "AIエージェントの普及は、業務自動化だけでなく、セキュリティ検証やAI利用時の防御市場も拡大させています。",
+      "category": "提携・M&A",
+      "published_at": "2026-04-23",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "LayerX、AgenticSecをグループに迎え、AI時代のセキュリティ領域に進出",
+        "url": "https://layerx.co.jp/news/20260423/",
+        "publisher": "LayerX",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-08-13-caddi-saas-award",
+      "entity_id": "caddi",
+      "title": "CADDi DrawerがAI駆動の製造業向けSaaSとしてSaaS Awardsを受賞",
+      "summary": "CADDiは、AI駆動ソフトウェアCADDi Drawerが2024 SaaS AwardsでBusiness IntelligenceとEngineering Managementのカテゴリで評価されたと発表しました。",
+      "why_it_matters": "日本発の製造業向けAIプロダクトは、図面・調達・設計情報を扱う業界特化SaaSとしてグローバル展開の観測対象になります。",
+      "category": "SaaS再定義",
+      "published_at": "2024-08-13",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "CADDi Wins Best Business Intelligence and Engineering Management Software at 2024 SaaS Awards",
+        "url": "https://us.caddi.com/resources/news/caddi-wins-best-business-intelligence-and-engineering-management-software-at-2024-saas-awards",
+        "publisher": "CADDi",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2024-02-28-legalon-assistant",
+      "entity_id": "legalon-technologies",
+      "title": "LegalOnが契約業務向け生成AI LegalOn Assistantを発表",
+      "summary": "LegalOn Technologiesは、契約への質問回答、条項ドラフト、要約などを支援するLegalOn Assistantを発表しました。",
+      "why_it_matters": "業界特化AI SaaSでは、汎用チャットではなく、契約文書、プレイブック、レビュー体制、セキュリティを一体化したAIが競争軸になります。",
+      "category": "SaaS再定義",
+      "published_at": "2024-02-28",
+      "importance": "medium",
+      "verification": "confirmed",
+      "change": {
+        "delta": "直近3年ベースラインへ追加"
+      },
+      "source": {
+        "title": "LegalOn Launches Generative AI for Contracts, LegalOn Assistant",
+        "url": "https://us-direct.legalontech.com/press-releases/legalon-assistant-generative-ai-for-contracts",
+        "publisher": "LegalOn Technologies",
         "tier": "primary"
       }
     }

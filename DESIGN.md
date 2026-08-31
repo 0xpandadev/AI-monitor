@@ -55,3 +55,4 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - 2026-08-31: Added cobalt as a secondary semantic color only for confirmed activity states. Reason: distinguish evidence from orange discussion accents.
 - 2026-08-31: Kept incomplete baseline coverage visible. Reason: prevent unresearched companies from being mistaken for inactive companies.
 - 2026-08-31: Added a locally derived ontology surface, relationship map, honest trend fallback, evidence radar, and deterministic insight board. Reason: connect company facts into decision-ready patterns without adding Palantir, MiroFish, or direct LLM API dependencies.
+- 2026-08-31: Changed matrix state marks from abstract shapes to Japanese state glyphs and added per-company evidence-history counts. Reason: make it clear that cells represent evidence status, not a numeric score or market ranking.

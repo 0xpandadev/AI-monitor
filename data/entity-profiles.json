@@ -1,12 +1,15 @@
 {
-  "updated_at": "2026-08-31T06:10:00.000Z",
-  "baseline_window": { "start": "2023-09-01", "end": "2026-08-31" },
+  "updated_at": "2026-08-31T09:20:00.000Z",
+  "baseline_window": {
+    "start": "2023-09-01",
+    "end": "2026-08-31"
+  },
   "coverage": {
     "status": "in_progress",
-    "profiles_started": 11,
+    "profiles_started": 30,
     "profiles_complete": 0,
     "total_entities": 181,
-    "note": "初回週次調査で確認した企業から台帳化を開始。3年分の公式情報バックフィルは未完了"
+    "note": "completeは指定した3年窓の一次情報確認が完了したプロフィールのみ"
   },
   "profiles": [
     {
@@ -14,132 +17,1549 @@
       "status": "partial",
       "current_position": "基盤モデルを外部開発環境へ展開する一方、高自律エージェントの安全性とパートナー依存が経営課題になっている。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "models": "scaled", "products": "active", "agents": "active", "infrastructure": "observed", "partnerships": "active", "governance": "active", "research": "active" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "active",
+        "agents": "active",
+        "infrastructure": "observed",
+        "partnerships": "active",
+        "governance": "active",
+        "research": "active"
+      },
       "internal_use": [],
-      "offerings": ["GPT-5.6ファミリー", "Kiroでのモデル提供"],
-      "partnerships": ["Amazon Web Services / Kiro", "Cursor（契約終了方針を発表）"],
-      "activity_signal_ids": ["2026-08-26-openai-hugging-face-incident", "2026-08-28-openai-cursor-contract", "2026-08-24-openai-gpt56-kiro"]
+      "offerings": [
+        "GPT-5.6ファミリー",
+        "Kiroでのモデル提供"
+      ],
+      "partnerships": [
+        "Amazon Web Services / Kiro",
+        "Cursor（契約終了方針を発表）"
+      ],
+      "activity_signal_ids": [
+        "2026-08-26-openai-hugging-face-incident",
+        "2026-08-28-openai-cursor-contract",
+        "2026-08-24-openai-gpt56-kiro"
+      ]
     },
     {
       "entity_id": "anthropic",
       "status": "partial",
       "current_position": "ブラウザ実行と継続記憶を一般提供し、仕事の実行面を広げながら、自動アラインメント研究も進めている。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "models": "active", "products": "scaled", "agents": "scaled", "infrastructure": "observed", "partnerships": "unknown", "governance": "active", "research": "active" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "active",
+        "products": "scaled",
+        "agents": "scaled",
+        "infrastructure": "observed",
+        "partnerships": "unknown",
+        "governance": "active",
+        "research": "active"
+      },
       "internal_use": [],
-      "offerings": ["Claude in Chrome", "Claude Memory", "Claude Cowork"],
+      "offerings": [
+        "Claude in Chrome",
+        "Claude Memory",
+        "Claude Cowork"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-26-anthropic-claude-chrome-ga", "2026-08-25-anthropic-unified-memory", "2026-08-28-anthropic-automated-alignment-research"]
+      "activity_signal_ids": [
+        "2026-08-26-anthropic-claude-chrome-ga",
+        "2026-08-25-anthropic-unified-memory",
+        "2026-08-28-anthropic-automated-alignment-research"
+      ]
     },
     {
       "entity_id": "google-deepmind",
       "status": "partial",
       "current_position": "音声と動画の専門モデルをGemini APIと企業向けエージェント基盤へ組み込み、マルチモーダル業務の入口を広げている。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "models": "scaled", "products": "active", "agents": "observed", "infrastructure": "observed", "partnerships": "unknown", "governance": "unknown", "research": "active" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "scaled",
+        "products": "active",
+        "agents": "observed",
+        "infrastructure": "observed",
+        "partnerships": "unknown",
+        "governance": "unknown",
+        "research": "active"
+      },
       "internal_use": [],
-      "offerings": ["Gemini 3.5 Transcribe", "Gemini Omni 1.1 Flash"],
+      "offerings": [
+        "Gemini 3.5 Transcribe",
+        "Gemini Omni 1.1 Flash"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-26-google-gemini-transcribe", "2026-08-27-google-gemini-omni-11"]
+      "activity_signal_ids": [
+        "2026-08-26-google-gemini-transcribe",
+        "2026-08-27-google-gemini-omni-11"
+      ]
     },
     {
       "entity_id": "meta",
       "status": "partial",
       "current_position": "大規模AI処理のボトルネックをネットワーク層から解くため、AI向けEthernet転送規格を外部公開している。",
       "maturity_stage": "proprietary",
-      "development_methods": ["in-house"],
-      "dimensions": { "models": "unknown", "products": "unknown", "agents": "unknown", "infrastructure": "active", "partnerships": "observed", "governance": "unknown", "research": "active" },
-      "internal_use": ["大規模AIクラスタ向けネットワーク技術"],
-      "offerings": ["MetaRoCE仕様・参照実装"],
-      "partnerships": ["Open Compute Project"],
-      "activity_signal_ids": ["2026-08-24-meta-roce"]
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "unknown",
+        "products": "unknown",
+        "agents": "unknown",
+        "infrastructure": "active",
+        "partnerships": "observed",
+        "governance": "unknown",
+        "research": "active"
+      },
+      "internal_use": [
+        "大規模AIクラスタ向けネットワーク技術"
+      ],
+      "offerings": [
+        "MetaRoCE仕様・参照実装"
+      ],
+      "partnerships": [
+        "Open Compute Project"
+      ],
+      "activity_signal_ids": [
+        "2026-08-24-meta-roce"
+      ]
     },
     {
       "entity_id": "nvidia",
       "status": "partial",
       "current_position": "AIエージェントの長文脈・多数ツール呼び出しを前提に、電力当たり処理量とトークンコストを製品価値として訴求している。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "models": "observed", "products": "scaled", "agents": "active", "infrastructure": "scaled", "partnerships": "unknown", "governance": "unknown", "research": "active" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "models": "observed",
+        "products": "scaled",
+        "agents": "active",
+        "infrastructure": "scaled",
+        "partnerships": "unknown",
+        "governance": "unknown",
+        "research": "active"
+      },
       "internal_use": [],
-      "offerings": ["Vera Rubin NVL72"],
+      "offerings": [
+        "Vera Rubin NVL72"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-24-nvidia-vera-rubin-agent-efficiency"]
+      "activity_signal_ids": [
+        "2026-08-24-nvidia-vera-rubin-agent-efficiency"
+      ]
     },
     {
       "entity_id": "fortience",
       "status": "partial",
       "current_position": "AI化する業務の棚卸しと優先順位付けを入口商品にし、AIネイティブなToBe業務構想へ接続している。",
       "maturity_stage": "commercial",
-      "development_methods": ["consulting-si"],
-      "dimensions": { "strategy": "active", "internal-use": "unknown", "offering": "scaled", "build": "observed", "deployment": "observed", "operations": "unknown", "products": "observed", "partnerships": "unknown" },
+      "development_methods": [
+        "consulting-si"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "observed",
+        "deployment": "observed",
+        "operations": "unknown",
+        "products": "observed",
+        "partnerships": "unknown"
+      },
       "internal_use": [],
-      "offerings": ["AIエージェント3ステップ"],
+      "offerings": [
+        "AIエージェント3ステップ"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-25-fortience-ai-agent-three-steps"]
+      "activity_signal_ids": [
+        "2026-08-25-fortience-ai-agent-three-steps"
+      ]
     },
     {
       "entity_id": "deloitte-tohmatsu",
       "status": "partial",
       "current_position": "企業固有の判断基準をオントロジーとして実装し、AIによる業務自律実行までを支援領域にしている。",
       "maturity_stage": "commercial",
-      "development_methods": ["consulting-si"],
-      "dimensions": { "strategy": "active", "internal-use": "observed", "offering": "scaled", "build": "active", "deployment": "active", "operations": "observed", "products": "active", "partnerships": "observed" },
-      "internal_use": ["社内データを使ったオントロジーPoC（公式発表で有効性を確認）"],
-      "offerings": ["企業固有知識のオントロジー構築サービス"],
-      "partnerships": ["複数データプラットフォーム企業とのアライアンス（社名は今回未特定）"],
-      "activity_signal_ids": ["2026-08-25-deloitte-ontology-service"]
+      "development_methods": [
+        "consulting-si"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "observed",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "observed",
+        "products": "active",
+        "partnerships": "observed"
+      },
+      "internal_use": [
+        "社内データを使ったオントロジーPoC（公式発表で有効性を確認）"
+      ],
+      "offerings": [
+        "企業固有知識のオントロジー構築サービス"
+      ],
+      "partnerships": [
+        "複数データプラットフォーム企業とのアライアンス（社名は今回未特定）"
+      ],
+      "activity_signal_ids": [
+        "2026-08-25-deloitte-ontology-service"
+      ]
     },
     {
       "entity_id": "ntt-data",
       "status": "partial",
       "current_position": "エージェント構築・共有・実行から、専用VDI、権限、操作履歴までを統合し、全社業務プロセスの実行基盤として外部提供している。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house", "consulting-si"],
-      "dimensions": { "enterprise-ai": "active", "employee-genai": "unknown", "proprietary-ai": "scaled", "customer-ai": "scaled", "manufacturing-rd": "unknown", "sales-service": "active", "scm-quality": "unknown", "governance": "active", "organization": "observed", "partnerships": "unknown", "research": "observed" },
-      "internal_use": ["LITRON審査エージェントの固定資産管理業務検証"],
-      "offerings": ["LITRON Builder", "LITRON Library", "LITRON Buddy", "AIエージェント向けVDI"],
+      "development_methods": [
+        "in-house",
+        "consulting-si"
+      ],
+      "dimensions": {
+        "enterprise-ai": "active",
+        "employee-genai": "unknown",
+        "proprietary-ai": "scaled",
+        "customer-ai": "scaled",
+        "manufacturing-rd": "unknown",
+        "sales-service": "active",
+        "scm-quality": "unknown",
+        "governance": "active",
+        "organization": "observed",
+        "partnerships": "unknown",
+        "research": "observed"
+      },
+      "internal_use": [
+        "LITRON審査エージェントの固定資産管理業務検証"
+      ],
+      "offerings": [
+        "LITRON Builder",
+        "LITRON Library",
+        "LITRON Buddy",
+        "AIエージェント向けVDI"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-25-ntt-data-litron-expansion", "2026-08-25-ntt-data-agent-vdi"]
+      "activity_signal_ids": [
+        "2026-08-25-ntt-data-litron-expansion",
+        "2026-08-25-ntt-data-agent-vdi"
+      ]
     },
     {
       "entity_id": "nec",
       "status": "partial",
       "current_position": "独自AIを中核に、需要予測・調達・生産計画などSCMの複数業務を横断実行する高価格帯エージェントを事業化している。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "enterprise-ai": "unknown", "employee-genai": "unknown", "proprietary-ai": "active", "customer-ai": "scaled", "manufacturing-rd": "observed", "sales-service": "unknown", "scm-quality": "scaled", "governance": "observed", "organization": "unknown", "partnerships": "unknown", "research": "observed" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "enterprise-ai": "unknown",
+        "employee-genai": "unknown",
+        "proprietary-ai": "active",
+        "customer-ai": "scaled",
+        "manufacturing-rd": "observed",
+        "sales-service": "unknown",
+        "scm-quality": "scaled",
+        "governance": "observed",
+        "organization": "unknown",
+        "partnerships": "unknown",
+        "research": "observed"
+      },
       "internal_use": [],
-      "offerings": ["NEC SCM AIエージェント", "AI Platform Service", "cotomi"],
+      "offerings": [
+        "NEC SCM AIエージェント",
+        "AI Platform Service",
+        "cotomi"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-28-nec-scm-ai-agent"]
+      "activity_signal_ids": [
+        "2026-08-28-nec-scm-ai-agent"
+      ]
     },
     {
       "entity_id": "freee",
       "status": "partial",
       "current_position": "会計画面へのAI追加ではなく、資料回収から決算申告までをまたぐ業務エージェントと顧客側の開発基盤へ拡張している。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "copilot": "active", "agents": "scaled", "platform": "scaled", "governance": "observed", "pricing": "observed", "ecosystem": "active" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "copilot": "active",
+        "agents": "scaled",
+        "platform": "scaled",
+        "governance": "observed",
+        "pricing": "observed",
+        "ecosystem": "active"
+      },
       "internal_use": [],
-      "offerings": ["freee顧問先管理 | AIエージェント", "freee Agent Hub"],
+      "offerings": [
+        "freee顧問先管理 | AIエージェント",
+        "freee Agent Hub"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-28-freee-agent-hub"]
+      "activity_signal_ids": [
+        "2026-08-28-freee-agent-hub"
+      ]
     },
     {
       "entity_id": "notion",
       "status": "partial",
       "current_position": "文書・業務空間のエージェント化を進めつつ、直接実行だけでなく人が承認する編集モードを製品に組み込んでいる。",
       "maturity_stage": "commercial",
-      "development_methods": ["in-house"],
-      "dimensions": { "copilot": "active", "agents": "scaled", "platform": "active", "governance": "active", "pricing": "unknown", "ecosystem": "unknown" },
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "copilot": "active",
+        "agents": "scaled",
+        "platform": "active",
+        "governance": "active",
+        "pricing": "unknown",
+        "ecosystem": "unknown"
+      },
       "internal_use": [],
-      "offerings": ["Notion Agent", "Suggest edits"],
+      "offerings": [
+        "Notion Agent",
+        "Suggest edits"
+      ],
       "partnerships": [],
-      "activity_signal_ids": ["2026-08-28-notion-agent-suggest-edits"]
+      "activity_signal_ids": [
+        "2026-08-28-notion-agent-suggest-edits"
+      ]
+    },
+    {
+      "entity_id": "accenture",
+      "status": "partial",
+      "current_position": "生成AIを企業全体の再創造テーマとして位置づけ、戦略、データ基盤、セキュアなデジタルコア、人材・働き方、責任あるAI、顧客体験までを一体で支援している。AI Refineryでは、エージェント型アーキテクチャやガバナンスを含むスケール支援を前面に出している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "observed",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [
+        "Advanced AI Center KyotoでAI同士と人の共創体験を提示"
+      ],
+      "offerings": [
+        "生成AIテクノロジーサービス",
+        "Accenture AI Refinery",
+        "Microsoft連携によるAI導入・Copilot活用支援"
+      ],
+      "partnerships": [
+        "Microsoft"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "生成AIテクノロジーサービスを確認",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "価値主導、AI対応デジタルコア、人材・働き方、責任あるAI、顧客体験など、企業全体の生成AI再創造支援をサービスとして提示している。",
+          "source": {
+            "title": "生成AIテクノロジーサービス",
+            "url": "https://www.accenture.com/jp-ja/services/ai-data/generative-ai",
+            "publisher": "Accenture",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "AI Refineryでエージェント型アーキテクチャを提示",
+          "category": "AIエージェント",
+          "stage": "外部販売・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "生成AIを大規模に展開するためのデータ、インフラ、エコシステム、アプリケーション、エージェント、規制・セキュリティの複雑性管理を支援する。",
+          "source": {
+            "title": "Accenture AI RefineryでスケーラブルなAIを解き放つ",
+            "url": "https://www.accenture.com/jp-ja/services/ai-data/ai-refinery",
+            "publisher": "Accenture",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "pwc-consulting",
+      "status": "partial",
+      "current_position": "生成AI専門タスクフォースを組成し、事業化支援、社内導入支援、リスク管理支援を明示している。コンサル、監査、税務、法務、M&Aの横断知見を組み合わせる点が特徴。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "unknown",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "observed",
+        "products": "observed",
+        "partnerships": "observed"
+      },
+      "internal_use": [],
+      "offerings": [
+        "生成AIを活用した事業化支援",
+        "生成AIの社内導入支援",
+        "生成AIに関するリスク管理支援",
+        "営業業務の生成AI活用支援"
+      ],
+      "partnerships": [
+        "PwC Japanグループ内の監査・税務・法務・M&A専門家"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "生成AIコンサルティングサービスを確認",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "生成AI市場参入、社内導入、リスク管理を3つのサービスとして整理し、生成AI専門タスクフォースで提供している。",
+          "source": {
+            "title": "生成AI（Generative AI）コンサルティングサービス",
+            "url": "https://www.pwc.com/jp/ja/services/consulting/analytics/generative-ai.html",
+            "publisher": "PwC Japan",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "mckinsey",
+      "status": "partial",
+      "current_position": "QuantumBlackをAI by McKinseyとして位置づけ、戦略、データ変革、デジタルツイン、業界別AI製品、AIエージェント導入までをカバーしている。Wonderful AIとの協業により、エージェントAIを戦略から本番展開まで進める構えを強めている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "startup-partnership",
+        "in-house"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "active",
+        "offering": "scaled",
+        "build": "scaled",
+        "deployment": "scaled",
+        "operations": "active",
+        "products": "scaled",
+        "partnerships": "scaled"
+      },
+      "internal_use": [
+        "QuantumBlack LabsでAIツール・資産を開発"
+      ],
+      "offerings": [
+        "QuantumBlack AI transformation",
+        "業界別AI products",
+        "Digital Twins",
+        "Wonderful AIとのagentic AI deployment支援"
+      ],
+      "partnerships": [
+        "Wonderful AI",
+        "NVIDIA",
+        "QuantumBlack alliance ecosystem"
+      ],
+      "activity_signal_ids": [
+        "2026-04-07-mckinsey-wonderful-agentic-ai"
+      ],
+      "history": [
+        {
+          "date": "2026-04-07",
+          "title": "Wonderful AIとのエージェントAI協業",
+          "category": "AIエージェント",
+          "stage": "外部販売・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "AI変革能力とエージェント基盤を組み合わせ、実験から本番展開までの支援を提示した。",
+          "source": {
+            "title": "McKinsey and Wonderful team up to deliver enterprise AI transformation from strategy to scale",
+            "url": "https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/mckinsey-and-wonderful-team-up-to-deliver-enterprise-ai-transformation-from-strategy-to-scale",
+            "publisher": "McKinsey & Company",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "QuantumBlackの提供領域を確認",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "AIコンサルティング、データ変革、デジタルツイン、業界別AI資産、アライアンスを含むAI支援体制を確認した。",
+          "source": {
+            "title": "QuantumBlack",
+            "url": "https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients/",
+            "publisher": "McKinsey & Company",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "bcg",
+      "status": "partial",
+      "current_position": "BCG Xを中心に、AI at scale、責任あるAI、生成AI評価、レッドチーミング、研究開発支援までを外部提供している。AI Science Instituteにより、科学・R&D領域のAI活用を専門領域として明確化した。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "in-house",
+        "academic-collaboration"
+      ],
+      "dimensions": {
+        "strategy": "scaled",
+        "internal-use": "observed",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "observed",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [
+        "BCG XのAI専門人材・プロダクトライブラリー"
+      ],
+      "offerings": [
+        "AI at Scale",
+        "Responsible AI",
+        "生成AIシステム評価",
+        "ARTKIT",
+        "AI Science Institute"
+      ],
+      "partnerships": [
+        "学術機関",
+        "業界R&Dチーム"
+      ],
+      "activity_signal_ids": [
+        "2025-04-24-bcg-ai-science-institute"
+      ],
+      "history": [
+        {
+          "date": "2025-04-24",
+          "title": "AI Science Instituteを設立",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "大学・研究機関との共同研究",
+          "summary": "AIを活用した科学的研究の加速と、事業における実用的な提案を支援する研究所を設立した。",
+          "source": {
+            "title": "BCG X、「AIサイエンス研究所」を設立",
+            "url": "https://www.bcg.com/ja-jp/press/24april2025-bcg-x-launches-ai-science-institute",
+            "publisher": "BCG",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "Responsible AIと生成AI評価資産を確認",
+          "category": "ガバナンス",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "生成AI評価、BCG Xプロダクトライブラリー、レッドチーミング用オープンソースツールARTKITを提供領域として確認した。",
+          "source": {
+            "title": "責任あるAI",
+            "url": "https://www.bcg.com/ja-jp/capabilities/artificial-intelligence/responsible-ai",
+            "publisher": "BCG",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "abeam",
+      "status": "partial",
+      "current_position": "AI戦略、AI組織、AIガバナンス、AIソーシング、Copilot Studio、AgentOps、需要予測、OCR、DevCrew Designerなど、業務導入と開発運用のメニューを広く持つ。PKSHA Workplaceとの連携により、社内問い合わせ対応の生成AIサービスも提供している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "startup-partnership",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "observed",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "scaled",
+        "operations": "active",
+        "products": "active",
+        "partnerships": "active"
+      },
+      "internal_use": [
+        "AI活用知見をAIソーシングや業務効率化支援に展開"
+      ],
+      "offerings": [
+        "AI戦略策定",
+        "AI組織構想",
+        "AIガバナンス",
+        "生成AI OCR",
+        "Copilot Studioエージェント構築",
+        "AgentOps",
+        "需要予測"
+      ],
+      "partnerships": [
+        "PKSHA Workplace"
+      ],
+      "activity_signal_ids": [
+        "2024-07-09-abeam-pksha-genai-helpdesk"
+      ],
+      "history": [
+        {
+          "date": "2024-07-09",
+          "title": "PKSHA Workplaceと社内問合せ生成AIサービスを提供",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "PKSHA AI ヘルプデスクを用い、社内問い合わせ対応のナレッジ整理、チャネル一元化、周辺業務連携を支援する。",
+          "source": {
+            "title": "生成AIを活用した社内問合せ対応業務効率化支援サービスの提供を開始",
+            "url": "https://www.abeam.com/jp/ja/news/2024/0709/",
+            "publisher": "ABeam Consulting",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "AIサービスメニューを確認",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "AI戦略からAI組織、ガバナンス、生成AI、AgentOps、業務別AIソリューションまでの提供メニューを確認した。",
+          "source": {
+            "title": "AI",
+            "url": "https://www.abeam.com/jp/ja/service/ai/",
+            "publisher": "ABeam Consulting",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "ridgelinez",
+      "status": "partial",
+      "current_position": "生成AIの社内実践知をもとに、アセスメント、PoC、実装、AIガバナンス、ガイドライン整備までを支援している。Azure OpenAIとSlackによる社内チャットボット、RAG、マルチエージェントなどの実践をサービスへ接続している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "consulting-si",
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "strategy": "active",
+        "internal-use": "active",
+        "offering": "scaled",
+        "build": "active",
+        "deployment": "active",
+        "operations": "active",
+        "products": "observed",
+        "partnerships": "observed"
+      },
+      "internal_use": [
+        "Azure OpenAI＋Slackチャットボット",
+        "RAG",
+        "マルチエージェント",
+        "リサーチ・マーケティング・HRでの生成AI活用"
+      ],
+      "offerings": [
+        "生成AIアセスメント",
+        "生成AI PoC・実装支援",
+        "AIガバナンス・ガイドライン整備",
+        "AI & Analytics支援"
+      ],
+      "partnerships": [
+        "Fujitsuグループ"
+      ],
+      "activity_signal_ids": [],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "生成AIサービスの現在提供状況を確認",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "2023年5月のサービス提供開始以来、20社以上のクライアント伴走実績を持つと説明している。",
+          "source": {
+            "title": "生成AI",
+            "url": "https://www.ridgelinez.com/service/theme/generative-ai/",
+            "publisher": "Ridgelinez",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "AIガバナンス・セキュリティ支援を確認",
+          "category": "ガバナンス",
+          "stage": "外部販売・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "AI活用時のガバナンス、リスク、セキュリティ観点を支援テーマとして提示している。",
+          "source": {
+            "title": "AIガバナンス・セキュリティ",
+            "url": "https://www.ridgelinez.com/service/theme/governance-risk-compliance/ai-governance-security/",
+            "publisher": "Ridgelinez",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "fujitsu",
+      "status": "partial",
+      "current_position": "Fujitsu KozuchiをAIプラットフォームとして商用化し、生成AI、AIトラスト、AI×コンピューティング、AIエージェント、業種別サービスを外部提供している。UvanceやData Intelligence PaaSと接続し、技術とコンサルティングの両面で展開している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "consulting-si",
+        "academic-collaboration"
+      ],
+      "dimensions": {
+        "enterprise-ai": "active",
+        "employee-genai": "observed",
+        "proprietary-ai": "scaled",
+        "customer-ai": "scaled",
+        "manufacturing-rd": "active",
+        "sales-service": "observed",
+        "scm-quality": "observed",
+        "governance": "active",
+        "organization": "active",
+        "partnerships": "observed",
+        "research": "scaled"
+      },
+      "internal_use": [
+        "Fujitsu Kozuchi技術の社内研究開発と顧客PoC蓄積",
+        "AIトラスト技術"
+      ],
+      "offerings": [
+        "Fujitsu Kozuchi",
+        "Fujitsu Data Intelligence PaaS",
+        "AI agents on Fujitsu Research Portal",
+        "Private AI Platform on PRIMERGY"
+      ],
+      "partnerships": [
+        "理化学研究所",
+        "REMOW",
+        "Open source and commercial model partners"
+      ],
+      "activity_signal_ids": [
+        "2024-03-12-fujitsu-kozuchi-commercialization"
+      ],
+      "history": [
+        {
+          "date": "2024-03-12",
+          "title": "Kozuchi商用化と全社AI戦略",
+          "category": "内製開発",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "Fujitsu Kozuchiの商用化、UvanceへのAI組み込み、独自生成AI・AIトラスト技術を説明した。",
+          "source": {
+            "title": "新たな全社AI戦略を発表。富士通AIの強みとは。",
+            "url": "https://www.fujitsu.com/jp/microsite/fujitsutransformationnews/2024-03-12/01/",
+            "publisher": "Fujitsu",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "研究開発版AIエージェント群を確認",
+          "category": "AIエージェント",
+          "stage": "独自開発",
+          "method": "自社開発",
+          "summary": "Meeting Agent、Field Work AI Agent、Materials Discoveryなど、Kozuchi上のAIサービスとAIエージェントを確認した。",
+          "source": {
+            "title": "AI - Fujitsu Research Portal",
+            "url": "https://en-portal.research.global.fujitsu.com/kozuchi/",
+            "publisher": "Fujitsu",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "hitachi",
+      "status": "partial",
+      "current_position": "全社のAIトランスフォーメーション、Lumada、GlobalLogic、Microsoft/Google Cloud等の提携を軸に、社内生産性向上と顧客向け生成AIサービスを両立している。生成AI共通基盤、業務ガイドライン、1,000件規模のユースケース検証、人材育成を外部サービス化している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product",
+        "consulting-si"
+      ],
+      "dimensions": {
+        "enterprise-ai": "scaled",
+        "employee-genai": "scaled",
+        "proprietary-ai": "active",
+        "customer-ai": "scaled",
+        "manufacturing-rd": "active",
+        "sales-service": "observed",
+        "scm-quality": "observed",
+        "governance": "active",
+        "organization": "scaled",
+        "partnerships": "scaled",
+        "research": "active"
+      },
+      "internal_use": [
+        "生成AI共通基盤",
+        "業務利用ガイドライン",
+        "27万人従業員へのCopilot等活用",
+        "5万人超のGenAI人材育成"
+      ],
+      "offerings": [
+        "生成AI活用プロフェッショナルサービス powered by Lumada",
+        "Lumada Solutionsへの生成AI組み込み"
+      ],
+      "partnerships": [
+        "Microsoft",
+        "Google Cloud",
+        "GlobalLogic"
+      ],
+      "activity_signal_ids": [
+        "2024-07-22-hitachi-lumada-genai-service",
+        "2024-06-03-hitachi-microsoft-genai-alliance"
+      ],
+      "history": [
+        {
+          "date": "2024-06-03",
+          "title": "Microsoftとの生成AI戦略協業",
+          "category": "提携・M&A",
+          "stage": "全社導入",
+          "method": "外部製品導入",
+          "summary": "Azure OpenAI Service、Dynamics 365、Copilot、GitHub CopilotをLumadaと社内生産性向上に組み込むと発表した。",
+          "source": {
+            "title": "Hitachi and Microsoft Enter Milestone Agreement to Accelerate Business and Social Innovation with Generative AI",
+            "url": "https://www.hitachi.com/en-us/press/hitachi-and-microsoft-enter-milestone-agreement-to-accelerate-business/",
+            "publisher": "Hitachi",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2024-07-22",
+          "title": "生成AI活用プロフェッショナルサービスを開始",
+          "category": "AIオファリング",
+          "stage": "外部販売・事業化",
+          "method": "コンサル・SIerとの共同開発",
+          "summary": "生成AI導入、価値創出、人材育成をトータル支援するLumadaサービスを提供開始した。",
+          "source": {
+            "title": "「生成AI活用プロフェッショナルサービス powered by Lumada」を提供開始",
+            "url": "https://www.hitachi.com/ja-jp/press/articles/2024/07/0722/",
+            "publisher": "Hitachi",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "toyota",
+      "status": "partial",
+      "current_position": "Toyota Research Instituteを中心に、ロボティクス、モビリティ、車両デザイン、運転支援へ生成AI・機械学習を適用している。ホワイトカラー生成AIよりも、フィジカルAI、設計、ロボット行動学習の観測価値が高い。",
+      "maturity_stage": "proprietary",
+      "development_methods": [
+        "in-house",
+        "academic-collaboration"
+      ],
+      "dimensions": {
+        "enterprise-ai": "observed",
+        "employee-genai": "unknown",
+        "proprietary-ai": "active",
+        "customer-ai": "observed",
+        "manufacturing-rd": "active",
+        "sales-service": "unknown",
+        "scm-quality": "unknown",
+        "governance": "observed",
+        "organization": "active",
+        "partnerships": "observed",
+        "research": "scaled"
+      },
+      "internal_use": [
+        "車両設計支援",
+        "ロボット行動学習",
+        "AI-assisted driving research"
+      ],
+      "offerings": [
+        "Large Behavior Model関連研究",
+        "AI-assisted driving technology"
+      ],
+      "partnerships": [
+        "Toyota Research Institute",
+        "MIT / Stanford等の研究コミュニティ"
+      ],
+      "activity_signal_ids": [
+        "2023-09-19-toyota-large-behavior-models"
+      ],
+      "history": [
+        {
+          "date": "2023-09-19",
+          "title": "ロボット向けLarge Behavior Modelへの生成AI手法",
+          "category": "内製開発",
+          "stage": "独自開発",
+          "method": "自社開発",
+          "summary": "Diffusion Policyによりロボットへ新しい動作を教える手法を発表した。",
+          "source": {
+            "title": "Toyota Research Institute Unveils Breakthrough in Teaching Robots New Behaviors",
+            "url": "https://pressroom.toyota.com/toyota-research-institute-unveils-breakthrough-in-teaching-robots-new-behaviors/",
+            "publisher": "Toyota Research Institute",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "sony",
+      "status": "partial",
+      "current_position": "Sony AIと各研究組織を通じ、生成AI、フェアネス、画像生成、3D/幾何認識、音楽・映像・ゲームに関わるAI研究を継続している。AI倫理・データ同意・創作支援など、クリエイティブ産業のAI論点も観測対象にする。",
+      "maturity_stage": "proprietary",
+      "development_methods": [
+        "in-house",
+        "academic-collaboration"
+      ],
+      "dimensions": {
+        "enterprise-ai": "observed",
+        "employee-genai": "unknown",
+        "proprietary-ai": "active",
+        "customer-ai": "active",
+        "manufacturing-rd": "observed",
+        "sales-service": "unknown",
+        "scm-quality": "unknown",
+        "governance": "active",
+        "organization": "active",
+        "partnerships": "observed",
+        "research": "scaled"
+      },
+      "internal_use": [
+        "Sony AIの研究成果を創作・エンタメ・センサー領域へ接続"
+      ],
+      "offerings": [
+        "Sony AI research",
+        "クリエイティブAI技術",
+        "aiboなどAI搭載製品群"
+      ],
+      "partnerships": [
+        "MIT",
+        "The University of Texas at Austin",
+        "学術研究者"
+      ],
+      "activity_signal_ids": [
+        "2024-12-23-sony-neurips-ai-research"
+      ],
+      "history": [
+        {
+          "date": "2024-12-23",
+          "title": "NeurIPS 2024でAI研究を発表",
+          "category": "研究",
+          "stage": "独自開発",
+          "method": "大学・研究機関との共同研究",
+          "summary": "生成AI、フェアネス、ニューラル等変性、画像生成など幅広い研究発表を確認した。",
+          "source": {
+            "title": "Sony Presents New AI Research at NeurIPS 2024",
+            "url": "https://www.sony.com/en/SonyInfo/technology/stories/entries/NeurIPS2024_report/index.html",
+            "publisher": "Sony Group",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "mitsubishi-electric",
+      "status": "partial",
+      "current_position": "MaisartをAI技術ブランドとして、製造現場、形式検証、マルチAIエージェント議論などを研究開発している。製造・FA文脈では、生成AIより広いAI技術としての観測が必要。",
+      "maturity_stage": "proprietary",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "enterprise-ai": "active",
+        "employee-genai": "unknown",
+        "proprietary-ai": "scaled",
+        "customer-ai": "scaled",
+        "manufacturing-rd": "scaled",
+        "sales-service": "unknown",
+        "scm-quality": "active",
+        "governance": "active",
+        "organization": "active",
+        "partnerships": "observed",
+        "research": "scaled"
+      },
+      "internal_use": [
+        "Maisart",
+        "製造現場の行動分析AI",
+        "形式検証支援AI",
+        "マルチAIエージェント議論技術"
+      ],
+      "offerings": [
+        "Maisart",
+        "製造現場向けAI",
+        "機器・FA向けAI技術"
+      ],
+      "partnerships": [],
+      "activity_signal_ids": [
+        "2024-01-25-mitsubishi-electric-behavior-ai"
+      ],
+      "history": [
+        {
+          "date": "2024-01-25",
+          "title": "製造現場の手作業分析AIを開発",
+          "category": "内製開発",
+          "stage": "独自開発",
+          "method": "自社開発",
+          "summary": "事前教師データなしで手作業動画を分析し、改善点を可視化するAIを発表した。",
+          "source": {
+            "title": "Mitsubishi Electric Develops Behavioral-analysis AI that Analyzes Manual Tasks Without Requiring Training Data",
+            "url": "https://www.mitsubishielectric.com/en/pr/2024/0125/",
+            "publisher": "Mitsubishi Electric",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "sakana-ai",
+      "status": "partial",
+      "current_position": "東京発のAI R&D企業として、自然知能、進化的モデルマージ、AI Scientistなど独自研究を進めている。NVIDIAや日本大手企業からの出資・協業により、国産AIエコシステムの中心候補になっている。",
+      "maturity_stage": "proprietary",
+      "development_methods": [
+        "in-house",
+        "startup-partnership",
+        "academic-collaboration"
+      ],
+      "dimensions": {
+        "core-tech": "scaled",
+        "products": "observed",
+        "customers": "observed",
+        "partnerships": "scaled",
+        "funding": "scaled",
+        "research": "scaled"
+      },
+      "internal_use": [
+        "自然知能・集合知に基づく基盤モデル研究",
+        "AI Scientist"
+      ],
+      "offerings": [
+        "AI Scientist",
+        "進化的モデルマージ",
+        "日本語視覚言語モデル・画像生成モデル群"
+      ],
+      "partnerships": [
+        "NVIDIA",
+        "MUFG",
+        "SMBC",
+        "Mizuho",
+        "NEC",
+        "KDDI",
+        "Fujitsu",
+        "ANA",
+        "Tokio Marine"
+      ],
+      "activity_signal_ids": [
+        "2024-09-04-sakana-series-a-nvidia",
+        "2024-08-13-sakana-ai-scientist"
+      ],
+      "history": [
+        {
+          "date": "2024-08-13",
+          "title": "AI Scientistを発表",
+          "category": "研究",
+          "stage": "独自開発",
+          "method": "自社開発",
+          "summary": "研究アイデア生成、実験、論文作成までを自動化する方向の研究成果を発表した。",
+          "source": {
+            "title": "The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery",
+            "url": "https://sakana.ai/ai-scientist/",
+            "publisher": "Sakana AI",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2024-09-04",
+          "title": "Series AとNVIDIA協業",
+          "category": "提携・M&A",
+          "stage": "独自開発",
+          "method": "AIスタートアップとの連携",
+          "summary": "約2億ドルのSeries AとNVIDIA協業、日本大手企業からの出資を発表した。",
+          "source": {
+            "title": "Announcing Our Series A",
+            "url": "https://sakana.ai/series-a/",
+            "publisher": "Sakana AI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "preferred-networks",
+      "status": "partial",
+      "current_position": "PLaMoを国産LLMとして自社開発し、クラウドAPI、Amazon Bedrock Marketplace、オンプレミス、エッジデバイス向け小規模モデル、金融・医療・翻訳など特化型モデルへ展開している。計算基盤やAIチップとの接続も観測対象。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "core-tech": "scaled",
+        "products": "scaled",
+        "customers": "active",
+        "partnerships": "active",
+        "funding": "unknown",
+        "research": "active"
+      },
+      "internal_use": [
+        "MN-2を使ったLLM技術開発",
+        "PLaMoシリーズの継続開発"
+      ],
+      "offerings": [
+        "PLaMo Prime",
+        "PLaMo API",
+        "PLaMo Chat",
+        "オンプレミス提供",
+        "エッジ向けSLM",
+        "特化型モデル"
+      ],
+      "partnerships": [
+        "Amazon Bedrock Marketplace",
+        "miibo",
+        "Tachyon Generative AI",
+        "QommonsAI"
+      ],
+      "activity_signal_ids": [
+        "2023-09-28-pfn-plamo-13b"
+      ],
+      "history": [
+        {
+          "date": "2023-09-28",
+          "title": "PLaMo-13Bを公開",
+          "category": "基盤モデル",
+          "stage": "独自開発",
+          "method": "自社開発",
+          "summary": "日英対応13B LLMを公開し、MN-2とABCIを利用した開発経緯を説明した。",
+          "source": {
+            "title": "PLaMo-13Bを公開しました",
+            "url": "https://www.preferred.jp/ja/blog/tech/llm-plamo",
+            "publisher": "Preferred Networks",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "生成AI基盤モデル事業を確認",
+          "category": "基盤モデル",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "PLaMoをクラウドAPI、Bedrock Marketplace、オンプレミス、組み込み先サービスへ提供している。",
+          "source": {
+            "title": "生成AI基盤モデル",
+            "url": "https://www.preferred.jp/ja/business/genai",
+            "publisher": "Preferred Networks",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "elyza",
+      "status": "partial",
+      "current_position": "日本語LLM ELYZA LLM for JPを開発・提供し、企業向けAPIサービスや共同開発を進めている。KDDIグループとの資本業務提携により、通信大手の導入力と組み合わせた社会実装が観測ポイント。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "startup-partnership"
+      ],
+      "dimensions": {
+        "core-tech": "scaled",
+        "products": "active",
+        "customers": "active",
+        "partnerships": "scaled",
+        "funding": "observed",
+        "research": "active"
+      },
+      "internal_use": [
+        "ELYZA LLM for JPシリーズの研究開発"
+      ],
+      "offerings": [
+        "ELYZA LLM for JP",
+        "APIサービス",
+        "企業向け共同開発"
+      ],
+      "partnerships": [
+        "KDDIグループ"
+      ],
+      "activity_signal_ids": [
+        "2024-03-12-elyza-70b-japanese-llm",
+        "2024-03-18-elyza-kddi-alliance"
+      ],
+      "history": [
+        {
+          "date": "2024-03-12",
+          "title": "700億パラメータ日本語LLMを開発",
+          "category": "基盤モデル",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "ELYZA LLM for JPシリーズとしてAPIサービスや共同開発を順次提供するとした。",
+          "source": {
+            "title": "グローバルモデルに匹敵する700億パラメータの日本語LLMを開発しました",
+            "url": "https://elyza.ai/news/2024/03/12/%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AB%E5%8C%B9%E6%95%B5%E3%81%99%E3%82%8B700%E5%84%84%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%AE%E6%97%A5%E6%9C%AC%E8%AA%9Ellm%E3%82%92",
+            "publisher": "ELYZA",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2024-03-18",
+          "title": "KDDIグループと資本業務提携",
+          "category": "提携・M&A",
+          "stage": "外部販売・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "生成AIの社会実装に向けた資本業務提携を発表した。",
+          "source": {
+            "title": "KDDIグループとの資本業務提携を発表しました",
+            "url": "https://elyza.ai/news/2024/03/18/kddi%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%A8%E3%81%AE%E8%B3%87%E6%9C%AC%E6%A5%AD%E5%8B%99%E6%8F%90%E6%90%BA%E3%82%92%E7%99%BA%E8%A1%A8%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F",
+            "publisher": "ELYZA",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "stockmark",
+      "status": "partial",
+      "current_position": "ビジネス領域の日本語データに強い独自LLMと、Anews/Astrategy/A Technologyなどのエンタープライズ向け情報活用プロダクトを組み合わせている。国産生成AIプロジェクト、産総研連携、Series D調達により、企業向け生成AIプラットフォームとして拡張している。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "academic-collaboration",
+        "startup-partnership"
+      ],
+      "dimensions": {
+        "core-tech": "scaled",
+        "products": "scaled",
+        "customers": "active",
+        "partnerships": "active",
+        "funding": "active",
+        "research": "active"
+      },
+      "internal_use": [
+        "Stockmark-LLM-100b",
+        "Anewsへの実装計画",
+        "ビジネス情報RAG基盤"
+      ],
+      "offerings": [
+        "Stockmark-LLM-100b",
+        "Anews",
+        "Astrategy",
+        "Stockmark A Technology",
+        "企業ごとの独自LLM開発支援"
+      ],
+      "partnerships": [
+        "産業技術総合研究所",
+        "Panasonic HD",
+        "Polaris Capital Group"
+      ],
+      "activity_signal_ids": [
+        "2024-05-16-stockmark-llm-100b",
+        "2024-10-21-stockmark-series-d"
+      ],
+      "history": [
+        {
+          "date": "2024-05-16",
+          "title": "Stockmark-LLM-100bを公開",
+          "category": "基盤モデル",
+          "stage": "独自開発",
+          "method": "自社開発",
+          "summary": "1,000億パラメータ規模の独自LLMを公開し、企業向けRAGや独自LLM開発支援へ展開すると説明した。",
+          "source": {
+            "title": "ストックマーク 1,000億パラメータ規模の独自LLMを公開",
+            "url": "https://stockmark.co.jp/r-and-d/topics/20240516/",
+            "publisher": "Stockmark",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2024-10-21",
+          "title": "Series Dで45億円調達",
+          "category": "提携・M&A",
+          "stage": "外部販売・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "エンタープライズ向け生成AIプラットフォームの拡大に向けて資金調達した。",
+          "source": {
+            "title": "ストックマーク シリーズDラウンドでポラリスより45億円の資金調達を実施",
+            "url": "https://stockmark.co.jp/news/20241021/",
+            "publisher": "Stockmark",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "pksha-technology",
+      "status": "partial",
+      "current_position": "自然言語処理を中核に、社内・顧客接点で働くAIエージェントをソリューションとAI SaaSの両面で提供している。チャットボット/ボイスボットをChatAgent/VoiceAgentへ再定義し、HR、営業、不動産投資接点など用途を広げている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "startup-partnership"
+      ],
+      "dimensions": {
+        "core-tech": "active",
+        "products": "scaled",
+        "customers": "scaled",
+        "partnerships": "active",
+        "funding": "unknown",
+        "research": "observed"
+      },
+      "internal_use": [
+        "PKSHA AI Agentsとして既存AI SaaSをエージェント化"
+      ],
+      "offerings": [
+        "PKSHA AI Agents",
+        "PKSHA ChatAgent",
+        "PKSHA VoiceAgent",
+        "AI Suite for HR",
+        "セールスAIエージェント"
+      ],
+      "partnerships": [
+        "Sapeet",
+        "シノケングループ",
+        "ワークポート"
+      ],
+      "activity_signal_ids": [
+        "2025-04-07-pksha-ai-agents",
+        "2026-01-09-pksha-sales-ai-agent"
+      ],
+      "history": [
+        {
+          "date": "2025-04-07",
+          "title": "PKSHA AI Agentsをローンチ",
+          "category": "AIエージェント",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "社内・顧客接点で働くAIエージェントを、ソリューション型とプロダクト型の両面で提供開始した。",
+          "source": {
+            "title": "新サービス「PKSHA AI Agents」をローンチ",
+            "url": "https://www.pkshatech.com/news/20250407/",
+            "publisher": "PKSHA Technology",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-01-09",
+          "title": "セールスAIエージェントを提供開始",
+          "category": "AIエージェント",
+          "stage": "外部販売・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "シノケングループ向けに、24時間365日稼働する対話型AIアバターの営業接点を提供した。",
+          "source": {
+            "title": "PKSHAグループとシノケングループが「セールスAIエージェント」を提供開始",
+            "url": "https://www.pkshatech.com/news/20260109/",
+            "publisher": "PKSHA Technology",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "layerx",
+      "status": "partial",
+      "current_position": "バクラクを中心とするSaaS事業に加え、Ai WorkforceとAIエージェント事業を立ち上げ、業務の自動運転化を掲げている。AIを使った生産性向上を組織・報酬・セキュリティ領域にも広げている。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "startup-partnership"
+      ],
+      "dimensions": {
+        "copilot": "active",
+        "agents": "scaled",
+        "platform": "scaled",
+        "governance": "active",
+        "pricing": "observed",
+        "ecosystem": "active"
+      },
+      "internal_use": [
+        "Bet AI行動指針",
+        "AI等の利活用による生産性向上を報酬制度へ反映"
+      ],
+      "offerings": [
+        "Ai Workforce",
+        "AI-BPOサービス",
+        "バクラクのAI機能",
+        "AgenticSec Pentest"
+      ],
+      "partnerships": [
+        "AgenticSec",
+        "三菱UFJ銀行"
+      ],
+      "activity_signal_ids": [
+        "2025-04-07-layerx-ai-agent-business",
+        "2026-04-23-layerx-agenticsec"
+      ],
+      "history": [
+        {
+          "date": "2025-04-07",
+          "title": "AIエージェント事業を開始",
+          "category": "SaaS再定義",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "請求書受領代行などをAIエージェントが行うAI-BPOサービスを予定し、業務の完全自動運転を掲げた。",
+          "source": {
+            "title": "LayerX、AIエージェント事業を開始。AIを活用して、業務の「完全自動運転」を目指す",
+            "url": "https://layerx.co.jp/news/20250407/",
+            "publisher": "LayerX",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-04-23",
+          "title": "AgenticSecをグループ化",
+          "category": "提携・M&A",
+          "stage": "外部販売・事業化",
+          "method": "AIスタートアップとの連携",
+          "summary": "AIエージェントによるペネトレーションテスト自動化技術を取り込み、AI時代のソフトウェアセキュリティ領域へ進出した。",
+          "source": {
+            "title": "LayerX、AgenticSecをグループに迎え、AI時代のセキュリティ領域に進出",
+            "url": "https://layerx.co.jp/news/20260423/",
+            "publisher": "LayerX",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "caddi",
+      "status": "partial",
+      "current_position": "製造業の図面・調達・設計情報を扱うCADDi Drawerを中心に、AI駆動の業界特化SaaSとしてグローバル展開している。製造業の暗黙知・図面・調達データをAIで活用するプレイヤーとして観測する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house"
+      ],
+      "dimensions": {
+        "core-tech": "active",
+        "products": "scaled",
+        "customers": "active",
+        "partnerships": "observed",
+        "funding": "unknown",
+        "research": "observed"
+      },
+      "internal_use": [
+        "製造業データ・図面情報をAIで構造化・活用"
+      ],
+      "offerings": [
+        "CADDi Drawer",
+        "CADDi Quote",
+        "製造業向け設計・調達データ活用"
+      ],
+      "partnerships": [],
+      "activity_signal_ids": [
+        "2024-08-13-caddi-saas-award"
+      ],
+      "history": [
+        {
+          "date": "2024-08-13",
+          "title": "CADDi DrawerがSaaS Awardsで評価",
+          "category": "SaaS再定義",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "AI駆動の製造業向けSaaSとして、BIとEngineering Managementのカテゴリで受賞した。",
+          "source": {
+            "title": "CADDi Wins Best Business Intelligence and Engineering Management Software at 2024 SaaS Awards",
+            "url": "https://us.caddi.com/resources/news/caddi-wins-best-business-intelligence-and-engineering-management-software-at-2024-saas-awards",
+            "publisher": "CADDi",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
+    },
+    {
+      "entity_id": "legalon-technologies",
+      "status": "partial",
+      "current_position": "AI契約レビューを中核に、LegalOn Assistant、AI Revise、自社基準プレイブック、契約データベース検索など、法務業務のAIエージェント化を進めている。日本発でグローバル展開する業界特化AI SaaSとして観測する。",
+      "maturity_stage": "commercial",
+      "development_methods": [
+        "in-house",
+        "external-product"
+      ],
+      "dimensions": {
+        "core-tech": "active",
+        "products": "scaled",
+        "customers": "active",
+        "partnerships": "observed",
+        "funding": "unknown",
+        "research": "observed"
+      },
+      "internal_use": [
+        "弁護士監修コンテンツとAIモデルを組み合わせた契約レビュー"
+      ],
+      "offerings": [
+        "LegalOn Assistant",
+        "LegalOn Cloud",
+        "AI Revise",
+        "AI contract review playbooks"
+      ],
+      "partnerships": [
+        "Microsoft Azure OpenAI Service"
+      ],
+      "activity_signal_ids": [
+        "2024-02-28-legalon-assistant"
+      ],
+      "history": [
+        {
+          "date": "2024-02-28",
+          "title": "LegalOn Assistantを発表",
+          "category": "SaaS再定義",
+          "stage": "外部販売・事業化",
+          "method": "外部製品導入",
+          "summary": "契約への質問回答、条項ドラフト、要約などを支援する生成AI機能を発表した。",
+          "source": {
+            "title": "LegalOn Launches Generative AI for Contracts, LegalOn Assistant",
+            "url": "https://us-direct.legalontech.com/press-releases/legalon-assistant-generative-ai-for-contracts",
+            "publisher": "LegalOn Technologies",
+            "tier": "primary"
+          }
+        },
+        {
+          "date": "2026-08-31",
+          "title": "日本向けLegalOnアシスタント機能を確認",
+          "category": "SaaS再定義",
+          "stage": "外部販売・事業化",
+          "method": "自社開発",
+          "summary": "契約質問、文案修正、論点リスト、契約DB横断検索、自社基準プレイブック生成などを提供している。",
+          "source": {
+            "title": "LegalOnアシスタント",
+            "url": "https://www.legalontech.com/jp/products/assistant",
+            "publisher": "LegalOn Technologies",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-08-31T09:20:00.000Z"
     }
   ]
 }

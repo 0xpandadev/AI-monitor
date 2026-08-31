@@ -113,7 +113,9 @@
         "type": "service",
         "url": "https://aihot.virxact.com",
         "authentication": "none",
-        "mcp": false
+        "mcp": true,
+        "api_version": "v1",
+        "rss": true
       },
       "fallback": "config/research-capabilities.json"
     },
