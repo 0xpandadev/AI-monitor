@@ -99,6 +99,12 @@ a{color:var(--navy-700)}a:visited{color:#604968}
 .graph-node text{font-size:11px}
 .graph-node text.sub{font-size:8px}
 
+/* Keep period controls next to the data they actually change. */
+.period-scope-panel{display:flex;justify-content:space-between;align-items:flex-end;gap:22px;margin-top:13px;padding:14px 16px;border:1px solid var(--slate-300);background:#fff}
+.period-scope-panel>div:first-child{min-width:0}.period-scope-panel>div:first-child>span,.graph-period-control>div>span,.graph-static-note>span{display:block;color:var(--orange);font:8px var(--data);letter-spacing:.12em}.period-scope-panel h2{margin:3px 0;font-size:16px}.period-scope-panel p{max-width:68ch;margin:3px 0 0;color:var(--slate-500);font-size:10px}.period-scope-panel .period-rail{flex:0 0 auto}
+.graph-period-control{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:11px 16px;border-bottom:1px solid var(--slate-200);background:#f8f9fb}.graph-period-control>div:first-child{min-width:220px}.graph-period-control>div>b,.graph-period-control>div>small{display:block}.graph-period-control>div>b{margin-top:3px;font-size:11px}.graph-period-control>div>small,.graph-static-note>small{margin-top:2px;color:var(--slate-500);font:8px var(--data)}.graph-period-control .period-rail{flex:0 0 auto}.graph-static-note{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--slate-200);background:#f8f9fb}.graph-static-note>b{font-size:11px}.graph-static-note>small{margin-top:0}
+@media(max-width:900px){.period-scope-panel,.graph-period-control{align-items:flex-start;flex-direction:column}.period-scope-panel .period-rail,.graph-period-control .period-rail{width:100%;overflow:auto}.graph-period-control>div:first-child{min-width:0}}
+
 /* Boardroom Observatory: one reading path for the AI change view. */
 .theme-summary.observatory-shell{margin-top:0;border:0;background:transparent}
 .observatory-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;padding:27px 28px 24px;border-top:5px solid var(--orange);background:var(--navy-900);color:#fff}
