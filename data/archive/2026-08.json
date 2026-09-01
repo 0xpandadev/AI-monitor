@@ -478,10 +478,10 @@
   ],
   "source_health": [
     {
-      "source": "AIhot",
+      "source": "市場・技術情報",
       "status": "checked",
       "role": "weekly discovery",
-      "note": "直近7日間のAI業界発見レーンとして使用。重要項目は一次情報へ戻して確認する。公開案内ではREST API v1、RSS、MCPが案内されている。"
+      "note": "直近7日間の市場・技術動向を確認し、重要項目は一次情報へ戻して確認する。"
     },
     {
       "source": "company official pages",

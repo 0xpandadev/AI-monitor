@@ -84,4 +84,4 @@ npm run profiles:import -- path\to\reviewed-batch.json
 
 ## 別のパソコンで使う
 
-GitHubからcloneし、`npm run doctor`、`npm run skills:check -- --target=both`、`npm start`を実行します。アプリ、監視対象、更新手順、検証スクリプトが同じリポジトリに含まれているため、チームメンバーも同じ形式で更新を継続できます。Foresight Radar、Smart Research、**AIhot MCP**、Palantir Ontologyは親スキルから役割別に呼び出されます。MiroFishとOpportunity Intelligenceは任意の分析・発見アダプターであり、未導入でも確認済み情報の収集・公開は継続できます。
+GitHubからcloneし、`npm run doctor`、`npm run skills:check -- --target=both`、`npm start`を実行します。アプリ、監視対象、更新手順、検証スクリプトが同じリポジトリに含まれているため、チームメンバーも同じ形式で更新を継続できます。調査・分析の実行環境は、プロジェクトのセットアップ診断に従って準備します。
