@@ -10,6 +10,7 @@
   ],
   "relation_types": [
     { "id": "changed-in", "label": "変化を確認", "source": "weekly-signal" },
+    { "id": "co-occurs-with", "label": "同一企業で共起", "source": "derived-from-confirmed-weekly-signals" },
     { "id": "offers", "label": "提供", "source": "company-profile" },
     { "id": "partners-with", "label": "提携", "source": "company-profile" }
   ],

@@ -49,6 +49,14 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/AI市場の動き/);
   assert.match(files,/示唆ボード/);
   assert.match(files,/企業 × AIテーマの関係マップ/);
+  assert.match(files,/外周 = 企業/);
+  assert.match(files,/破線.*同じ企業/);
+  assert.match(files,/data-graph-company/);
+  assert.match(files,/data-graph-theme/);
+  assert.match(files,/全体表示に戻す/);
+  assert.match(files,/関連ニュース/);
+  assert.match(files,/光っている接続の根拠ID/);
+  assert.equal(files.includes('今回、読むべきこと'),false);
   assert.equal(files.includes('市場テーマ・レーダー'),false);
   assert.equal(files.includes('動きの強さ'),false);
 });
@@ -112,11 +120,22 @@ test('ontology surface derives relationships, honest trends, and sourced insight
   assert.ok(data.knowledge_graph.summary.edges>0);
   assert.equal(data.knowledge_graph.summary.watched_companies,data.metrics.watched);
   assert.ok(data.knowledge_graph.summary.relation_counts['changed-in']>0);
+  assert.ok(data.knowledge_graph.summary.relation_counts['co-occurs-with']>0);
   for(const edge of data.knowledge_graph.edges){
     assert.ok(['item','profile','unverified'].includes(edge.evidence_scope),`${edge.id} has invalid evidence scope`);
     assert.equal(edge.evidence_count,edge.evidence_ids.length);
     for(const id of edge.evidence_ids)assert.ok(signalIds.has(id),`${edge.id} references unknown direct evidence ${id}`);
     for(const id of (edge.profile_evidence_ids||[]))assert.ok(signalIds.has(id)||String(id).startsWith('profile:'),`${edge.id} references unknown profile evidence ${id}`);
+  }
+  for(const edge of data.knowledge_graph.edges.filter(edge=>edge.relation_type==='co-occurs-with')){
+    assert.equal(edge.from.startsWith('topic:'),true);
+    assert.equal(edge.to.startsWith('topic:'),true);
+    assert.ok(edge.supporting_company_evidence.length>0);
+    for(const support of edge.supporting_company_evidence){
+      assert.ok(support.entity_id);
+      assert.ok(support.left_evidence_ids.length>0);
+      assert.ok(support.right_evidence_ids.length>0);
+    }
   }
   assert.ok(data.knowledge_graph.summary.relation_evidence_counts.offers.profile>0);
   assert.ok(data.knowledge_graph.summary.relation_evidence_counts['partners-with'].profile>0);
