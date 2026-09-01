@@ -48,6 +48,9 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/自社AI活用/);
   assert.match(files,/AI市場の動き/);
   assert.match(files,/示唆ボード/);
+  assert.match(files,/企業 × AIテーマの関係マップ/);
+  assert.equal(files.includes('市場テーマ・レーダー'),false);
+  assert.equal(files.includes('動きの強さ'),false);
 });
 
 test('portable skill manifest keeps the core local and external installs explicit',()=>{
