@@ -82,7 +82,9 @@ for(const dependency of manifest.dependencies){
     installable:Boolean(dependency.installable),
     fallback:dependency.fallback||null,
     source_status:dependency.source_status||dependency.source?.pin_status||'not-applicable',
+    source_url:dependency.source?.web_url||dependency.source?.url||null,
     source_ref:dependency.source?.ref||null,
+    install_command:dependency.installable?`npm run skills:install -- --target=${targetArg==='auto'?'codex|claude|both':targetArg}`:null,
     actions:[]
   };
   const missing=targetStatus.filter(item=>!item.location);
@@ -108,6 +110,8 @@ else{
     const locations=[item.project_location,...item.targets.map(target=>target.location)].filter(Boolean);
     const state=locations.length?'available':item.fallback?'fallback-ready':'missing';
     console.log(`${state.padEnd(14)} ${item.id.padEnd(31)} ${locations[0]||item.source_status}`);
+    if(!locations.length&&item.source_url)console.log(`  source: ${item.source_url}`);
+    if(!locations.length&&item.install_command)console.log(`  install: ${item.install_command}`);
     for(const action of item.actions)console.log(`  -> ${action.target||''} ${action.status} ${action.destination||action.message||''}`.trimEnd());
   }
   console.log(output.note);

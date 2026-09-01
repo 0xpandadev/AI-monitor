@@ -67,6 +67,17 @@ test('portable skill manifest keeps the core local and external installs explici
   }
 });
 
+test('skill checker exposes the missing skill source and explicit install command',()=>{
+  const result=spawnSync(process.execPath,['scripts/bootstrap-skills.cjs','--json','--target=claude'],{cwd:ROOT,encoding:'utf8'});
+  assert.equal(result.status,0,result.stderr);
+  const report=JSON.parse(result.stdout);
+  const foresight=report.dependencies.find(item=>item.id==='foresight-radar');
+  const ontology=report.dependencies.find(item=>item.id==='palantir-ontology');
+  for(const item of [foresight,ontology]){
+    assert.equal(item.targets[0].status,'missing');assert.match(item.source_url,/^https:\/\/github\.com\/0xpandadev\//);assert.match(item.install_command,/npm run skills:install/);
+  }
+});
+
 test('board is explicit when empty and every populated signal is sourced',()=>{
   const data=dashboard();
   assert.equal(data.product.name,'AI Opportunity Monitor');
