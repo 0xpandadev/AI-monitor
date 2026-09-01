@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const net=require('node:net');
-const {spawn}=require('node:child_process');
+const {spawn,spawnSync}=require('node:child_process');
 const {dashboard,registry,validateUpdate,validateProfileBatch}=require('../lib/data.cjs');
 
 const ROOT=path.join(__dirname,'..');
