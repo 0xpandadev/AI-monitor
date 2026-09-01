@@ -4,7 +4,7 @@ const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
   digest:['WEEKLY AI LANDSCAPE','今週のダイジェスト'],
   ledger:['EVIDENCE UPDATE HISTORY','更新履歴'],
-  relationships:['WEEKLY AI MOVEMENTS','今週の変化'],
+  relationships:['AI MARKET MOVEMENTS','AI市場の動き'],
   insights:['EVIDENCE TO DECISION','示唆ボード'],
   'ai-companies':['MODEL / PLATFORM WATCH','主要AI企業'],
   consulting:['CONSULTING AI MAP','コンサルマップ'],
@@ -228,10 +228,47 @@ function renderCapabilityStrip(){
   const list=ids.map(id=>state.data.entities.find(entity=>entity.id===id)).filter(Boolean);
   return `<section class="capability-strip"><header><div><span>CONSULTING CAPABILITY SNAPSHOT</span><h2>コンサル各社の現在地</h2><p>自社活用・顧客向け提供・実装定着など、根拠で確認できた状態を6軸で比較します。これは優劣スコアではありません。</p></div><button data-jump="consulting">詳細マップ →</button></header><div class="capability-legend">${matrix.dimensions.map(item=>`<span>${esc(item.label)}</span>`).join('')}</div><div class="capability-rows">${list.map(entity=>`<button class="capability-row" data-entity="${esc(entity.id)}"><strong>${esc(entity.name)}</strong><small>${esc(entity.segment||'')}</small><div>${matrix.dimensions.map(dimension=>{const value=profileState(entity,dimension.id);return `<i class="${value}" title="${esc(`${dimension.label}: ${stateDefinition(value).label}`)}">${stateGlyph[value]}</i>`;}).join('')}</div></button>`).join('')}</div><footer><span>未</span>未確認　<span>確</span>確認あり　<span>継</span>継続展開　<span>本</span>本格展開</footer></section>`;
 }
+const activityColumns=[
+  {id:'compute',label:'算力・半導体',note:'計算資源・チップ'},
+  {id:'models',label:'基盤モデル',note:'モデル・研究'},
+  {id:'platform',label:'クラウド・データ',note:'クラウド・業務基盤'},
+  {id:'apps',label:'AIアプリ',note:'アプリ・エージェント'},
+  {id:'industry',label:'企業導入',note:'事業会社の利活用'},
+  {id:'delivery',label:'コンサル・実装',note:'構想・定着'}
+];
+function activityLayer(signal){
+  const entity=signal.entity||state.data.entities.find(item=>item.id===signal.entity_id)||{};
+  if(entity.group_id==='consulting')return 'delivery';
+  if(entity.group_id==='enterprises')return 'industry';
+  if(['global-saas','japan-saas'].includes(entity.group_id))return 'platform';
+  if(/半導体|ハード|GPU|compute/i.test(`${entity.segment||''} ${entity.name||''}`))return 'compute';
+  if(/モデル開発|研究/i.test(entity.segment||''))return 'models';
+  if(/ビッグテック|クラウド|インフラ/i.test(entity.segment||''))return 'platform';
+  return 'apps';
+}
+function periodCompanyRows(window){
+  const byEntity=new Map();
+  for(const signal of window.current){const row=byEntity.get(signal.entity_id)||{entity:signal.entity,signals:[]};row.signals.push(signal);byEntity.set(signal.entity_id,row);}
+  const weight={critical:3,high:2,medium:1,low:0};
+  return [...byEntity.values()].sort((a,b)=>{const ai=Math.max(...a.signals.map(item=>weight[item.importance]||0)),bi=Math.max(...b.signals.map(item=>weight[item.importance]||0));return bi-ai||b.signals.length-a.signals.length||String(b.signals[0]?.published_at).localeCompare(String(a.signals[0]?.published_at));});
+}
+function renderActivityMatrix(window){
+  const rows=periodCompanyRows(window).slice(0,14);
+  return `<section class="activity-matrix-panel"><header><div><span>PERIOD ACTIVITY MATRIX</span><h2>企業 × AI市場レイヤー</h2><p>横軸はAIの役割、縦軸は期間内に公式更新を確認した企業です。点を押すと、その更新の根拠を開きます。</p></div><div class="activity-matrix-key"><b>●</b><span>確認済み更新</span><i>未確認</i></div></header>${rows.length?`<div class="activity-matrix-scroll"><table class="activity-matrix"><thead><tr><th>企業</th>${activityColumns.map(column=>`<th><b>${esc(column.label)}</b><small>${esc(column.note)}</small></th>`).join('')}</tr></thead><tbody>${rows.map(row=>{const latest=row.signals.slice().sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)))[0];return `<tr><th><button data-entity="${esc(row.entity?.id||'')}"><strong>${esc(row.entity?.name||row.signals[0]?.entity_id||'')}</strong><small>${esc(row.entity?.segment||row.entity?.group_label||'')} · ${row.signals.length}件</small></button></th>${activityColumns.map(column=>{const matches=row.signals.filter(signal=>activityLayer(signal)===column.id),last=matches.slice().sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)))[0];return `<td>${matches.length?`<button class="activity-dot" data-signal="${esc(last.id)}" title="${esc(`${column.label}・${matches.length}件`)}"><b>●</b><span>${matches.length}</span></button>`:'<span class="activity-empty">·</span>'}</td>`;}).join('')}</tr>`;}).join('')}</tbody></table></div>`:'<div class="empty-inline"><b>この期間に確認済みの更新はありません</b><p>一次情報が追加されるとマトリクスに表示します。</p></div>'}<footer>点の数は市場シェアではなく、選択期間に登録された確認済み更新の件数です。企業名を押すとプロフィールを確認できます。</footer></section>`;
+}
+function renderReadout(window){
+  const totals=activityColumns.map(column=>({column,count:window.current.filter(signal=>activityLayer(signal)===column.id).length})).sort((a,b)=>b.count-a.count);
+  const multi=periodCompanyRows(window).filter(row=>row.signals.length>1).length;
+  return `<section class="readout-band"><article><span>最多の観測層</span><b>${totals[0]?.count?esc(totals[0].column.label):'未確認'}</b><small>${totals[0]?.count||0}件 · ${esc(window.definition.label)}</small></article><article><span>複数更新の企業</span><b>${multi}社</b><small>同じ期間に2件以上の確認</small></article><article><span>読む順番</span><b>点 → 根拠 → 示唆</b><small>件数で優劣を判断しない</small></article></section>`;
+}
+function renderConsultingUpdates(window){
+  const updates=window.current.filter(signal=>signal.entity?.group_id==='consulting').slice().sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,5);
+  return `<section class="consulting-updates"><header><div><span>CONSULTING WATCH</span><h2>この期間のコンサル更新</h2><p>コンサル能力マップとは分け、選択期間に実際に確認できた更新だけを表示します。</p></div><button data-jump="consulting">能力定義・全社一覧 →</button></header>${updates.length?`<div class="consulting-update-list">${updates.map(signal=>`<button data-signal="${esc(signal.id)}"><span>${esc(signal.entity?.name||signal.entity_id)} · ${esc(signal.published_at)}</span><b>${esc(shortLabel(signal.title,68))}</b><small>${esc(signal.category)} · ${esc(signal.source?.publisher||'一次情報')}</small></button>`).join('')}</div>`:'<div class="empty-inline"><b>${esc(window.definition.label)}のコンサル更新は未確認です</b><p>能力マップの状態と、期間内のニュースは別物として扱います。</p></div>'}</section>`;
+}
 function renderThemeSummary(){
-  const window=periodWindow(),themes=periodThemeSummary();
+  const window=periodWindow();
   const companies=new Set(window.current.map(signal=>signal.entity_id).filter(Boolean)).size;
-  return `<div class="theme-summary observatory-shell"><section class="observatory-hero"><div><span>BOARDROOM OBSERVATORY</span><h2>AIの変化を、会議で読む</h2><p>期間を選ぶと、確認済みの状況、AI市場の層、テーマ、コンサル各社の現在地が同じデータから切り替わります。</p></div>${periodRail()}</section><div class="observatory-meta"><span>${esc(window.definition.label)} · 基準日 ${esc(window.reference)}</span><b>${window.current.length}件の更新</b><b>${companies}社が関与</b><em>一次情報のみ</em></div>${renderSituationBoard(window,themes)}${renderThemeStrip(themes,window)}${renderChangeStrip(window)}${renderCapabilityStrip()}</div>`;
+  return `<div class="theme-summary observatory-shell"><section class="observatory-hero"><div><span>AI MARKET MOVEMENTS</span><h2>${esc(window.definition.label)}のAI市場の状況</h2><p>ダイジェストがニュースを読む画面なのに対し、ここでは企業の更新をAI市場の役割別マトリクスで比較します。</p></div>${periodRail()}</section><div class="observatory-meta"><span>${esc(window.definition.label)} · 基準日 ${esc(window.reference)}</span><b>${window.current.length}件の更新</b><b>${companies}社が関与</b><em>一次情報のみ</em></div>${renderReadout(window)}${renderActivityMatrix(window)}${renderConsultingUpdates(window)}</div>`;
 }
 
 function renderRelationships(){
