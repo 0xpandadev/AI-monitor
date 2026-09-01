@@ -61,7 +61,10 @@ test('portable skill manifest keeps the core local and external installs explici
   assert.equal(smart.source.type,'github');assert.match(smart.source.url,/^https:\/\/github\.com\//);
   assert.match(smart.source.ref,/^[0-9a-f]{40}$/);
   const foresight=manifest.dependencies.find(item=>item.id==='foresight-radar');
-  assert.equal(foresight.installable,false);assert.ok(foresight.fallback);
+  const ontology=manifest.dependencies.find(item=>item.id==='palantir-ontology');
+  for(const dependency of [foresight,ontology]){
+    assert.equal(dependency.installable,true);assert.equal(dependency.source.type,'github');assert.match(dependency.source.url,/^https:\/\/github\.com\/0xpandadev\//);assert.match(dependency.source.ref,/^[0-9a-f]{40}$/);assert.ok(dependency.fallback);
+  }
 });
 
 test('board is explicit when empty and every populated signal is sourced',()=>{

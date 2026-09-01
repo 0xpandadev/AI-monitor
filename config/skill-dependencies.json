@@ -27,10 +27,19 @@
       "requirement": "optional-enhancement",
       "delivery": "external-skill",
       "aliases": ["foresight-radar"],
-      "installable": false,
-      "source": null,
-      "source_status": "unpublished-source-not-recorded",
-      "release_action": "公開前に正規GitHub URLとライセンスを登録するか、許諾済みコピーをリポジトリへ同梱する",
+      "installable": true,
+      "source": {
+        "type": "github",
+        "url": "https://github.com/0xpandadev/Foresight-Radar.git",
+        "web_url": "https://github.com/0xpandadev/Foresight-Radar",
+        "ref": "5ce47e92de00dbf7ee103b51574dfc505e01b94a",
+        "path": ".",
+        "license": "MIT",
+        "pin_status": "pinned-commit",
+        "pinned_at": "2026-09-01"
+      },
+      "source_status": "pinned-commit",
+      "release_action": "npm run skills:install -- --target=codex|claude|both で、固定コミットから明示的に導入する",
       "fallback": "docs/BASELINE-RESEARCH.md"
     },
     {
@@ -58,10 +67,19 @@
       "requirement": "optional-enhancement",
       "delivery": "external-skill",
       "aliases": ["palantir-ontology"],
-      "installable": false,
-      "source": null,
-      "source_status": "local-skill-source-not-recorded",
-      "release_action": "公開済みGitHub URLとライセンスを登録すると自動インストール可能。現状はアプリ内ontologyロジックとdocs/ONTOLOGY-AND-INSIGHTS.mdをfallbackにする",
+      "installable": true,
+      "source": {
+        "type": "github",
+        "url": "https://github.com/0xpandadev/palantir_ontology.git",
+        "web_url": "https://github.com/0xpandadev/palantir_ontology",
+        "ref": "2243fc4024d347f475560fa0519ad5278bcf8ea6",
+        "path": "palantir-ontology",
+        "license": "MIT",
+        "pin_status": "pinned-commit",
+        "pinned_at": "2026-09-01"
+      },
+      "source_status": "pinned-commit",
+      "release_action": "npm run skills:install -- --target=codex|claude|both で、固定コミットから明示的に導入する",
       "fallback": "docs/ONTOLOGY-AND-INSIGHTS.md"
     },
     {
