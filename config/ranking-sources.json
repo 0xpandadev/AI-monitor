@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "policy": "ランキングは市場全体の総合順位ではない。各データ源の測定対象・対象母集団・更新日・限界を併記し、異なるランキングの点数や順位を合算しない。",
+  "sources": [
+    {
+      "id": "openrouter-usage",
+      "label": "OpenRouter 利用動向",
+      "perspective": "開発者利用",
+      "metric": "OpenRouter経由で処理されたトークン量",
+      "cadence": "daily / weekly / monthly",
+      "url": "https://openrouter.ai/rankings",
+      "methodology_url": "https://openrouter.ai/rankings",
+      "limitation": "OpenRouter上の公開トラフィックであり、品質・世界全体の利用量・利用者数・売上を示さない。"
+    },
+    {
+      "id": "artificial-analysis-index",
+      "label": "Artificial Analysis Intelligence Index",
+      "perspective": "独立ベンチマーク",
+      "metric": "数学・科学・コード・推論等を統合した評価",
+      "cadence": "方法論・評価セット更新時",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "methodology_url": "https://artificialanalysis.ai/evaluations",
+      "limitation": "評価設計・採点モデル・バージョンに依存する。指数の世代をまたいだ単純比較はしない。"
+    },
+    {
+      "id": "arena-human-preference",
+      "label": "Arena 人間選好",
+      "perspective": "対話品質・人間選好",
+      "metric": "匿名ペア比較の投票によるリーダーボード",
+      "cadence": "継続更新",
+      "url": "https://arena.ai/leaderboard",
+      "methodology_url": "https://arena.ai/how-it-works",
+      "limitation": "参加者・プロンプト・評価カテゴリの構成に依存し、特定の業務タスクの実力を単独で保証しない。"
+    },
+    {
+      "id": "livebench",
+      "label": "LiveBench",
+      "perspective": "汚染耐性・客観評価",
+      "metric": "定期更新問題と客観正解による能力評価",
+      "cadence": "ベンチマーク更新時",
+      "url": "https://livebench.ai/",
+      "methodology_url": "https://github.com/livebench/livebench",
+      "limitation": "ベンチマーク能力であり、価格、速度、導入容易性、実運用の成功を測るものではない。"
+    },
+    {
+      "id": "swe-bench",
+      "label": "SWE-bench Verified",
+      "perspective": "ソフトウェア実装",
+      "metric": "実在GitHub課題の修正成功率",
+      "cadence": "継続更新",
+      "url": "https://www.swebench.com/",
+      "methodology_url": "https://www.swebench.com/",
+      "limitation": "ソフトウェア修正タスクの評価であり、汎用対話や企業導入能力の総合順位ではない。"
+    }
+  ]
+}

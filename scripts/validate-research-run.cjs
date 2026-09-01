@@ -7,10 +7,16 @@ if(!runId)throw new Error('Usage: npm run research:validate -- weekly-YYYY-MM-DD
 if(!/^weekly-\d{4}-\d{2}-\d{2}$/.test(runId))throw new Error('run_idの形式が不正です');
 const dir=path.join(root,'data','runs',runId);
 const read=name=>JSON.parse(fs.readFileSync(path.join(dir,name),'utf8'));
-const errors=[];let manifest,discovery,verification,ontology,scenario,update;
-try{manifest=read('manifest.json');discovery=read('discovery.json');verification=read('verification.json');ontology=read('ontology-analysis.json');scenario=read('scenario-analysis.json');update=read('weekly-update.json');}catch(error){throw new Error(`ランの必須ファイルを読めません: ${error.message}`);}
+const errors=[];let manifest,discovery,verification,rankings,ontology,scenario,update;
+try{manifest=read('manifest.json');discovery=read('discovery.json');verification=read('verification.json');rankings=read('rankings.json');ontology=read('ontology-analysis.json');scenario=read('scenario-analysis.json');update=read('weekly-update.json');}catch(error){throw new Error(`ランの必須ファイルを読めません: ${error.message}`);}
 if(manifest.run_id!==runId)errors.push('manifest.run_idがディレクトリ名と一致しません');
 if(discovery.run_id!==runId||verification.run_id!==runId||ontology.run_id!==runId||scenario.run_id!==runId)errors.push('分析ファイルのrun_idが一致しません');
+if(rankings.run_id!==runId)errors.push('rankings.jsonのrun_idが一致しません');
+for(const [index,source] of (rankings.sources||[]).entries()){
+  if(!source.id||!['confirmed','pending','not_available'].includes(source.status))errors.push(`rankings.sources[${index}] は id と有効なstatusが必要です`);
+  if(source.status==='confirmed'&&(!source.as_of||!Array.isArray(source.rows)||source.rows.length===0))errors.push(`rankings.sources[${index}] confirmedにはas_ofとrowsが必要です`);
+  for(const row of source.rows||[])if(!Number.isInteger(row.rank)||!row.model||!row.metric)errors.push(`rankings.sources[${index}] の順位行が不正です`);
+}
 for(const [index,item] of (discovery.candidates||[]).entries()){
   const p=`discovery.candidates[${index}]`;
   if(!item.id||!item.title||!item.category||!item.discovered_from?.url)errors.push(`${p} は id/title/category/discovered_from.url が必要です`);

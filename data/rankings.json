@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-09-01T00:00:00.000Z",
+  "policy": "ランキングは測定軸ごとに表示し、異なるランキングを合算しない。",
+  "sources": [
+    {
+      "id": "openrouter-usage",
+      "status": "confirmed",
+      "as_of": "2026-08-31",
+      "captured_at": "2026-09-01T00:00:00.000Z",
+      "rows": [
+        { "rank": 1, "model": "DeepSeek V4 Flash 0731", "provider": "DeepSeek", "metric": "12.2T tokens", "change": "+5%" },
+        { "rank": 2, "model": "Ox Alpha", "provider": "Stealth", "metric": "9.75T tokens", "change": "+44%" },
+        { "rank": 3, "model": "GPT-5.6 Luna", "provider": "OpenAI", "metric": "8.48T tokens", "change": "+89%" }
+      ]
+    },
+    {
+      "id": "artificial-analysis-index",
+      "status": "confirmed",
+      "as_of": "2026-08-06",
+      "captured_at": "2026-09-01T00:00:00.000Z",
+      "rows": [
+        { "rank": 1, "model": "Claude Opus 5", "provider": "Anthropic", "metric": "Intelligence Index 63", "change": "維持" }
+      ]
+    },
+    { "id": "arena-human-preference", "status": "pending", "as_of": null, "captured_at": null, "rows": [] },
+    { "id": "livebench", "status": "pending", "as_of": null, "captured_at": null, "rows": [] },
+    { "id": "swe-bench", "status": "pending", "as_of": null, "captured_at": null, "rows": [] }
+  ]
+}

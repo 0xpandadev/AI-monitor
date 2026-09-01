@@ -27,7 +27,7 @@ The system may recommend items for review. It must never automatically make an e
    ```
 
 2. Record the returned `run_id`. Work only in `data/runs/<run_id>/` for this run.
-3. Read `manifest.json`, `discovery.json`, `verification.json`, `ontology-analysis.json`, `scenario-analysis.json`, `weekly-update.json`, `config/weekly-research.json`, `config/watchlist.json`, and `config/sources.json` before research.
+3. Read `manifest.json`, `discovery.json`, `verification.json`, `rankings.json`, `ontology-analysis.json`, `scenario-analysis.json`, `weekly-update.json`, `config/weekly-research.json`, `config/watchlist.json`, `config/sources.json`, and `config/ranking-sources.json` before research.
 4. Do not silently install missing skills. Report each unavailable optional adapter with the URL in `config/skill-dependencies.json`, then use the repository fallback.
 
 ## Fixed sequence
@@ -64,6 +64,18 @@ Use **Palantir Ontology** principles with `config/ontology.json`:
 - action class: `recommend` only. The action is to place a discussion/research item in the monitor; a human decides what to do externally.
 
 Write `ontology-analysis.json`. A cross-company pattern needs at least two confirmed verification IDs. State the pattern, evidence IDs, counterevidence, unknowns, and the next research question. Do not turn raw item counts into strength scores.
+
+### 3a. Refresh ranking lenses without inventing a single overall rank
+
+Refresh every source in `rankings.json` from its official leaderboard or methodology page. Keep the source-specific measurement separate:
+
+- OpenRouter: developer usage on its own network, not model quality.
+- Artificial Analysis: independently run benchmark index, with methodology version.
+- Arena: human preference in anonymous pairwise comparisons.
+- LiveBench: contamination-resistant objective benchmark.
+- SWE-bench Verified: software engineering task success.
+
+For each source record `as_of`, capture time, top rows, metric text, a source URL, and method/version notes. Mark an inaccessible or stale source `not_available`; do not reuse an old ranking as if it were current. Never sum ranks, create a composite score, or call the result “the best AI model.”
 
 ### 4. Run MiroFish only when it has a real question
 
