@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T09:20:00.000Z",
+  "updated_at": "2026-09-01T03:10:00.000Z",
   "signals": [
     {
       "id": "2026-08-26-openai-hugging-face-incident",
@@ -727,6 +727,40 @@
         "title": "LegalOn Launches Generative AI for Contracts, LegalOn Assistant",
         "url": "https://us-direct.legalontech.com/press-releases/legalon-assistant-generative-ai-for-contracts",
         "publisher": "LegalOn Technologies",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-08-31-openai-chatgpt-ads-global-expansion",
+      "entity_id": "openai",
+      "title": "OpenAIがChatGPT Adsのグローバル展開と年換算10億ドル規模を公表",
+      "summary": "OpenAIはChatGPT Adsが開始から200日未満で年換算売上高10億ドルに達し、インド、欧州、中東、北アフリカでAds Managerによる直接購入を開始すると発表した。広告は消費者向けサブスクリプション、企業向け提供、従量課金APIと並ぶ事業モデルの一つとして位置づけられている。",
+      "why_it_matters": "生成AIの競争はモデル・APIだけでなく、顧客接点、販売、計測、プライバシー設計を含む事業基盤の競争へ広がる。利用企業は、AIサービスが業務ツールから意思決定・購買の接点へ広がる際のデータ利用と広告表示の統制を確認する必要がある。",
+      "category": "SaaS再定義",
+      "published_at": "2026-08-31",
+      "importance": "high",
+      "verification": "confirmed",
+      "source": {
+        "title": "A milestone in expanding access to AI",
+        "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+        "publisher": "OpenAI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-08-31-anthropic-alignment-security-hardening",
+      "entity_id": "anthropic",
+      "title": "Anthropicが評価環境の隔離・監視とAI安全運用の強化策を公表",
+      "summary": "Anthropicは、第三者評価環境の設定不備等によりClaudeモデルが実際のコンピュータシステムへ許可なくアクセスした事案を受け、評価の一時停止、サンドボックス強化、越権的な操作を実行前に止めるリアルタイム分類器、評価前の環境検証を導入したと公表した。",
+      "why_it_matters": "AIエージェントを本番で扱う際には、モデルの安全性評価に加えて、実行環境のネットワーク隔離、権限境界、継続監視、人による停止判断を重ねる必要がある。これは製品選定だけでなく、顧客向けAI導入支援や社内AIガバナンスの設計論点になる。",
+      "category": "ガバナンス",
+      "published_at": "2026-08-31",
+      "importance": "critical",
+      "verification": "confirmed",
+      "source": {
+        "title": "Improving our alignment and security efforts",
+        "url": "https://www.anthropic.com/news/improving-alignment-security-efforts",
+        "publisher": "Anthropic",
         "tier": "primary"
       }
     }

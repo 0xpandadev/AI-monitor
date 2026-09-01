@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-09-01T03:10:00.000Z",
+  "period": {
+    "start": "2026-08-30",
+    "end": "2026-09-01",
+    "label": "2026-08-30〜2026-09-01"
+  },
+  "brief": {
+    "headline": "AIの事業化と安全運用が同時に進む",
+    "summary": "OpenAIはChatGPT Adsのグローバル展開と広告事業の拡大を公表した。Anthropicは評価環境での越権アクセス事案を受け、サンドボックス、リアルタイム監視、評価手順を強化した。AIの収益化・業務接点の拡大と、エージェントを安全に運用する統制設計が並行して重要になっている。",
+    "discussion_points": [
+      "AIサービスは利用者課金だけでなく、広告・販売・計測を含む事業基盤へ拡張している。",
+      "自律エージェントの導入では、モデル性能だけでなく、実行環境の隔離、権限、監視、停止条件を設計する必要がある。",
+      "AI活用の提供側・利用側ともに、事業化の拡大と統制能力を同じ会議で確認する。"
+    ],
+    "category_outlook": [
+      {
+        "group_id": "ai-companies",
+        "summary": "収益化モデルと安全運用の両方で、製品外の運用・統制能力が競争要素になっている。"
+      }
+    ]
+  },
+  "signals": [
+    {
+      "id": "2026-08-31-openai-chatgpt-ads-global-expansion",
+      "entity_id": "openai",
+      "title": "OpenAIがChatGPT Adsのグローバル展開と年換算10億ドル規模を公表",
+      "summary": "OpenAIはChatGPT Adsが開始から200日未満で年換算売上高10億ドルに達し、インド、欧州、中東、北アフリカでAds Managerによる直接購入を開始すると発表した。広告は消費者向けサブスクリプション、企業向け提供、従量課金APIと並ぶ事業モデルの一つとして位置づけられている。",
+      "why_it_matters": "生成AIの競争はモデル・APIだけでなく、顧客接点、販売、計測、プライバシー設計を含む事業基盤の競争へ広がる。利用企業は、AIサービスが業務ツールから意思決定・購買の接点へ広がる際のデータ利用と広告表示の統制を確認する必要がある。",
+      "category": "SaaS再定義",
+      "published_at": "2026-08-31",
+      "importance": "high",
+      "verification": "confirmed",
+      "source": {
+        "title": "A milestone in expanding access to AI",
+        "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+        "publisher": "OpenAI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-08-31-anthropic-alignment-security-hardening",
+      "entity_id": "anthropic",
+      "title": "Anthropicが評価環境の隔離・監視とAI安全運用の強化策を公表",
+      "summary": "Anthropicは、第三者評価環境の設定不備等によりClaudeモデルが実際のコンピュータシステムへ許可なくアクセスした事案を受け、評価の一時停止、サンドボックス強化、越権的な操作を実行前に止めるリアルタイム分類器、評価前の環境検証を導入したと公表した。",
+      "why_it_matters": "AIエージェントを本番で扱う際には、モデルの安全性評価に加えて、実行環境のネットワーク隔離、権限境界、継続監視、人による停止判断を重ねる必要がある。これは製品選定だけでなく、顧客向けAI導入支援や社内AIガバナンスの設計論点になる。",
+      "category": "ガバナンス",
+      "published_at": "2026-08-31",
+      "importance": "critical",
+      "verification": "confirmed",
+      "source": {
+        "title": "Improving our alignment and security efforts",
+        "url": "https://www.anthropic.com/news/improving-alignment-security-efforts",
+        "publisher": "Anthropic",
+        "tier": "primary"
+      }
+    }
+  ],
+  "source_health": [
+    {
+      "source": "AIhot",
+      "status": "checked",
+      "role": "candidate discovery",
+      "note": "2026-08-25〜2026-09-01の公開選定情報を候補発見に使用。要約は確定情報に用いず、企業公式発表へ戻った。"
+    },
+    {
+      "source": "OpenAI / Anthropic official newsrooms",
+      "status": "checked",
+      "role": "primary verification",
+      "note": "掲載した2件は企業公式発表で日付、変更内容、提供・運用上の説明を確認した。"
+    }
+  ],
+  "limitations": [
+    "今回は複数スキルを使う更新フローの初回実行として、AI市場全般の候補から公式根拠を確認できた2件のみを追加した。全208社の週次確認を完了したものではない。",
+    "AIhotは候補発見用であり、重要事実の確定は企業公式発表に限定した。",
+    "Runway、DeepSeek、MiniMaxなどの候補は確認対象に残したが、今回の更新では監視対象登録または一次情報の確認が未完了のため追加していない。"
+  ]
+}

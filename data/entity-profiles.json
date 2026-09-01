@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T14:10:00.000Z",
+  "updated_at": "2026-09-01T03:10:00.000Z",
   "baseline_window": {
     "start": "2021-09-01",
     "end": "2026-08-31"
@@ -15,7 +15,7 @@
     {
       "entity_id": "openai",
       "status": "partial",
-      "current_position": "基盤モデルを外部開発環境へ展開する一方、高自律エージェントの安全性とパートナー依存が経営課題になっている。",
+      "current_position": "基盤モデルと開発者向け提供を拡張する一方、ChatGPTを広告、購買、意思決定の接点へ広げ、消費者・企業・APIをまたぐ事業基盤を構築している。高自律エージェントの安全性とパートナー依存も継続して監視する。",
       "maturity_stage": "commercial",
       "development_methods": [
         "in-house"
@@ -32,7 +32,8 @@
       "internal_use": [],
       "offerings": [
         "GPT-5.6ファミリー",
-        "Kiroでのモデル提供"
+        "Kiroでのモデル提供",
+        "ChatGPT Ads"
       ],
       "partnerships": [
         "Amazon Web Services / Kiro",
@@ -41,13 +42,31 @@
       "activity_signal_ids": [
         "2026-08-26-openai-hugging-face-incident",
         "2026-08-28-openai-cursor-contract",
-        "2026-08-24-openai-gpt56-kiro"
-      ]
+        "2026-08-24-openai-gpt56-kiro",
+        "2026-08-31-openai-chatgpt-ads-global-expansion"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "ChatGPT Adsのグローバル展開を公表",
+          "category": "事業化・製品",
+          "stage": "commercial",
+          "method": "in-house",
+          "summary": "ChatGPT Adsが年換算売上高10億ドルに達し、Ads Managerの直接購入をインド、欧州、中東、北アフリカへ広げると発表した。",
+          "source": {
+            "title": "A milestone in expanding access to AI",
+            "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/",
+            "publisher": "OpenAI",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-09-01T03:10:00.000Z"
     },
     {
       "entity_id": "anthropic",
       "status": "partial",
-      "current_position": "ブラウザ実行と継続記憶を一般提供し、仕事の実行面を広げながら、自動アラインメント研究も進めている。",
+      "current_position": "ブラウザ実行と継続記憶で仕事の実行面を広げながら、評価環境、内部エージェント利用、RL環境における隔離・監視・停止統制を強化している。モデル提供だけでなく、エージェント運用の安全設計を継続して監視する。",
       "maturity_stage": "commercial",
       "development_methods": [
         "in-house"
@@ -61,7 +80,9 @@
         "governance": "active",
         "research": "active"
       },
-      "internal_use": [],
+      "internal_use": [
+        "内部フロンティア・エージェント利用の監視と統制"
+      ],
       "offerings": [
         "Claude in Chrome",
         "Claude Memory",
@@ -71,8 +92,26 @@
       "activity_signal_ids": [
         "2026-08-26-anthropic-claude-chrome-ga",
         "2026-08-25-anthropic-unified-memory",
-        "2026-08-28-anthropic-automated-alignment-research"
-      ]
+        "2026-08-28-anthropic-automated-alignment-research",
+        "2026-08-31-anthropic-alignment-security-hardening"
+      ],
+      "history": [
+        {
+          "date": "2026-08-31",
+          "title": "評価環境の隔離・監視強化を公表",
+          "category": "ガバナンス",
+          "stage": "commercial",
+          "method": "in-house",
+          "summary": "第三者評価環境等での越権アクセス事案を受け、評価環境の強化、実行前に操作を止める分類器、評価前の環境検証、ネットワーク隔離を含む対策を公表した。",
+          "source": {
+            "title": "Improving our alignment and security efforts",
+            "url": "https://www.anthropic.com/news/improving-alignment-security-efforts",
+            "publisher": "Anthropic",
+            "tier": "primary"
+          }
+        }
+      ],
+      "last_reviewed": "2026-09-01T03:10:00.000Z"
     },
     {
       "entity_id": "google-deepmind",
