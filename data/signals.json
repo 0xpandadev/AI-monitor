@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-01T03:10:00.000Z",
+  "updated_at": "2026-09-01T05:55:00.000Z",
   "signals": [
     {
       "id": "2026-08-26-openai-hugging-face-incident",
@@ -181,6 +181,7 @@
       "published_at": "2026-08-25",
       "importance": "high",
       "verification": "confirmed",
+      "verification_id": "verify-fortience-20260825",
       "source": {
         "title": "AI業務改革の早期具体化を支援する『AIエージェント3ステップ』を提供開始",
         "url": "https://www.fortience.com/company/newsroom/20260825/",
@@ -198,6 +199,7 @@
       "published_at": "2026-08-25",
       "importance": "high",
       "verification": "confirmed",
+      "verification_id": "verify-deloitte-ontology-20260825",
       "source": {
         "title": "AIの業務自律実行のために企業固有の業務知見をデジタル化するオントロジー構築サービスを提供",
         "url": "https://www.deloitte.com/jp/ja/about/press-room/nr20260825.html",
@@ -215,10 +217,11 @@
       "published_at": "2026-08-25",
       "importance": "high",
       "verification": "confirmed",
+      "verification_id": "verify-nttdata-litron-20260825",
       "source": {
         "title": "AIエージェントによる、業務プロセス全体の実行を実現する統合AI基盤『LITRON』を拡充",
         "url": "https://www.nttdata.com/global/ja/news/topics/2026/082501/",
-        "publisher": "NTTデータ",
+        "publisher": "NTTデータグループ",
         "tier": "primary"
       }
     },
@@ -232,10 +235,11 @@
       "published_at": "2026-08-25",
       "importance": "high",
       "verification": "confirmed",
+      "verification_id": "verify-nttdata-agent-vdi-20260825",
       "source": {
         "title": "AIエージェントを企業で安全に運用する仮想デスクトップ環境を提供開始",
         "url": "https://www.nttdata.com/global/ja/news/topics/2026/082500/",
-        "publisher": "NTTデータ",
+        "publisher": "NTTデータグループ",
         "tier": "primary"
       }
     },
@@ -249,6 +253,7 @@
       "published_at": "2026-08-28",
       "importance": "high",
       "verification": "confirmed",
+      "verification_id": "verify-nec-scm-agent-20260828",
       "source": {
         "title": "NEC、多様なサプライチェーン業務を自律実行する『NEC SCM AIエージェント』を販売開始",
         "url": "https://jpn.nec.com/press/202608/20260828_01.html",

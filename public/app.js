@@ -34,7 +34,9 @@ function shortLabel(value,max=28){const text=String(value||'');return text.lengt
 function signalFeed(signals){
   const periodStart=state.data.brief?.period?.start;
   const current=periodStart?signals.filter(signal=>signal.published_at>=periodStart):[];
-  return current.length?current:signals;
+  const scoped=state.data.brief?.scope?.entity_ids;
+  const filtered=Array.isArray(scoped)&&scoped.length?current.filter(signal=>scoped.includes(signal.entity_id)):current;
+  return filtered.length?filtered:(current.length?current:signals);
 }
 function categoryCounts(signals){
   const counts=new Map();
@@ -165,16 +167,25 @@ function weeklyLensIntro(id){
 }
 
 const weeklyLenses=[
-  {id:'models',label:'モデル・基盤技術',test:(signal,entity)=>signal.category==='基盤モデル'||/半導体|GPU|計算|クラウド/.test(`${entity.segment||''} ${entity.name||''}`)},
-  {id:'products',label:'製品・AIエージェント',test:signal=>['AIエージェント','SaaS再定義'].includes(signal.category)},
-  {id:'industry',label:'業界・企業活用',test:(signal,entity)=>entity.group_id==='enterprises'||signal.category==='内製開発'},
-  {id:'research',label:'論文・研究',test:signal=>signal.category==='研究'},
-  {id:'practice',label:'実装・活用方法',test:signal=>signal.category==='AIオファリング'},
-  {id:'perspectives',label:'市場・制度・論点',test:signal=>['提携・M&A','ガバナンス'].includes(signal.category)}
+  {id:'models',label:'モデル・基盤技術'},
+  {id:'products',label:'製品・AIエージェント'},
+  {id:'industry',label:'業界・企業活用'},
+  {id:'research',label:'論文・研究'},
+  {id:'practice',label:'実装・活用方法'},
+  {id:'perspectives',label:'市場・制度・論点'}
 ];
+function weeklyLensForSignal(signal){
+  const category=signal.category;
+  if(category==='基盤モデル')return 'models';
+  if(['AIエージェント','SaaS再定義'].includes(category))return 'products';
+  if(category==='研究')return 'research';
+  if(category==='AIオファリング')return 'practice';
+  if(['提携・M&A','ガバナンス','組織・人材'].includes(category))return 'perspectives';
+  if(['企業導入','内製開発'].includes(category))return 'industry';
+  return 'perspectives';
+}
 function matchesWeeklyLens(signal,id){
-  const entity=signal.entity||state.data.entities.find(item=>item.id===signal.entity_id)||{};
-  return weeklyLenses.find(lens=>lens.id===id)?.test(signal,entity)||false;
+  return weeklyLensForSignal(signal)===id;
 }
 function renderCanvasSignals(signals,allSignals){
   const ranked=signals.slice().sort((a,b)=>{const weight={critical:3,high:2,medium:1,low:0};return (weight[b.importance]||0)-(weight[a.importance]||0)||String(b.published_at).localeCompare(String(a.published_at));});
