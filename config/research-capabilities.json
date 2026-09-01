@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0",
   "principle": "運用スキルは能力IDを呼び、特定の外部スキル名を必須依存にしない",
+  "operating_model": "週次ランを作成し、発見・検証・構造分析・任意シナリオ分析の成果物を同じrun_idで保存してから、確認済み更新だけを公開データへ取り込む",
   "runtime": "サインイン済みのCodexまたはClaude Code。OpenAI/Anthropic APIキーは不要",
   "capabilities": [
     {
@@ -9,6 +10,14 @@
       "preferred_skills": ["foresight-radar"],
       "fallback": "同梱のbaseline手順に従い、企業公式ニュース、IR、製品、導入事例を年別に検索して一次情報を保存する",
       "required": true
+    },
+    {
+      "id": "keyword-discovery-adapter",
+      "purpose": "固定ウォッチ外の候補・関連語・新興プレイヤーを発見し、追加候補として記録する",
+      "preferred_skills": ["opportunity-intelligence"],
+      "fallback": "AIhot、Foresight Radarのsource-map、企業名・カテゴリ別の一次情報探索を使う",
+      "required": false,
+      "note": "Opportunity Intelligenceはキーワード起点の候補発見に限定して使う。固定ウォッチの全社確認を置き換えない"
     },
     {
       "id": "weekly-discovery",

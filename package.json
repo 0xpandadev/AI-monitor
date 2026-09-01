@@ -11,6 +11,9 @@
     "skills:check": "node scripts/bootstrap-skills.cjs --json",
     "skills:install": "node scripts/bootstrap-skills.cjs --install --json",
     "research:batches": "node scripts/create-research-batches.cjs",
+    "research:run": "node scripts/create-research-run.cjs",
+    "research:validate": "node scripts/validate-research-run.cjs",
+    "research:publish": "node scripts/publish-research-run.cjs",
     "update:template": "node scripts/create-update-template.cjs",
     "update:import": "node scripts/import-update.cjs",
     "profiles:import": "node scripts/import-profile-batch.cjs"

@@ -1,45 +1,97 @@
 ---
 name: update-ai-opportunity-monitor
-description: Refresh the AI Opportunity Monitor with current, source-verified changes across AI companies, consulting firms, Japanese enterprises, startups, and SaaS companies. Use for the weekly update or a requested current refresh of this board.
+description: Run the AI Opportunity Monitor as a recurring intelligence system: collect, verify, structure, optionally stress-test, and publish source-backed changes across the full fixed watchlist and the AI market.
 ---
 
-# Update AI Opportunity Monitor
+# AI Opportunity Monitor: weekly intelligence orchestrator
 
-Use the signed-in Codex session as the research and synthesis environment. Do not request or call an OpenAI or Anthropic API key.
+This is the repository-owned parent skill. It does not replace Foresight Radar, Smart Research, Palantir Ontology, or MiroFish. It invokes their methods in one fixed operating sequence and saves every stage under one `run_id`.
 
-## Capability resolution
+Use the signed-in Codex or Claude Code session. Do not call OpenAI or Anthropic APIs and do not ask for model API keys.
 
-This repository owns the workflow. External skill names are optional adapters, not hard dependencies.
+## The decision this system supports
 
-1. Read `config/research-capabilities.json` and `config/skill-dependencies.json`, then run `npm run capabilities` and `npm run skills:check`.
-2. Resolve work by capability ID: `historical-baseline`, `weekly-discovery`, `deep-verification`, `primary-verification`, and `dashboard-publication`.
-3. Use Foresight Radar for the three-year source map and changes when available. Use Smart Research for evidence packs and contradiction checks when available. Use AIhot's public REST API for the latest seven-day discovery lane when available; AIhot is not an MCP server and is not a historical archive for this workflow.
-4. When a preferred skill is absent or named differently, execute the embedded fallback in `docs/BASELINE-RESEARCH.md`. Never reduce the watchlist because another machine lacks a global skill.
-5. Codex and Claude Code must produce the same JSON contracts, so their outputs can be merged without sharing model API keys.
-6. Do not install or overwrite external skills implicitly. When the user explicitly asks to install missing skills, use `npm run skills:install -- --target=codex`; review unresolved or unpinned sources before publication.
+> Which confirmed AI-market and company moves deserve attention in this period, what is their evidence, and which areas need further research or a human discussion?
 
-## Three-year baseline mode
+The system may recommend items for review. It must never automatically make an external business decision, change a watchlist, publish a candidate as fact, or treat a simulation as evidence.
 
-When asked to build or refresh company fundamentals, read `docs/BASELINE-RESEARCH.md`, `config/entity-intelligence.json`, `data/entity-profiles.json`, and `schemas/entity-profile-batch.schema.json`.
+## Start a weekly run
 
-- Generate non-overlapping assignments with `npm run research:batches -- <group-id> <batch-size>`.
-- Write one profile batch per assignee. Do not edit `data/entity-profiles.json` concurrently.
-- Import each reviewed batch with `npm run profiles:import -- <batch-file>`.
-- Mark a profile `complete` only after the specified three-year official-source window has been reviewed.
-- Keep internal use, external offerings, partnerships, maturity, development method, and evidence-backed history separate.
+1. From the repository root, run:
 
-1. Work from the repository root and execute `npm run doctor`.
-2. Read `config/weekly-research.json`, `config/watchlist.json`, `config/topics.json`, `config/sources.json`, `config/entity-intelligence.json`, the current `data/signals.json`, `data/entity-profiles.json`, and `schemas/weekly-update.schema.json`.
-3. Execute `npm run update:template` and use the generated `data/drafts/weekly-update.json` as the only draft.
-4. Run the AI market pulse first. Review AIhot's selected information for the complete target week through all six lenses defined in `config/weekly-research.json`: models, products and agents, industry adoption, research, implementation practice, and market or governance perspectives. This lane is not restricted to companies in the watchlist.
-5. Treat AIhot titles and summaries as discovery material. Open the linked original source and verify material claims with the original paper, company announcement, product page, official repository, or government source. Do not repeat an AIhot summary as a confirmed fact.
-6. Run the company watch second. Check every registered company in all six monitoring groups every week, including all `core`, `extended`, and `candidate` startup and emerging-company entries. Priority changes the order and depth of review only; it never permits skipping a registered company. Give deeper attention to major AI companies, Big 4, MBB, Kearney, Japanese AI startups and emerging companies, major domestic enterprises, and leading domestic/global SaaS companies.
-7. Record only an actual change from the prior state. Separate confirmed information from candidates. Do not invent activity to fill the board.
-8. For every signal, explain `why_it_matters` for a strategy or market-research discussion. Use only `critical`, `high`, `medium`, or `watch` for importance and `confirmed`, `candidate`, `updated`, or `retracted` for verification.
-9. Include source failures and coverage gaps in `source_health` and `limitations`.
-10. Execute `npm run update:import -- data/drafts/weekly-update.json`. Do not report completion unless validation succeeds.
-11. Update the relevant entity profile after verified changes so the change ledger, current-position summary, maturity stage, and qualitative heatmap remain consistent. A weekly signal must not stay isolated from the company baseline.
+   ```powershell
+   npm run doctor
+   npm run capabilities
+   npm run skills:check -- --target=codex
+   npm run research:run -- YYYY-MM-DD
+   ```
 
-The weekly research definition and the baseline research procedure in this repository remain the source of truth when external skills are absent or named differently.
+2. Record the returned `run_id`. Work only in `data/runs/<run_id>/` for this run.
+3. Read `manifest.json`, `discovery.json`, `verification.json`, `ontology-analysis.json`, `scenario-analysis.json`, `weekly-update.json`, `config/weekly-research.json`, `config/watchlist.json`, and `config/sources.json` before research.
+4. Do not silently install missing skills. Report each unavailable optional adapter with the URL in `config/skill-dependencies.json`, then use the repository fallback.
 
-Report verified changes, review candidates, source gaps, and the three most important discussion points.
+## Fixed sequence
+
+### 1. Create one common candidate pool
+
+Use these roles before assigning deeper work:
+
+- **Foresight Radar**: review the existing source map and the prior state. Collect official-source candidates for the full watchlist and identify genuine changes, not restatements.
+- **AIhot**: review selected items for the target period through all six market lenses in `config/weekly-research.json`. AIhot is discovery only. Preserve its linked original URL and never promote its summary directly to a fact.
+- **Opportunity Intelligence adapter, if available**: use its keyword expansion and surrounding-player discovery to identify new Japanese emerging companies, adjacent providers, and search terms. Do not use it to replace the all-company fixed watch.
+
+Save every possible item in `discovery.json` with a unique `id`, category, discovery method, original link, named entity where applicable, and a coverage note. A candidate is not a weekly signal.
+
+### 2. Split verification work only after the pool exists
+
+Use **Smart Research** for each material candidate. Verify an original official release, IR filing, product/release page, official repository, paper, or government source. Run contradiction checks for important claims.
+
+In `verification.json`, keep a separate row for each candidate with:
+
+- `id`, `candidate_id`, `status` (`confirmed`, `candidate`, `retracted`, or `not_verified`)
+- direct answer / source-backed fact
+- `primary_sources` with URLs, publisher, date, and short evidence
+- contradiction, unknown, and coverage notes
+
+All groups in the fixed watchlist must be checked each week. Priority changes research depth, never who is skipped. Do not create activity to fill empty companies.
+
+### 3. Build the current-state and relationship analysis
+
+Use **Palantir Ontology** principles with `config/ontology.json`:
+
+- objects: Company, AIActivity, Offering, Partnership, Source, and Change
+- relations: company performed activity; activity affects an offering or internal use; activity relates to a partner; every relation points to verification evidence
+- action class: `recommend` only. The action is to place a discussion/research item in the monitor; a human decides what to do externally.
+
+Write `ontology-analysis.json`. A cross-company pattern needs at least two confirmed verification IDs. State the pattern, evidence IDs, counterevidence, unknowns, and the next research question. Do not turn raw item counts into strength scores.
+
+### 4. Run MiroFish only when it has a real question
+
+MiroFish is optional and must not run merely because it is installed. Use it only when a decision-relevant theme has multiple confirmed facts and a focused question about adoption, competitive response, partner response, or regulatory reaction.
+
+Before execution, put a source package in `scenario-analysis.json` that names actors, dates, relationships, competing perspectives, and unknowns. If MiroFish is actually run, record the engine, input artifacts, runtime/report artifact paths or URLs, assumptions, and scenarios. Mark all output as `hypothesis`, not fact. If it is not used, leave `status` as `not_requested` or `not_run`.
+
+### 5. Publish verified data only
+
+1. Populate `weekly-update.json` with confirmed changes only. Every signal must have `verification_id` that links to a confirmed verification row.
+2. Update affected entity profiles through the established profile-batch process when the current position has actually changed.
+3. Run:
+
+   ```powershell
+   npm run research:validate -- <run_id>
+   npm run research:publish -- <run_id>
+   ```
+
+4. Do not report the run as complete until both commands succeed.
+
+## Output contract and boundaries
+
+| File | Meaning | May be shown as fact? |
+| --- | --- | --- |
+| `discovery.json` | Raw candidates and coverage | No |
+| `verification.json` | Primary-source evidence and contradictions | Only `confirmed` rows |
+| `ontology-analysis.json` | Evidence-linked cross-company structure | As analysis, never as an unqualified fact |
+| `scenario-analysis.json` | Optional hypotheses from a specific scenario | No, always labelled hypothesis |
+| `weekly-update.json` | Confirmed changes approved for app import | Yes, after validation |
+
+Finish with: coverage achieved, confirmed changes, candidates requiring review, source gaps, whether MiroFish was used, and the three most important discussion prompts.

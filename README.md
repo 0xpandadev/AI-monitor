@@ -52,7 +52,18 @@ npm start
 
 > AI Opportunity Monitorを今週分に更新してください。
 
-更新内容は取込前に検証され、確認済み情報、調査候補、情報源、未確認範囲を分けて保存します。アプリ自体はOpenAI APIやAnthropic APIを直接呼びません。
+この依頼は画面の更新ではなく、1回の**調査ラン**を実行します。候補発見、一次情報での確認、関係の構造化、必要時だけのシナリオ検討、確認済み更新の公開を順番に行います。アプリ自体はOpenAI APIやAnthropic APIを直接呼びません。
+
+手動で開始する場合は次の通りです。
+
+```powershell
+npm run research:run -- 2026-09-01
+# Codex / Claude Codeに、返されたrun_idでupdate-ai-opportunity-monitorを実行するよう依頼
+npm run research:validate -- weekly-2026-09-01
+npm run research:publish -- weekly-2026-09-01
+```
+
+詳細は[週次調査ランの運用モデル](docs/WEEKLY-RUN-OPERATING-MODEL.md)を参照してください。
 
 ## 3〜5年ベースライン
 
@@ -72,4 +83,4 @@ npm run profiles:import -- path\to\reviewed-batch.json
 
 ## 別のパソコンで使う
 
-GitHubからcloneし、`npm run doctor`と`npm start`を実行します。アプリ、監視対象、更新手順、検証スクリプトが同じリポジトリに含まれているため、チームメンバーも同じ形式で更新を継続できます。
+GitHubからcloneし、`npm run doctor`、`npm run skills:check -- --target=both`、`npm start`を実行します。アプリ、監視対象、更新手順、検証スクリプトが同じリポジトリに含まれているため、チームメンバーも同じ形式で更新を継続できます。Foresight Radar、Smart Research、AIhot、Palantir Ontologyは親スキルから役割別に呼び出されます。MiroFishとOpportunity Intelligenceは任意の分析・発見アダプターであり、未導入でも確認済み情報の収集・公開は継続できます。

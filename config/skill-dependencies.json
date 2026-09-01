@@ -138,6 +138,23 @@
       "fallback": "config/research-capabilities.json"
     },
     {
+      "id": "opportunity-intelligence",
+      "capabilities": ["keyword-discovery-adapter"],
+      "requirement": "optional-enhancement",
+      "delivery": "manual-adapter",
+      "aliases": ["opportunity-intelligence"],
+      "installable": false,
+      "source": {
+        "type": "github",
+        "url": "https://github.com/0xpandadev/Opportunity-Intelligence",
+        "web_url": "https://github.com/0xpandadev/Opportunity-Intelligence",
+        "pin_status": "not-pinned"
+      },
+      "source_status": "not-pinned-do-not-auto-install",
+      "release_action": "必要な探索ロジックを確認してから、固定コミットを指定して任意アダプターとして導入する",
+      "fallback": "Foresight Radarのsource-mapとAIhotの候補発見を利用する"
+    },
+    {
       "id": "primary-web-verification",
       "capabilities": ["primary-verification"],
       "requirement": "platform-capability",
