@@ -54,19 +54,14 @@
       ]
     },
     "enterprises": {
-      "label": "日本企業AI利活用マップ",
+      "label": "事業会社のAI活用・事業化マップ",
       "dimensions": [
-        { "id": "enterprise-ai", "label": "全社AI" },
-        { "id": "employee-genai", "label": "全社員向け" },
-        { "id": "proprietary-ai", "label": "独自開発" },
-        { "id": "customer-ai", "label": "顧客向け" },
-        { "id": "manufacturing-rd", "label": "製造・R&D" },
-        { "id": "sales-service", "label": "営業・顧客接点" },
-        { "id": "scm-quality", "label": "SCM・品質" },
-        { "id": "governance", "label": "統制・セキュリティ" },
-        { "id": "organization", "label": "組織・人材" },
-        { "id": "partnerships", "label": "提携・出資" },
-        { "id": "research", "label": "特許・研究" }
+        { "id": "internal-use", "label": "社内業務活用" },
+        { "id": "product-embedding", "label": "自社製品への組込み" },
+        { "id": "ai-business", "label": "AI事業・外販" },
+        { "id": "tech-research", "label": "独自技術・研究" },
+        { "id": "org-talent", "label": "組織・人材" },
+        { "id": "ecosystem", "label": "外部エコシステム" }
       ]
     },
     "startups": {

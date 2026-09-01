@@ -39,7 +39,7 @@ test('public product surface contains only the monitoring product',()=>{
   for(const phrase of forbidden)assert.equal(files.includes(phrase),false,`${phrase} leaked into public UI`);
   assert.match(files,/AI Opportunity Monitor/);
   assert.match(files,/コンサルマップ/);
-  assert.match(files,/日本企業AI利活用/);
+  assert.match(files,/事業会社のAI活用・提供状況/);
   assert.match(files,/更新履歴/);
   assert.match(files,/カテゴリ別ニュース/);
   assert.match(files,/コンサル分類/);
@@ -89,7 +89,7 @@ test('board is explicit when empty and every populated signal is sourced',()=>{
   assert.equal(data.metrics.profiles_complete,0);
   assert.deepEqual(data.intelligence.evidence_states.map(item=>item.id),['unknown','observed','active','scaled']);
   assert.deepEqual(data.intelligence.matrices.consulting.dimensions.map(item=>item.id),['client-offerings','delivery-capability','internal-adoption','reusable-assets','external-ecosystem','ai-talent-org']);
-  assert.ok(data.intelligence.matrices.enterprises.dimensions.some(item=>item.id==='manufacturing-rd'));
+  assert.deepEqual(data.intelligence.matrices.enterprises.dimensions.map(item=>item.id),['internal-use','product-embedding','ai-business','tech-research','org-talent','ecosystem']);
   if(data.signals.length===0){
     assert.equal(data.brief.headline,'初回の定点観測前です');
     return;

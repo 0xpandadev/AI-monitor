@@ -8,7 +8,7 @@ const viewMeta={
   insights:['EVIDENCE TO DECISION','示唆ボード'],
   'ai-companies':['MODEL / PLATFORM WATCH','主要AI企業'],
   consulting:['CONSULTING AI MAP','コンサルマップ'],
-  enterprises:['JAPAN ENTERPRISE ADOPTION','日本企業AI利活用'],
+  enterprises:['JAPAN ENTERPRISE ADOPTION','事業会社のAI活用・提供状況'],
   startups:['JAPAN AI CHALLENGERS','スタートアップ・新興企業'],
   saas:['SAAS REPOSITIONING','SaaSのAI戦略'],
   archive:['MONTHLY MEMORY','月次アーカイブ'],
@@ -26,7 +26,19 @@ function signalsFor(ids){const allowed=new Set(entities(ids).map(entity=>entity.
 function stateDefinition(id){return state.data.intelligence.evidence_states.find(item=>item.id===id)||{id:'unknown',label:'未確認',definition:'一次情報による確認がまだない'};}
 function maturityLabel(id){return state.data.intelligence.maturity_stages.find(item=>item.id===id)?.label||'未確認';}
 function methodLabel(id){return state.data.intelligence.development_methods.find(item=>item.id===id)?.label||id;}
-function profileState(entity,dimension){return entity.profile?.dimensions?.[dimension]||'unknown';}
+function profileState(entity,dimension){
+  const values={unknown:0,observed:1,active:2,scaled:3};
+  const maxState=(...ids)=>ids.reduce((best,id)=>{const value=entity.profile?.dimensions?.[id]||'unknown';return values[value]>(values[best]||0)?value:best;},'unknown');
+  if(entity.group_id==='enterprises'){
+    if(dimension==='internal-use')return maxState('enterprise-ai','employee-genai');
+    if(dimension==='product-embedding')return maxState('customer-ai','sales-service');
+    if(dimension==='ai-business')return entity.profile?.offerings?.length?maxState('customer-ai','proprietary-ai'):'unknown';
+    if(dimension==='tech-research')return maxState('proprietary-ai','manufacturing-rd','research');
+    if(dimension==='org-talent')return entity.profile?.dimensions?.organization||'unknown';
+    if(dimension==='ecosystem')return entity.profile?.dimensions?.partnerships||'unknown';
+  }
+  return entity.profile?.dimensions?.[dimension]||'unknown';
+}
 function matrixFor(id){return state.data.intelligence.matrices[id]||{label:'企業AI現在地',dimensions:[]};}
 function watchLabel(entity){if(entity.profile?.status==='complete')return '基準調査完了';if(entity.profile)return '基礎情報は部分確認';return '基準情報を調査待ち';}
 function evidenceCount(entity){return (entity.profile?.history?.length||0)+(entity.signal_count||0);}
@@ -129,7 +141,7 @@ function setView(view){state.view=view;state.searchQuery='';state.relationshipTa
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
-  const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界の基盤モデル、Geminiを含む大手プラットフォーム、中国・アジア勢、データ/オントロジー、AIクラウド、推論基盤、半導体・HBM、AIサーバーを一つの供給網として比較します。'),consulting:()=>renderCategory(['consulting'],'コンサル各社を、顧客向け提供、実装・定着、自社AI活用、共通資産、外部連携、AI人材・組織の6軸で比較します。業界・業務領域と個別オファリングは詳細で確認します。'),enterprises:()=>renderCategory(['enterprises'],'日本企業の全社AI、独自開発、製造・R&D、顧客向けAI、SCM、統制、組織を業界別・企業別に確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
+  const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界の基盤モデル、Geminiを含む大手プラットフォーム、中国・アジア勢、データ/オントロジー、AIクラウド、推論基盤、半導体・HBM、AIサーバーを一つの供給網として比較します。'),consulting:()=>renderCategory(['consulting'],'コンサル各社を、顧客向け提供、実装・定着、自社AI活用、共通資産、外部連携、AI人材・組織の6軸で比較します。業界・業務領域と個別オファリングは詳細で確認します。'),enterprises:()=>renderCategory(['enterprises'],'事業会社を、社内業務活用、自社製品への組込み、AI事業・外販、独自技術・研究、組織・人材、外部エコシステムの6軸で比較します。製造・営業・SCMなどの対象業務は企業詳細で確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
   let html=(views[state.view]||renderDigest)();
   html=html.replaceAll('現在地','AI活用・提供状況');
   $('#content').innerHTML=html;
@@ -451,7 +463,7 @@ function renderEntityMatrix(list,matrix){
 
 function renderIndustryMatrix(list,matrix){
   const segments=Object.entries(list.reduce((result,entity)=>{const key=entity.segment||'未分類';(result[key]||=[]).push(entity);return result;},{}));
-  const dimensions=matrix.dimensions.filter(item=>['enterprise-ai','proprietary-ai','manufacturing-rd','customer-ai','organization'].includes(item.id));
+  const dimensions=matrix.dimensions.filter(item=>['internal-use','product-embedding','ai-business','tech-research'].includes(item.id));
   const order=['unknown','observed','active','scaled'];
   return `<section class="matrix-panel industry"><header><div><span>業界別AI導入状況</span><h2>調査済み企業から見える現在地</h2></div><p>業界全体の導入率ではありません。各業界で基礎情報を確認できた企業の最も進んだ状態です。</p></header><div class="table-scroll"><table class="industry-matrix"><thead><tr><th>業界 / 調査カバレッジ</th>${dimensions.map(item=>`<th>${esc(item.label)}</th>`).join('')}</tr></thead><tbody>${segments.map(([segment,members])=>{const profiled=members.filter(item=>item.profile).length;return `<tr><th>${esc(segment)}<span>${profiled} / ${members.length}社</span></th>${dimensions.map(dimension=>{const values=members.map(entity=>profileState(entity,dimension.id));const value=values.sort((a,b)=>order.indexOf(b)-order.indexOf(a))[0]||'unknown';return `<td><span class="industry-cell ${value}" title="調査済み企業の最上位確認状態">${stateGlyph[value]} ${esc(stateDefinition(value).label)}</span></td>`;}).join('')}</tr>`;}).join('')}</tbody></table></div></section>`;
 }
