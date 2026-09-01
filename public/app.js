@@ -1,4 +1,4 @@
-const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',relationshipTab:'changes',periodScope:'week',graphPeriodScope:'week',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
+const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',relationshipTab:'changes',periodScope:'week',graphPeriodScope:'week',playerGroup:'all',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
@@ -91,6 +91,7 @@ function bind(){
     const graphFilter=event.target.closest('[data-graph-filter]');if(graphFilter){state.graphFilter=graphFilter.dataset.graphFilter;render();return;}
     const relationshipTab=event.target.closest('[data-relationship-tab]');if(relationshipTab){state.relationshipTab=relationshipTab.dataset.relationshipTab;render();return;}
     const periodScope=event.target.closest('[data-period-scope]');if(periodScope){const target=periodScope.dataset.periodTarget==='graph'?'graphPeriodScope':'periodScope';state[target]=periodScope.dataset.periodScope;render();return;}
+    const playerGroup=event.target.closest('[data-player-group]');if(playerGroup){state.playerGroup=playerGroup.dataset.playerGroup;render();return;}
     const digestFilter=event.target.closest('[data-digest-filter]');if(digestFilter){state.digestCategory=digestFilter.dataset.digestFilter;render();return;}
     const companyFilter=event.target.closest('[data-company-filter]');if(companyFilter){state.companyFilter=companyFilter.dataset.companyFilter;render();return;}
     const aiTypeFilter=event.target.closest('[data-ai-type-filter]');if(aiTypeFilter){state.aiTypeFilter=aiTypeFilter.dataset.aiTypeFilter;render();return;}
@@ -107,7 +108,7 @@ function bind(){
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeDrawer();closeMeetingMode();}if(!$('#meeting-mode').hidden&&event.key==='ArrowRight')moveMeeting(1);if(!$('#meeting-mode').hidden&&event.key==='ArrowLeft')moveMeeting(-1);});
 }
 function navigate(event){const button=event.target.closest('[data-view]');if(button)setView(button.dataset.view);}
-function setView(view){state.view=view;state.query='';state.relationshipTab='changes';state.periodScope='week';state.graphPeriodScope='week';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
+function setView(view){state.view=view;state.query='';state.relationshipTab='changes';state.periodScope='week';state.graphPeriodScope='week';state.playerGroup='all';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
@@ -259,9 +260,23 @@ function renderReadout(window){
   const multi=periodCompanyRows(window).filter(row=>row.signals.length>1).length;
   return `<section class="readout-band"><article><span>最多の観測層</span><b>${totals[0]?.count?esc(totals[0].column.label):'未確認'}</b><small>${totals[0]?.count||0}件 · ${esc(window.definition.label)}</small></article><article><span>複数更新の企業</span><b>${multi}社</b><small>同じ期間に2件以上の確認</small></article><article><span>読む順番</span><b>点 → 根拠 → 示唆</b><small>件数で優劣を判断しない</small></article></section>`;
 }
-function renderConsultingUpdates(window){
-  const updates=window.current.filter(signal=>signal.entity?.group_id==='consulting').slice().sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,5);
-  return `<section class="consulting-updates"><header><div><span>CONSULTING WATCH</span><h2>この期間のコンサル更新</h2><p>コンサル能力マップとは分け、選択期間に実際に確認できた更新だけを表示します。</p></div><button data-jump="consulting">能力定義・全社一覧 →</button></header>${updates.length?`<div class="consulting-update-list">${updates.map(signal=>`<button data-signal="${esc(signal.id)}"><span>${esc(signal.entity?.name||signal.entity_id)} · ${esc(signal.published_at)}</span><b>${esc(shortLabel(signal.title,68))}</b><small>${esc(signal.category)} · ${esc(signal.source?.publisher||'一次情報')}</small></button>`).join('')}</div>`:'<div class="empty-inline"><b>${esc(window.definition.label)}のコンサル更新は未確認です</b><p>能力マップの状態と、期間内のニュースは別物として扱います。</p></div>'}</section>`;
+const playerGroups=[
+  {id:'consulting',label:'コンサル'},
+  {id:'enterprises',label:'日本企業'},
+  {id:'startups',label:'スタートアップ・新興'},
+  {id:'saas',label:'SaaS'},
+  {id:'ai-companies',label:'AI企業'}
+];
+function playerGroupId(signal){
+  const group=signal.entity?.group_id;
+  if(group==='global-saas'||group==='japan-saas')return 'saas';
+  return playerGroups.some(item=>item.id===group)?group:'ai-companies';
+}
+function renderPlayerUpdates(window){
+  const updates=window.current.slice().sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)));
+  const selected=state.playerGroup==='all'?updates:updates.filter(signal=>playerGroupId(signal)===state.playerGroup);
+  const totalCompanies=new Set(updates.map(signal=>signal.entity_id)).size;
+  return `<section class="player-movements"><header><div><span>PLAYER MOVEMENTS / ${esc(window.definition.label)}</span><h2>${esc(window.definition.label)}のプレイヤー動向</h2><p>選択期間に公式発表・公式事例で確認できた更新を、プレイヤー種別で束ねています。企業プロフィールの能力マップとは別の「期間内イベント」です。</p></div><div class="player-total"><b>${updates.length}</b><small>確認済み更新 · ${totalCompanies}社</small></div></header><div class="player-group-band"><button class="${state.playerGroup==='all'?'active':''}" data-player-group="all"><span>すべて</span><b>${updates.length}</b><small>${totalCompanies}社</small></button>${playerGroups.map(group=>{const items=updates.filter(signal=>playerGroupId(signal)===group.id);return `<button class="${state.playerGroup===group.id?'active':''}" data-player-group="${group.id}"><span>${esc(group.label)}</span><b>${items.length}</b><small>${new Set(items.map(signal=>signal.entity_id)).size}社</small></button>`;}).join('')}</div>${selected.length?`<div class="player-update-list">${selected.slice(0,10).map(signal=>{const group=playerGroups.find(item=>item.id===playerGroupId(signal));return `<button data-signal="${esc(signal.id)}"><time>${esc(signal.published_at)}</time><span>${esc(group?.label||'AI企業')}</span><strong>${esc(signal.entity?.name||signal.entity_id)}</strong><b>${esc(shortLabel(signal.title,72))}</b><small>${esc(signal.category)} · ${esc(signal.source?.publisher||'一次情報')}</small></button>`;}).join('')}</div>`:'<div class="empty-inline"><b>${esc(window.definition.label)}に該当する更新は未確認です</b><p>公式根拠が追加されると、このプレイヤー動向に表示します。</p></div>'}<footer>表示対象は選択期間内の確認済み一次情報です。件数は企業の優劣や市場シェアではありません。</footer></section>`;
 }
 function renderPeriodScopePanel(){
   return `<section class="period-scope-panel"><div><span>WINDOW CONTROL</span><h2>市場状況の更新期間</h2><p>下のAIレイヤーマトリクス、読み取り、コンサル更新にだけ適用します。関係マップの期間は関係マップ内で別に選択します。</p></div>${periodRail(['week','month','quarter','year'],state.periodScope,'market')}</section>`;
@@ -269,7 +284,7 @@ function renderPeriodScopePanel(){
 function renderThemeSummary(){
   const window=periodWindow();
   const companies=new Set(window.current.map(signal=>signal.entity_id).filter(Boolean)).size;
-  return `<div class="theme-summary observatory-shell"><section class="observatory-hero"><div><span>AI MARKET MOVEMENTS</span><h2>AI市場の動きを確認する</h2><p>選択した期間に、どの企業がAI市場のどの層で更新したかを比較します。</p></div></section><div class="observatory-meta"><span>${esc(window.definition.label)} · 基準日 ${esc(window.reference)}</span><b>${window.current.length}件の更新</b><b>${companies}社が関与</b><em>一次情報のみ</em></div>${renderPeriodScopePanel()}${renderReadout(window)}${renderActivityMatrix(window)}${renderConsultingUpdates(window)}</div>`;
+  return `<div class="theme-summary observatory-shell"><section class="observatory-hero"><div><span>AI MARKET MOVEMENTS</span><h2>AI市場の動きを確認する</h2><p>選択した期間に、どの企業がAI市場のどの層で更新したかを比較します。</p></div></section><div class="observatory-meta"><span>${esc(window.definition.label)} · 基準日 ${esc(window.reference)}</span><b>${window.current.length}件の更新</b><b>${companies}社が関与</b><em>一次情報のみ</em></div>${renderPeriodScopePanel()}${renderReadout(window)}${renderActivityMatrix(window)}${renderPlayerUpdates(window)}</div>`;
 }
 
 function relationshipEdges(graph,relationType){
