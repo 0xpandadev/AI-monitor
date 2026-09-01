@@ -119,7 +119,7 @@ function bind(){
     const signal=event.target.closest('[data-signal]');if(signal){openSignal(signal.dataset.signal);return;}
     const insight=event.target.closest('[data-insight]');if(insight){openInsight(insight.dataset.insight);return;}
     const graphFilter=event.target.closest('[data-graph-filter]');if(graphFilter){state.graphFilter=graphFilter.dataset.graphFilter;render();return;}
-    const relationshipTab=event.target.closest('[data-relationship-tab]');if(relationshipTab){state.relationshipTab=relationshipTab.dataset.relationshipTab;if(state.relationshipTab==='offers')state.graphFilter='offers';if(state.relationshipTab==='partners')state.graphFilter='partners-with';render();return;}
+    const relationshipTab=event.target.closest('[data-relationship-tab]');if(relationshipTab){state.relationshipTab=relationshipTab.dataset.relationshipTab;if(state.relationshipTab==='changes')state.graphFilter='changed-in';if(state.relationshipTab==='offers')state.graphFilter='offers';if(state.relationshipTab==='partners')state.graphFilter='partners-with';render();return;}
     const periodScope=event.target.closest('[data-period-scope]');if(periodScope){const target=periodScope.dataset.periodTarget==='graph'?'graphPeriodScope':'periodScope';state[target]=periodScope.dataset.periodScope;render();return;}
     const playerGroup=event.target.closest('[data-player-group]');if(playerGroup){state.playerGroup=playerGroup.dataset.playerGroup;render();return;}
     const digestFilter=event.target.closest('[data-digest-filter]');if(digestFilter){state.digestCategory=digestFilter.dataset.digestFilter;render();return;}
@@ -354,20 +354,64 @@ function themeFamily(category=''){
   if(/提携|出資|M&A|組織|人材/.test(value))return 'エコシステム';
   return '業務実装';
 }
+function importanceWeight(value){
+  return {critical:3,high:2,medium:1,low:.5}[value]||1;
+}
+function clampScore(value){
+  return Math.max(0,Math.min(1,value));
+}
+function pointPercent(score){
+  return Math.round(14+clampScore(score)*72);
+}
+function radarMethodology(){
+  return {
+    velocity:[
+      ['当期件数','35%','選択期間に確認した同一テーマの更新数'],
+      ['前期比','25%','前の同じ長さの期間と比べた増減'],
+      ['直近性','20%','基準日に近い更新ほど高い'],
+      ['重要度','20%','critical / high / medium / low の重み']
+    ],
+    diffusion:[
+      ['企業数','40%','同じテーマに関与した監視企業数'],
+      ['プレイヤー種別','25%','AI企業、SaaS、コンサル、事業会社などの広がり'],
+      ['市場レイヤー','20%','算力、モデル、アプリ、導入などの役割の広がり'],
+      ['原典数','15%','異なる公式・一次情報源の数']
+    ],
+    evidence:[
+      ['根拠強度','点の大きさ','一次情報比率、原典数、確認済み件数から算出'],
+      ['色','テーマ系統','能力供給、業務実装、事業化、統制、エコシステムを区別']
+    ]
+  };
+}
 function marketRadar(window){
   const themes=periodThemeSummary(state.periodScope).filter(item=>item.current.length);
+  const maxCurrent=Math.max(1,...themes.map(item=>item.current.length));
   const maxCompanies=Math.max(1,...themes.map(item=>item.companies));
   const maxSources=Math.max(1,...themes.map(item=>item.sources));
+  const maxLayers=Math.max(1,...themes.map(item=>new Set(item.current.map(activityLayer)).size));
+  const maxPlayers=Math.max(1,...themes.map(item=>new Set(item.current.map(playerGroupId)).size));
+  const spanDays=Math.max(1,window.definition.days);
   return themes.slice(0,9).map((item,index)=>{
-    const delta=item.previous.length?item.current.length-item.previous.length:item.current.length;
-    const pace=Math.max(18,Math.min(90,42+(delta>0?26:delta===0?10:0)+Math.min(18,item.current.length*4)));
-    const breadth=Math.max(18,Math.min(90,26+(item.companies/maxCompanies)*38+(item.sources/maxSources)*26));
-    return {...item,index,pace,breadth,family:themeFamily(item.category)};
+    const delta=item.current.length-item.previous.length;
+    const growth=item.previous.length?Math.max(-1,Math.min(2,delta/item.previous.length)):(item.current.length?1:0);
+    const avgImportance=item.current.reduce((sum,signal)=>sum+importanceWeight(signal.importance),0)/Math.max(1,item.current.length);
+    const recency=item.current.reduce((sum,signal)=>{const ageDays=Math.max(0,(window.end-Date.parse(signal.published_at))/86400000);return sum+Math.max(0,1-ageDays/spanDays);},0)/Math.max(1,item.current.length);
+    const players=new Set(item.current.map(playerGroupId)).size;
+    const layers=new Set(item.current.map(activityLayer)).size;
+    const primaryCount=item.current.filter(signal=>signal.source?.tier==='primary'||signal.verification==='confirmed').length;
+    const primaryRatio=primaryCount/Math.max(1,item.current.length);
+    const velocityScore=clampScore((item.current.length/maxCurrent)*.35+((growth+1)/3)*.25+recency*.2+(avgImportance/3)*.2);
+    const diffusionScore=clampScore((item.companies/maxCompanies)*.4+(players/maxPlayers)*.25+(layers/maxLayers)*.2+(item.sources/maxSources)*.15);
+    const evidenceScore=clampScore(primaryRatio*.45+(item.sources/maxSources)*.25+(item.current.length/maxCurrent)*.3);
+    const pace=pointPercent(velocityScore),breadth=pointPercent(diffusionScore);
+    const quadrant=velocityScore>=.55&&diffusionScore>=.55?'優先調査':velocityScore<.55&&diffusionScore>=.55?'構造テーマ':velocityScore>=.55?'新しい動き':'継続観測';
+    return {...item,index,delta,growth,players,layers,primaryRatio,velocityScore,diffusionScore,evidenceScore,pace,breadth,quadrant,family:themeFamily(item.category)};
   });
 }
 function renderMarketRadar(window){
   const points=marketRadar(window);
-  return `<section class="intel-radar"><header><div><span>MARKET THEME RADAR</span><h2>市場テーマ・レーダー</h2><p>横軸は直近の動きの速さ、縦軸は確認企業・市場レイヤーへの広がりです。市場規模や企業の優劣を示す図ではありません。</p></div><div class="intel-key"><i></i><span>今すぐ深掘り</span><i></i><span>観測を継続</span></div></header><div class="radar-stage"><div class="radar-quadrant top-left">構造的に追う</div><div class="radar-quadrant top-right">今すぐ深掘り</div><div class="radar-quadrant bottom-left">観測継続</div><div class="radar-quadrant bottom-right">早期シグナル</div><div class="radar-axis radar-x"><span>動きは緩やか</span><b>動きの速さ</b><span>動きが速い</span></div><div class="radar-axis radar-y"><span>広がりが大きい</span><b>市場への広がり</b><span>限定的</span></div>${points.map(item=>`<button class="radar-point ${item.family}" style="left:${item.pace}%;bottom:${item.breadth}%" data-signal="${esc(item.latest?.id||'')}"><i></i><span>${esc(shortLabel(item.category,15))}</span><small>${item.current.length}件 / ${item.companies}社</small></button>`).join('')}</div><footer>広がりは、この期間に確認した関与企業数・情報源数から算出する観測上の代理指標です。点を押すと、最新の原典を開きます。</footer></section>`;
+  const method=radarMethodology();
+  return `<section class="intel-radar"><header><div><span>MARKET THEME RADAR</span><h2>市場テーマ・レーダー</h2><p>選択期間の確認済み更新を、同じ計算式で配置します。横は動きの強さ、縦は広がり、点の大きさは根拠強度です。</p></div><div class="intel-key"><i></i><span>根拠強度が高い</span><i></i><span>観測継続</span></div></header><div class="radar-stage"><div class="radar-quadrant top-left">構造テーマ</div><div class="radar-quadrant top-right">優先調査</div><div class="radar-quadrant bottom-left">継続観測</div><div class="radar-quadrant bottom-right">新しい動き</div><div class="radar-axis radar-x"><span>緩やか</span><b>動きの強さ</b><span>強い</span></div><div class="radar-axis radar-y"><span>広い</span><b>市場への広がり</b><span>限定的</span></div>${points.map(item=>`<button class="radar-point ${item.family}" style="left:${item.pace}%;bottom:${item.breadth}%;--point-size:${Math.round(9+item.evidenceScore*10)}px" data-signal="${esc(item.latest?.id||'')}" title="${esc(`${item.category}: 動き${Math.round(item.velocityScore*100)} / 広がり${Math.round(item.diffusionScore*100)} / 根拠${Math.round(item.evidenceScore*100)}`)}"><i></i><span>${esc(shortLabel(item.category,15))}</span><small>${item.current.length}件 / ${item.companies}社</small></button>`).join('')}</div><div class="radar-method-grid"><article><b>横軸: 動きの強さ</b>${method.velocity.map(([name,weight,note])=>`<span><em>${esc(weight)}</em><strong>${esc(name)}</strong><small>${esc(note)}</small></span>`).join('')}</article><article><b>縦軸: 市場への広がり</b>${method.diffusion.map(([name,weight,note])=>`<span><em>${esc(weight)}</em><strong>${esc(name)}</strong><small>${esc(note)}</small></span>`).join('')}</article></div>${points.length?`<div class="radar-point-list">${points.map(item=>`<button data-signal="${esc(item.latest?.id||'')}"><b>${esc(item.category)}</b><span>${esc(item.quadrant)}</span><small>動き ${Math.round(item.velocityScore*100)} / 広がり ${Math.round(item.diffusionScore*100)} / 根拠 ${Math.round(item.evidenceScore*100)} · 当期 ${item.current.length}件、前期 ${item.previous.length}件、${item.companies}社、${item.layers}層、${item.sources}原典</small></button>`).join('')}</div>`:''}<footer>このレーダーは市場規模や企業順位ではありません。週次で確認した事実の分布から「どのテーマを会議で深掘りするか」を決めるための観測モデルです。</footer></section>`;
 }
 function renderStructureMap(window){
   const groups=['能力供給','業務実装','事業化','統制','エコシステム'].map(label=>({label,signals:window.current.filter(signal=>themeFamily(signal.category)===label)}));
@@ -422,8 +466,10 @@ function renderRelationships(){
   const periodGraph=state.graphFilter==='changed-in';
   const graphControl=periodGraph?`<div class="graph-period-control"><div><span>RELATIONSHIP WINDOW</span><b>関係マップの更新期間</b><small>企業×変化テーマだけに適用します。</small></div>${periodRail(['week','month','quarter','year'],state.graphPeriodScope,'graph')}</div>`:'<div class="graph-static-note"><span>BASELINE RELATIONSHIPS</span><b>基礎関係</b><small>顧客向け提供・外部提携は、プロフィール根拠に基づく全期間の基礎情報です。</small></div>';
   const tabNav=`<nav class="relationship-tabs" aria-label="AI市場の見方">${tabs.map(([id,label])=>`<button class="relationship-tab ${state.relationshipTab===id?'active':''}" data-relationship-tab="${id}">${label}</button>`).join('')}</nav>`;
-  if(state.relationshipTab==='changes')return `${tabNav}${pane}`;
-  return `<section class="relationship-context"><span>DETAILED VIEW</span><h2>${state.relationshipTab==='offers'?'顧客向け提供':'外部提携'}を確認する</h2><p>企業を選ぶと、提供内容・関係先・公式根拠を詳細で確認できます。</p></section>${tabNav}${pane}<section class="graph-panel relationship-explorer"><div class="graph-panel-inner"><header><div><span>関係マップ</span><h2>AI市場の関係を俯瞰する</h2><p>全体の構造を一画面で確認し、必要な企業・更新だけをクリックして詳細を開きます。</p></div><div class="graph-filters">${[['offers','企業×提供'],['partners-with','企業×提携']].map(([id,label])=>`<button class="${state.graphFilter===id?'active':''}" data-graph-filter="${id}">${label} <b>${relationshipEdges(graph,id).length}</b></button>`).join('')}</div></header>${graphControl}${renderNetworkGraph(graph,state.graphFilter)}<footer>${esc(graph.caveat)} 代表12件を表示。顧客向け提供・外部提携は、プロフィール根拠に基づく基礎関係です。提供の個別根拠 ${offerCounts.item}件、提携の個別根拠 ${partnerCounts.item}件。</footer></div></section>`;
+  const graphFilters=state.relationshipTab==='changes'?[['changed-in','企業×変化テーマ'],['offers','企業×提供'],['partners-with','企業×提携']]:[['offers','企業×提供'],['partners-with','企業×提携']];
+  const graphPanel=`<section class="graph-panel relationship-explorer ${state.relationshipTab==='changes'?'compact-map':''}"><div class="graph-panel-inner"><header><div><span>関係マップ</span><h2>企業・テーマ・提供・提携のつながり</h2><p>一覧で気になった論点を、企業とテーマ、提供内容、提携先の関係として確認します。全体構造を見るための探索図です。</p></div><div class="graph-filters">${graphFilters.map(([id,label])=>`<button class="${state.graphFilter===id?'active':''}" data-graph-filter="${id}">${label} <b>${relationshipEdges(graph,id).length}</b></button>`).join('')}</div></header>${graphControl}${renderNetworkGraph(graph,state.graphFilter)}<footer>${esc(graph.caveat)} 代表12件を表示。提供の個別根拠 ${offerCounts.item}件、提携の個別根拠 ${partnerCounts.item}件。線は市場規模ではなく、登録済み根拠で確認できた関係です。</footer></div></section>`;
+  if(state.relationshipTab==='changes')return `${tabNav}${pane}${graphPanel}`;
+  return `<section class="relationship-context"><span>DETAILED VIEW</span><h2>${state.relationshipTab==='offers'?'顧客向け提供':'外部提携'}を確認する</h2><p>企業を選ぶと、提供内容・関係先・公式根拠を詳細で確認できます。</p></section>${tabNav}${pane}${graphPanel}`;
 }
 
 function renderNetworkGraph(graph,relationType){
