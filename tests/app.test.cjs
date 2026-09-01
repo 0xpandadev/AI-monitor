@@ -43,7 +43,8 @@ test('public product surface contains only the monitoring product',()=>{
   assert.match(files,/更新履歴/);
   assert.match(files,/カテゴリ別ニュース/);
   assert.match(files,/コンサル分類/);
-  assert.match(files,/会議モード/);
+  assert.match(files,/企業・テーマを検索/);
+  assert.match(files,/検索結果/);
   assert.match(files,/自社AI活用/);
   assert.match(files,/AI市場の動き/);
   assert.match(files,/示唆ボード/);

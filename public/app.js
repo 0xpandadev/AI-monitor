@@ -1,4 +1,4 @@
-const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',relationshipTab:'changes',periodScope:'week',graphPeriodScope:'week',playerGroup:'all',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
+const state={data:null,view:'digest',searchQuery:'',graphFilter:'changed-in',relationshipTab:'changes',periodScope:'week',graphPeriodScope:'week',playerGroup:'all',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
@@ -62,6 +62,22 @@ function valueFilters(list,field){
   const values=[...new Set(list.map(entity=>entity[field]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja'));
   return [{id:'all',label:'すべて'},...values.map(value=>({id:value,label:value}))];
 }
+function searchMatches(value,query){return String(value||'').toLowerCase().includes(query);}
+function closeSearchResults(){const panel=$('#search-results');if(!panel)return;panel.hidden=true;panel.innerHTML='';}
+function renderSearchResults(){
+  const panel=$('#search-results'),query=state.searchQuery;
+  if(!query){closeSearchResults();return;}
+  const companies=state.data.entities.filter(entity=>searchMatches(`${entity.name} ${entity.group_label||''} ${entity.segment||''} ${entity.region_tag||''}`,query)).slice(0,8);
+  const signals=state.data.signals.filter(signal=>searchMatches(`${signal.title} ${signal.summary} ${signal.category} ${signal.entity?.name||''}`,query)).slice(0,5);
+  panel.innerHTML=`<div class="search-results-head"><b>検索結果</b><small>企業 ${companies.length}件 · 更新 ${signals.length}件</small></div>${companies.length?`<section><span>企業</span>${companies.map(entity=>`<button data-entity="${esc(entity.id)}"><b>${esc(entity.name)}</b><small>${esc(entity.group_label||'')} · ${esc(entity.segment||'未分類')}</small></button>`).join('')}</section>`:''}${signals.length?`<section><span>更新・テーマ</span>${signals.map(signal=>`<button data-signal="${esc(signal.id)}"><b>${esc(shortLabel(signal.title,58))}</b><small>${esc(signal.entity?.name||signal.entity_id)} · ${esc(signal.published_at)}</small></button>`).join('')}</section>`:''}${!companies.length&&!signals.length?'<p>一致する企業・更新はありません。</p>':''}`;
+  panel.hidden=false;
+}
+function selectSearchResult(event){
+  const entity=event.target.closest('[data-entity]');const signal=event.target.closest('[data-signal]');
+  if(!entity&&!signal)return;
+  state.searchQuery='';$('#global-search').value='';closeSearchResults();
+  if(entity)openEntity(entity.dataset.entity);else openSignal(signal.dataset.signal);
+}
 
 async function api(path,options={}){
   const response=await fetch(path,{headers:{'Content-Type':'application/json',...(options.headers||{})},...options});
@@ -82,8 +98,8 @@ async function init(){
 
 function bind(){
   $('#primary-nav').addEventListener('click',navigate);$('.sidebar-secondary').addEventListener('click',navigate);
-  $('#global-search').addEventListener('input',event=>{state.query=event.target.value.trim().toLowerCase();render();});
-  $('#meeting-mode-button').addEventListener('click',openMeetingMode);
+  $('#global-search').addEventListener('input',event=>{state.searchQuery=event.target.value.trim().toLowerCase();renderSearchResults();});
+  $('#search-results').addEventListener('click',selectSearchResult);
   $('#content').addEventListener('click',event=>{
     const entity=event.target.closest('[data-entity]');if(entity){openEntity(entity.dataset.entity);return;}
     const signal=event.target.closest('[data-signal]');if(signal){openSignal(signal.dataset.signal);return;}
@@ -104,11 +120,10 @@ function bind(){
     const signal=event.target.closest('[data-signal]');if(signal)openSignal(signal.dataset.signal);
   });
   $('#drawer-close').addEventListener('click',closeDrawer);$('#drawer-backdrop').addEventListener('click',closeDrawer);
-  $('#meeting-close').addEventListener('click',closeMeetingMode);$('#meeting-prev').addEventListener('click',()=>moveMeeting(-1));$('#meeting-next').addEventListener('click',()=>moveMeeting(1));
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeDrawer();closeMeetingMode();}if(!$('#meeting-mode').hidden&&event.key==='ArrowRight')moveMeeting(1);if(!$('#meeting-mode').hidden&&event.key==='ArrowLeft')moveMeeting(-1);});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeDrawer();closeSearchResults();}});
 }
 function navigate(event){const button=event.target.closest('[data-view]');if(button)setView(button.dataset.view);}
-function setView(view){state.view=view;state.query='';state.relationshipTab='changes';state.periodScope='week';state.graphPeriodScope='week';state.playerGroup='all';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
+function setView(view){state.view=view;state.searchQuery='';state.relationshipTab='changes';state.periodScope='week';state.graphPeriodScope='week';state.playerGroup='all';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';closeSearchResults();$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
@@ -134,7 +149,6 @@ function renderDigestNews(signals){
   let feed=signalFeed(signals);
   const counts=categoryCounts(feed),active=state.digestCategory;
   if(active!=='all')feed=feed.filter(signal=>signal.category===active);
-  if(state.query)feed=feed.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''} ${signal.category}`.toLowerCase().includes(state.query));
   const shown=feed.slice().sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,14);
   const total=counts.reduce((sum,item)=>sum+item.count,0);
   return `<section class="digest-news-board"><div class="digest-news-list"><header><div><span>カテゴリ別ニュース</span><h2>今週・今回取り込みの確認済み情報</h2></div><b>${shown.length} / ${feed.length}件</b></header>${shown.length?shown.map(signal=>`<article class="digest-news-card ${esc(signal.importance)}"><button data-signal="${esc(signal.id)}"><time>${esc(signal.published_at)}</time><strong>${esc(signal.entity?.name||signal.entity_id)}</strong><h3>${esc(signal.title)}</h3><p>${esc(signal.summary)}</p><footer><span>${esc(signal.category)}</span><small>${esc(signal.source?.publisher||'source')}</small></footer></button></article>`).join(''):'<div class="empty-inline"><b>該当するニュースはありません</b><p>カテゴリまたは検索条件を変えてください。</p></div>'}</div><aside class="digest-category-rail"><header><span>タグで絞る</span><h3>カテゴリ</h3><p>件数は登録済み根拠の数です。市場評価ではありません。</p></header><button class="${active==='all'?'active':''}" data-digest-filter="all"><span>すべて</span><b>${total}</b></button>${counts.map(item=>`<button class="${active===item.category?'active':''}" data-digest-filter="${esc(item.category)}"><span>${esc(item.category)}</span><b>${item.count}</b></button>`).join('')}</aside></section>`;
@@ -339,7 +353,6 @@ function renderInsights(){
 
 function renderLedgerPage(signals){
   let filtered=signals;
-  if(state.query)filtered=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''} ${signal.category}`.toLowerCase().includes(state.query));
   return `<section class="category-intro"><div><span>Evidence-backed changes</span><h2>ニュースを更新履歴として残す</h2><p>毎週拾った確認済み情報を、企業プロフィールに積み上がる差分ログとして保存します。ニュース閲覧はダイジェスト、長期比較はこの更新履歴で見ます。</p></div><dl><div><dt>確認済み更新</dt><dd>${filtered.length}</dd></div><div><dt>一次情報</dt><dd>${filtered.filter(item=>item.source?.tier==='primary').length}</dd></div></dl></section><section class="ledger-board standalone"><header><div><span>更新履歴</span><h2>${esc(state.data.brief.period?.label||'全期間')}</h2></div><button data-method>定義を見る</button></header>${renderLedgerTable(filtered)}</section>`;
 }
 
@@ -352,7 +365,6 @@ function renderCategory(ids,description){
   const baseList=entities(ids);let list=baseList,signals=signalsFor(ids);
   if(ids.length===1&&ids[0]==='consulting'&&state.companyFilter!=='all'){list=list.filter(entity=>matchesConsultingFilter(entity,state.companyFilter));const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
   if(ids.length===1&&ids[0]==='ai-companies'){if(state.aiTypeFilter!=='all')list=list.filter(entity=>entity.segment===state.aiTypeFilter);if(state.aiRegionFilter!=='all')list=list.filter(entity=>entity.region_tag===state.aiRegionFilter);const allowed=new Set(list.map(entity=>entity.id));signals=signals.filter(signal=>allowed.has(signal.entity_id));}
-  if(state.query){list=list.filter(entity=>`${entity.name} ${entity.segment||''} ${entity.region_tag||''} ${entity.profile?.current_position||''}`.toLowerCase().includes(state.query));signals=signals.filter(signal=>`${signal.title} ${signal.summary} ${signal.entity?.name||''}`.toLowerCase().includes(state.query));}
   const matrixId=ids.length>1?'global-saas':ids[0];const matrix=matrixFor(matrixId);const started=list.filter(entity=>entity.profile).length;const historyTotal=list.reduce((sum,entity)=>sum+evidenceCount(entity),0);
   const enterpriseIndustry=ids.includes('enterprises')?renderIndustryMatrix(list,matrix):'';
   const companyFilterStrip=ids.length===1&&ids[0]==='consulting'?renderConsultingFilterStrip(baseList):(ids.length===1&&ids[0]==='ai-companies'?renderAiFilterStrip(baseList):'');
@@ -444,21 +456,5 @@ function openMethod(){
 }
 function showDrawer(html,mode='signal'){html=html.replaceAll('AIの現在地','AI活用・提供状況').replaceAll('AI現在地','AI活用・提供状況');$('#drawer-content').innerHTML=html;$('#detail-drawer').classList.toggle('profile',mode==='profile');$('#drawer-backdrop').hidden=false;$('#detail-drawer').classList.add('open');$('#detail-drawer').setAttribute('aria-hidden','false');$('#drawer-close').focus();}
 function closeDrawer(){$('#detail-drawer').classList.remove('open','profile');$('#detail-drawer').setAttribute('aria-hidden','true');$('#drawer-backdrop').hidden=true;}
-
-function meetingSlides(){
-  const d=state.data,b=d.brief,top=d.signals.slice(0,4),competitors=d.signals.filter(item=>item.entity?.group_id==='consulting').slice(0,3),insight=d.insights?.[0];
-  return [
-    {kicker:'THIS WEEK',title:b.headline,body:b.summary,foot:`${b.period?.label||''} · 一次情報で確認 ${d.metrics.confirmed}件`},
-    {kicker:'THE EVIDENCE',title:'結論を支える4つの変更',body:`<ol class="meeting-evidence">${top.map(item=>`<li><span>${esc(item.entity?.name||item.entity_id)}</span><b>${esc(item.title)}</b><small>${esc(item.source.publisher)}</small></li>`).join('')}</ol>`,html:true,foot:'企業公式・研究組織の一次情報'},
-    {kicker:'COMPETITOR IMPACT',title:'競合はAI構想から実装資産へ',body:competitors.length?`<div class="meeting-evidence">${competitors.map(item=>`<p><span>${esc(item.entity?.name||item.entity_id)}</span><b>${esc(item.title)}</b>${esc(item.why_it_matters)}</p>`).join('')}</div>`:'今週確認できた競合コンサルの重要変更はありません。',html:true,foot:'コンサルティング更新履歴'},
-    {kicker:'OBSERVED PATTERN',title:insight?.title||'複数社にまたがる変化は未検出',body:insight?`<p>${esc(insight.conclusion)}</p><p><b>示唆：</b>${esc(insight.implication)}</p>`:'週次更新の蓄積後に、複数社・複数根拠のパターンを表示します。',html:true,foot:insight?`${insight.evidence_count}件 / ${insight.source_count}情報源 · 長期トレンドとは未断定`:'根拠付きインサイト'},
-    {kicker:'STRATEGIC IMPLICATION',title:'次に議論すること',body:`<ol class="meeting-agenda">${(b.discussion_points||[]).map(item=>`<li>${esc(item)}</li>`).join('')}</ol>`,html:true,foot:'意思決定用の論点'},
-    {kicker:'WATCH NEXT',title:'次回までに埋める情報',body:`<ul class="meeting-agenda">${(b.limitations||[]).map(item=>`<li>${esc(item)}</li>`).join('')}</ul>`,html:true,foot:`基準調査 ${d.metrics.profiles_complete} / ${d.metrics.watched}社完了`}
-  ];
-}
-function openMeetingMode(){state.meetingSlide=0;$('#meeting-mode').hidden=false;document.body.classList.add('meeting-open');renderMeeting();}
-function closeMeetingMode(){$('#meeting-mode').hidden=true;document.body.classList.remove('meeting-open');}
-function moveMeeting(delta){const slides=meetingSlides();state.meetingSlide=Math.max(0,Math.min(slides.length-1,state.meetingSlide+delta));renderMeeting();}
-function renderMeeting(){const slides=meetingSlides(),slide=slides[state.meetingSlide];$('#meeting-content').innerHTML=`<span>${esc(slide.kicker)}</span><h2>${esc(slide.title)}</h2><div class="meeting-body">${slide.html?slide.body:esc(slide.body)}</div><footer>${esc(slide.foot)}</footer>`;$('#meeting-index').textContent=`${state.meetingSlide+1} / ${slides.length}`;$('#meeting-prev').disabled=state.meetingSlide===0;$('#meeting-next').disabled=state.meetingSlide===slides.length-1;}
 
 init();

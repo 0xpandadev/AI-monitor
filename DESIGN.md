@@ -13,7 +13,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - Display: Yu Gothic UI, then BIZ UDPGothic and Japanese system fallbacks.
 - Body: BIZ UDPGothic, then Yu Gothic UI and Japanese system fallbacks.
 - Data labels: Cascadia Mono, then Consolas.
-- Large type is reserved for the weekly conclusion and meeting mode. Tables remain compact.
+- Large type is reserved for the weekly conclusion. Tables remain compact.
 
 ## Layout and spacing
 
@@ -31,7 +31,6 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 - AI company filter strip: ordinary company-type tags such as Big Tech, model developers, enterprise AI, AI cloud/inference, model distribution, semiconductor/hardware, and AI servers; region tags are a separate filter axis.
 - Company matrix: qualitative cells only: unknown, observed, active, scaled.
 - Industry matrix: aggregation of researched companies with an explicit coverage warning; never an industry adoption rate.
-- Meeting mode: one message per screen with conclusion, evidence, competitor effect, implication, and next watch items.
 - Coverage warning: always visible while the 3-5 year baseline is incomplete.
 - Relationship surface: the AI市場の動き page shows the period activity matrix and a permanently visible representative relationship map. The map is capped at 12 high-evidence edges for an at-a-glance overview; offering and partnership catalogs retain the full records.
 - Player movements: period-confirmed updates are grouped into consulting, Japanese enterprises, startups/emerging, SaaS, and AI companies. The group band shows coverage first; the timeline opens the individual source.
@@ -51,7 +50,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 ## Motion and accessibility
 
 - Motion is limited to the detail drawer and toast, with reduced-motion support.
-- Keyboard Escape closes overlays; arrow keys move meeting slides.
+- Keyboard Escape closes the detail drawer and search results.
 - Matrix states use a symbol and a text label in addition to color.
 
 ## Current design decisions

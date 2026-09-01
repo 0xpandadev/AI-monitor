@@ -43,11 +43,13 @@
           <h1 id="view-title">今週のダイジェスト</h1>
         </div>
         <div class="header-tools">
-          <button id="meeting-mode-button" class="meeting-button" type="button"><span>会議モード</span><b>全画面で見る</b></button>
-          <label class="search-box" for="global-search">
-            <span>企業を検索</span>
-            <input id="global-search" type="search" placeholder="企業名・テーマ">
-          </label>
+          <div class="search-area">
+            <label class="search-box" for="global-search">
+              <span>企業・テーマを検索</span>
+              <input id="global-search" type="search" placeholder="例：マッキンゼー、AIエージェント" autocomplete="off">
+            </label>
+            <div id="search-results" class="search-results" hidden></div>
+          </div>
           <div class="update-state"><span>最終更新</span><b id="updated-at">未更新</b></div>
         </div>
       </header>
@@ -60,15 +62,6 @@
     <button id="drawer-close" class="drawer-close" aria-label="詳細を閉じる">×</button>
     <div id="drawer-content"></div>
   </aside>
-  <section id="meeting-mode" class="meeting-mode" aria-label="会議モード" hidden>
-    <button id="meeting-close" class="meeting-close" type="button" aria-label="会議モードを閉じる">×</button>
-    <div id="meeting-content" class="meeting-content"></div>
-    <nav class="meeting-nav" aria-label="スライド操作">
-      <button id="meeting-prev" type="button">← 前へ</button>
-      <span id="meeting-index">1 / 5</span>
-      <button id="meeting-next" type="button">次へ →</button>
-    </nav>
-  </section>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="/app.js" defer></script>
 </body>
