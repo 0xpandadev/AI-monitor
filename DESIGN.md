@@ -55,6 +55,10 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 
 ## Current design decisions
 
+- Home is the **Intelligence Canvas**: one editorial reading path from the period's lead signal, to scoped supporting signals, to the AI market structure and company groups. It does not expose a raw update table on the first screen.
+- The home filter is scoped to the important-signal surface only. It never silently changes the market map or company coverage figures.
+- The home market snapshot uses six AI-value-chain layers. A value is the count of confirmed signals in the current feed, never a market-size score, company ranking, or maturity rating.
+
 - AI市場の動きは、期間別のAI市場レイヤーマトリクスを主画面にする。
 - 関係マップは常時表示し、根拠件数の多い代表12件を一画面で見せる。
 - 市場状況と関係マップの期間タグは別管理にする。
