@@ -81,6 +81,12 @@ a{color:var(--navy-700)}a:visited{color:#604968}
 .relationship-tabs{display:flex;gap:0;margin-top:13px;border-bottom:1px solid var(--slate-300);background:#fff}.relationship-tab{border:0;border-right:1px solid var(--slate-200);background:#f4f5f7;padding:12px 16px;color:var(--slate-600);font:700 10px var(--data);cursor:pointer}.relationship-tab:hover{background:var(--cobalt-soft);color:var(--navy-800)}.relationship-tab.active{background:var(--navy-900);color:#fff}.theme-summary>header dl{display:flex;margin:0}.theme-summary>header dl>div{min-width:74px;padding-left:13px;border-left:1px solid var(--slate-200)}.theme-summary>header dt{color:var(--slate-500);font:8px var(--data)}.theme-summary>header dd{margin:4px 0 0;color:var(--navy-700);font:700 17px var(--display)}
 @media(max-width:760px){.relationship-tabs{overflow:auto}.relationship-tab{flex:0 0 auto}.theme-summary>header dl{margin-top:13px}.theme-summary>header dl>div{padding:8px;border:1px solid var(--slate-200)}}
 
+/* Keep the explorer open while switching its relation type, and give filters a full readable rail. */
+.graph-panel-inner>header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px;padding:17px 19px;border-bottom:1px solid var(--slate-200)}
+.graph-panel-inner>header>div:first-child{min-width:0}.graph-panel-inner .graph-filters{display:grid;grid-template-columns:repeat(3,minmax(145px,1fr));gap:6px;justify-content:stretch;max-width:570px}.graph-panel-inner .graph-filters button{min-width:0;white-space:nowrap;text-align:left}
+@media(max-width:1120px){.graph-panel-inner>header{grid-template-columns:1fr;align-items:start}.graph-panel-inner .graph-filters{max-width:none}}
+@media(max-width:760px){.graph-panel-inner .graph-filters{grid-template-columns:1fr}.graph-panel-inner .graph-filters button{width:100%}}
+
 /* Boardroom Observatory: one reading path for the AI change view. */
 .theme-summary.observatory-shell{margin-top:0;border:0;background:transparent}
 .observatory-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;padding:27px 28px 24px;border-top:5px solid var(--orange);background:var(--navy-900);color:#fff}

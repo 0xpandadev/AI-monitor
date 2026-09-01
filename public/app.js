@@ -1,4 +1,4 @@
-const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',relationshipTab:'changes',periodScope:'week',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
+const state={data:null,view:'digest',query:'',meetingSlide:0,graphFilter:'changed-in',graphOpen:false,relationshipTab:'changes',periodScope:'week',digestCategory:'all',companyFilter:'all',aiTypeFilter:'all',aiRegionFilter:'all'};
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const viewMeta={
@@ -88,7 +88,7 @@ function bind(){
     const entity=event.target.closest('[data-entity]');if(entity){openEntity(entity.dataset.entity);return;}
     const signal=event.target.closest('[data-signal]');if(signal){openSignal(signal.dataset.signal);return;}
     const insight=event.target.closest('[data-insight]');if(insight){openInsight(insight.dataset.insight);return;}
-    const graphFilter=event.target.closest('[data-graph-filter]');if(graphFilter){state.graphFilter=graphFilter.dataset.graphFilter;render();return;}
+    const graphFilter=event.target.closest('[data-graph-filter]');if(graphFilter){state.graphFilter=graphFilter.dataset.graphFilter;state.graphOpen=true;render();return;}
     const relationshipTab=event.target.closest('[data-relationship-tab]');if(relationshipTab){state.relationshipTab=relationshipTab.dataset.relationshipTab;render();return;}
     const periodScope=event.target.closest('[data-period-scope]');if(periodScope){state.periodScope=periodScope.dataset.periodScope;render();return;}
     const digestFilter=event.target.closest('[data-digest-filter]');if(digestFilter){state.digestCategory=digestFilter.dataset.digestFilter;render();return;}
@@ -98,6 +98,7 @@ function bind(){
     const jump=event.target.closest('[data-jump]');if(jump)setView(jump.dataset.jump);
     const method=event.target.closest('[data-method]');if(method)openMethod();
   });
+  $('#content').addEventListener('toggle',event=>{if(event.target.matches('.relationship-explorer'))state.graphOpen=event.target.open;});
   $('#content').addEventListener('submit',submitEntity);
   $('#drawer-content').addEventListener('click',event=>{
     const signal=event.target.closest('[data-signal]');if(signal)openSignal(signal.dataset.signal);
@@ -107,12 +108,15 @@ function bind(){
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeDrawer();closeMeetingMode();}if(!$('#meeting-mode').hidden&&event.key==='ArrowRight')moveMeeting(1);if(!$('#meeting-mode').hidden&&event.key==='ArrowLeft')moveMeeting(-1);});
 }
 function navigate(event){const button=event.target.closest('[data-view]');if(button)setView(button.dataset.view);}
-function setView(view){state.view=view;state.query='';state.relationshipTab='changes';state.periodScope='week';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
+function setView(view){state.view=view;state.query='';state.relationshipTab='changes';state.graphOpen=false;state.periodScope='week';state.digestCategory='all';state.companyFilter='all';state.aiTypeFilter='all';state.aiRegionFilter='all';$('#global-search').value='';$$('[data-view]').forEach(item=>item.classList.toggle('active',item.dataset.view===view));render();window.scrollTo({top:0,behavior:'smooth'});}
 
 function render(){
   const [kicker,title]=viewMeta[state.view];$('#view-kicker').textContent=kicker;$('#view-title').textContent=title;
   const views={digest:renderDigest,ledger:()=>renderLedgerPage(state.data.signals),relationships:renderRelationships,insights:renderInsights,'ai-companies':()=>renderCategory(['ai-companies'],'世界の基盤モデル、Geminiを含む大手プラットフォーム、中国・アジア勢、データ/オントロジー、AIクラウド、推論基盤、半導体・HBM、AIサーバーを一つの供給網として比較します。'),consulting:()=>renderCategory(['consulting'],'コンサル各社を、顧客向け提供、実装・定着、自社AI活用、共通資産、外部連携、AI人材・組織の6軸で比較します。業界・業務領域と個別オファリングは詳細で確認します。'),enterprises:()=>renderCategory(['enterprises'],'日本企業の全社AI、独自開発、製造・R&D、顧客向けAI、SCM、統制、組織を業界別・企業別に確認します。'),startups:()=>renderCategory(['startups'],'日本発のAIスタートアップ・新興企業を、独自技術、製品、顧客、提携、資金調達、研究で比較します。'),saas:()=>renderCategory(['global-saas','japan-saas'],'国内外SaaSが、支援AIから業務エージェント、開発基盤、統制、価格、連携網へどう移っているかを比較します。'),archive:renderArchive,settings:renderSettings};
-  $('#content').innerHTML=(views[state.view]||renderDigest)();
+  let html=(views[state.view]||renderDigest)();
+  html=html.replaceAll('現在地','AI活用・提供状況');
+  $('#content').innerHTML=html;
+  if(state.view==='relationships'&&state.graphOpen)requestAnimationFrame(()=>{const explorer=$('.relationship-explorer');if(explorer)explorer.open=true;});
 }
 
 function renderDigest(){
@@ -373,7 +377,7 @@ function openInsight(id){
 function openMethod(){
   showDrawer(`<span class="drawer-kicker">METHOD / DEFINITIONS</span><h2>ヒートマップと記号の判定方法</h2><section class="drawer-section"><p>各セルは市場シェアや優劣ではなく、一次情報で確認できた活動の状態です。ニュース件数、検索結果数、言及数は色付けに使いません。</p>${state.data.intelligence.evidence_states.map(item=>`<div class="method-row"><span class="matrix-key ${item.id}">${stateGlyph[item.id]} ${esc(item.label)}</span><p>${esc(item.definition)}</p></div>`).join('')}</section><section class="drawer-section"><h3>導入段階</h3><p>${state.data.intelligence.maturity_stages.map(item=>esc(item.label)).join(' → ')}</p></section><section class="drawer-section emphasis"><h3>誤読しないために</h3><p>未確認は「取り組みがない」という意味ではありません。現時点で登録済みの一次情報がないという意味です。行頭の確認履歴件数は登録済み根拠の数で、強さや市場評価ではありません。</p></section>`);
 }
-function showDrawer(html,mode='signal'){$('#drawer-content').innerHTML=html;$('#detail-drawer').classList.toggle('profile',mode==='profile');$('#drawer-backdrop').hidden=false;$('#detail-drawer').classList.add('open');$('#detail-drawer').setAttribute('aria-hidden','false');$('#drawer-close').focus();}
+function showDrawer(html,mode='signal'){html=html.replaceAll('AIの現在地','AI活用・提供状況').replaceAll('AI現在地','AI活用・提供状況');$('#drawer-content').innerHTML=html;$('#detail-drawer').classList.toggle('profile',mode==='profile');$('#drawer-backdrop').hidden=false;$('#detail-drawer').classList.add('open');$('#detail-drawer').setAttribute('aria-hidden','false');$('#drawer-close').focus();}
 function closeDrawer(){$('#detail-drawer').classList.remove('open','profile');$('#detail-drawer').setAttribute('aria-hidden','true');$('#drawer-backdrop').hidden=true;}
 
 function meetingSlides(){
