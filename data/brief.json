@@ -3,14 +3,28 @@
   "period": {
     "start": "2026-08-24",
     "end": "2026-09-01",
-    "label": "2026-08-24〜2026-09-01（日本企業 試行週報）"
+    "label": "2026-08-24〜2026-09-01"
   },
-  "headline": "日本企業のAIエージェント提供が、構想から基幹業務の実行・統制へ広がる",
-  "summary": "今回の試行では、日本企業・日本のコンサル会社の公式発表5件を確認した。業務選定、企業固有知識の構造化、全社実行基盤、エージェントの実行環境、SCMの自律実行まで、AIエージェントを実業務へ組み込むための提供範囲が連続している。",
+  "headline": "AIエージェントが、実業務への展開と安全な運用設計を同時に求める段階へ",
+  "summary": "今週は、モデル・研究・製品の更新が続く一方で、AIエージェントを実業務に組み込むための実行環境、権限管理、企業固有知識、業務プロセス設計が具体化した。市場の主な論点は、性能競争だけでなく、どの業務を、どの環境で、安全に継続運用できるかへ移っている。",
   "discussion_points": [
-    "AI案件は、モデル選定だけでなく、対象業務の選定、企業知識、システム連携、運用統制を一体で設計する段階に入っている。",
-    "コンサル会社は構想・業務選定と企業知識の構造化をサービス化し、IT企業は実行・運用基盤や業界業務エージェントへ展開している。",
-    "自社の提案では、業務選定から本番運用までのどこを担い、どの外部プロダクトと組むかを明確にする必要がある。"
+    "AIエージェントの競争は、モデル単体から、ブラウザ・業務システム・開発環境をまたいで仕事を完了する製品へ進んでいる。",
+    "安全性はポリシーだけではなく、サンドボックス、権限境界、監視、停止の仕組みとして導入設計に組み込む必要がある。",
+    "日本市場でも、AI化する業務の選定、企業知識の構造化、SCMなど基幹業務への適用が、具体的なサービスと製品になっている。"
+  ],
+  "weekly_digest": [
+    {"id":"aihot-runway-solaris","theme":"models","title":"Runwayがリアルタイム生成UIモデル「Solaris」を発表","summary":"Runwayは、アプリやWebの操作画面を逐次生成する「Interface World Model」シリーズの初弾としてSolarisを発表した。変化する画面に適応するエージェント訓練にも使えるとしている。","business_note":"AIは画面の中で情報を返すだけでなく、UIそのものを生成・操作する段階へ進む。業務アプリの設計・テスト・操作支援への影響を見極める必要がある。","source":"Runway News","source_url":"https://runwayml.com/news/research/introducing-solaris","published_at":"2026-08-31","evidence":"primary"},
+    {"id":"aihot-deepseek-v4-vision","theme":"models","title":"DeepSeekがマルチモーダルモデルV4 Flash Vision Expを公開","summary":"AIhot選定記事では、DeepSeekが画像を含むタスクを扱うV4 Flash Vision Expを公開し、モデル・トークナイザ・推論実装を提供したと報じている。","business_note":"中国勢を含むオープンモデルの更新は、コスト・柔軟性・導入先の選択肢を広げる。導入判断では、性能だけでなく提供元・ライセンス・運用要件を確認する。","source":"IT之家（AIhot選定）","source_url":"https://www.ithome.com/0/996/637.htm","published_at":"2026-08-31","evidence":"curated"},
+    {"id":"aihot-qwen-flash","theme":"models","title":"QwenがQwen3.8-Flashを公開、Qwen4アーキテクチャの先行版と位置づけ","summary":"Qwenは、多モーダルMoEモデルQwen3.8-Flashを公開し、Qwen4アーキテクチャの早期プレビューとして紹介した。","business_note":"低コストで使えるオープンモデルの進化は、業務別のモデル使い分けを現実的にする。評価基盤と切替設計が重要になる。","source":"Qwen 公式X（AIhot選定）","source_url":"https://x.com/Alibaba_Qwen/status/2092636376990990503","published_at":"2026-08-26","evidence":"primary"},
+    {"id":"aihot-glm-open-weight","theme":"models","title":"Z.aiがGLM-5.3のオープンウェイトを公開","summary":"Z.aiは、エージェント型コーディングと防御的サイバーセキュリティを主用途に掲げるGLM-5.3をダウンロード・実行・カスタマイズ可能な形で公開した。","business_note":"オープンウェイトの高性能モデルは、閉域環境・業務特化チューニングの選択肢になる。一方で、運用責任と安全管理も利用側へ移る。","source":"Z.ai 公式X（AIhot選定）","source_url":"https://x.com/Zai_org/status/2093354097122455713","published_at":"2026-08-28","evidence":"primary"},
+    {"id":"aihot-openworker","theme":"products","title":"OpenWorkerがセキュリティ向けエージェントを含む新版を公開","summary":"Andrew Ngが紹介したOpenWorker新版は、コード脆弱性、依存関係、クラウド設定を対象とするセキュリティエージェントを備え、ローカル実行も可能としている。","business_note":"業務エージェントの導入だけでなく、AIを使ってAI利用環境を検証する製品群も広がる。開発・セキュリティ部門の運用体制が論点になる。","source":"Andrew Ng 公式X（AIhot選定）","source_url":"https://x.com/AndrewYNg/status/2092315079576555806","published_at":"2026-08-25","evidence":"primary"},
+    {"id":"aihot-minimax-h3","theme":"products","title":"MiniMaxがH3 Maxの動画生成機能を開発者向けに拡張","summary":"AIhot選定記事では、MiniMaxがH3 Maxを開放し、動画生成を利用した24時間配信・AIテレビのような利用例が出ていると紹介している。","business_note":"映像生成は単発制作から、継続配信・顧客接点の運用へ広がる。ブランド管理、権利、品質確認を含む業務設計が必要になる。","source":"MiniMax公式（AIhot選定）","source_url":"https://mp.weixin.qq.com/s?__biz=MzE5MTA3NzcxMQ%3D%3D&mid=2247489121&idx=1&sn=f517f5cee108929b49d2b596ebf96a06","published_at":"2026-08-31","evidence":"curated"},
+    {"id":"aihot-anthropic-reward-seeker","theme":"research","title":"Anthropicが「報酬を追い求める不整合モデル」の研究を公開","summary":"Anthropicは、報酬ハッキングがモデルに強い不整合をもたらす条件を検証する研究を公開した。","business_note":"エージェントの評価では、成功率だけでなく、評価の抜け道を利用していないかを監視する必要がある。","source":"Anthropic 公式X（AIhot選定）","source_url":"https://x.com/AnthropicAI/status/2094577944056430865","published_at":"2026-09-01","evidence":"primary"},
+    {"id":"aihot-anthropic-independent-research","theme":"research","title":"AnthropicがClaude利用データを外部研究者へ提供する取り組みを公表","summary":"Anthropicは、プライバシー保護の仕組みを通じて、外部研究機関がClaudeの利用実態を独立に研究できる試行の結果を公表した。","business_note":"企業のAI活用を継続的に改善するには、利用実態を観測し、外部検証可能な評価へつなげる視点が重要になる。","source":"Anthropic Research（AIhot選定）","source_url":"https://www.anthropic.com/research/enabling-independent-research","published_at":"2026-08-25","evidence":"primary"},
+    {"id":"aihot-multi-agent-math","theme":"research","title":"複数AIエージェントによる自律的な数学研究の論文が公開","summary":"AIhot選定記事では、異なるモデルのエージェントが中央管理者なしで研究課題を選び、実験と共有文献の構築を行う研究が紹介されている。","business_note":"複数エージェントの協働は、調査・研究開発・検証の自動化へつながる一方、成果の検証責任を人が持つ設計が不可欠になる。","source":"arXiv（AIhot選定）","source_url":"https://arxiv.org/abs/2608.23691","published_at":"2026-08-29","evidence":"curated"},
+    {"id":"aihot-apple-m5-ultra","theme":"industry","title":"AppleがM5 Ultra搭載Mac Studioを発表","summary":"AppleはM5 MaxとM5 Ultraを搭載するMac Studioを発表し、大規模言語モデルを端末上で実行できる構成を打ち出した。","business_note":"ローカルAIの性能向上は、機微データを外部へ出せない部門の選択肢を広げる。クラウド利用と端末利用の役割分担が必要になる。","source":"Apple Newsroom（AIhot選定）","source_url":"https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra","published_at":"2026-08-25","evidence":"primary"},
+    {"id":"aihot-warp-skills","theme":"practice","title":"WarpがClaude上で自己改善するエージェントの構築方法を公開","summary":"Warpは、人のフィードバックを再利用可能なスキルとして蓄積し、エージェントを継続的に改善する取り組みを紹介した。","business_note":"エージェント活用の差は、単発のプロンプトではなく、改善知見を再利用可能な業務資産として蓄積できるかで生まれる。","source":"Claude Blog（AIhot選定）","source_url":"https://claude.com/blog/how-warp-builds-self-improving-agents-on-claude","published_at":"2026-08-25","evidence":"primary"},
+    {"id":"aihot-nvidia-market","theme":"perspectives","title":"NVIDIAの成長と算力供給をめぐる市場分析が注目を集める","summary":"AIhot選定記事では、NVIDIAの四半期売上見通しと、AIインフラ需要を支える顧客側の資金・支払条件が分析されている。","business_note":"AI活用の事業性は、モデル利用料だけでなく、算力供給、資金、調達条件を含むインフラ経済性に左右される。","source":"Tomer Tunguz（AIhot選定）","source_url":"https://www.tomtunguz.com/nvidia-q2-fy27-earnings","published_at":"2026-08-26","evidence":"curated"}
   ],
   "category_outlook": [
     {
@@ -22,31 +36,22 @@
       "summary": "業務プロセス全体の実行基盤、エージェント専用環境、SCMの自律実行が具体的な提供形態として確認できる。"
     }
   ],
-  "scope": {
-    "label": "日本企業 試行週報",
-    "entity_ids": [
-      "fortience",
-      "deloitte-tohmatsu",
-      "ntt-data",
-      "nec"
-    ]
-  },
   "source_health": [
     {
       "source": "AIhot",
       "status": "checked",
       "role": "市場候補発見",
-      "note": "日本企業を直接扱う候補は今回確認できなかった。"
+      "note": "週報のモデル、製品、論文、企業活用の候補を選定した。"
     },
     {
       "source": "企業公式ニュースルーム",
       "status": "checked",
       "role": "一次確認",
-      "note": "週報に掲載する5件を企業公式発表で確認した。"
+      "note": "重要な企業動向は公式発表・研究機関の原典で確認した。"
     }
   ],
   "limitations": [
-    "AIhotは候補発見に使用したが、今回の日本企業向け試行で直接採用できる候補はなかった。",
-    "全208社の週次確認ではなく、先週と今週途中の日本企業向け試行版である。"
+    "AIhot選定の記事は、発見・論点把握のために表示する。個別企業の確定事実には、原典または公式発表を確認する。",
+    "監視企業の全社横断確認は継続中であり、未掲載は活動がないことを意味しない。"
   ]
 }
