@@ -56,6 +56,7 @@ The visual character is analytical, editorial, and understated. Deep navy and ne
 ## Current design decisions
 
 - Home is the **Intelligence Canvas**: one editorial reading path from the period's lead signal, to scoped supporting signals, to the AI market structure and company groups. It does not expose a raw update table on the first screen.
+- The home hero is an information-only weekly cover: it shows up to three official-update messages, not a single permanent slogan and not a meeting decision prompt. These messages are regenerated from the selected week's confirmed updates.
 - The home filter is scoped to the important-signal surface only. It never silently changes the market map or company coverage figures.
 - The home filter preserves the weekly-research lenses: モデル・基盤技術, 製品・AIエージェント, 業界・企業活用, 論文・研究, 実装・活用方法, 市場・制度・論点. These are meeting-facing research lenses, not raw internal event categories. They remain visible when the selected period has zero confirmed updates; each number is that lens's period count.
 - The home market snapshot uses six AI-value-chain layers. A value is the count of confirmed signals in the current feed, never a market-size score, company ranking, or maturity rating.
