@@ -24,11 +24,12 @@
       "purpose": "AI市場全体と登録済み監視企業の週次候補を発見する",
       "preferred_skills": ["aihot"],
       "connector": {
-        "type": "public-rest-api-or-mcp",
+        "type": "mcp-adapter",
         "base_url": "https://aihot.virxact.com",
-        "authentication": "none",
+        "mcp_url": "https://aihot.virxact.com/api/mcp",
+        "authentication": "接続済みMCPを使用",
         "mcp": true,
-        "note": "REST API v1、RSS、MCPが案内されている。直近7日間の発見用で、要約は一次情報ではない"
+        "note": "このプロジェクトではAIhot MCPを週次候補発見に使用する。直近7日間の発見用で、要約は一次情報ではない。公式発表、注目論文、公式X、当事者である著名グローバル個人の一次発信を対象にする"
       },
       "fallback": "企業名、期間、AI関連語を使ったWeb検索と公式ニュースページ確認",
       "required": true

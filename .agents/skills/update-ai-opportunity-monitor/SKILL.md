@@ -27,7 +27,7 @@ The system may recommend items for review. It must never automatically make an e
    ```
 
 2. Record the returned `run_id`. Work only in `data/runs/<run_id>/` for this run.
-3. Read `manifest.json`, `discovery.json`, `verification.json`, `rankings.json`, `ontology-analysis.json`, `scenario-analysis.json`, `weekly-update.json`, `config/weekly-research.json`, `config/watchlist.json`, `config/sources.json`, and `config/ranking-sources.json` before research.
+3. Read `manifest.json`, `discovery.json`, `verification.json`, `rankings.json`, `ontology-analysis.json`, `scenario-analysis.json`, `weekly-update.json`, `config/weekly-research.json`, `config/aihot-source-policy.json`, `config/watchlist.json`, `config/sources.json`, and `config/ranking-sources.json` before research.
 4. Do not silently install missing skills. Report each unavailable optional adapter with the URL in `config/skill-dependencies.json`, then use the repository fallback.
 
 ## Fixed sequence
@@ -37,7 +37,7 @@ The system may recommend items for review. It must never automatically make an e
 Use these roles before assigning deeper work:
 
 - **Foresight Radar**: review the existing source map and the prior state. Collect official-source candidates for the full watchlist and identify genuine changes, not restatements.
-- **AIhot**: review selected items for the target period through all six market lenses in `config/weekly-research.json`. AIhot is discovery only. Preserve its linked original URL and never promote its summary directly to a fact.
+- **AIhot MCP**: review the target period through all six market lenses in `config/weekly-research.json`. Include official releases, important papers, product and implementation updates, official X posts, and first-person posts by globally influential researchers, founders, executives, or research leaders. Follow `config/aihot-source-policy.json`: exclude generic personal commentary and keep the original post or linked source. AIhot is discovery only; never promote its summary directly to a fact.
 - **Opportunity Intelligence adapter, if available**: use its keyword expansion and surrounding-player discovery to identify new Japanese emerging companies, adjacent providers, and search terms. Do not use it to replace the all-company fixed watch.
 
 Save every possible item in `discovery.json` with a unique `id`, category, discovery method, original link, named entity where applicable, and a coverage note. A candidate is not a weekly signal.

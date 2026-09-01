@@ -51,7 +51,7 @@ The installer:
 | Palantir Ontology design | Object/action/relationship modeling | Optional; local skill is recognized, canonical GitHub URL still needs to be registered |
 | Palantir Foundry OSDK workflow | Real Foundry Ontology objects/actions integration | Optional integration; installable from a pinned public GitHub path |
 | MiroFish guide | Scenario simulation planning, seed quality, and report audit | Optional; installable from a pinned public GitHub repository |
-| AIhot | Seven-day discovery | Built-in public REST connector; separate skill is not required |
+| AIhot | Seven-day discovery: official releases, papers, official X and notable global actors | MCP connector. If missing, present its MCP endpoint and the official skill links; do not silently install it. |
 | Browser verification | Official-source confirmation | Codex or Claude Code runtime capability with embedded fallback |
 
 ## Release gate before GitHub publication
@@ -71,3 +71,15 @@ Before publishing the repository:
 Do not have multiple researchers edit `data/entity-profiles.json` directly. Allocate non-overlapping company batches, save each result against `schemas/entity-profile-batch.schema.json`, review the evidence, then import the reviewed batch centrally.
 
 Machine-local schedules are not created by Git clone. Register the weekly schedule separately on every computer that should execute the monitor.
+
+## AIhot on another computer
+
+The Monitor uses AIhot through MCP for discovery. It does **not** treat AIhot summaries as publishable evidence: official originals are verified before an item enters the dashboard.
+
+When `npm run skills:check -- --target=both` reports that AIhot MCP is unavailable, show the teammate these three official entry points and ask them to complete their normal Codex or Claude Code MCP connection flow:
+
+- [MCP Server](https://aihot.virxact.com/api/mcp)
+- [GitHub mirror](https://github.com/KKKKhazix/khazix-skills/tree/main/aihot)
+- [Skill package](https://aihot.virxact.com/aihot-skill/README.md)
+
+Do not auto-install or duplicate a globally installed `aihot` skill. After connection or installation, open a new agent session and rerun `npm run skills:check -- --target=both`.

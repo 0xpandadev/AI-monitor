@@ -124,17 +124,21 @@
       "id": "aihot",
       "capabilities": ["weekly-discovery"],
       "requirement": "connector",
-      "delivery": "embedded-public-rest-connector",
+      "delivery": "mcp-adapter",
       "aliases": ["aihot", "ai-radar"],
       "installable": false,
       "source": {
         "type": "service",
         "url": "https://aihot.virxact.com",
-        "authentication": "none",
+        "mcp_url": "https://aihot.virxact.com/api/mcp",
+        "github_mirror": "https://github.com/KKKKhazix/khazix-skills/tree/main/aihot",
+        "skill_package": "https://aihot.virxact.com/aihot-skill/README.md",
+        "authentication": "接続済みMCPを使用",
         "mcp": true,
         "api_version": "v1",
         "rss": true
       },
+      "release_action": "まずMCP ServerをCodexまたはClaude Codeへ接続する。MCPを利用できない環境ではGitHubミラーまたはSkill完全版を確認し、AIhot Skillを個別導入する",
       "fallback": "config/research-capabilities.json"
     },
     {

@@ -20,7 +20,7 @@ for(const [index,source] of (rankings.sources||[]).entries()){
 for(const [index,item] of (discovery.candidates||[]).entries()){
   const p=`discovery.candidates[${index}]`;
   if(!item.id||!item.title||!item.category||!item.discovered_from?.url)errors.push(`${p} は id/title/category/discovered_from.url が必要です`);
-  if(!['aihot','foresight-radar','opportunity-intelligence','official-source','manual'].includes(item.discovery_method))errors.push(`${p}.discovery_methodが不正です`);
+  if(!['aihot','aihot-mcp','foresight-radar','opportunity-intelligence','official-source','manual'].includes(item.discovery_method))errors.push(`${p}.discovery_methodが不正です`);
 }
 const candidates=new Set((discovery.candidates||[]).map(item=>item.id));
 for(const [index,item] of (verification.items||[]).entries()){

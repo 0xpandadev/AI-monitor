@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "connector": "AIhot MCP",
+  "purpose": "AI市場全般の週次候補発見。アプリから直接取得せず、週次調査を実行するCodexまたはClaude CodeのMCP経由で使う。",
+  "weekly_intake": [
+    { "id": "official-releases", "label": "主要AI企業・研究機関の公式発表", "priority": "high" },
+    { "id": "papers", "label": "注目論文・研究", "priority": "high" },
+    { "id": "products", "label": "製品・AIエージェント・実装方法", "priority": "high" },
+    { "id": "official-x", "label": "企業・研究機関の公式X発信", "priority": "medium" },
+    { "id": "notable-individual-x", "label": "グローバルで影響力のある研究者・創業者・経営者本人の一次発信", "priority": "medium" }
+  ],
+  "social_inclusion": {
+    "include": [
+      "公式アカウントによる製品、研究、採用、提携、方針の一次発信",
+      "モデル開発・研究・導入の当事者であるグローバルな研究者、創業者、CEO、Chief Scientist、研究責任者の本人発信"
+    ],
+    "exclude": [
+      "出典を伴わない感想、投資煽り、ニュースの単純転載、匿名アカウント、一般的なインフルエンサーの論評",
+      "投稿だけでは製品仕様、契約、数値、提携の確定に足りない内容"
+    ],
+    "evidence_rule": "公式Xまたは当事者本人の一次投稿は発言・発表の根拠として保存できる。ただし市場規模、契約、性能、製品仕様などの重要事実は公式発表、論文、リリースノート、IR、リポジトリ等でも確認する。"
+  },
+  "publication_rule": "AIhotの要約や順位付けをそのまま確定情報にしない。原典URL、発信者、投稿日、確認結果をverification.jsonへ保存したものだけをアプリに公開する。"
+}

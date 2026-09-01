@@ -18,13 +18,13 @@ AI Opportunity Monitorの主成果物は画面ではなく、繰り返せる調�
 | 役割 | 実行するもの | 保存先 |
 | --- | --- | --- |
 | 3〜5年の基準情報・差分 | Foresight Radar | `entity-profiles.json` とランの`discovery.json` |
-| 今週の市場全般の候補発見 | AIhot | `discovery.json` |
+| 今週の市場全般の候補発見 | AIhot MCP（公式発表・注目論文・公式X・当事者の著名グローバル個人発信） | `discovery.json` |
 | 重要候補の一次情報・反証確認 | Smart Research | `verification.json` |
 | 企業・活動・提携・根拠の構造化 | Palantir Ontology | `ontology-analysis.json` |
 | 競合反応・採用分岐の仮説検討 | MiroFish（任意） | `scenario-analysis.json` |
 | 候補・関連語・新興企業の探索 | Opportunity Intelligence（任意アダプター） | `discovery.json` |
 
-AIhotとOpportunity Intelligenceは発見用です。掲載事実の根拠には使わず、必ず公式発表、IR、製品ページ、論文、政府資料などで確認します。
+AIhot MCPとOpportunity Intelligenceは発見用です。公式Xまたは当事者本人の一次投稿は発言・発表の根拠として保存できますが、製品仕様、数値、契約、性能などの重要事実は、必ず公式発表、IR、製品ページ、論文、政府資料などでも確認します。
 
 ## 開始と公開
 

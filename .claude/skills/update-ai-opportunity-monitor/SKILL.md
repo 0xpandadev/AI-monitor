@@ -5,7 +5,7 @@ description: Run the AI Opportunity Monitor as a recurring intelligence system: 
 
 # AI Opportunity Monitor: weekly intelligence orchestrator
 
-Use the same workflow and contracts as `.agents/skills/update-ai-opportunity-monitor/SKILL.md`. This repository-owned parent skill orchestrates Foresight Radar, AIhot, Smart Research, the optional Opportunity Intelligence adapter, Palantir Ontology, and optional MiroFish without using model API keys.
+Use the same workflow and contracts as `.agents/skills/update-ai-opportunity-monitor/SKILL.md`. This repository-owned parent skill orchestrates Foresight Radar, **AIhot MCP**, Smart Research, the optional Opportunity Intelligence adapter, Palantir Ontology, and optional MiroFish without using model API keys. AIhot MCP is discovery-only: collect official releases, papers, official X posts, and posts by globally influential actors; verify material facts against their primary source before publication.
 
 1. Run `npm run doctor`, `npm run capabilities`, `npm run skills:check -- --target=claude`, and `npm run research:run -- YYYY-MM-DD`.
 2. Use the returned run directory as the sole workspace for discovery, verification, ontology analysis, optional simulation, and publish data.
