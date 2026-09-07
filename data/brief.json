@@ -1,69 +1,44 @@
 {
-  "updated_at": "2026-09-01T05:55:00.000Z",
+  "updated_at": "2026-09-06T22:38:15.176Z",
   "period": {
-    "start": "2026-08-24",
-    "end": "2026-09-01",
-    "label": "2026-08-24〜2026-09-01"
+    "start": "2026-09-01",
+    "end": "2026-09-07",
+    "label": "2026-09-01〜2026-09-07"
   },
-  "headline": "AIエージェントの商用化：勝敗はモデル性能から業務実装・統制へ",
-  "summary": "AIは、回答する道具から、ブラウザや業務システムをまたいで仕事を完了する存在へ移っている。実装が進むほど、企業固有の知識、権限設計、実行環境、継続改善の仕組みが競争力を左右する。",
-  "key_messages": [
-    {
-      "title": "会話支援から、業務を完了するAIへ",
-      "description": "ブラウザ、開発、SCMなどで、AIが実際にタスクを実行する製品が増えている。評価軸は回答品質だけでなく、業務の完了率と再作業の削減へ移る。"
-    },
-    {
-      "title": "安全性は、導入後に足す機能ではない",
-      "description": "権限、ネットワーク隔離、監視、停止を最初から実行環境に組み込めるかが、本番利用の前提になる。"
-    },
-    {
-      "title": "企業固有の知識と業務設計が差になる",
-      "description": "同じモデルを使っても、どの業務に適用し、判断基準とデータをどう構造化するかで、実用性と再現性が分かれる。"
-    }
-  ],
+  "headline": "モデル競争は、エージェントを実業務へ入れる運用設計の競争へ広がった",
+  "summary": "2026年9月1日から9月7日の確認済み更新では、OpenAIのGPT-6 Astra発表と研究自動化、Anthropicの形式化数学証明、xAIの調達業務エージェント、GitHubの多モデル編成が確認できた。共通点は、単体モデルの性能だけでなく、研究、調達、開発ワークフローの中でAIをどう動かし、どう制御するかへ焦点が移っている点にある。",
   "discussion_points": [
-    "最初に選ぶべきはモデルではなく、AIに任せる業務と、人が残す判断・承認の境界である。",
-    "本番導入の必須要件は、業務データへの接続、エージェント単位の権限、操作履歴、緊急停止を一つの運用設計にすることだ。",
-    "コンサル・IT企業・SaaSの競争は、単発の導入支援ではなく、業務知識を再利用できる資産として積み上げられるかに移る。"
-  ],
-  "weekly_digest": [
-    {"id":"runway-solaris","theme":"models","title":"Runwayがリアルタイム生成UIモデル「Solaris」を発表","summary":"Runwayは、アプリやWebの操作画面を逐次生成する「Interface World Model」シリーズの初弾としてSolarisを発表した。変化する画面に適応するエージェント訓練にも使えるとしている。","business_note":"AIは画面の中で情報を返すだけでなく、UIそのものを生成・操作する段階へ進む。業務アプリの設計・テスト・操作支援への影響を見極める必要がある。","source":"Runway News","source_url":"https://runwayml.com/news/research/introducing-solaris","published_at":"2026-08-31","evidence":"primary"},
-    {"id":"qwen-flash","theme":"models","title":"QwenがQwen3.8-Flashを公開、Qwen4アーキテクチャの先行版と位置づけ","summary":"Qwenは、多モーダルMoEモデルQwen3.8-Flashを公開し、Qwen4アーキテクチャの早期プレビューとして紹介した。","business_note":"低コストで使えるオープンモデルの進化は、業務別のモデル使い分けを現実的にする。評価基盤と切替設計が重要になる。","source":"Qwen 公式X","source_url":"https://x.com/Alibaba_Qwen/status/2092636376990990503","published_at":"2026-08-26","evidence":"primary"},
-    {"id":"glm-open-weight","theme":"models","title":"Z.aiがGLM-5.3のオープンウェイトを公開","summary":"Z.aiは、エージェント型コーディングと防御的サイバーセキュリティを主用途に掲げるGLM-5.3をダウンロード・実行・カスタマイズ可能な形で公開した。","business_note":"オープンウェイトの高性能モデルは、閉域環境・業務特化チューニングの選択肢になる。一方で、運用責任と安全管理も利用側へ移る。","source":"Z.ai 公式X","source_url":"https://x.com/Zai_org/status/2093354097122455713","published_at":"2026-08-28","evidence":"primary"},
-    {"id":"openworker-security","theme":"products","title":"OpenWorkerがセキュリティ向けエージェントを含む新版を公開","summary":"Andrew Ngが紹介したOpenWorker新版は、コード脆弱性、依存関係、クラウド設定を対象とするセキュリティエージェントを備え、ローカル実行も可能としている。","business_note":"業務エージェントの導入だけでなく、AIを使ってAI利用環境を検証する製品群も広がる。開発・セキュリティ部門の運用体制が論点になる。","source":"Andrew Ng 公式X","source_url":"https://x.com/AndrewYNg/status/2092315079576555806","published_at":"2026-08-25","evidence":"primary"},
-    {"id":"minimax-h3","theme":"products","title":"MiniMaxがH3 Maxの動画生成機能を開発者向けに拡張","summary":"MiniMaxはH3 Maxを開放し、動画生成を利用した24時間配信・AIテレビのような利用例を紹介している。","business_note":"映像生成は単発制作から、継続配信・顧客接点の運用へ広がる。ブランド管理、権利、品質確認を含む業務設計が必要になる。","source":"MiniMax 公式","source_url":"https://mp.weixin.qq.com/s?__biz=MzE5MTA3NzcxMQ%3D%3D&mid=2247489121&idx=1&sn=f517f5cee108929b49d2b596ebf96a06","published_at":"2026-08-31","evidence":"primary"},
-    {"id":"anthropic-reward-seeker","theme":"research","title":"Anthropicが「報酬を追い求める不整合モデル」の研究を公開","summary":"Anthropicは、報酬ハッキングがモデルに強い不整合をもたらす条件を検証する研究を公開した。","business_note":"エージェントの評価では、成功率だけでなく、評価の抜け道を利用していないかを監視する必要がある。","source":"Anthropic 公式X","source_url":"https://x.com/AnthropicAI/status/2094577944056430865","published_at":"2026-09-01","evidence":"primary"},
-    {"id":"anthropic-independent-research","theme":"research","title":"AnthropicがClaude利用データを外部研究者へ提供する取り組みを公表","summary":"Anthropicは、プライバシー保護の仕組みを通じて、外部研究機関がClaudeの利用実態を独立に研究できる試行の結果を公表した。","business_note":"企業のAI活用を継続的に改善するには、利用実態を観測し、外部検証可能な評価へつなげる視点が重要になる。","source":"Anthropic Research","source_url":"https://www.anthropic.com/research/enabling-independent-research","published_at":"2026-08-25","evidence":"primary"},
-    {"id":"multi-agent-math","theme":"research","title":"複数AIエージェントによる自律的な数学研究の論文が公開","summary":"異なるモデルのエージェントが中央管理者なしで研究課題を選び、実験と共有文献の構築を行う研究が公開された。","business_note":"複数エージェントの協働は、調査・研究開発・検証の自動化へつながる一方、成果の検証責任を人が持つ設計が不可欠になる。","source":"arXiv","source_url":"https://arxiv.org/abs/2608.23691","published_at":"2026-08-29","evidence":"primary"},
-    {"id":"apple-m5-ultra","theme":"industry","title":"AppleがM5 Ultra搭載Mac Studioを発表","summary":"AppleはM5 MaxとM5 Ultraを搭載するMac Studioを発表し、大規模言語モデルを端末上で実行できる構成を打ち出した。","business_note":"ローカルAIの性能向上は、機微データを外部へ出せない部門の選択肢を広げる。クラウド利用と端末利用の役割分担が必要になる。","source":"Apple Newsroom","source_url":"https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra","published_at":"2026-08-25","evidence":"primary"},
-    {"id":"warp-skills","theme":"practice","title":"WarpがClaude上で自己改善するエージェントの構築方法を公開","summary":"Warpは、人のフィードバックを再利用可能なスキルとして蓄積し、エージェントを継続的に改善する取り組みを紹介した。","business_note":"エージェント活用の差は、単発のプロンプトではなく、改善知見を再利用可能な業務資産として蓄積できるかで生まれる。","source":"Claude Blog","source_url":"https://claude.com/blog/how-warp-builds-self-improving-agents-on-claude","published_at":"2026-08-25","evidence":"primary"}
+    "AI活用の競争軸は、モデル選定だけでなく、業務フロー、権限、監査、成果測定を含む実行設計へ移っている。",
+    "コンサル提案では、AIエージェントの導入対象業務を選ぶだけでなく、人間承認、ログ、停止条件、費用対効果の測定まで一体で設計する必要がある。",
+    "今後の定点観測では、各社のエージェント活用を研究・開発・調達・顧客接点・基幹業務のどこに埋め込んだかで分類する。"
   ],
   "category_outlook": [
     {
-      "group_id": "consulting",
-      "summary": "構想・業務選定と企業固有知識の構造化が、AIエージェント案件の入口としてサービス化している。"
+      "group_id": "ai-companies",
+      "summary": "モデル企業は性能発表に加え、自社研究・数学証明・調達など具体業務でのエージェント実装を示し始めている。"
     },
     {
-      "group_id": "enterprises",
-      "summary": "業務プロセス全体の実行基盤、エージェント専用環境、SCMの自律実行が具体的な提供形態として確認できる。"
+      "group_id": "saas",
+      "summary": "開発者向けSaaSでは、多モデルを裏側で編成して品質とコストを調整する実行基盤が製品差別化になりつつある。"
     }
   ],
   "source_health": [
     {
-      "source": "市場・技術情報",
+      "source": "公開AI市場候補",
       "status": "checked",
-      "role": "市場候補発見",
-      "note": "モデル、製品、論文、企業活用の公開情報を確認した。"
+      "role": "候補発見",
+      "note": "候補発見にのみ使用し、確定情報は原典へ戻って確認"
     },
     {
-      "source": "企業公式ニュースルーム",
+      "source": "企業公式発表",
       "status": "checked",
       "role": "一次確認",
-      "note": "重要な企業動向は公式発表・研究機関の原典で確認した。"
+      "note": "掲載した5件は公式発表または公式ブログで確認"
     }
   ],
   "limitations": [
-    "掲載記事は、発信元自身の発表・論文・公式発信など、直接確認できる原典へリンクする。",
-    "監視企業の全社横断確認は継続中であり、未掲載は活動がないことを意味しない。"
+    "固定ウォッチリスト208社の全社深掘りを完了したものではない。",
+    "二次情報やSNS由来の候補は、原典確認できたものだけを公開データへ入れた。",
+    "ランキング更新は今回未完了のため、ランキングデータは前回値を維持する。"
   ]
 }

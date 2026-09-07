@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-01T05:55:00.000Z",
+  "updated_at": "2026-09-06T22:38:15.176Z",
   "signals": [
     {
       "id": "2026-08-26-openai-hugging-face-incident",
@@ -766,6 +766,96 @@
         "title": "Improving our alignment and security efforts",
         "url": "https://www.anthropic.com/news/improving-alignment-security-efforts",
         "publisher": "Anthropic",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-09-03-openai-gpt-6-astra",
+      "entity_id": "openai",
+      "title": "OpenAIがGPT-6 Astraを発表し、ChatGPT/API/Azure/Bedrockへ展開",
+      "summary": "OpenAIはGPT-6 Astraを発表し、ChatGPT Plus、Pro、Business、Enterprise、OpenAI API、Microsoft Azure、AWS Bedrockへの展開を説明した。コンピューター利用、ソフトウェア開発、サイバー、科学、業務文書などを重点領域として示している。",
+      "why_it_matters": "モデル性能の発表が、企業の業務実行、開発、セキュリティ、科学研究の利用場面まで直接つながっている。導入検討では性能表だけでなく、利用条件、安全制御、企業管理者の設定範囲を確認する必要がある。",
+      "category": "モデル・基盤技術",
+      "published_at": "2026-09-03",
+      "importance": "critical",
+      "verification": "confirmed",
+      "verification_id": "verify-2026-09-03-openai-gpt-6-astra",
+      "source": {
+        "title": "GPT-6 Astra: A new generation of intelligence",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "publisher": "OpenAI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-09-06-openai-research-acceleration",
+      "entity_id": "openai",
+      "title": "OpenAIが研究組織でのエージェント活用と研究自動化の進捗を公表",
+      "summary": "OpenAIは、研究組織でcoding agent活用が増加していること、自動化研究インターン相当の目標に到達したこと、研究者の実験・コード作成・技術支援のあり方が変化していることを公表した。",
+      "why_it_matters": "先端AI企業自身が研究開発プロセスをエージェント化している。事業会社やコンサル会社にとっても、AI活用の対象が一般事務だけでなく、高度専門業務や研究開発の生産性に広がることを示す。",
+      "category": "企業AI活用",
+      "published_at": "2026-09-06",
+      "importance": "high",
+      "verification": "confirmed",
+      "verification_id": "verify-2026-09-06-openai-research-acceleration",
+      "source": {
+        "title": "Research acceleration: The view inside OpenAI",
+        "url": "https://openai.com/index/research-acceleration-view-inside-openai/",
+        "publisher": "OpenAI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-09-04-anthropic-fermat-formalization",
+      "entity_id": "anthropic",
+      "title": "AnthropicがClaudeによるフェルマーの最終定理の機械検証証明を公表",
+      "summary": "Anthropicは、ClaudeがLeanでフェルマーの最終定理のエンドツーエンドな機械検証証明を作成したと公表した。11日間、13百万行のLean、29,500の中間定理を最終証明に使用したと説明している。",
+      "why_it_matters": "AIの価値が文章生成やコード補助を超え、検証可能な専門知識作業へ進む兆候である。研究開発、品質保証、技術監査の領域で、AIが成果物を作るだけでなく検証可能性を高める方向が重要になる。",
+      "category": "論文・研究",
+      "published_at": "2026-09-04",
+      "importance": "high",
+      "verification": "confirmed",
+      "verification_id": "verify-2026-09-04-anthropic-fermat",
+      "source": {
+        "title": "Formalizing Fermat's Last Theorem",
+        "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
+        "publisher": "Anthropic",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-09-04-xai-grok-bot-procurement",
+      "entity_id": "xai",
+      "title": "xAIがGrok Botを調達業務に使った社内活用事例を公表",
+      "summary": "xAIは、Grok Botに支出、契約、利用データを読ませ、調達交渉やSaaS更新の削減機会を特定するHaggle Botの社内活用を公表した。10万ドル超の直接削減機会を特定したと説明している。",
+      "why_it_matters": "AIエージェントの企業活用が、情報整理だけではなく、支出データ、契約、利用状況を横断して実務上の削減機会を出す段階に入っている。権限、社内確認、対外連絡の禁止線を設計する必要がある。",
+      "category": "企業AI活用",
+      "published_at": "2026-09-04",
+      "importance": "high",
+      "verification": "confirmed",
+      "verification_id": "verify-2026-09-04-xai-grok-procurement",
+      "source": {
+        "title": "Setting Grok Bot loose on procurement",
+        "url": "https://x.ai/news/grok-bot-procurement",
+        "publisher": "xAI",
+        "tier": "primary"
+      }
+    },
+    {
+      "id": "2026-09-04-microsoft-github-hydrafusion",
+      "entity_id": "microsoft",
+      "title": "GitHubがCopilot向け多モデル編成のHydraFusion研究プレビューを発表",
+      "summary": "GitHubは、Copilot CLIで利用できるProject HydraFusionを研究プレビューとして発表した。Single、Cascade、Critiqueの実行パターンを選び、品質、コスト、遅延のバランスを取る多モデル編成を説明している。",
+      "why_it_matters": "AI開発支援は、単一モデルを選ぶUIから、裏側で複数モデルと実行パターンを組み替えるランタイムへ向かっている。企業の開発現場では、品質ゲート、コスト管理、独立レビューが導入論点になる。",
+      "category": "製品・AIエージェント",
+      "published_at": "2026-09-04",
+      "importance": "high",
+      "verification": "confirmed",
+      "verification_id": "verify-2026-09-04-github-hydrafusion",
+      "source": {
+        "title": "Project HydraFusion: Frontier quality via multi-model orchestration",
+        "url": "https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/",
+        "publisher": "GitHub",
         "tier": "primary"
       }
     }
